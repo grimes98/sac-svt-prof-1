@@ -1,0 +1,16 @@
+{
+  "name": "sac-svt-app",
+  "version": "1.0.0",
+  "description": "منصة SAC · SVT prof — مكتبة وتكوين رقمي للأساتذة",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "vite --host --port 5173",
+    "build": "vite build",
+    "preview": "vite preview --host --port 5173"
+  },
+  "devDependencies": {
+    "vite": "^5.4.0"
+  }
+}
