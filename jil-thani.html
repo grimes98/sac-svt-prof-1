@@ -144,7 +144,7 @@ footer .fl img{width:34px;height:34px;object-fit:contain;filter:brightness(0) in
 
 <script>
 const SECTIONS=[
-{id:"g1",e:"❓",t:"ما هو «الجيل الثاني» أصلًا؟",html:`
+{id:"g1",free:true,e:"❓",t:"ما هو «الجيل الثاني» أصلًا؟",html:`
   <p>عندما تسمع «مناهج الجيل الثاني»، فالمقصود ببساطة هو <b>الطبعة الجديدة من البرامج الدراسية</b> التي اعتمدتها وزارة التربية في الجزائر ابتداءً من سنة <b>2016</b>، لتحلّ محل البرامج القديمة (الجيل الأول).</p>
   <h4>🤔 لماذا غيّروا البرامج؟</h4>
   <p>البرامج القديمة (الجيل الأول) كُتبت على مراحل متفرّقة وبدون خطة موحّدة، فظهرت فيها <b>عيوب واختلالات</b>: تكرار، نقص انسجام بين السنوات، وتركيز على الحفظ. جاء الجيل الثاني ليصلح ذلك.</p>
@@ -158,7 +158,7 @@ const SECTIONS=[
   </table>
   <div class="example">🔎 <b>باختصار:</b> بدل أن نقول للتلميذ «احفظ أنّ الأغذية 3 أنواع»، نضعه أمام مشكل حقيقي (طفل مريض بسوء التغذية) ونجعله يكتشف بنفسه أنواع الأغذية ودورها. هذا هو جوهر الجيل الثاني.</div>
 `},
-{id:"g2",e:"📚",t:"قاموس المصطلحات الأساسية (افهمها أولًا)",html:`
+{id:"g2",free:true,e:"📚",t:"قاموس المصطلحات الأساسية (افهمها أولًا)",html:`
   <p>قبل أي شيء، هذه هي الكلمات التي ستتكرّر كثيرًا. افهمها جيدًا وسيصبح كل شيء سهلًا:</p>
   <div class="def"><div class="term">📖 الكفاءة (Compétence)</div><div class="body">هي <b>قدرة</b> التلميذ على استعمال ما تعلّمه لحل مشكلة في الحياة، وليست مجرّد معلومة يحفظها. <br><b>مثال:</b> ليست «يعرف أنواع الأغذية»، بل «يستطيع أن يقترح وجبة غذائية متوازنة لطفل».</div></div>
   <div class="def"><div class="term">📖 المورد (Ressource)</div><div class="body">هي <b>المعلومة أو المهارة الصغيرة</b> التي يحتاجها التلميذ لبناء الكفاءة. الكفاءة تُبنى من عدّة موارد. <br><b>مثال:</b> «مصدر الأغذية»، «تركيب الأغذية»، «دور كل غذاء» = موارد تُكوّن كفاءة التغذية السليمة.</div></div>
@@ -168,7 +168,7 @@ const SECTIONS=[
   <div class="def"><div class="term">📖 المقطع التعلّمي (Séquence)</div><div class="body">هو <b>مجموعة دروس مترابطة</b> داخل الميدان تُدرَّس معًا. <br><b>مثال:</b> مقطع «التغذية عند الإنسان» يضمّ عدّة حصص.</div></div>
   <div class="def"><div class="term">📖 المركّبة (Composante)</div><div class="body">هي <b>جزء من الكفاءة</b>. الكفاءة الكبيرة تنقسم إلى مركّبات أصغر يسهل تدريسها. </div></div>
 `},
-{id:"g3",e:"🏗️",t:"كيف يُبنى المنهاج؟ (من الأكبر إلى الأصغر)",html:`
+{id:"g3",free:false,e:"🏗️",t:"كيف يُبنى المنهاج؟ (من الأكبر إلى الأصغر)",html:`
   <p>تخيّل المنهاج كشجرة: تبدأ من الجذع الكبير وتتفرّع إلى أغصان أصغر. إليك الترتيب من الأعلى للأسفل:</p>
   <div class="steps">
     <div class="s"><div class="num"></div><div class="txt"><b>الكفاءة الشاملة</b> — الهدف الكبير في نهاية السنة كلها.<br><span style="color:var(--muted);font-size:.9rem">مثال س1م: «يحافظ على صحته وصحة غيره ويتدخّل لحماية البيئة».</span></div></div>
@@ -179,7 +179,7 @@ const SECTIONS=[
   </div>
   <div class="example">🔎 <b>مثال كامل:</b> الكفاءة الشاملة (يحافظ على صحته) ← ميدان (الإنسان والصحة) ← الكفاءة الختامية (يقدّم إرشادات أمام اختلالات وظيفية) ← مقطع (التغذية عند الإنسان) ← موارد (مصدر الأغذية، تركيبها، دورها...).</div>
 `},
-{id:"g4",e:"🔬",t:"لماذا مادة علوم الطبيعة مهمّة؟",html:`
+{id:"g4",free:false,e:"🔬",t:"لماذا مادة علوم الطبيعة مهمّة؟",html:`
   <p>حسب المنهاج، مادة علوم الطبيعة والحياة في المتوسط تهدف إلى:</p>
   <ul>
     <li>تكوين تلميذ يفهم <b>جسمه وصحته</b> ويحافظ عليها</li>
@@ -190,7 +190,7 @@ const SECTIONS=[
   <div class="def"><div class="term">📖 المسعى العلمي (Démarche scientifique)</div><div class="body">هو <b>طريقة تفكير العالِم</b>: يلاحظ ظاهرة ← يطرح سؤالًا ← يقترح تفسيرًا (فرضية) ← يجرّب ← يستنتج. نعلّم التلميذ يفكّر بهذه الطريقة.</div></div>
   <div class="example">🔎 مادة العلوم مثالية للجيل الثاني لأنها <b>غنية بالتجارب والملاحظة</b> — فرصة ذهبية ليكتشف التلميذ بنفسه بدل الحفظ.</div>
 `},
-{id:"g5",e:"🧩",t:"مدخل الوضعيات: قلب الجيل الثاني",html:`
+{id:"g5",free:false,e:"🧩",t:"مدخل الوضعيات: قلب الجيل الثاني",html:`
   <p>أهم فكرة في الجيل الثاني هي: <b>«كل شيء يبدأ بوضعية»</b> — لا يوجد درس بدون وضعية تُثير تفكير التلميذ. القاعدة الذهبية: <b>لا كفاءة بدون وضعية</b>.</p>
   <h4>🔖 أنواع الوضعيات (متى نستعمل كلًّا منها؟)</h4>
   <div class="def"><div class="term">1️⃣ الوضعية الانطلاقية (المشكلة)</div><div class="body">تُقدَّم في <b>بداية المقطع</b>، وهي مشكل من الواقع يثير فضول التلميذ ويجعله يتساءل.<br><b>مثال:</b> «لماذا يمرض أطفال بعض الدول بسوء التغذية رغم أنهم يأكلون؟»</div></div>
@@ -204,7 +204,7 @@ const SECTIONS=[
     <li>اجعلها واضحة وفيها <b>سند</b> (صورة/نص/جدول) و<b>تعليمة</b> (المطلوب)</li>
   </ul>
 `},
-{id:"g6",e:"🔎",t:"المسعى العلمي: خطوات الحصة",html:`
+{id:"g6",free:false,e:"🔎",t:"المسعى العلمي: خطوات الحصة",html:`
   <p>في كل حصة بالجيل الثاني، يمرّ التلميذ بخطوات المسعى العلمي (نفس طريقة العالِم):</p>
   <div class="steps">
     <div class="s"><div class="num"></div><div class="txt"><b>الإحساس بالمشكل</b> — نضع التلميذ أمام وضعية تجعله يشعر بوجود سؤال يحتاج جوابًا.</div></div>
@@ -216,7 +216,7 @@ const SECTIONS=[
   </div>
   <div class="example">🔎 هكذا لا يعطي الأستاذ الجواب جاهزًا، بل <b>يقود التلميذ ليكتشفه بنفسه</b> — فيبقى راسخًا في ذهنه.</div>
 `},
-{id:"g7",e:"🗓️",t:"كيف تخطّط وتدرّس؟ (نموذج عملي)",html:`
+{id:"g7",free:false,e:"🗓️",t:"كيف تخطّط وتدرّس؟ (نموذج عملي)",html:`
   <p>الآن الجزء العملي: كيف تنظّم عملك كأستاذ؟ إليك المستندات التي ستستعملها:</p>
   <div class="def"><div class="term">📄 الوثيقة المرافقة</div><div class="body">كتاب يرافق المنهاج <b>يشرح لك كيف تطبّقه</b> عمليًا (المنهاج يقول «ماذا»، والوثيقة تقول «كيف»).</div></div>
   <div class="def"><div class="term">📄 مخطط التعلّمات السنوي</div><div class="body">جدول تخطّط فيه <b>كل السنة</b>: ما الذي ستدرّسه في كل أسبوع، بأي ترتيب.</div></div>
@@ -231,7 +231,7 @@ const SECTIONS=[
   </ul>
   <div class="example">🔎 <b>قاعدة الوجبة المتوازنة (1-2-4):</b> كل وجبة يجب أن تحترم: <b>4</b> أغذية بناء ونمو + <b>2</b> غذاءان للطاقة + <b>1</b> غذاء وظيفي (خضر/ماء). قاعدة بسيطة يحفظها التلميذ ويطبّقها.</div>
 `},
-{id:"g8",e:"✅",t:"كيف تقوّم التلاميذ؟",html:`
+{id:"g8",free:false,e:"✅",t:"كيف تقوّم التلاميذ؟",html:`
   <p>التقويم في الجيل الثاني <b>ليس مجرّد امتحان حفظ</b>، بل قياس هل يستطيع التلميذ استعمال ما تعلّمه. نقوّم: المعارف، المهارات، والسلوكات.</p>
   <h4>🧰 وسائل التقويم (من الأسهل للأصعب)</h4>
   <ul>
@@ -248,7 +248,7 @@ const SECTIONS=[
   <div class="example">🔎 <b>قاعدة عملية للتوزيع:</b> نخصّص حوالي <b>¾ من العلامة للمعايير الأساسية</b> (الوجاهة، الأدوات، الانسجام) و<b>¼ لمعيار الإتقان</b> (الترتيب، الجمالية).</div>
   <div class="def"><div class="term">📖 أنواع الشبكات</div><div class="body"><b>تحليلية:</b> تفصّل كل معيار على حدة (مناسبة للتدقيق). <b>شمولية:</b> سلّم واحد يقيّم العمل ككل (أسرع).</div></div>
 `},
-{id:"g9",e:"📝",t:"كيف تُعدّ مذكّرة",html:`
+{id:"g9",free:false,e:"📝",t:"كيف تُعدّ مذكّرة",html:`
   <p>المذكّرة هي <b>خطة مكتوبة</b> تحضّرها قبل دخولك للقسم، ترشدك: ماذا ستدرّس؟ كيف؟ وبأي وسائل؟ لكنّ إعداد المذكّرة لا يبدأ من الدرس مباشرة، بل يتبع <b>تسلسلاً هرميًّا</b>: تبدأ من <b>وضعية الميدان</b> (الكبرى)، ثم <b>وضعية المقطع التعلّمي</b>، ثم <b>المقطع البيداغوجي</b> (الدرس نفسه بتقسيماته)، وتختم بـ<b>وضعية الإدماج</b>. في هذا المحور نمشي معك خطوة بخطوة، ونذكر لك في كل عنصر <b>من أين تجيبه</b>.</p>
 
   <div class="note">📌 قبل أن تكتب أي شيء، ضع أمامك <b>ثلاث مراجع أساسية</b>، منها يُستخرج كل عنصر في المذكّرة:
@@ -439,7 +439,7 @@ const SECTIONS=[
   <div class="note">💡 <b>نصائح ذهبية:</b> اجعل الوضعية من واقع التلميذ · نوّع السندات · اترك التلميذ يكتشف بنفسه · اجعل الحوصلة واضحة ومختصرة · لا تنسَ التقويم في كل حصة.</div>
   <div class="example">🔎 <b>تذكّر:</b> المذكّرة ليست نصًّا تحفظه، بل <b>خطة مرنة</b> تسترشد بها. للاطّلاع على نماذج جاهزة، عد إلى <a href="maktaba.html" style="color:var(--green-d);font-weight:800">مكتبة المنصة</a>. ولتحليل مذكّرة حقيقية كاملة انظر المحور التالي.</div>
 `},
-{id:"g10",e:"🔬",t:"تحليل مذكّرة حقيقية: «المستحاثات» (نموذج مطبّق)",html:`
+{id:"g10",free:false,e:"🔬",t:"تحليل مذكّرة حقيقية: «المستحاثات» (نموذج مطبّق)",html:`
   <p>لنطبّق كل ما سبق على <b>مذكّرة حقيقية</b> جاهزة: مقطع «المستحاثات» (ميدان الإنسان والمحيط - السنة الثانية متوسط). سنفكّكها عنصرًا عنصرًا لترى كيف بُنيت فعليًا.</p>
 
   <div class="note">📎 هذه المذكّرة نموذج فعلي كامل. لاحظ أنها ليست حصة واحدة فقط، بل <b>ملف مقطع كامل</b> يحتوي عدّة وثائق: وضعية انطلاقية + مذكّرة الدرس + مطبوعات الأفواج + وضعية إدماج — وكلها تُصحَّح بشبكة معايير.</div>
@@ -546,8 +546,8 @@ const SECTIONS=[
 
   <div class="note">🎓 <b>الخلاصة:</b> لاحظ كيف أن المذكّرة الواحدة سلسلة مترابطة: <b>منهاج → كفاءة → مركّبات → وضعية → موارد → أنشطة (بتعليمات متدرّجة) → حوصلة → تقويم بمعايير → إدماج</b>. إذا فهمت هذا التسلسل على هذا النموذج، تستطيع إعداد مذكّرتك لأي مقطع.</div>
   <div class="example">🔎 <b>خطوتك التالية:</b> حمّل مذكّرات جاهزة من <a href="maktaba.html" style="color:var(--green-d);font-weight:800">مكتبة المنصة</a>، وفكّكها بنفس هذه الطريقة، ثم جرّب إعداد واحدة بنفسك.</div>
-`},,
-{id:"g11",e:"🗓️",t:"مخطّط التدرّج السنوي للتعلّمات",html:`
+`},
+{id:"g11",free:false,e:"🗓️",t:"مخطّط التدرّج السنوي للتعلّمات",html:`
   <p>قبل أن تدخل القسم طوال السنة، تحتاج إلى <b>خطّة سنوية</b> تنظّم سير التعلّمات. في الجيل الثاني تخلّينا عن «التوزيع السنوي» التقليدي وعوّضناه بـ<b>مخطّط التدرّج السنوي للتعلّمات</b>. لنفهم الفرق.</p>
 
   <div class="def"><div class="term">📖 التوزيع السنوي (القديم)</div><div class="body">تصميم في جدول يوازي بين <b>وحدات الزمن</b> و<b>الوحدات المعرفية المبرمجة</b>، يتابع مدى تطابق المضامين مع الحجم الساعي ووتيرة إنجاز المنهاج. <b>هدفه: متابعة تنفيذ المنهاج</b> (تناول خطّي تسلسلي). تُخلّي عنه في الجيل الثاني.</div></div>
@@ -565,7 +565,7 @@ const SECTIONS=[
   </table>
   <div class="note">💡 <b>الخلاصة:</b> التدرّج السنوي أكثر مرونة وذكاءً — لا تنتقل لتعلّم جديد قبل التأكّد من تحكّم التلاميذ في السابق، ويسمح بتدبير الوقت واقتصاد الجهد.</div>
 `},
-{id:"g12",e:"📖",t:"قراءة وتقويم الكتاب المدرسي",html:`
+{id:"g12",free:false,e:"📖",t:"قراءة وتقويم الكتاب المدرسي",html:`
   <p>الكتاب المدرسي <b>أداة العمل المفضّلة</b> في التعليم والتعلّم، ووسيلة رئيسية لتحقيق أهداف المنهاج. لكنّه ليس مقدّسًا: على الأستاذ أن يعرف كيف يقرؤه، يقيّمه، ويوظّفه بذكاء لا أن يصبح أسيرًا له.</p>
 
   <div class="def"><div class="term">📖 وظائف الكتاب المدرسي</div><div class="body">هو <b>أداة بيداغوجية</b> + <b>مصدر وثائقي</b> + <b>مرجع</b>. يتعلّم منه التلميذ تعلّمًا ذاتيًّا ويستعمله الأستاذ مصدرًا للمعلومات المنظّمة. وكتب علوم الطبيعة والحياة مُنجزة <b>بمدخل الوضعيات</b> وغنيّة بالوثائق والمخطّطات.</div></div>
@@ -600,7 +600,7 @@ const SECTIONS=[
   </ul></div>
   <div class="example">🔎 <b>التوظيف السليم:</b> الكتاب موجّه <b>لنشاط التلميذ الفردي المستقل</b> والتعلّم الذاتي — لا بديلًا عن دور الأستاذ. وظّفه كمصدر للسندات والأنشطة، لا كنصّ يُقرأ ويُحفظ.</div>
 `},
-{id:"g13",e:"🧾",t:"إعداد المذكّرة عمليًّا: خطوة بخطوة",html:`
+{id:"g13",free:false,e:"🧾",t:"إعداد المذكّرة عمليًّا: خطوة بخطوة",html:`
   <p>هذا المحور دليل عملي مركّز يكمّل محور «كيف تُعدّ مذكّرة»: يأخذك من <b>الأدوات</b> إلى <b>الخطوات</b> إلى <b>بنية المذكّرة الكاملة</b> (رأسها وجسمها).</p>
 
   <h4>🧰 الأدوات التي تعتمد عليها</h4>
@@ -648,16 +648,69 @@ const SECTIONS=[
   <div class="example">🔎 للتطبيق الكامل على مذكّرة حقيقية، راجع محور <b>«تحليل مذكّرة حقيقية: المستحاثات»</b>. ولنماذج جاهزة عد إلى <a href="maktaba.html" style="color:var(--green-d);font-weight:800">المكتبة الرقمية</a>.</div>
 `}
 ];
-const toc=document.getElementById('toc');
-toc.innerHTML=SECTIONS.map((s,i)=>`<a href="#${s.id}" onclick="return goTo(event,'${s.id}')"><span class="n">${i+1}</span> ${s.t}</a>`).join('');
-const acc=document.getElementById('acc');
-acc.innerHTML=SECTIONS.map((s,i)=>`
-  <div class="acc-item${i===0?' open':''}" id="${s.id}">
-    <button class="acc-btn" onclick="toggle(this)">
-      <span class="ic">${s.e}</span><span class="tt">${s.t}</span><span class="arrow">▼</span>
-    </button>
-    <div class="panel"><div class="panel-in">${s.html}</div></div>
-  </div>`).join('');
+function checkIsLogged() {
+  const sess = localStorage.getItem('sac_session');
+  const role = localStorage.getItem('sac_role');
+  let users = {};
+  try { users = JSON.parse(localStorage.getItem('sac_users') || '{}'); } catch(e){}
+  return (role === 'admin' || role === 'user' || sess === 'admin@sac-svt.dz' || sess === 'admin' || (sess && users[sess]));
+}
+
+function getUserRole() {
+  const sess = localStorage.getItem('sac_session');
+  const role = localStorage.getItem('sac_role');
+  if (role === 'admin' || sess === 'admin@sac-svt.dz' || sess === 'admin') return 'admin';
+  if (checkIsLogged()) return 'user';
+  return 'guest';
+}
+
+function updateJilThaniNavbar() {
+  const container = document.getElementById('jilThaniHeaderAuth');
+  if (!container) return;
+  const role = getUserRole();
+  const sess = localStorage.getItem('sac_session');
+  let users = {};
+  try { users = JSON.parse(localStorage.getItem('sac_users') || '{}'); } catch(e){}
+  
+  if (role !== 'guest') {
+    const name = (users[sess] && users[sess].name) ? users[sess].name : (role === 'admin' ? 'المسؤول' : sess);
+    container.innerHTML = `
+      <button class="btn" style="background:#0d9488; border:none; color:#fff; cursor:default; padding:8px 14px; font-size:0.88rem; border-radius:10px; font-weight:700;">👤 مرحبًا، ${name}</button>
+      <button class="back" onclick="jilThaniLogout()" style="padding:8px 14px; font-size:0.88rem; border-radius:10px; border:1px solid #00a8a8; color:#00a8a8; font-weight:700; background:#fff; cursor:pointer;">تسجيل الخروج 🚪</button>
+    `;
+  } else {
+    container.innerHTML = `
+      <button class="btn" onclick="sessionStorage.setItem('sac_redirect','jil-thani.html'); window.location.href='login.html'" style="background:#00a8a8; border:none; color:#fff; cursor:pointer; padding:8px 14px; font-size:0.88rem; border-radius:10px; font-weight:700;">تسجيل الدخول</button>
+    `;
+  }
+}
+
+function jilThaniLogout() {
+  localStorage.removeItem('sac_session');
+  localStorage.removeItem('sac_role');
+  updateJilThaniNavbar();
+  renderJilThani();
+}
+
+function handleTocClick(ev, id, isFree) {
+  if (ev) ev.preventDefault();
+  if (!isFree && getUserRole() === 'guest') {
+    sessionStorage.setItem('sac_redirect', 'jil-thani.html#' + id);
+    window.location.href = 'login.html';
+    return false;
+  }
+  return goTo(null, id);
+}
+
+function handleAccClick(btn, id, isFree) {
+  if (!isFree && getUserRole() === 'guest') {
+    sessionStorage.setItem('sac_redirect', 'jil-thani.html#' + id);
+    window.location.href = 'login.html';
+    return;
+  }
+  toggle(btn);
+}
+
 function toggle(btn){
   const item=btn.closest('.acc-item');
   const panel=item.querySelector('.panel');
@@ -665,28 +718,273 @@ function toggle(btn){
   if(open){item.classList.remove('open');panel.style.maxHeight=null;}
   else{item.classList.add('open');panel.style.maxHeight=panel.scrollHeight+'px';}
 }
-function openAcc(id){
-  const item=document.getElementById(id);
-  if(!item.classList.contains('open')){item.classList.add('open');const p=item.querySelector('.panel');p.style.maxHeight=p.scrollHeight+'px';}
-}
+
 function goTo(ev,id){
   if(ev) ev.preventDefault();
   const item=document.getElementById(id);
   if(!item) return false;
-  // open the target section first
   if(!item.classList.contains('open')){
     item.classList.add('open');
     const p=item.querySelector('.panel');
     p.style.maxHeight=p.scrollHeight+'px';
   }
-  // scroll to it after it expands
   setTimeout(function(){
-    const y=item.getBoundingClientRect().top+window.pageYOffset-14;
+    const y=item.getBoundingClientRect().top+window.pageYOffset-80;
     window.scrollTo({top:y,behavior:'smooth'});
   },60);
   return false;
 }
-document.querySelectorAll('.acc-item.open .panel').forEach(p=>p.style.maxHeight=p.scrollHeight+'px');
+
+function renderJilThani() {
+  const role = getUserRole();
+  const toc = document.getElementById('toc');
+  const acc = document.getElementById('acc');
+  
+  if (toc) {
+    toc.innerHTML = SECTIONS.map((s, i) => {
+      let badge = '';
+      if (s.free) {
+        badge = `<span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:700;background:#e0f2fe;color:#0369a1;margin-inline-start:8px;">🆓 مجاني للجميع</span>`;
+      } else if (role === 'guest') {
+        badge = `<span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:700;background:#fef3c7;color:#b45309;margin-inline-start:8px;">🔒 مميّز (يتطلب تسجيل الدخول)</span>`;
+      } else if (role === 'user') {
+        badge = `<span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:700;background:#dcfce7;color:#15803d;margin-inline-start:8px;">🔓 مفتوح لك</span>`;
+      } else if (role === 'admin') {
+        badge = `<span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:700;background:#fef08a;color:#854d0e;margin-inline-start:8px;">👑 مفتوح للأدمين</span>`;
+      }
+      return `<a href="#${s.id}" onclick="return handleTocClick(event, '${s.id}', ${s.free})"><span class="n">${i+1}</span> <span style="flex:1;">${s.t}</span> ${badge}</a>`;
+    }).join('');
+  }
+  
+  if (acc) {
+    acc.innerHTML = SECTIONS.map((s, i) => {
+      let badge = '';
+      let panelContent = s.html;
+      if (s.free) {
+        badge = `<span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:700;background:#e0f2fe;color:#0369a1;margin-inline-start:8px;">🆓 مجاني للجميع</span>`;
+      } else if (role === 'guest') {
+        badge = `<span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:700;background:#fef3c7;color:#b45309;margin-inline-start:8px;">🔒 مميّز (يتطلب تسجيل الدخول)</span>`;
+        panelContent = `
+          <div style="text-align:center;padding:40px 20px;background:#fef3c7;border:1px solid #fde68a;border-radius:14px;color:#b45309;margin:14px 0;">
+            <div style="font-size:2.8rem;margin-bottom:12px;">🔒</div>
+            <h3 style="font-size:1.25rem;font-weight:800;margin-bottom:8px;color:#92400e;">هذا المحور مميّز ومخصص للأساتذة المشتركين فقط</h3>
+            <p style="font-size:0.95rem;max-width:520px;margin:0 auto 18px;color:#b45309;">للوصول إلى تفاصيل هذا الشرح وكافة المحاور والبيداغوجيات التطبيقية ونماذج المذكرات، يرجى تسجيل الدخول بحساب الأستاذ.</p>
+            <button class="btn" onclick="sessionStorage.setItem('sac_redirect','jil-thani.html#${s.id}'); window.location.href='login.html'" style="padding:10px 26px;font-size:0.95rem;font-weight:800;border:none;border-radius:10px;background:linear-gradient(135deg, #f59e0b, #d97706);color:#fff;cursor:pointer;box-shadow:0 4px 14px rgba(245,158,11,0.3);">سجّل دخولك الآن لعرض الشرح كاملاً ✨</button>
+          </div>
+        `;
+      } else if (role === 'user') {
+        badge = `<span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:700;background:#dcfce7;color:#15803d;margin-inline-start:8px;">🔓 مفتوح لك</span>`;
+      } else if (role === 'admin') {
+        badge = `<span style="display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:700;background:#fef08a;color:#854d0e;margin-inline-start:8px;">👑 مفتوح للأدمين</span>`;
+      }
+      return `
+        <div class="acc-item${i===0 ? ' open' : ''}" id="${s.id}">
+          <button class="acc-btn" onclick="handleAccClick(this, '${s.id}', ${s.free})">
+            <span class="ic">${s.e}</span><span class="tt">${s.t} ${badge}</span><span class="arrow">▼</span>
+          </button>
+          <div class="panel"><div class="panel-in">${panelContent}</div></div>
+        </div>`;
+    }).join('');
+    
+    document.querySelectorAll('.acc-item.open .panel').forEach(p => p.style.maxHeight = p.scrollHeight + 'px');
+  }
+}
+
+updateJilThaniNavbar();
+renderJilThani();
+
+if (window.location.hash) {
+  const targetId = window.location.hash.replace('#', '');
+  const targetSec = SECTIONS.find(s => s.id === targetId);
+  if (targetSec && (targetSec.free || getUserRole() !== 'guest')) {
+    setTimeout(() => goTo(null, targetId), 150);
+  }
+}
 </script>
+<!-- ========================================================================= -->
+<!-- درع الحماية الشامل لمنصة SAC · SVT prof (منع النسخ، السكرينشوت، وأدوات المطورين) -->
+<!-- ========================================================================= -->
+<style>
+/* 1. منع تحديد ونسخ النصوص في كافة عناصر الصفحة ما عدا حقول الإدخال */
+body, html, *:not(input):not(textarea) {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+  -webkit-touch-callout: none !important;
+}
+/* السماح بالكتابة داخل حقول الإدخال والتعليقات */
+input, textarea {
+  -webkit-user-select: auto !important;
+  -moz-user-select: auto !important;
+  -ms-user-select: auto !important;
+  user-select: auto !important;
+}
+
+/* 2. حماية الطباعة والتحويل إلى PDF */
+@media print {
+  body * {
+    display: none !important;
+  }
+  body::after {
+    content: "⚠️ تنبيه: محتويات منصة SAC · SVT prof محمية بحقوق الملكية الفكرية ولا يسمح بطباعتها أو نسخها دون إذن رسمي.";
+    display: block !important;
+    font-size: 20px;
+    font-weight: bold;
+    color: #be123c;
+    text-align: center;
+    padding: 50px;
+  }
+}
+
+/* 3. شاشة التعتيم عند التقاط الشاشة أو التبديل أو فحص الأكواد */
+#antiScreenshotOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 35, 38, 0.98);
+  backdrop-filter: blur(28px);
+  z-index: 9999999;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: 'Tajawal', 'Segoe UI', Tahoma, sans-serif;
+  text-align: center;
+  padding: 30px;
+}
+#antiScreenshotOverlay h3 {
+  font-size: 1.65rem;
+  color: #2dd4bf;
+  margin-bottom: 14px;
+  font-weight: 800;
+}
+#antiScreenshotOverlay p {
+  font-size: 1.05rem;
+  color: #daeeee;
+  max-width: 500px;
+  line-height: 1.65;
+}
+</style>
+
+<div id="antiScreenshotOverlay">
+  <div style="font-size: 7.5rem; filter: drop-shadow(0 0 35px rgba(45,212,191,0.6));">🛡️</div>
+</div>
+
+<script>
+(function(){
+  // 1. منع تضمين المنصة في إطارات وهمية لحماية الحسابات (Anti-Clickjacking Frame-Busting)
+  try {
+    if (window.top !== window.self && !window.location.hostname.includes('arena.ai') && !window.location.hostname.includes('onrender.com') && !window.location.hostname.includes('localhost')) {
+      window.top.location.href = window.self.location.href;
+    }
+  } catch (e) {}
+
+  // 2. منع القائمة المنسدلة عند النقر بالزر الأيمن (Right-Click Context Menu)
+  document.addEventListener('contextmenu', function(e) {
+    if(!['INPUT', 'TEXTAREA'].includes(e.target.tagName)) {
+      e.preventDefault();
+      return false;
+    }
+  }, false);
+
+  // 3. منع تحديد النص والاقتصاص والنسخ والسحب (Copy, Cut, SelectStart, DragStart)
+  ['copy', 'cut', 'selectstart', 'dragstart'].forEach(function(evt) {
+    document.addEventListener(evt, function(e) {
+      if(!['INPUT', 'TEXTAREA'].includes(e.target.tagName)) {
+        e.preventDefault();
+        return false;
+      }
+    }, false);
+  });
+
+  // 4. منع اختصارات لوحة المفاتيح الخاصة بالنسخ، الطباعة، الحفظ، وأدوات المطورين والسكرينشوت
+  document.addEventListener('keydown', function(e) {
+    // PrintScreen Key
+    if(e.key === 'PrintScreen' || e.keyCode === 44) {
+      e.preventDefault();
+      triggerAntiScreenshotAlert();
+      return false;
+    }
+    // F12 (DevTools) or Ctrl+Shift+I/J/C
+    if(e.key === 'F12' || e.keyCode === 123) {
+      e.preventDefault();
+      triggerAntiScreenshotAlert();
+      return false;
+    }
+    // Ctrl+C, Ctrl+X, Ctrl+S, Ctrl+P, Ctrl+U (View Source)
+    if(e.ctrlKey || e.metaKey) {
+      const k = e.key ? e.key.toLowerCase() : '';
+      if(['c', 'x', 's', 'p', 'u'].includes(k) && !['INPUT', 'TEXTAREA'].includes(e.target.tagName)) {
+        e.preventDefault();
+        return false;
+      }
+      if(e.shiftKey && ['i', 'j', 'c', 's'].includes(k)) {
+        e.preventDefault();
+        triggerAntiScreenshotAlert();
+        return false;
+      }
+    }
+  }, false);
+
+  // 5. دالة تفعيل شاشة التعتيم والإشعار الفوري عند اكتشاف التقاط الشاشة أو فحص الكود
+  function triggerAntiScreenshotAlert() {
+    const overlay = document.getElementById('antiScreenshotOverlay');
+    if(overlay) {
+      overlay.style.display = 'flex';
+      try { if(navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText('محتوى محمي - منصة SAC SVT prof'); } catch(err) {}
+      setTimeout(function() {
+        overlay.style.display = 'none';
+      }, 3500);
+    }
+  }
+
+  // 6. التعتيم عند فقدان التركيز (Snipping Tool / Screen Recording Blur Protection)
+  window.addEventListener('blur', function() {
+    if(document.activeElement && ['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+    const overlay = document.getElementById('antiScreenshotOverlay');
+    if(overlay) overlay.style.display = 'flex';
+  });
+
+  window.addEventListener('focus', function() {
+    const overlay = document.getElementById('antiScreenshotOverlay');
+    if(overlay) overlay.style.display = 'none';
+  });
+
+  document.addEventListener('keyup', function(e) {
+    if(e.key === 'PrintScreen' || e.keyCode === 44) {
+      triggerAntiScreenshotAlert();
+    }
+  }, false);
+
+  // 7. كاشف أدوات المطورين النشط (Active DevTools Detector Trap)
+  setInterval(function() {
+    const widthThreshold = window.outerWidth - window.innerWidth > 170;
+    const heightThreshold = window.outerHeight - window.innerHeight > 170;
+    if(widthThreshold || heightThreshold) {
+      const overlay = document.getElementById('antiScreenshotOverlay');
+      if(overlay && overlay.style.display !== 'flex') {
+        overlay.style.display = 'flex';
+      }
+    }
+  }, 1000);
+
+  // 8. نظام الخاتم المائي الديناميكي المقاوم لتصوير الهاتف واستخراج النصوص (Anti-OCR & Camera Shield)
+  try {
+    const sess = localStorage.getItem('sac_session') || localStorage.getItem('sac_role') || 'SAC · SVT prof';
+    const stampText = sess !== "SAC · SVT prof" ? `⚠️ منصة SAC · SVT prof · إنجاز وتجميع قائم على أعمال نخبة من أساتذة المادة ⚠️ نسخة مرخصة لحساب (${sess})` : "⚠️ منصة SAC · SVT prof · إنجاز وتجميع قائم على أعمال نخبة من أساتذة المادة ⚠️";
+    const watermarkDiv = document.createElement('div');
+    watermarkDiv.id = 'sacAntiOcrWatermark';
+    watermarkDiv.style.cssText = 'position:fixed;inset:-200px;z-index:999998;pointer-events:none;display:flex;flex-wrap:wrap;align-content:space-around;justify-content:space-around;overflow:hidden;opacity:0.045;user-select:none;font-family:"Tajawal",sans-serif;font-weight:800;font-size:1.15rem;color:#0a5860;transform:rotate(-24deg);white-space:nowrap;';
+    let patternHTML = '';
+    for(let i=0; i<60; i++) {
+      patternHTML += `<span style="padding:32px 48px;letter-spacing:1px;">${stampText}</span>`;
+    }
+    watermarkDiv.innerHTML = patternHTML;
+    document.body.appendChild(watermarkDiv);
+  } catch(e) {}
+})();
+</script>
+<!-- ========================================================================= -->
 </body>
 </html>

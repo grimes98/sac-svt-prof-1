@@ -71,7 +71,191 @@ footer .fl img{width:34px;height:34px;object-fit:contain;filter:brightness(0) in
   var users = {};
   try { users = JSON.parse(localStorage.getItem('sac_users')) || {}; } catch(e){}
   if(!s || !users[s]){
-    document.documentElement.innerHTML = '<body style="margin:0;font-family:Tajawal,Segoe UI,sans-serif;display:grid;place-items:center;min-height:100vh;background:linear-gradient(135deg,#007878,#00a8a8);color:#fff;text-align:center;padding:30px"><div><div style="font-size:5rem">🔒</div><h1 style="font-size:1.8rem;margin:10px 0">هذا المحتوى مميّز</h1><p style="opacity:.9;margin-bottom:8px">سجّل الدخول للوصول إلى هذا المحتوى الحصري</p><p style="opacity:.8;font-size:.9rem;margin-bottom:24px">المحتوى المميّز متاح للأساتذة المسجّلين فقط</p><a href="index.html" style="display:inline-block;background:#fff;color:#007878;font-weight:800;padding:14px 30px;border-radius:12px;text-decoration:none">🔐 العودة للمنصة وتسجيل الدخول</a></div></body>';
+    document.documentElement.innerHTML = '<body style="margin:0;font-family:Tajawal,Segoe UI,sans-serif;display:grid;place-items:center;min-height:100vh;background:linear-gradient(135deg,#007878,#00a8a8);color:#fff;text-align:center;padding:30px"><div><div style="font-size:5rem">🔒</div><h1 style="font-size:1.8rem;margin:10px 0">هذا المحتوى مميّز</h1><p style="opacity:.9;margin-bottom:8px">سجّل الدخول للوصول إلى هذا المحتوى الحصري</p><p style="opacity:.8;font-size:.9rem;margin-bottom:24px">المحتوى المميّز متاح للأساتذة المسجّلين فقط</p><a href="index.html" style="display:inline-block;background:#fff;color:#007878;font-weight:800;padding:14px 30px;border-radius:12px;text-decoration:none">🔐 العودة للمنصة وتسجيل الدخول</a></div><!-- ========================================================================= -->
+<!-- درع الحماية الشامل لمنصة SAC · SVT prof (منع النسخ، السكرينشوت، وأدوات المطورين) -->
+<!-- ========================================================================= -->
+<style>
+/* 1. منع تحديد ونسخ النصوص في كافة عناصر الصفحة ما عدا حقول الإدخال */
+body, html, *:not(input):not(textarea) {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+  -webkit-touch-callout: none !important;
+}
+/* السماح بالكتابة داخل حقول الإدخال والتعليقات */
+input, textarea {
+  -webkit-user-select: auto !important;
+  -moz-user-select: auto !important;
+  -ms-user-select: auto !important;
+  user-select: auto !important;
+}
+
+/* 2. حماية الطباعة والتحويل إلى PDF */
+@media print {
+  body * {
+    display: none !important;
+  }
+  body::after {
+    content: "⚠️ تنبيه: محتويات منصة SAC · SVT prof محمية بحقوق الملكية الفكرية ولا يسمح بطباعتها أو نسخها دون إذن رسمي.";
+    display: block !important;
+    font-size: 20px;
+    font-weight: bold;
+    color: #be123c;
+    text-align: center;
+    padding: 50px;
+  }
+}
+
+/* 3. شاشة التعتيم عند التقاط الشاشة أو التبديل أو فحص الأكواد */
+#antiScreenshotOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 35, 38, 0.98);
+  backdrop-filter: blur(28px);
+  z-index: 9999999;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: 'Tajawal', 'Segoe UI', Tahoma, sans-serif;
+  text-align: center;
+  padding: 30px;
+}
+#antiScreenshotOverlay h3 {
+  font-size: 1.65rem;
+  color: #2dd4bf;
+  margin-bottom: 14px;
+  font-weight: 800;
+}
+#antiScreenshotOverlay p {
+  font-size: 1.05rem;
+  color: #daeeee;
+  max-width: 500px;
+  line-height: 1.65;
+}
+</style>
+
+<div id="antiScreenshotOverlay">
+  <div style="font-size: 7.5rem; filter: drop-shadow(0 0 35px rgba(45,212,191,0.6));">🛡️</div>
+</div>
+
+<script>
+(function(){
+  // 1. منع تضمين المنصة في إطارات وهمية لحماية الحسابات (Anti-Clickjacking Frame-Busting)
+  try {
+    if (window.top !== window.self && !window.location.hostname.includes('arena.ai') && !window.location.hostname.includes('onrender.com') && !window.location.hostname.includes('localhost')) {
+      window.top.location.href = window.self.location.href;
+    }
+  } catch (e) {}
+
+  // 2. منع القائمة المنسدلة عند النقر بالزر الأيمن (Right-Click Context Menu)
+  document.addEventListener('contextmenu', function(e) {
+    if(!['INPUT', 'TEXTAREA'].includes(e.target.tagName)) {
+      e.preventDefault();
+      return false;
+    }
+  }, false);
+
+  // 3. منع تحديد النص والاقتصاص والنسخ والسحب (Copy, Cut, SelectStart, DragStart)
+  ['copy', 'cut', 'selectstart', 'dragstart'].forEach(function(evt) {
+    document.addEventListener(evt, function(e) {
+      if(!['INPUT', 'TEXTAREA'].includes(e.target.tagName)) {
+        e.preventDefault();
+        return false;
+      }
+    }, false);
+  });
+
+  // 4. منع اختصارات لوحة المفاتيح الخاصة بالنسخ، الطباعة، الحفظ، وأدوات المطورين والسكرينشوت
+  document.addEventListener('keydown', function(e) {
+    // PrintScreen Key
+    if(e.key === 'PrintScreen' || e.keyCode === 44) {
+      e.preventDefault();
+      triggerAntiScreenshotAlert();
+      return false;
+    }
+    // F12 (DevTools) or Ctrl+Shift+I/J/C
+    if(e.key === 'F12' || e.keyCode === 123) {
+      e.preventDefault();
+      triggerAntiScreenshotAlert();
+      return false;
+    }
+    // Ctrl+C, Ctrl+X, Ctrl+S, Ctrl+P, Ctrl+U (View Source)
+    if(e.ctrlKey || e.metaKey) {
+      const k = e.key ? e.key.toLowerCase() : '';
+      if(['c', 'x', 's', 'p', 'u'].includes(k) && !['INPUT', 'TEXTAREA'].includes(e.target.tagName)) {
+        e.preventDefault();
+        return false;
+      }
+      if(e.shiftKey && ['i', 'j', 'c', 's'].includes(k)) {
+        e.preventDefault();
+        triggerAntiScreenshotAlert();
+        return false;
+      }
+    }
+  }, false);
+
+  // 5. دالة تفعيل شاشة التعتيم والإشعار الفوري عند اكتشاف التقاط الشاشة أو فحص الكود
+  function triggerAntiScreenshotAlert() {
+    const overlay = document.getElementById('antiScreenshotOverlay');
+    if(overlay) {
+      overlay.style.display = 'flex';
+      try { if(navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText('محتوى محمي - منصة SAC SVT prof'); } catch(err) {}
+      setTimeout(function() {
+        overlay.style.display = 'none';
+      }, 3500);
+    }
+  }
+
+  // 6. التعتيم عند فقدان التركيز (Snipping Tool / Screen Recording Blur Protection)
+  window.addEventListener('blur', function() {
+    if(document.activeElement && ['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+    const overlay = document.getElementById('antiScreenshotOverlay');
+    if(overlay) overlay.style.display = 'flex';
+  });
+
+  window.addEventListener('focus', function() {
+    const overlay = document.getElementById('antiScreenshotOverlay');
+    if(overlay) overlay.style.display = 'none';
+  });
+
+  document.addEventListener('keyup', function(e) {
+    if(e.key === 'PrintScreen' || e.keyCode === 44) {
+      triggerAntiScreenshotAlert();
+    }
+  }, false);
+
+  // 7. كاشف أدوات المطورين النشط (Active DevTools Detector Trap)
+  setInterval(function() {
+    const widthThreshold = window.outerWidth - window.innerWidth > 170;
+    const heightThreshold = window.outerHeight - window.innerHeight > 170;
+    if(widthThreshold || heightThreshold) {
+      const overlay = document.getElementById('antiScreenshotOverlay');
+      if(overlay && overlay.style.display !== 'flex') {
+        overlay.style.display = 'flex';
+      }
+    }
+  }, 1000);
+  // 8. نظام الخاتم المائي الديناميكي المقاوم لتصوير الهاتف واستخراج النصوص (Anti-OCR & Camera Shield)
+  try {
+    const sess = localStorage.getItem("sac_session") || localStorage.getItem("sac_role") || "SAC · SVT prof";
+    const stampText = sess !== "SAC · SVT prof" ? `⚠️ منصة SAC · SVT prof · إنجاز وتجميع قائم على أعمال نخبة من أساتذة المادة ⚠️ نسخة مرخصة لحساب (${sess})` : "⚠️ منصة SAC · SVT prof · إنجاز وتجميع قائم على أعمال نخبة من أساتذة المادة ⚠️";
+    const watermarkDiv = document.createElement("div");
+    watermarkDiv.id = "sacAntiOcrWatermark";
+    watermarkDiv.style.cssText = "position:fixed;inset:-200px;z-index:999998;pointer-events:none;display:flex;flex-wrap:wrap;align-content:space-around;justify-content:space-around;overflow:hidden;opacity:0.045;user-select:none;font-family:Tajawal,sans-serif;font-weight:800;font-size:1.15rem;color:#0a5860;transform:rotate(-24deg);white-space:nowrap;";
+    let patternHTML = "";
+    for(let i=0; i<60; i++) {
+      patternHTML += `<span style="padding:32px 48px;letter-spacing:1px;">${stampText}</span>`;
+    }
+    watermarkDiv.innerHTML = patternHTML;
+    document.body.appendChild(watermarkDiv);
+  } catch(e) {}
+})();
+</script>
+<!-- ========================================================================= -->
+</body>';
     throw new Error('locked');
   }
 })();
