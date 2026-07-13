@@ -1146,17 +1146,33 @@ html, body {
   document.addEventListener("visibilitychange", checkSnippingGuard, true);
   setInterval(checkSnippingGuard, 250);
 
-  // 7. كاشف أدوات المطورين النشط (Active DevTools Detector Trap)
+  
+  // 7. كاشف أدوات المطورين النشط والمصيدة الدائمة (Active DevTools Detector Trap & Debugger Loop)
+  let devtoolsDetected = false;
   setInterval(function() {
     const widthThreshold = window.outerWidth - window.innerWidth > 170;
     const heightThreshold = window.outerHeight - window.innerHeight > 170;
     if(widthThreshold || heightThreshold) {
-      const overlay = document.getElementById('antiScreenshotOverlay');
-      if(overlay && overlay.style.display !== 'flex') {
-        overlay.style.display = 'flex';
+      devtoolsDetected = true;
+      const overlay = document.getElementById("antiScreenshotOverlay");
+      if(overlay && overlay.style.display !== "flex") {
+        overlay.style.display = "flex";
       }
     }
+  }, 800);
+
+  // فحص أداء تنفيذ المتصفح ومصيدة فحص الـ Console
+  setInterval(function() {
+    const start = performance.now();
+    debugger; // تتجمد هنا فقط إذا كانت أدوات المطورين F12 مفتوحة
+    const end = performance.now();
+    if (end - start > 100) {
+      devtoolsDetected = true;
+      const overlay = document.getElementById("antiScreenshotOverlay");
+      if(overlay) overlay.style.display = "flex";
+    }
   }, 1000);
+
   // 8. نظام الخاتم المائي الديناميكي المقاوم لتصوير الهاتف واستخراج النصوص (Anti-OCR & Camera Shield)
   try {
     const sess = localStorage.getItem("sac_session") || localStorage.getItem("sac_role") || "SAC · SVT prof";
