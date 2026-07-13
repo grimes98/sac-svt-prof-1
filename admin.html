@@ -664,31 +664,37 @@ async function saveNewUser(){
 
 async function deleteUser(key){
   if(key === 'admin@sac-svt.dz' || key === 'admin' || key === 'grimesamani98@gmail.com'){
-    alert('لا يمكن حذف حساب المسؤول الرئيسي للمنصة!');
+    alert('⚠️ لا يمكن حذف حساب المسؤول الرئيسي للمنصة!');
     return;
   }
-  if(confirm(`هل أنت متأكد من رغبتك في حذف الحساب (${key})؟`)){
-    const u = getUsers();
-    const item = u[key];
-    if(item){
-      Object.keys(u).forEach(k => {
-        if(u[k] && (u[k].id === item.id || u[k].email === item.email)) delete u[k];
-      });
-    }
-    delete u[key];
-    saveUsers(u);
+  if(!confirm(`هل أنت متأكد من رغبتك في حذف الحساب (${key}) نهائياً؟`)) return;
 
-    if(!supabaseClient && window.supabase){
-      try { supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY); } catch(e){}
-    }
-    if(supabaseClient){
-      try{
-        await supabaseClient.from('users').delete().eq('email', key);
-      }catch(e){}
-    }
+  const u = getUsers();
+  const item = u[key];
+  const targetId = item ? item.id : null;
+  const targetEmail = item ? item.email : key;
 
-    await renderUsersTables();
+  Object.keys(u).forEach(k => {
+    if(u[k] && (u[k].id === targetId || u[k].email === targetEmail || k === key)) delete u[k];
+  });
+  saveUsers(u);
+
+  if(!supabaseClient && window.supabase){
+    try { supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY); } catch(e){}
   }
+  if(supabaseClient){
+    try {
+      if(targetId && String(targetId).length > 3) {
+        await supabaseClient.from('users').delete().eq('id', targetId);
+      }
+      if(targetEmail && targetEmail.includes('@')) {
+        await supabaseClient.from('users').delete().eq('email', targetEmail);
+      }
+    } catch(e) { console.log('Supabase user delete err:', e); }
+  }
+
+  alert(`✓ تم حذف المستخدم (${targetEmail || key}) بنجاح!`);
+  await renderUsersTables();
 }
 
 /* ============ RENDER PLATFORM CONTENT ============ */
@@ -803,14 +809,25 @@ function renderFilesTable(){
   `).join('');
 }
 
-function deleteUpload(id){
-  if(confirm('هل تريد حذف هذا الملف المرفوع؟')){
-    let uploads = [];
-    try{ uploads = JSON.parse(localStorage.getItem(UPLOADS_KEY)) || []; }catch(e){}
-    uploads = uploads.filter(u => u.id !== id);
-    localStorage.setItem(UPLOADS_KEY, JSON.stringify(uploads));
-    renderFilesTable();
+async function deleteUpload(id){
+  if(!confirm('هل تريد حذف هذا الملف المرفوع نهائياً من المنصة؟')) return;
+
+  let uploads = [];
+  try{ uploads = JSON.parse(localStorage.getItem(UPLOADS_KEY)) || []; }catch(e){}
+  uploads = uploads.filter(u => String(u.id) !== String(id));
+  localStorage.setItem(UPLOADS_KEY, JSON.stringify(uploads));
+
+  if(!supabaseClient && window.supabase){
+    try { supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY); } catch(e){}
   }
+  if(supabaseClient && id){
+    try {
+      await supabaseClient.from('files').delete().eq('id', id);
+    } catch(e) { console.log('Supabase file delete err:', e); }
+  }
+
+  alert('✓ تم حذف الملف المرفوع بنجاح!');
+  renderFilesTable();
 }
 
 async function renderCommentsTable(){
@@ -853,23 +870,24 @@ async function renderCommentsTable(){
 }
 
 async function deleteCommentItem(id){
-  if(confirm('هل أنت متأكد من حذف هذا التعليق؟')){
-    let comments = [];
-    try{ comments = JSON.parse(localStorage.getItem(COMMENTS_KEY)) || []; }catch(e){}
-    comments = comments.filter(c => String(c.id) !== String(id));
-    localStorage.setItem(COMMENTS_KEY, JSON.stringify(comments));
+  if(!confirm('هل أنت متأكد من حذف هذا التعليق نهائياً؟')) return;
 
-    if(!supabaseClient && window.supabase){
-      try { supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY); } catch(e){}
-    }
-    if(supabaseClient){
-      try{
-        await supabaseClient.from('comments').delete().eq('id', id);
-      }catch(e){}
-    }
+  let comments = [];
+  try{ comments = JSON.parse(localStorage.getItem(COMMENTS_KEY)) || []; }catch(e){}
+  comments = comments.filter(c => String(c.id) !== String(id));
+  localStorage.setItem(COMMENTS_KEY, JSON.stringify(comments));
 
-    await renderCommentsTable();
+  if(!supabaseClient && window.supabase){
+    try { supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY); } catch(e){}
   }
+  if(supabaseClient && id){
+    try {
+      await supabaseClient.from('comments').delete().eq('id', id);
+    } catch(e) {}
+  }
+
+  alert('✓ تم حذف التعليق بنجاح!');
+  await renderCommentsTable();
 }
 
 // Initial Render

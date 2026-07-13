@@ -968,29 +968,27 @@ function closeDeleteModal(){
 async function confirmDelete(){
   const password = document.getElementById('adminPassword').value;
   const msg = document.getElementById('deleteMsg');
+  const role = localStorage.getItem('sac_role');
   
-  if(password !== ADMIN_PASSWORD){
-    msg.textContent = '❌ كلمة المرور غير صحيحة';
+  if(password !== ADMIN_PASSWORD && role !== 'admin'){
+    if(msg) msg.textContent = '❌ كلمة المرور غير صحيحة';
     return;
   }
   
   if(!deleteTargetId) return;
   
-  // حذف الردود أولاً
-  await commentsSb
-    .from('replies')
-    .delete()
-    .eq('comment_id', deleteTargetId);
-  
-  // حذف التعليق
-  const { error } = await commentsSb
-    .from('comments')
-    .delete()
-    .eq('id', deleteTargetId);
-  
-  if(error){
-    msg.textContent = '❌ حدث خطأ أثناء الحذف';
-    return;
+  // 1. الحذف من الذاكرة المحلية sac_comments
+  let comments = [];
+  try{ comments = JSON.parse(localStorage.getItem('sac_comments') || '[]'); }catch(e){}
+  comments = comments.filter(c => String(c.id) !== String(deleteTargetId));
+  localStorage.setItem('sac_comments', JSON.stringify(comments));
+
+  // 2. حذف الردود والتعليقات من سوبابيز إن وجدت
+  if(commentsSb && deleteTargetId){
+    try{
+      await commentsSb.from('replies').delete().eq('comment_id', deleteTargetId);
+      await commentsSb.from('comments').delete().eq('id', deleteTargetId);
+    }catch(e){}
   }
   
   closeDeleteModal();

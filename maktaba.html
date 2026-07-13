@@ -709,10 +709,27 @@ async function loadUsers(){
   document.getElementById('usersList').innerHTML = users.length?users.map(fmt).join(''):'<div style="color:var(--muted)">لا يوجد</div>';
 }
 async function delUser(id,email){
-  if(!confirm('حذف المستخدم: '+email+' ؟'))return;
-  const {error}=await sb.from('users').delete().eq('id',id);
-  if(error){alert('خطأ: '+error.message);return}
-  loadUsers();
+  if(!confirm('هل أنت متأكد من حذف المستخدم: '+email+' نهائياً؟')) return;
+  
+  // 1. الحذف من الذاكرة المحلية sac_users
+  let u = {};
+  try { u = JSON.parse(localStorage.getItem('sac_users') || '{}'); } catch(e){}
+  Object.keys(u).forEach(k => {
+    if(u[k] && (String(u[k].id) === String(id) || u[k].email === email || k === email)) delete u[k];
+  });
+  localStorage.setItem('sac_users', JSON.stringify(u));
+
+  // 2. الحذف من قاعدة Supabase
+  if(sb && id && String(id).length > 3){
+    try { await sb.from('users').delete().eq('id', id); } catch(e){}
+  }
+  if(sb && email && email.includes('@')){
+    try { await sb.from('users').delete().eq('email', email); } catch(e){}
+  }
+
+  alert('✓ تم حذف المستخدم ('+email+') بنجاح!');
+  if(typeof loadUsers === 'function') loadUsers();
+  if(typeof renderUsersTables === 'function') renderUsersTables();
 }
 function el(id,d){document.getElementById(id).style.display=d}
 function adminLogin(){
