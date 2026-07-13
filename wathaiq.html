@@ -1029,19 +1029,21 @@ html, body {
   });
 
   // 5. دالة تفعيل شاشة التعتيم والإشعار الفوري عند اكتشاف التقاط الشاشة أو فحص الكود
+  
+  // 5. دالة تفعيل شاشة التعتيم والإشعار الفوري عند اكتشاف التقاط الشاشة أو فحص الكود
   function triggerAntiScreenshotAlert() {
-    const overlay = document.getElementById('antiScreenshotOverlay');
+    const overlay = document.getElementById("antiScreenshotOverlay");
     if(overlay) {
-      overlay.style.display = 'flex';
-      try { if(navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText('محتوى محمي - منصة SAC SVT prof'); } catch(err) {}
+      window.sacManualOverlayTrigger = true;
+      overlay.style.display = "flex";
+      try { if(navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText("⚠️ محتوى محمي بحقوق الملكية الفكرية - منصة SAC SVT prof"); } catch(err) {}
       setTimeout(function() {
-        overlay.style.display = 'none';
+        window.sacManualOverlayTrigger = false;
+        overlay.style.display = "none";
       }, 3500);
     }
   }
 
-
-  
   // 6. حارس التركيز والتعتيم الشامل عند تبديل التبويبات أو فتح متصفح أو تطبيق آخر أو أداة القص
   function checkSnippingGuard() {
     const overlay = document.getElementById("antiScreenshotOverlay");
