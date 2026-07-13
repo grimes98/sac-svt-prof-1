@@ -544,6 +544,7 @@ const svt = [
 ];
 
 const services = [
+  {e:"🔬", t:"أداة «تحليل مذكرتي» بالذكاء الاصطناعي", d:"ارفع مذكرتك بصيغة PDF ليقوم الذكاء الاصطناعي البيداغوجي بتحليلها وإعطائك الإيجابيات، السلبيات، واقتراحات التحسين فورا.", tag:"أداة ذكية", link:"javascript:openSacMemoAnalyzer()", free:true},
   {e:"📝",t:"إنجاز الفروض والاختبارات",d:"طلب إنجاز فروض واختبارات مخصّصة.",url:"https://forms.gle/r79ytG9zmXdFGeK2A"},
   {e:"🗂️",t:"إنجاز مذكرات الأستاذ",d:"لجميع المستويات: 1م · 2م · 3م · 4م.",url:"https://forms.gle/iVxFVQbYEH8P9zZE8"},
   {e:"📒",t:"دفاتر الأستاذ (PDF)",d:"لجميع الموادّ بصيغة PDF — نماذج جاهزة.",url:"https://forms.gle/ZLn5GBRTz1q72aHz8"},
@@ -554,6 +555,19 @@ const services = [
 /* ============ RENDER ============ */
 function card(item, isService){
   if(isService){
+    if(item.link){
+      return `<a class="svc" href="${item.link}" style="border:2px solid #00a8a8; background:linear-gradient(135deg, #f2fafa, #eefaf7); box-shadow:0 6px 20px rgba(0,168,168,0.15);">
+        <div class="ic" style="background:#00a8a8; color:#fff; border-radius:12px; padding:10px;">${item.e}</div>
+        <div class="info">
+          <h4 style="color:#0a5860; font-weight:800; display:flex; align-items:center; gap:8px;">
+            <span>${item.t}</span>
+            <span style="background:#dcfce7; color:#166534; font-size:0.72rem; padding:2px 8px; border-radius:10px; border:1px solid #22c55e;">✨ جديد</span>
+          </h4>
+          <p style="color:#173a3a; font-weight:500;">${item.d}</p>
+        </div>
+        <div class="arrow" style="color:#00a8a8; font-weight:800; font-size:0.95rem;">🚀 ابدأ التحليل ←</div>
+      </a>`;
+    }
     return `<a class="svc" href="${item.url}" target="_blank" rel="noopener">
       <div class="ic">${item.e}</div>
       <div class="info"><h4>${item.t}</h4><p>${item.d}</p></div>
