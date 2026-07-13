@@ -11,6 +11,7 @@ const ASSETS_TO_CACHE = [
   'wathaiq.html',
   'manifest.json',
   'sac-chatbot.js',
+  'sac-memo-analyzer.js',
   'assets/Sac.png'
 ];
 
