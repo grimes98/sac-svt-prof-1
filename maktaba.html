@@ -1156,11 +1156,13 @@ html, body {
   }
 
 
-  // 6. حارس التركيز والتعتيم الفوري ضد أدوات القص بالماوس (Snipping Tool / Lightshot / Screen Capture UI)
+  
+  // 6. حارس التركيز والتعتيم الشامل عند تبديل التبويبات أو فتح متصفح أو تطبيق آخر أو أداة القص
   function checkSnippingGuard() {
     const overlay = document.getElementById("antiScreenshotOverlay");
     if (!overlay) return;
-    if (!document.hasFocus() || document.hidden) {
+    // إذا اختفت النافذة (تبديل تبويب أو فتح تبويب جديد) أو فقد المتصفح التركيز لصالح نافذة أخرى
+    if (document.hidden || !document.hasFocus()) {
       if (document.activeElement && ["INPUT", "TEXTAREA"].includes(document.activeElement.tagName)) return;
       if (overlay.style.display !== "flex") {
         overlay.style.display = "flex";
@@ -1171,8 +1173,9 @@ html, body {
   }
   window.addEventListener("blur", checkSnippingGuard, true);
   window.addEventListener("focus", checkSnippingGuard, true);
+  window.addEventListener("pagehide", checkSnippingGuard, true);
   document.addEventListener("visibilitychange", checkSnippingGuard, true);
-  setInterval(checkSnippingGuard, 350);
+  setInterval(checkSnippingGuard, 250);
 
   // 7. كاشف أدوات المطورين النشط (Active DevTools Detector Trap)
   setInterval(function() {
