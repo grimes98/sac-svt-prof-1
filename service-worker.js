@@ -12,6 +12,7 @@ const ASSETS_TO_CACHE = [
   'manifest.json',
   'sac-chatbot.js',
   'sac-memo-analyzer.js',
+  'sac-cursor-birds.js',
   'assets/Sac.png'
 ];
 
