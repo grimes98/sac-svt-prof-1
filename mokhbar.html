@@ -110,6 +110,12 @@ footer .fl{display:flex;align-items:center;justify-content:center;gap:10px;margi
 footer .fl img{width:34px;height:34px;object-fit:contain;filter:brightness(0) invert(1)}
 @media(max-width:640px){.hero h1{font-size:1.6rem}.brand span{font-size:1rem}.acc-btn{font-size:1rem}}
 </style>
+<link rel="manifest" href="manifest.json">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAC SVT prof">
+<link rel="apple-touch-icon" href="assets/Sac.png">
 </head>
 <body>
 <script>
@@ -371,6 +377,68 @@ input, textarea {
   };
 
   renderTopAdminToolbar();
+
+  // 10. تسجيل محرك تطبيق الويب التقدمي (PWA Service Worker & Mobile Install Banner)
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function() {
+      navigator.serviceWorker.register("service-worker.js").then(function(reg) {
+        console.log("✓ PWA ServiceWorker registered with scope:", reg.scope);
+      }).catch(function(err) {
+        console.log("PWA ServiceWorker registration error:", err);
+      });
+    });
+  }
+
+  let deferredPrompt = null;
+  window.addEventListener("beforeinstallprompt", function(e) {
+    e.preventDefault();
+    deferredPrompt = e;
+    showPwaInstallBanner(false);
+  });
+
+  // تفعيل زر التثبيت للهاتف أو الآيفون
+  function showPwaInstallBanner(isIos) {
+    if (document.getElementById("sacPwaInstallBanner") || window.location.pathname.includes("login.html")) return;
+    const banner = document.createElement("div");
+    banner.id = "sacPwaInstallBanner";
+    banner.style.cssText = "position:fixed; bottom:20px; left:50%; transform:translateX(-50%); z-index:999997; background:linear-gradient(135deg, #0d9488, #0f766e); color:#fff; padding:10px 20px; border-radius:30px; box-shadow:0 8px 25px rgba(13,148,136,0.45); border:2px solid #5eead4; display:flex; align-items:center; gap:12px; font-family:Tajawal,sans-serif; font-weight:800; font-size:0.92rem; cursor:pointer; transition:0.3s; width:max-content; max-width:92vw;";
+    banner.innerHTML = `
+      <span style="font-size:1.3rem;">📲</span>
+      <span>تثبيت تطبيق SAC · SVT prof على هاتفك</span>
+      <span onclick="event.stopPropagation(); document.getElementById('sacPwaInstallBanner').remove();" style="margin-inline-start:6px; background:rgba(0,0,0,0.2); width:24px; height:24px; border-radius:50%; display:grid; place-items:center; font-size:0.75rem;">✕</span>
+    `;
+    banner.onclick = function() {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then(function(choiceResult) {
+          if (choiceResult.outcome === "accepted") {
+            banner.remove();
+          }
+          deferredPrompt = null;
+        });
+      } else if (isIos) {
+        alert("📲 لتثبيت التطبيق على جهازك (آيفون/آيباد):
+
+1. اضغط على زر المشاركة (Share ⬆️) في متصفح Safari.
+2. اختر «إضافة إلى الشاشة الرئيسية (Add to Home Screen ➕)».
+3. اضغط «إضافة (Add)» لتظهر أيقونة المنصة في هاتفك!");
+      } else {
+        alert("📲 لتثبيت التطبيق على جهازك الأندرويد:
+
+اضغط على قائمة المتصفح (⋮ فوق) ثم اختر «إضافة إلى الشاشة الرئيسية (Add to Home screen)» أو «تثبيت التطبيق (Install app)».");
+      }
+    };
+    document.body.appendChild(banner);
+  }
+
+  // كشف الآيفون لإظهار زر التثبيت إذا لم يكن مثبتاً بالفعل
+  const isIosDevice = /iPhone|iPad|iPod/i.test(navigator.userAgent) && !window.MSStream;
+  const isStandalone = window.navigator.standalone || window.matchMedia("(display-mode: standalone)").matches;
+  if (isIosDevice && !isStandalone) {
+    setTimeout(function() { showPwaInstallBanner(true); }, 3000);
+  } else if (!isStandalone) {
+    setTimeout(function() { showPwaInstallBanner(false); }, 4000);
+  }
 })();
 </script>
 <!-- ========================================================================= -->
