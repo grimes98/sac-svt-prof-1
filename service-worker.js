@@ -10,6 +10,7 @@ const ASSETS_TO_CACHE = [
   'mokhbar.html',
   'wathaiq.html',
   'manifest.json',
+  'sac-chatbot.js',
   'assets/Sac.png'
 ];
 
