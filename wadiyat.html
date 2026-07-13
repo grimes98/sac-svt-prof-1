@@ -323,34 +323,49 @@ html, body {
     }, false);
   });
 
-  // 4. منع اختصارات لوحة المفاتيح الخاصة بالنسخ، الطباعة، الحفظ، وأدوات المطورين والسكرينشوت
-  document.addEventListener('keydown', function(e) {
-    // PrintScreen Key
-    if(e.key === 'PrintScreen' || e.keyCode === 44) {
+
+  // 4. منع اختصارات لوحة المفاتيح الخاصة بالنسخ، الطباعة، الحفظ، وأدوات المطورين والسكرينشوت في ويندوز وماك
+  document.addEventListener("keydown", function(e) {
+    const k = e.key ? e.key.toLowerCase() : "";
+    const isMetaOrCtrl = e.metaKey || e.ctrlKey;
+    
+    // PrintScreen Key or Alt + PrintScreen
+    if(e.key === "PrintScreen" || e.keyCode === 44 || (e.altKey && (e.key === "PrintScreen" || e.keyCode === 44))) {
       e.preventDefault();
+      e.stopPropagation();
       triggerAntiScreenshotAlert();
       return false;
     }
-    // F12 (DevTools) or Ctrl+Shift+I/J/C
-    if(e.key === 'F12' || e.keyCode === 123) {
+    // Win + Shift + S (Snipping Tool) or Cmd + Shift + 3/4/5 (Mac Screenshot)
+    if((isMetaOrCtrl && e.shiftKey && ["s", "3", "4", "5", "c", "i", "j"].includes(k)) || e.key === "F12" || e.keyCode === 123) {
       e.preventDefault();
+      e.stopPropagation();
       triggerAntiScreenshotAlert();
       return false;
     }
     // Ctrl+C, Ctrl+X, Ctrl+S, Ctrl+P, Ctrl+U (View Source)
-    if(e.ctrlKey || e.metaKey) {
-      const k = e.key ? e.key.toLowerCase() : '';
-      if(['c', 'x', 's', 'p', 'u'].includes(k) && !['INPUT', 'TEXTAREA'].includes(e.target.tagName)) {
-        e.preventDefault();
-        return false;
-      }
-      if(e.shiftKey && ['i', 'j', 'c', 's'].includes(k)) {
-        e.preventDefault();
-        triggerAntiScreenshotAlert();
-        return false;
-      }
+    if(isMetaOrCtrl && ["c", "x", "s", "p", "u"].includes(k) && !["INPUT", "TEXTAREA"].includes(e.target.tagName)) {
+      e.preventDefault();
+      e.stopPropagation();
+      return false;
     }
-  }, false);
+  }, true);
+
+  // مراقبة رفع إصبع السكرينشوت لضمان التعتيم وتفريغ الحافظة
+  document.addEventListener("keyup", function(e) {
+    if(e.key === "PrintScreen" || e.keyCode === 44 || (e.metaKey && e.shiftKey)) {
+      triggerAntiScreenshotAlert();
+    }
+  }, true);
+
+  // التعتيم الفوري عند اختفاء الصفحة أو استخدام أداة اقتصاص الشاشة
+  document.addEventListener("visibilitychange", function() {
+    const overlay = document.getElementById("antiScreenshotOverlay");
+    if(document.hidden && overlay) {
+      overlay.style.display = "flex";
+      try { if(navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText("⚠️ محتوى محمي بحقوق الملكية الفكرية - منصة SAC SVT prof"); } catch(err) {}
+    }
+  });
 
   // 5. دالة تفعيل شاشة التعتيم والإشعار الفوري عند اكتشاف التقاط الشاشة أو فحص الكود
   function triggerAntiScreenshotAlert() {
@@ -364,23 +379,24 @@ html, body {
     }
   }
 
-  // 6. التعتيم عند فقدان التركيز (Snipping Tool / Screen Recording Blur Protection)
-  window.addEventListener('blur', function() {
-    if(document.activeElement && ['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
-    const overlay = document.getElementById('antiScreenshotOverlay');
-    if(overlay) overlay.style.display = 'flex';
-  });
 
-  window.addEventListener('focus', function() {
-    const overlay = document.getElementById('antiScreenshotOverlay');
-    if(overlay) overlay.style.display = 'none';
-  });
-
-  document.addEventListener('keyup', function(e) {
-    if(e.key === 'PrintScreen' || e.keyCode === 44) {
-      triggerAntiScreenshotAlert();
+  // 6. حارس التركيز والتعتيم الفوري ضد أدوات القص بالماوس (Snipping Tool / Lightshot / Screen Capture UI)
+  function checkSnippingGuard() {
+    const overlay = document.getElementById("antiScreenshotOverlay");
+    if (!overlay) return;
+    if (!document.hasFocus() || document.hidden) {
+      if (document.activeElement && ["INPUT", "TEXTAREA"].includes(document.activeElement.tagName)) return;
+      if (overlay.style.display !== "flex") {
+        overlay.style.display = "flex";
+      }
+    } else if (overlay.style.display === "flex" && !window.sacManualOverlayTrigger) {
+      overlay.style.display = "none";
     }
-  }, false);
+  }
+  window.addEventListener("blur", checkSnippingGuard, true);
+  window.addEventListener("focus", checkSnippingGuard, true);
+  document.addEventListener("visibilitychange", checkSnippingGuard, true);
+  setInterval(checkSnippingGuard, 350);
 
   // 7. كاشف أدوات المطورين النشط (Active DevTools Detector Trap)
   setInterval(function() {
