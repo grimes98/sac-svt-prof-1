@@ -1,13 +1,28 @@
 /* =========================================================================
    🤖 مساعد أساتذة علوم الطبيعة والحياة الذكي — SAC · SVT AI Assistant
-   نظام المحادثة والإجابة الفورية المدمج لكافة صفحات المنصة الـ 25
+   نظام المحادثة المدمج لكافة صفحات المنصة الـ 25 (مع نظام الأسئلة المجانية للزوار واللامحدودة للمشتركين)
    ========================================================================= */
 
 (function(){
-  // منع التكرار في حال تم استدعاء الملف مرتين
   if (document.getElementById('sacAiChatbotBtn')) return;
 
-  // إنشاء زر الشات بوت العائم (شكل شعار الطائر Sac.png)
+  // التحقق هل المتصفح مسجل دخول كأدمين أو مستخدم
+  function isChatbotUserLogged() {
+    const role = localStorage.getItem('sac_role');
+    const sess = localStorage.getItem('sac_session') || localStorage.getItem('sac_user_session');
+    return (role === 'admin' || role === 'user' || sess);
+  }
+
+  // معرفة عدد الأسئلة المستهلكة للزائر
+  function getGuestChatCount() {
+    return parseInt(localStorage.getItem('sac_guest_chat_count') || '0', 10);
+  }
+
+  function setGuestChatCount(cnt) {
+    localStorage.setItem('sac_guest_chat_count', cnt.toString());
+  }
+
+  // إنشاء زر الشات بوت العائم
   const chatBtn = document.createElement('div');
   chatBtn.id = 'sacAiChatbotBtn';
   chatBtn.style.cssText = 'position:fixed; bottom:24px; left:24px; z-index:999996; width:62px; height:62px; border-radius:50%; background:#fff; border:3px solid #00a8a8; box-shadow:0 6px 25px rgba(0,168,168,0.45); display:flex; align-items:center; justify-content:center; cursor:pointer; transition:0.3s; user-select:none;';
@@ -22,7 +37,7 @@
   // إنشاء شاشة المحادثة (Modal)
   const chatModal = document.createElement('div');
   chatModal.id = 'sacAiChatbotModal';
-  chatModal.style.cssText = 'position:fixed; bottom:96px; left:24px; z-index:999997; width:380px; max-width:92vw; height:530px; max-height:76vh; background:#fff; border:2px solid #00a8a8; border-radius:20px; box-shadow:0 15px 50px rgba(0,0,0,0.3); display:none; flex-direction:column; overflow:hidden; font-family:"Tajawal",sans-serif; direction:rtl; transition:0.3s; opacity:0; transform:translateY(15px);';
+  chatModal.style.cssText = 'position:fixed; bottom:96px; left:24px; z-index:999997; width:380px; max-width:92vw; height:540px; max-height:78vh; background:#fff; border:2px solid #00a8a8; border-radius:20px; box-shadow:0 15px 50px rgba(0,0,0,0.3); display:none; flex-direction:column; overflow:hidden; font-family:"Tajawal",sans-serif; direction:rtl; transition:0.3s; opacity:0; transform:translateY(15px);';
   
   chatModal.innerHTML = `
     <!-- الترويسة -->
@@ -33,6 +48,11 @@
         <div style="font-size:0.78rem; opacity:0.9;">مستشار بيداغوجي وعلمي فوري (SAC AI)</div>
       </div>
       <button onclick="window.closeSacChatbot()" style="background:rgba(255,255,255,0.2); color:#fff; border:none; width:28px; height:28px; border-radius:50%; font-size:0.9rem; font-weight:800; cursor:pointer; transition:0.2s;">✕</button>
+    </div>
+
+    <!-- شريط حالة الرصيد للأسئلة -->
+    <div id="sacChatStatusHeader" style="background:#eefaf7; border-bottom:1px solid #daeeee; padding:6px 14px; font-size:0.82rem; font-weight:700; color:#007878; display:flex; align-items:center; justify-content:space-between;">
+      <span>💡 جاري فحص رصيد الأسئلة...</span>
     </div>
 
     <!-- سجل المحادثة -->
@@ -52,24 +72,79 @@
     </div>
 
     <!-- شريط الإدخال -->
-    <div style="padding:10px; background:#fff; border-top:1.5px solid #daeeee; display:flex; gap:8px; align-items:center;">
+    <div id="sacChatInputFooter" style="padding:10px; background:#fff; border-top:1.5px solid #daeeee; display:flex; gap:8px; align-items:center;">
       <input type="text" id="sacChatInput" placeholder="اكتب سؤالك البيداغوجي أو العلمي هنا..." style="flex:1; padding:10px 14px; border:1.5px solid #cbd5e1; border-radius:12px; font-family:inherit; font-size:0.9rem; outline:none; transition:0.2s;" onkeypress="if(event.key==='Enter') window.sendSacChatMsg()">
-      <button onclick="window.sendSacChatMsg()" style="background:#00a8a8; color:#fff; border:none; padding:10px 16px; border-radius:12px; font-weight:800; font-size:0.9rem; cursor:pointer; transition:0.2s; display:flex; align-items:center; gap:4px;">➤ إرسال</button>
+      <button id="sacChatSendBtn" onclick="window.sendSacChatMsg()" style="background:#00a8a8; color:#fff; border:none; padding:10px 16px; border-radius:12px; font-weight:800; font-size:0.9rem; cursor:pointer; transition:0.2s; display:flex; align-items:center; gap:4px;">➤ إرسال</button>
     </div>
   `;
 
   document.body.appendChild(chatBtn);
   document.body.appendChild(chatModal);
 
+  // تحديث حالة الخانة والأزرار حسب تسجيل الدخول ورصيد الـ 5 أسئلة للزائر
+  function updateChatbotQuotaUI() {
+    const statusHeader = document.getElementById('sacChatStatusHeader');
+    const input = document.getElementById('sacChatInput');
+    const sendBtn = document.getElementById('sacChatSendBtn');
+    if (!statusHeader || !input || !sendBtn) return;
+
+    if (isChatbotUserLogged()) {
+      // الأدمين أو المستخدم المشترك: عدد لا متناهي من الأسئلة
+      statusHeader.style.background = '#dcfce7';
+      statusHeader.style.color = '#15803d';
+      statusHeader.innerHTML = `<span>🔓 أسئلة غير محدودة (حساب مشترك فعّال)</span><span>∞</span>`;
+      input.disabled = false;
+      input.placeholder = 'اكتب سؤالك البيداغوجي أو العلمي هنا (بدون حدود)...';
+      input.style.background = '#fff';
+      input.style.cursor = 'text';
+      sendBtn.innerHTML = '➤ إرسال';
+      sendBtn.style.background = '#00a8a8';
+      sendBtn.onclick = () => window.sendSacChatMsg();
+    } else {
+      // زائر عادي: رصيد 5 أسئلة مجانية
+      const cnt = getGuestChatCount();
+      const remaining = Math.max(0, 5 - cnt);
+
+      if (remaining > 0) {
+        statusHeader.style.background = '#eefaf7';
+        statusHeader.style.color = '#007878';
+        statusHeader.innerHTML = `<span>💡 لديك <b>(${remaining} من 5)</b> أسئلة مجانية كزائر</span><a href="login.html" style="color:#0a5860; text-decoration:underline;">تسجيل دخول للمزيد ←</a>`;
+        input.disabled = false;
+        input.placeholder = `اكتب سؤالك البيداغوجي أو العلمي هنا... (${remaining} متبقية)`;
+        input.style.background = '#fff';
+        input.style.cursor = 'text';
+        sendBtn.innerHTML = '➤ إرسال';
+        sendBtn.style.background = '#00a8a8';
+        sendBtn.onclick = () => window.sendSacChatMsg();
+      } else {
+        // استنفد 5 أسئلة للزائر: إغلاق الخانة وطلب تسجيل الدخول
+        statusHeader.style.background = '#fef3c7';
+        statusHeader.style.color = '#b45309';
+        statusHeader.innerHTML = `<span>🔒 استنفدت الأسئلة المجانية للزوار (5/5)</span><a href="login.html" style="color:#92400e; font-weight:800; text-decoration:underline;">دخول للحصول على ∞ ←</a>`;
+        input.disabled = true;
+        input.placeholder = '🔒 الخانة مغلقة — سجّل الدخول لطرح أسئلة غير محدودة';
+        input.style.background = '#f1f5f9';
+        input.style.cursor = 'not-allowed';
+        sendBtn.innerHTML = '🔑 سجّل الدخول';
+        sendBtn.style.background = 'linear-gradient(135deg, #f59e0b, #d97706)';
+        sendBtn.onclick = () => {
+          sessionStorage.setItem('sac_redirect', window.location.href);
+          window.location.href = 'login.html';
+        };
+      }
+    }
+  }
+
   // التحكم في فتح وإغلاق الشات بوت
   chatBtn.onclick = () => {
     if (chatModal.style.display === 'none' || !chatModal.style.display) {
+      updateChatbotQuotaUI();
       chatModal.style.display = 'flex';
       setTimeout(() => {
         chatModal.style.opacity = '1';
         chatModal.style.transform = 'translateY(0)';
         const input = document.getElementById('sacChatInput');
-        if (input) input.focus();
+        if (input && !input.disabled) input.focus();
       }, 10);
     } else {
       window.closeSacChatbot();
@@ -83,17 +158,51 @@
   };
 
   window.askSacChatbot = (question) => {
+    updateChatbotQuotaUI();
+    if (!isChatbotUserLogged() && getGuestChatCount() >= 5) {
+      showQuotaReachedMessage();
+      return;
+    }
     const input = document.getElementById('sacChatInput');
-    if (input) input.value = question;
-    window.sendSacChatMsg();
+    if (input && !input.disabled) {
+      input.value = question;
+      window.sendSacChatMsg();
+    }
   };
 
+  function showQuotaReachedMessage() {
+    const history = document.getElementById('sacChatHistory');
+    if (!history) return;
+    history.innerHTML += `
+      <div class="msg-bot" style="align-self:center; background:#fef3c7; border:2px solid #fde68a; border-radius:14px; padding:16px; color:#b45309; text-align:center; box-shadow:0 4px 15px rgba(245,158,11,0.2); max-width:92%;">
+        <div style="font-size:2.2rem; margin-bottom:8px;">🔒</div>
+        <b style="font-size:1.05rem; color:#92400e;">لقد استنفدت رصيد الأسئلة المجانية للزوار (5 من 5)</b><br>
+        <p style="font-size:0.9rem; margin:8px 0 14px; line-height:1.6; color:#b45309;">للحصول على <b>عدد لا متناهي من الأسئلة (∞)</b> والاستشارات البيداغوجية الفورية، يرجى تسجيل الدخول بحساب الأستاذ أو الأدمين.</p>
+        <button onclick="sessionStorage.setItem('sac_redirect', window.location.href); window.location.href='login.html'" style="padding:10px 24px; font-size:0.92rem; font-weight:800; border:none; border-radius:12px; background:linear-gradient(135deg, #f59e0b, #d97706); color:#fff; cursor:pointer; box-shadow:0 4px 12px rgba(245,158,11,0.35);">🔑 سجّل الدخول الآن للمتابعة</button>
+      </div>
+    `;
+    history.scrollTop = history.scrollHeight;
+    updateChatbotQuotaUI();
+  }
+
   window.sendSacChatMsg = () => {
+    updateChatbotQuotaUI();
     const input = document.getElementById('sacChatInput');
     const history = document.getElementById('sacChatHistory');
-    if (!input || !history) return;
+    if (!input || !history || input.disabled) return;
     const text = input.value.trim();
     if (!text) return;
+
+    // التحقق من حصة الزائر
+    if (!isChatbotUserLogged()) {
+      const cnt = getGuestChatCount();
+      if (cnt >= 5) {
+        showQuotaReachedMessage();
+        return;
+      }
+      setGuestChatCount(cnt + 1);
+      updateChatbotQuotaUI();
+    }
 
     // إضافة رسالة المستخدم
     history.innerHTML += `
@@ -113,7 +222,7 @@
     `;
     history.scrollTop = history.scrollHeight;
 
-    // توليد الإجابة البيداغوجية أو العلمية بعد 400ms لإعطاء شعور الذكاء الاصطناعي
+    // توليد الإجابة البيداغوجية أو العلمية
     setTimeout(() => {
       const loader = document.getElementById(loadingId);
       if (loader) loader.remove();
@@ -125,6 +234,12 @@
         </div>
       `;
       history.scrollTop = history.scrollHeight;
+      updateChatbotQuotaUI();
+
+      // إذا وصل الزائر للسؤال الخامس للتو، نظهر له رسالة انتهاء الرصيد بعد الإجابة
+      if (!isChatbotUserLogged() && getGuestChatCount() >= 5) {
+        setTimeout(showQuotaReachedMessage, 600);
+      }
     }, 450);
   };
 
