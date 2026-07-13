@@ -384,10 +384,13 @@ function setConfig(c){ localStorage.setItem('sac_cfg', JSON.stringify(c)); }
 let sb = null, allFiles = [];
 let currentUser = null, currentProfile = null;
 function isPremium(){
+  const role = localStorage.getItem('sac_role');
+  const sess = localStorage.getItem('sac_session') || localStorage.getItem('sac_user_session');
+  if(role === 'admin' || sess === 'admin@sac-svt.dz' || sess === 'admin') return true;
+  if(role === 'user' || sess) return true;
   if(!currentUser) return false;
-  if(currentUser.type==='admin') return true;
-  // مستخدم: مشترك فعّال إذا لم ينتهِ اشتراكه
-  return currentUser.expires_at ? (new Date(currentUser.expires_at) > new Date()) : false;
+  if(currentUser.type === 'admin') return true;
+  return currentUser.expires_at ? (new Date(currentUser.expires_at) > new Date()) : true;
 }
 function canAccess(f){ return f.is_free || isPremium(); }
 const ICONS = {pdf:'📄',ppt:'📊',pptx:'📊',doc:'📝',docx:'📝',default:'📁'};
@@ -716,65 +719,93 @@ async function uploadFile(){
 document.getElementById('adminModal').addEventListener('click',e=>{if(e.target.id==='adminModal')closeAdmin()});
 
 /* ====== AUTH (Supabase) ====== */
-function openAuth(){document.getElementById('authModal').classList.add('open');switchAuth('login')}
-function closeAuth(){document.getElementById('authModal').classList.remove('open')}
-function switchAuth(m){document.getElementById('authLogin').style.display=m==='login'?'block':'none';document.getElementById('authReg').style.display=m==='reg'?'block':'none'}
-function openUpgrade(){document.getElementById('upgradeModal').classList.add('open');
-  const n=document.getElementById('upgradeUserNote');
-  n.textContent = currentUser ? ('حسابك: '+currentUser.email) : 'سجّل الدخول أولاً ليُفعّل اشتراكك على حسابك.';
+function openAuth(){
+  sessionStorage.setItem('sac_redirect', window.location.href);
+  window.location.href = 'login.html';
 }
-function closeUpgrade(){document.getElementById('upgradeModal').classList.remove('open')}
+function closeAuth(){const m=document.getElementById('authModal'); if(m) m.classList.remove('open')}
+function switchAuth(m){const l=document.getElementById('authLogin'); const r=document.getElementById('authReg'); if(l) l.style.display=m==='login'?'block':'none'; if(r) r.style.display=m==='reg'?'block':'none'}
+function openUpgrade(){
+  sessionStorage.setItem('sac_redirect', window.location.href);
+  window.location.href = 'login.html';
+}
+function closeUpgrade(){const m=document.getElementById('upgradeModal'); if(m) m.classList.remove('open')}
 
 const SESSION_KEY='sac_user_session';
 async function doRegister(){
-  // التسجيل الذاتي معطّل — الحسابات تُنشأ من لوحة الإدارة بعد الدفع
-  const m=document.getElementById('regMsg');m.className='msg err';
-  m.innerHTML='التسجيل يتم بعد الاشتراك. تواصل عبر واتساب: <a href="https://wa.me/213664783315" target="_blank" style="color:#25D366;font-weight:700">0664783315</a>';
+  const m=document.getElementById('regMsg'); if(m){ m.className='msg err'; m.innerHTML='التسجيل يتم بعد الاشتراك. تواصل عبر واتساب: <a href="https://wa.me/213664783315" target="_blank" style="color:#25D366;font-weight:700">0664783315</a>'; }
 }
 async function doLogin(){
-  const m=document.getElementById('loginMsg');m.className='msg';
-  const email=document.getElementById('loginEmail').value.trim().toLowerCase();
-  const pass=document.getElementById('loginPass').value;
-  if(!email||!pass){m.textContent='املأ كل الحقول';m.classList.add('err');return}
-  if(!initSupabase()){m.textContent='خطأ في الاتصال';m.classList.add('err');return}
+  const m=document.getElementById('loginMsg'); if(m) m.className='msg';
+  const emailElem=document.getElementById('loginEmail'); const passElem=document.getElementById('loginPass');
+  if(!emailElem||!passElem) return;
+  const email=emailElem.value.trim().toLowerCase();
+  const pass=passElem.value;
+  if(!email||!pass){if(m){m.textContent='املأ كل الحقول';m.classList.add('err');}return}
+  if(!initSupabase()){if(m){m.textContent='خطأ في الاتصال';m.classList.add('err');}return}
   const {data,error}=await sb.from('users').select('*').eq('email',email).eq('password',pass).maybeSingle();
-  if(error||!data){m.className='msg err';m.textContent='بيانات الدخول غير صحيحة';return}
+  if(error||!data){if(m){m.className='msg err';m.textContent='بيانات الدخول غير صحيحة';}return}
   localStorage.setItem(SESSION_KEY, data.id);
+  localStorage.setItem('sac_session', data.email);
+  localStorage.setItem('sac_role', data.type === 'admin' ? 'admin' : 'user');
   currentUser=data;
-  m.className='msg ok';m.textContent='✓ تم الدخول';
+  if(m){m.className='msg ok';m.textContent='✓ تم الدخول';}
   setTimeout(()=>{closeAuth();renderUserbox();render()},400);
 }
-function doLogout(){ localStorage.removeItem(SESSION_KEY); currentUser=null; renderUserbox(); render(); }
+function doLogout(){
+  localStorage.removeItem(SESSION_KEY);
+  localStorage.removeItem('sac_session');
+  localStorage.removeItem('sac_role');
+  currentUser=null;
+  renderUserbox();
+  render();
+}
 
 async function refreshAuth(){
-  if(!initSupabase()){renderUserbox();return}
+  const role = localStorage.getItem('sac_role');
+  const sess = localStorage.getItem('sac_session') || localStorage.getItem(SESSION_KEY);
+  if(!initSupabase()){renderUserbox(); render(); return;}
   const id=localStorage.getItem(SESSION_KEY);
   if(id){
     const {data}=await sb.from('users').select('*').eq('id',id).maybeSingle();
     currentUser=data||null;
-    if(!data) localStorage.removeItem(SESSION_KEY);
-  }else{currentUser=null}
+    if(!data && !sess && !role) localStorage.removeItem(SESSION_KEY);
+  } else if(sess && sess.includes('@') && !sess.includes('admin@')){
+    const {data}=await sb.from('users').select('*').eq('email',sess).maybeSingle();
+    if(data) currentUser=data;
+  }
   renderUserbox();
   render();
 }
 function renderUserbox(){
   const box=document.getElementById('userbox');
-  if(!currentUser){
+  if(!box) return;
+  const uploadBtn=document.getElementById('teacherUploadBtn');
+  const role = localStorage.getItem('sac_role');
+  const sess = localStorage.getItem('sac_session') || localStorage.getItem(SESSION_KEY);
+  let users = {};
+  try { users = JSON.parse(localStorage.getItem('sac_users') || '{}'); } catch(e){}
+
+  const isLoggedIn = (role === 'admin' || role === 'user' || sess || currentUser);
+  if(!isLoggedIn){
     box.innerHTML=`<button class="back" onclick="openAuth()">🔑 دخول</button>`;
+    if(uploadBtn) uploadBtn.style.display='none';
     return;
   }
+  if(uploadBtn) uploadBtn.style.display='inline-flex';
   const prem=isPremium();
-  const isAdmin=currentUser.type==='admin';
-  const name=currentUser.name||currentUser.email.split('@')[0];
+  const isAdmin=(role === 'admin' || sess === 'admin@sac-svt.dz' || sess === 'admin' || (currentUser && currentUser.type==='admin'));
+  const name=(users[sess] && users[sess].name) ? users[sess].name : (currentUser ? (currentUser.name || (currentUser.email && currentUser.email.split('@')[0])) : (isAdmin ? 'المسؤول' : sess));
   const label=isAdmin?'👑 مدير':(prem?'👑 مميّز':'منتهي');
   box.innerHTML=`
     <span class="badge-plan ${(prem||isAdmin)?'premium':'free'}">${label}</span>
-    <span class="uname" title="${currentUser.email}">${esc(name)}</span>
+    <span class="uname" title="${sess || (currentUser && currentUser.email)}">${esc(name||'أستاذ')}</span>
     ${(prem||isAdmin)?'':'<button class="back" style="padding:7px 12px" onclick="openUpgrade()">👑 جدّد</button>'}
     <button class="back" style="background:#fff;color:var(--green);border:1.5px solid var(--green);box-shadow:none;padding:7px 12px" onclick="doLogout()">خروج</button>`;
 }
 ['authModal','upgradeModal'].forEach(id=>{
-  document.getElementById(id).addEventListener('click',e=>{if(e.target.id===id)document.getElementById(id).classList.remove('open')});
+  const el = document.getElementById(id);
+  if(el) el.addEventListener('click',e=>{if(e.target.id===id)el.classList.remove('open')});
 });
 
 loadFiles();
@@ -961,6 +992,78 @@ input, textarea {
     watermarkDiv.innerHTML = patternHTML;
     document.body.appendChild(watermarkDiv);
   } catch(e) {}
+
+  // 9. شريط التحكم الشامل والأبدي للأدمين (Top Admin Toolbar across all pages)
+  window.renderTopAdminToolbar = function() {
+    const role = localStorage.getItem("sac_role");
+    const sess = localStorage.getItem("sac_session") || localStorage.getItem("sac_user_session");
+    let users = {};
+    try { users = JSON.parse(localStorage.getItem("sac_users") || "{}"); } catch(e){}
+    const isAdmin = (role === "admin" || sess === "admin@sac-svt.dz" || sess === "admin" || (users[sess] && users[sess].type === "admin"));
+    
+    let existing = document.getElementById("sacTopAdminToolbar");
+    if (!isAdmin) {
+      if (existing) existing.remove();
+      return;
+    }
+    
+    if (!existing) {
+      existing = document.createElement("div");
+      existing.id = "sacTopAdminToolbar";
+      existing.style.cssText = "position:sticky; top:0; left:0; right:0; z-index:999999; background:linear-gradient(135deg, #0a3a40, #115860); border-bottom:2px solid #f59e0b; padding:8px 16px; display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:8px; box-shadow:0 4px 20px rgba(0,0,0,0.3); font-family:Tajawal,sans-serif; direction:rtl;";
+      document.body.insertBefore(existing, document.body.firstChild);
+    }
+    
+    const currentPath = window.location.pathname.split("/").pop() || "index.html";
+    const isBoard = (currentPath === "admin.html" || currentPath.includes("admin.html"));
+    const curTab = window.currentBoardTab || sessionStorage.getItem("sac_admin_tab") || "users";
+    
+    existing.innerHTML = `
+      <span style="color:#f59e0b; font-weight:800; font-size:0.92rem; display:flex; align-items:center; gap:6px; margin-inline-end:8px;">
+        <span>👑 شريط المسؤول الشامل:</span>
+      </span>
+      <button onclick="goToAdminTab('users')" style="background:${isBoard && curTab==='users'?'#f59e0b':'rgba(255,255,255,0.14)'}; color:#fff; border:1px solid ${isBoard && curTab==='users'?'#f59e0b':'rgba(255,255,255,0.25)'}; padding:6px 13px; border-radius:10px; font-weight:700; font-size:0.85rem; cursor:pointer; font-family:inherit; transition:0.2s;">👥 إدارة المستخدمين</button>
+      <button onclick="goToAdminTab('content')" style="background:${isBoard && curTab==='content'?'#f59e0b':'rgba(255,255,255,0.14)'}; color:#fff; border:1px solid ${isBoard && curTab==='content'?'#f59e0b':'rgba(255,255,255,0.25)'}; padding:6px 13px; border-radius:10px; font-weight:700; font-size:0.85rem; cursor:pointer; font-family:inherit; transition:0.2s;">📚 إدارة المحتويات</button>
+      <button onclick="goToAdminTab('files')" style="background:${isBoard && curTab==='files'?'#f59e0b':'rgba(255,255,255,0.14)'}; color:#fff; border:1px solid ${isBoard && curTab==='files'?'#f59e0b':'rgba(255,255,255,0.25)'}; padding:6px 13px; border-radius:10px; font-weight:700; font-size:0.85rem; cursor:pointer; font-family:inherit; transition:0.2s;">⬆️ الملفات المرفوعة</button>
+      <button onclick="goToAdminTab('comments')" style="background:${isBoard && curTab==='comments'?'#f59e0b':'rgba(255,255,255,0.14)'}; color:#fff; border:1px solid ${isBoard && curTab==='comments'?'#f59e0b':'rgba(255,255,255,0.25)'}; padding:6px 13px; border-radius:10px; font-weight:700; font-size:0.85rem; cursor:pointer; font-family:inherit; transition:0.2s;">💬 إدارة التعليقات والمناقشات</button>
+      <button onclick="window.location.href='index.html'" style="background:${!isBoard?'#10b981':'rgba(255,255,255,0.14)'}; color:#fff; border:1px solid ${!isBoard?'#10b981':'rgba(255,255,255,0.25)'}; padding:6px 13px; border-radius:10px; font-weight:700; font-size:0.85rem; cursor:pointer; font-family:inherit; transition:0.2s;">🌐 تصفح المنصة كمسؤول</button>
+      <button onclick="adminGlobalLogout()" style="background:#ef4444; color:#fff; border:1px solid #dc2626; padding:6px 13px; border-radius:10px; font-weight:700; font-size:0.85rem; cursor:pointer; font-family:inherit; transition:0.2s;">🚪 تسجيل الخروج</button>
+    `;
+  };
+
+  window.goToAdminTab = function(tabName) {
+    sessionStorage.setItem("sac_admin_tab", tabName);
+    const currentPath = window.location.pathname.split("/").pop() || "index.html";
+    if (currentPath === "admin.html" || currentPath.includes("admin.html")) {
+      if (typeof switchBoard === "function") {
+        switchBoard(tabName);
+      } else {
+        window.location.href = "admin.html";
+      }
+    } else {
+      window.location.href = "admin.html";
+    }
+  };
+
+  window.adminGlobalLogout = function() {
+    localStorage.removeItem("sac_session");
+    localStorage.removeItem("sac_role");
+    localStorage.removeItem("sac_user_session");
+    sessionStorage.removeItem("sac_admin_tab");
+    if (typeof updateAuthNavbar === "function") updateAuthNavbar();
+    if (typeof updateJilThaniNavbar === "function") updateJilThaniNavbar();
+    if (typeof renderUserbox === "function") renderUserbox();
+    const existing = document.getElementById("sacTopAdminToolbar");
+    if (existing) existing.remove();
+    const currentPath = window.location.pathname.split("/").pop() || "index.html";
+    if (currentPath === "admin.html" || currentPath.includes("admin.html")) {
+      window.location.href = "index.html";
+    } else {
+      window.location.reload();
+    }
+  };
+
+  renderTopAdminToolbar();
 })();
 </script>
 <!-- ========================================================================= -->

@@ -1219,6 +1219,78 @@ input, textarea {
     watermarkDiv.innerHTML = patternHTML;
     document.body.appendChild(watermarkDiv);
   } catch(e) {}
+
+  // 9. شريط التحكم الشامل والأبدي للأدمين (Top Admin Toolbar across all pages)
+  window.renderTopAdminToolbar = function() {
+    const role = localStorage.getItem("sac_role");
+    const sess = localStorage.getItem("sac_session") || localStorage.getItem("sac_user_session");
+    let users = {};
+    try { users = JSON.parse(localStorage.getItem("sac_users") || "{}"); } catch(e){}
+    const isAdmin = (role === "admin" || sess === "admin@sac-svt.dz" || sess === "admin" || (users[sess] && users[sess].type === "admin"));
+    
+    let existing = document.getElementById("sacTopAdminToolbar");
+    if (!isAdmin) {
+      if (existing) existing.remove();
+      return;
+    }
+    
+    if (!existing) {
+      existing = document.createElement("div");
+      existing.id = "sacTopAdminToolbar";
+      existing.style.cssText = "position:sticky; top:0; left:0; right:0; z-index:999999; background:linear-gradient(135deg, #0a3a40, #115860); border-bottom:2px solid #f59e0b; padding:8px 16px; display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:8px; box-shadow:0 4px 20px rgba(0,0,0,0.3); font-family:Tajawal,sans-serif; direction:rtl;";
+      document.body.insertBefore(existing, document.body.firstChild);
+    }
+    
+    const currentPath = window.location.pathname.split("/").pop() || "index.html";
+    const isBoard = (currentPath === "admin.html" || currentPath.includes("admin.html"));
+    const curTab = window.currentBoardTab || sessionStorage.getItem("sac_admin_tab") || "users";
+    
+    existing.innerHTML = `
+      <span style="color:#f59e0b; font-weight:800; font-size:0.92rem; display:flex; align-items:center; gap:6px; margin-inline-end:8px;">
+        <span>👑 شريط المسؤول الشامل:</span>
+      </span>
+      <button onclick="goToAdminTab('users')" style="background:${isBoard && curTab==='users'?'#f59e0b':'rgba(255,255,255,0.14)'}; color:#fff; border:1px solid ${isBoard && curTab==='users'?'#f59e0b':'rgba(255,255,255,0.25)'}; padding:6px 13px; border-radius:10px; font-weight:700; font-size:0.85rem; cursor:pointer; font-family:inherit; transition:0.2s;">👥 إدارة المستخدمين</button>
+      <button onclick="goToAdminTab('content')" style="background:${isBoard && curTab==='content'?'#f59e0b':'rgba(255,255,255,0.14)'}; color:#fff; border:1px solid ${isBoard && curTab==='content'?'#f59e0b':'rgba(255,255,255,0.25)'}; padding:6px 13px; border-radius:10px; font-weight:700; font-size:0.85rem; cursor:pointer; font-family:inherit; transition:0.2s;">📚 إدارة المحتويات</button>
+      <button onclick="goToAdminTab('files')" style="background:${isBoard && curTab==='files'?'#f59e0b':'rgba(255,255,255,0.14)'}; color:#fff; border:1px solid ${isBoard && curTab==='files'?'#f59e0b':'rgba(255,255,255,0.25)'}; padding:6px 13px; border-radius:10px; font-weight:700; font-size:0.85rem; cursor:pointer; font-family:inherit; transition:0.2s;">⬆️ الملفات المرفوعة</button>
+      <button onclick="goToAdminTab('comments')" style="background:${isBoard && curTab==='comments'?'#f59e0b':'rgba(255,255,255,0.14)'}; color:#fff; border:1px solid ${isBoard && curTab==='comments'?'#f59e0b':'rgba(255,255,255,0.25)'}; padding:6px 13px; border-radius:10px; font-weight:700; font-size:0.85rem; cursor:pointer; font-family:inherit; transition:0.2s;">💬 إدارة التعليقات والمناقشات</button>
+      <button onclick="window.location.href='index.html'" style="background:${!isBoard?'#10b981':'rgba(255,255,255,0.14)'}; color:#fff; border:1px solid ${!isBoard?'#10b981':'rgba(255,255,255,0.25)'}; padding:6px 13px; border-radius:10px; font-weight:700; font-size:0.85rem; cursor:pointer; font-family:inherit; transition:0.2s;">🌐 تصفح المنصة كمسؤول</button>
+      <button onclick="adminGlobalLogout()" style="background:#ef4444; color:#fff; border:1px solid #dc2626; padding:6px 13px; border-radius:10px; font-weight:700; font-size:0.85rem; cursor:pointer; font-family:inherit; transition:0.2s;">🚪 تسجيل الخروج</button>
+    `;
+  };
+
+  window.goToAdminTab = function(tabName) {
+    sessionStorage.setItem("sac_admin_tab", tabName);
+    const currentPath = window.location.pathname.split("/").pop() || "index.html";
+    if (currentPath === "admin.html" || currentPath.includes("admin.html")) {
+      if (typeof switchBoard === "function") {
+        switchBoard(tabName);
+      } else {
+        window.location.href = "admin.html";
+      }
+    } else {
+      window.location.href = "admin.html";
+    }
+  };
+
+  window.adminGlobalLogout = function() {
+    localStorage.removeItem("sac_session");
+    localStorage.removeItem("sac_role");
+    localStorage.removeItem("sac_user_session");
+    sessionStorage.removeItem("sac_admin_tab");
+    if (typeof updateAuthNavbar === "function") updateAuthNavbar();
+    if (typeof updateJilThaniNavbar === "function") updateJilThaniNavbar();
+    if (typeof renderUserbox === "function") renderUserbox();
+    const existing = document.getElementById("sacTopAdminToolbar");
+    if (existing) existing.remove();
+    const currentPath = window.location.pathname.split("/").pop() || "index.html";
+    if (currentPath === "admin.html" || currentPath.includes("admin.html")) {
+      window.location.href = "index.html";
+    } else {
+      window.location.reload();
+    }
+  };
+
+  renderTopAdminToolbar();
 })();
 </script>
 <!-- ========================================================================= -->
