@@ -35,29 +35,38 @@ const SECURITY_HEADERS = {
 };
 
 const server = http.createServer((req, res) => {
-  // تفكيك الرابط وإزالة الاستعلامات (?query=...)
-  let urlPath = req.url === '/' ? '/index.html' : req.url.split('?')[0];
+  // تفكيك الرابط وإزالة الاستعلامات ومحددات التتبع (مثل ?fbclid=... المضافة تلقائياً من فيسبوك)
+  let urlPath = req.url.split('?')[0].split('#')[0];
+  if (urlPath === '/' || urlPath === '' || urlPath.endsWith('/')) {
+    urlPath = '/index.html';
+  }
+
   let filePath = path.join(__dirname, urlPath);
+
+  // التحقق مما إذا كان المسار يشير إلى مجلد (Directory) بدل ملف لتجنب خطأ EISDIR
+  try {
+    if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
+      filePath = path.join(filePath, 'index.html');
+    }
+  } catch (e) {
+    // تجاهل أخطاء الفحص الأولي وسيتم معالجتها بأمان في fs.readFile
+  }
 
   const extname = String(path.extname(filePath)).toLowerCase();
   const contentType = MIME_TYPES[extname] || 'application/octet-stream';
 
   fs.readFile(filePath, (error, content) => {
     if (error) {
-      if(error.code === 'ENOENT') {
-        fs.readFile(path.join(__dirname, 'index.html'), (err, indexContent) => {
-          if (err) {
-            res.writeHead(500, { ...SECURITY_HEADERS, 'Content-Type': 'text/plain; charset=UTF-8' });
-            res.end('خطأ في تحميل الصفحة الرئيسية index.html');
-          } else {
-            res.writeHead(200, { ...SECURITY_HEADERS, 'Content-Type': 'text/html; charset=UTF-8' });
-            res.end(indexContent, 'utf-8');
-          }
-        });
-      } else {
-        res.writeHead(500, { ...SECURITY_HEADERS, 'Content-Type': 'text/plain; charset=UTF-8' });
-        res.end('خطأ داخلي في الخادم: ' + error.code);
-      }
+      // عند حدوث أي خطأ (مثل ENOENT أو EISDIR)، نعود بأمان لتحميل الصفحة الرئيسية index.html لمنع توقف الموقع في متصفحات فيسبوك وتيك توك
+      fs.readFile(path.join(__dirname, 'index.html'), (err, indexContent) => {
+        if (err) {
+          res.writeHead(500, { ...SECURITY_HEADERS, 'Content-Type': 'text/plain; charset=UTF-8' });
+          res.end('خطأ في تحميل الصفحة الرئيسية index.html');
+        } else {
+          res.writeHead(200, { ...SECURITY_HEADERS, 'Content-Type': 'text/html; charset=UTF-8' });
+          res.end(indexContent, 'utf-8');
+        }
+      });
     } else {
       // منع التخزين المؤقت لصفحات الإدارة والتسجيل لحماية الجلسات
       let extraHeaders = {};
