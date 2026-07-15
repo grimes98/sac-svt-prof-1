@@ -241,19 +241,38 @@
     const quickReply = checkInstantCurriculumDatabase(q);
     if (quickReply) return quickReply;
 
-    // 2. ثانياً: الاتصال بخدمة الذكاء الاصطناعي الحقيقي المفتوحة (Pollinations AI / Open Inference)
-    // نستخدم Promise.race للبحث والإجابة الحقيقية خلال 4 ثوانٍ
+    // 2. ثانياً: الاتصال ببوابة الخادم الذكية (/api/chat - Arena Proxy) ثم السحابة المفتوحة (Pollinations AI)
     try {
       const systemPrompt = `أنت خبير بيداغوجي وعالم أحياء وجيولوجيا متخصص في منهاج علوم الطبيعة والحياة (SVT) للتعليم المتوسط في الجزائر (الجيل الثاني). أجب عن سؤال الأستاذ التالي بدقة علمية وبيولوجية وجيولوجية متناهية، وبشرح مفصل ومترابط وعلمي 100%، وبأسلوب تربوي محترم ومنظم في نقاط واضحة ومباشرة: ${q}`;
-      const apiUrl = `https://text.pollinations.ai/${encodeURIComponent(systemPrompt)}`;
       
+      // المحاولة الأولى: عبر خادم المنصة (للاتصال بنماذج Arena و OpenRouter و OpenAI في حال إضافة مفتاح في الإعدادات)
+      if (window.location.protocol !== 'file:') {
+        try {
+          const proxyReq = await Promise.race([
+            fetch('/api/chat', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ question: q, systemPrompt: systemPrompt })
+            }),
+            new Promise((_, reject) => setTimeout(() => reject(new Error('Proxy timeout')), 3500))
+          ]);
+          if (proxyReq && proxyReq.ok) {
+            const proxyData = await proxyReq.json();
+            if (proxyData && proxyData.reply && proxyData.reply.trim().length > 15) {
+              return `<b>🤖 إجابة المساعد الذكي المطور (SAC AI+ · ${proxyData.source.includes('arena') ? 'Arena Multi-Model' : 'Cloud'}):</b><br>` + formatAIResponseToHtml(proxyData.reply.trim());
+            }
+          }
+        } catch(eProxy) {}
+      }
+
+      // المحاولة الثانية: عبر البوابة المفتوحة المباشرة (Pollinations AI Gateway) في حال تعذر بروكسي الخادم
+      const apiUrl = `https://text.pollinations.ai/${encodeURIComponent(systemPrompt)}`;
       const fetchPromise = fetch(apiUrl, { method: 'GET' }).then(res => {
         if (!res.ok) throw new Error('Network response not ok');
         return res.text();
       });
 
       const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error('AI timeout')), 3600));
-
       const aiText = await Promise.race([fetchPromise, timeoutPromise]);
       if (aiText && aiText.trim().length > 20) {
         return `<b>🤖 إجابة الذكاء الاصطناعي المطور (SAC AI+):</b><br>` + formatAIResponseToHtml(aiText.trim());

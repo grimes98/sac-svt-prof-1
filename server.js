@@ -34,8 +34,71 @@ const SECURITY_HEADERS = {
   'Access-Control-Allow-Origin': '*'
 };
 
-const server = http.createServer((req, res) => {
-  // تفكيك الرابط وإزالة الاستعلامات ومحددات التتبع (مثل ?fbclid=... المضافة تلقائياً من فيسبوك)
+const server = http.createServer(async (req, res) => {
+  // 1. معالج واجهة برمجة التطبيقات الذكية (/api/chat) لربط المساعد الذكي بنماذج الذكاء الاصطناعي العالمية (Arena / OpenRouter / OpenAI)
+  if (req.method === 'POST' && req.url.startsWith('/api/chat')) {
+    let body = '';
+    req.on('data', chunk => { body += chunk.toString(); });
+    req.on('end', async () => {
+      try {
+        const { question, systemPrompt } = JSON.parse(body || '{}');
+        if (!question) {
+          res.writeHead(400, { ...SECURITY_HEADERS, 'Content-Type': 'application/json' });
+          return res.end(JSON.stringify({ error: 'السؤال مطلوب' }));
+        }
+
+        // التحقق من وجود مفتاح API في متغيرات البيئة على خادم Render (مثل OPENROUTER_API_KEY أو ARENA_API_KEY أو OPENAI_API_KEY)
+        const apiKey = process.env.OPENROUTER_API_KEY || process.env.ARENA_API_KEY || process.env.OPENAI_API_KEY;
+        const endpoint = process.env.AI_ENDPOINT_URL || (process.env.OPENAI_API_KEY ? 'https://api.openai.com/v1/chat/completions' : 'https://openrouter.ai/api/v1/chat/completions');
+        const model = process.env.AI_MODEL_NAME || 'deepseek/deepseek-chat';
+
+        if (apiKey) {
+          const aiReq = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${apiKey}`
+            },
+            body: JSON.stringify({
+              model: model,
+              messages: [
+                { role: 'system', content: systemPrompt || 'أنت خبير بيداغوجي وعالم أحياء متخصص في منهاج علوم الطبيعة والحياة للتعليم المتوسط في الجزائر (الجيل الثاني).' },
+                { role: 'user', content: question }
+              ],
+              temperature: 0.7,
+              max_tokens: 1000
+            })
+          });
+          const aiRes = await aiReq.json();
+          const reply = aiRes.choices?.[0]?.message?.content;
+          if (reply) {
+            res.writeHead(200, { ...SECURITY_HEADERS, 'Content-Type': 'application/json' });
+            return res.end(JSON.stringify({ reply: reply, source: 'arena_proxy_api' }));
+          }
+        }
+
+        // في حال عدم وجود مفتاح API مخزن، يتم التوجيه السحابي الفوري إلى البوابة المفتوحة المجانية (Pollinations AI Gateway)
+        const pollPrompt = (systemPrompt ? systemPrompt + '\n\nالسؤال: ' : '') + question;
+        const pollReq = await fetch(`https://text.pollinations.ai/${encodeURIComponent(pollPrompt)}`, { method: 'GET' });
+        if (pollReq.ok) {
+          const pollText = await pollReq.text();
+          if (pollText && pollText.trim().length > 10) {
+            res.writeHead(200, { ...SECURITY_HEADERS, 'Content-Type': 'application/json' });
+            return res.end(JSON.stringify({ reply: pollText.trim(), source: 'pollinations_cloud' }));
+          }
+        }
+
+        res.writeHead(503, { ...SECURITY_HEADERS, 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: 'تعذر الاتصال بالسحابة، الرجاء الاعتماد على المحرك المحلي المدمج' }));
+      } catch (err) {
+        res.writeHead(500, { ...SECURITY_HEADERS, 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: err.message }));
+      }
+    });
+    return;
+  }
+
+  // 2. تفكيك الرابط وإزالة الاستعلامات ومحددات التتبع (مثل ?fbclid=... المضافة تلقائياً من فيسبوك)
   let urlPath = req.url.split('?')[0].split('#')[0];
   if (urlPath === '/' || urlPath === '' || urlPath.endsWith('/')) {
     urlPath = '/index.html';
@@ -84,5 +147,5 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(PORT, () => {
-  console.log(`🚀 خادم منصة SAC · SVT prof يعمل بنجاح وبحماية HTTP Security Headers كاملة على المنفذ: ${PORT}`);
+  console.log(`🚀 خادم منصة SAC · SVT prof يعمل بنجاح وبحماية HTTP Security Headers وتوجيه المساعد الذكي (/api/chat) على المنفذ: ${PORT}`);
 });
