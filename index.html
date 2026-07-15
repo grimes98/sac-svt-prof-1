@@ -774,6 +774,11 @@ function fakeUpload(){
 // close modal on backdrop click
 document.getElementById('loginModal').addEventListener('click',e=>{if(e.target.id==='loginModal')closeLogin()});
 
+
+
+
+
+
 /* ============ COMMENTS (Supabase) ============ */
 const ADMIN_PASSWORD = "admin123"; // غيّرها لكلمة مرور أقوى
 
@@ -796,6 +801,7 @@ function renderLocalCommentsList(){
       <div class="c-text">${escapeHtml(c.text)}</div>
     </div>
   `).join('');
+
 }
 
 function initComments(){
@@ -993,6 +999,9 @@ async function confirmDelete(){
   closeDeleteModal();
   await loadComments();
 }
+
+
+
 
 // إرسال تعليق جديد
 async function submitComment(){
