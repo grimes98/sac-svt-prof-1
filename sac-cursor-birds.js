@@ -1,6 +1,7 @@
 /* =========================================================================
    👑🌌📅 محرك SAC · SVT prof الفخم للمؤثرات البصرية، الفصول الأربعة، والتاريخ والوقت
-   (Seasonal Academic Themes | Live Hijri & Gregorian Clock | Day Mode & Cosmic Dark Mode)
+   (Day Mode: 4-Seasons Botanical Leaves & Maple Animation | Night Mode: Cosmic Shooting Stars)
+   تم برمجة تساقط وتطاير أوراق الشجر حسب الفصول (الخريف، الصيف، الربيع، الشتاء) بدقة عالية
    ========================================================================= */
 
 (function() {
@@ -66,63 +67,118 @@
   }, 300);
 
   // =========================================================================
-  // ☀️ أولاً: محرك الجزيئات البصرية الملكية (تدرجات الفصول الأربعة — Seasonal Day Motes)
+  // 🍃 أولاً: محرك أوراق الشجر الطبيعية التفاعلية (الفصول الأربعة — 4-Seasons Leaf Engine)
+  // (أوراق خريفية قيقبية ذهبية، أوراق صيفية خضراء وذهبية، بتلات ربيع، وبلورات شتاء)
   // =========================================================================
-  const SEASONAL_MOTES_COLORS = {
-    spring: ['rgba(34, 197, 94, 0.4)', 'rgba(45, 212, 191, 0.4)', 'rgba(16, 185, 129, 0.35)', 'rgba(110, 231, 183, 0.35)'],
-    summer: ['rgba(250, 204, 21, 0.45)', 'rgba(234, 179, 8, 0.4)', 'rgba(245, 158, 11, 0.35)', 'rgba(13, 148, 136, 0.35)'],
-    autumn: ['rgba(217, 119, 6, 0.45)', 'rgba(180, 83, 9, 0.4)', 'rgba(234, 88, 12, 0.35)', 'rgba(251, 191, 36, 0.35)'],
-    winter: ['rgba(56, 189, 248, 0.4)', 'rgba(125, 211, 252, 0.4)', 'rgba(148, 163, 184, 0.35)', 'rgba(226, 232, 240, 0.35)']
-  };
-
-  class DayMote {
+  class SeasonalLeaf {
     constructor() {
-      this.reset();
-      this.y = Math.random() * height;
+      this.reset(true);
     }
-    reset() {
+    reset(randomStart = false) {
       this.x = Math.random() * width;
-      this.y = height + 30 + Math.random() * 100;
-      this.radius = 3 + Math.random() * 8;
-      this.vy = -(0.3 + Math.random() * 0.7);
-      this.vx = (Math.random() - 0.5) * 0.4;
-      const colors = SEASONAL_MOTES_COLORS[window.sacCurrentSeason] || SEASONAL_MOTES_COLORS.summer;
-      this.color = colors[Math.floor(Math.random() * colors.length)];
+      this.y = randomStart ? Math.random() * height : -40 - Math.random() * 80;
+      this.size = 11 + Math.random() * 13;
+      this.vy = 0.7 + Math.random() * 1.3;
+      this.vx = (Math.random() - 0.5) * 0.7;
       this.angle = Math.random() * Math.PI * 2;
-      this.pulseSpeed = 0.02 + Math.random() * 0.02;
+      this.rotationSpeed = (Math.random() - 0.5) * 0.03;
+      this.swaySpeed = 0.02 + Math.random() * 0.02;
+      this.swayOffset = Math.random() * Math.PI * 2;
+
+      const season = window.sacCurrentSeason;
+      if (season === 'autumn') {
+        const colors = ['#f59e0b', '#d97706', '#b45309', '#ea580c', '#fbbf24', '#c2410c'];
+        this.color = colors[Math.floor(Math.random() * colors.length)];
+        this.leafType = 'maple';
+      } else if (season === 'spring') {
+        const colors = ['#34d399', '#10b981', '#6ee7b7', '#f472b6', '#fbcfe8', '#059669'];
+        this.color = colors[Math.floor(Math.random() * colors.length)];
+        this.leafType = 'oval';
+      } else if (season === 'winter') {
+        const colors = ['#38bdf8', '#7dd3fc', '#bae6fd', '#e2e8f0', '#94a3b8'];
+        this.color = colors[Math.floor(Math.random() * colors.length)];
+        this.leafType = 'crystal';
+      } else {
+        // الصيف (جوان، جويلية، أوت - الحالي)
+        const colors = ['#14b8a6', '#0d9488', '#2dd4bf', '#facc15', '#eab308', '#84cc16'];
+        this.color = colors[Math.floor(Math.random() * colors.length)];
+        this.leafType = Math.random() > 0.4 ? 'oval' : 'sunLeaf';
+      }
     }
+
     update() {
       this.y += this.vy;
-      this.x += Math.sin(this.angle) * 0.3 + this.vx;
-      this.angle += this.pulseSpeed;
+      this.x += Math.sin(Date.now() * this.swaySpeed + this.swayOffset) * 0.7 + this.vx;
+      this.angle += this.rotationSpeed;
 
       const dx = mouse.x - this.x;
       const dy = mouse.y - this.y;
       const dist = Math.hypot(dx, dy);
-      if (dist < 100) {
-        this.x -= (dx / dist) * 1.2;
-        this.y -= (dy / dist) * 1.2;
+      if (dist < 110) {
+        this.x -= (dx / dist) * 2.2;
+        this.y -= (dy / dist) * 1.5;
       }
 
-      if (this.y < -30 || this.x < -50 || this.x > width + 50) {
+      if (this.y > height + 50 || this.x < -80 || this.x > width + 80) {
         this.reset();
       }
     }
+
     draw(ctx) {
       ctx.save();
+      ctx.translate(this.x, this.y);
+      ctx.rotate(this.angle);
+
       ctx.beginPath();
-      ctx.arc(this.x, this.y, this.radius + Math.sin(this.angle) * 1.5, 0, Math.PI * 2);
+      if (this.leafType === 'maple') {
+        // ورقة قيقبية خريفية مجزأة ومميزة (Maple Leaf - مثل فيديو الفيسبوك الريلز)
+        ctx.moveTo(0, -this.size);
+        ctx.lineTo(this.size * 0.4, -this.size * 0.4);
+        ctx.lineTo(this.size, -this.size * 0.3);
+        ctx.lineTo(this.size * 0.5, this.size * 0.2);
+        ctx.lineTo(this.size * 0.7, this.size * 0.9);
+        ctx.lineTo(0, this.size * 0.5);
+        ctx.lineTo(-this.size * 0.7, this.size * 0.9);
+        ctx.lineTo(-this.size * 0.5, this.size * 0.2);
+        ctx.lineTo(-this.size, -this.size * 0.3);
+        ctx.lineTo(-this.size * 0.4, -this.size * 0.4);
+        ctx.closePath();
+      } else if (this.leafType === 'crystal') {
+        // بلورة شتوية
+        ctx.moveTo(0, -this.size);
+        ctx.lineTo(this.size * 0.5, 0);
+        ctx.lineTo(0, this.size);
+        ctx.lineTo(-this.size * 0.5, 0);
+        ctx.closePath();
+      } else {
+        // ورقة نباتية بيضاوية انسيابية (Botanical Oval Leaf)
+        ctx.moveTo(0, -this.size);
+        ctx.bezierCurveTo(this.size * 0.85, -this.size * 0.5, this.size * 0.85, this.size * 0.5, 0, this.size);
+        ctx.bezierCurveTo(-this.size * 0.85, this.size * 0.5, -this.size * 0.85, -this.size * 0.5, 0, -this.size);
+        ctx.closePath();
+      }
+
       ctx.fillStyle = this.color;
-      ctx.shadowBlur = 10;
+      ctx.shadowBlur = 8;
       ctx.shadowColor = this.color;
+      ctx.globalAlpha = 0.78;
       ctx.fill();
+
+      // العصب الوسطي لورقة الشجر (Leaf Vein Detail)
+      ctx.beginPath();
+      ctx.moveTo(0, -this.size * 0.8);
+      ctx.lineTo(0, this.size * 0.8);
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.45)';
+      ctx.lineWidth = 1.3;
+      ctx.stroke();
+
       ctx.restore();
     }
   }
 
-  const dayMotes = [];
-  for (let i = 0; i < 35; i++) {
-    dayMotes.push(new DayMote());
+  const seasonalLeaves = [];
+  for (let i = 0; i < 30; i++) {
+    seasonalLeaves.push(new SeasonalLeaf());
   }
 
   // =========================================================================
@@ -232,7 +288,7 @@
   // =========================================================================
   function applyThemeVisuals() {
     if (canvas) {
-      canvas.style.opacity = window.sacCurrentTheme === 'dark' ? '0.88' : '0.45';
+      canvas.style.opacity = window.sacCurrentTheme === 'dark' ? '0.88' : '0.52';
     }
 
     let darkStyle = document.getElementById('sacDarkThemeStyles');
@@ -362,7 +418,6 @@
           .hero h1, .dash-hero h2 {
             color: #38bdf8 !important;
           }
-          /* ألوان وتنسيق ودجت التاريخ في الدارك مود */
           #sacDateTimeWidget {
             background: rgba(15, 23, 42, 0.85) !important;
             border-color: rgba(45, 212, 191, 0.45) !important;
@@ -383,7 +438,6 @@
     } else {
       if (darkStyle) darkStyle.remove();
       if (!dayStyle) {
-        // تحديد التدرجات الفصلية للنهار (Seasonal Day Backgrounds)
         let seasonBgGradient = 'linear-gradient(135deg, #fefce8 0%, #fef9c3 45%, #ecfdf5 100%)'; // ☀️ الصيف (افتراضي في جويلية)
         if (window.sacCurrentSeason === 'spring') {
           seasonBgGradient = 'linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 50%, #e0f2fe 100%)'; // 🌸 الربيع
@@ -536,11 +590,9 @@
     if (!el) return;
 
     const now = new Date();
-    // التقويم الميلادي بتوقيت الجزائر (Africa/Algiers)
     const optionsGregorian = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Africa/Algiers' };
     const gregorianStr = new Intl.DateTimeFormat('ar-DZ', optionsGregorian).format(now);
 
-    // حساب أو عرض التاريخ الهجري الدقيق بتوقيت الجزائر (أو التنسيق الأم القرى)
     let hijriStr = '2 صفر 1448 هـ';
     try {
       const optionsHijri = { day: 'numeric', month: 'long', year: 'numeric', calendar: 'islamic-umalqura', timeZone: 'Africa/Algiers' };
@@ -548,7 +600,6 @@
       if (!hijriStr.includes('هـ')) hijriStr += ' هـ';
     } catch(e) {}
 
-    // الوقت المباشر بالثواني بتوقيت الجزائر (GMT+1)
     const optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false, timeZone: 'Africa/Algiers' };
     const timeStr = new Intl.DateTimeFormat('en-GB', optionsTime).format(now);
 
@@ -564,7 +615,6 @@
   }
 
   function injectHeaderWidgets() {
-    // 1. حقن زر تبديل الثيم
     if (!document.getElementById('sacThemeToggleBtn')) {
       const btn = document.createElement('button');
       btn.id = 'sacThemeToggleBtn';
@@ -588,17 +638,14 @@
       updateToggleButtonUI();
     }
 
-    // 2. حقن ودجت التاريخ والوقت الزجاجي الفخم (Glassmorphism Date/Time Clock Widget)
     if (!document.getElementById('sacDateTimeWidget')) {
       const widget = document.createElement('div');
       widget.id = 'sacDateTimeWidget';
       widget.style.cssText = 'display:inline-flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:8px; background:rgba(255,255,255,0.75); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border:1.5px solid rgba(13,148,136,0.35); padding:6px 16px; border-radius:20px; font-size:0.82rem; font-weight:600; color:#1e293b; box-shadow:0 4px 15px rgba(0,0,0,0.06); transition:all 0.3s ease; margin: 4px auto 0; max-width:98%; text-align:center; z-index:10000;';
       widget.innerHTML = `<div id="sacDateTimeContent" style="display:flex; align-items:center; flex-wrap:wrap; justify-content:center; gap:6px;"></div>`;
 
-      // إضافة الودجت في الترويسة أو أسفل الترويسة مباشرة ليكون متجاوباً على كافة الشاشات
       const header = document.querySelector('header');
       if (header) {
-        // وضعه بشكل متجاوب داخل حاوية الهيدر أو تحت قائمة النزول
         header.appendChild(widget);
       } else if (document.body) {
         widget.style.position = 'fixed';
@@ -624,7 +671,7 @@
   }
 
   // =========================================================================
-  // 🎬 خامساً: حلقة التنشيط المستمرة (Animation Loop - شهب الليل وجزيئات ضوء النهار)
+  // 🎬 خامساً: حلقة التنشيط المستمرة (Animation Loop - شهب الليل وأوراق الفصول للنهار)
   // =========================================================================
   function animate() {
     ctx.clearRect(0, 0, width, height);
@@ -640,10 +687,10 @@
         sStar.draw(ctx);
       });
     } else {
-      // ☀️ وضع النهار الفصلي الفخم: الجزيئات البصرية الزمردية والذهبية (Seasonal Day Motes - بديل الطيور)
-      dayMotes.forEach(mote => {
-        mote.update();
-        mote.draw(ctx);
+      // 🍃 وضع النهار الفصلي الفخم: أوراق الشجر التفاعلية (Autumn Maple Leaves, Summer Sun Leaves, Spring Petals, Winter Crystals)
+      seasonalLeaves.forEach(leaf => {
+        leaf.update();
+        leaf.draw(ctx);
       });
     }
 
