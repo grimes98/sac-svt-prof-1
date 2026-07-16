@@ -68,12 +68,12 @@
     }
     .pkg-card:hover { transform: translateY(-8px); border-color: var(--green); box-shadow: 0 20px 40px rgba(13, 148, 136, 0.2); }
     .pkg-card.featured { border: 2.5px solid #f59e0b; background: linear-gradient(180deg, rgba(254, 243, 199, 0.4), rgba(255, 255, 255, 0.85)); position: relative; }
-    .pkg-card.featured::after { content: "⭐ الباقة الأكثر طلباً"; position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: #f59e0b; color: #fff; font-size: 0.82rem; font-weight: 800; padding: 4px 14px; border-radius: 20px; box-shadow: 0 4px 10px rgba(245, 158, 11, 0.3); }
+    .pkg-card.featured::after { content: "⭐ الحجم الأكبر A4"; position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: #f59e0b; color: #fff; font-size: 0.82rem; font-weight: 800; padding: 4px 14px; border-radius: 20px; box-shadow: 0 4px 10px rgba(245, 158, 11, 0.3); }
     
     .pkg-title { font-size: 1.25rem; font-weight: 800; color: var(--green-d); margin-bottom: 12px; }
     .pkg-desc { font-size: 0.94rem; color: var(--muted); line-height: 1.6; margin-bottom: 20px; flex-grow: 1; font-weight: 500; }
-    .pkg-price { font-size: 1.8rem; font-weight: 900; color: var(--green); margin-bottom: 20px; display: block; }
-    .pkg-price span { font-size: 0.95rem; font-weight: 700; color: var(--muted); }
+    .pkg-price { font-size: 1.55rem; font-weight: 900; color: var(--green); margin-bottom: 20px; display: block; }
+    .pkg-price span { font-size: 0.88rem; font-weight: 700; color: var(--muted); }
     .btn-select { background: var(--green); color: #fff; font-weight: 800; padding: 12px; border-radius: 14px; border: none; cursor: pointer; width: 100%; font-size: 1rem; transition: all 0.2s; }
     .btn-select:hover { background: var(--green-d); transform: scale(1.02); }
     .pkg-card.featured .btn-select { background: linear-gradient(135deg, #f59e0b, #d97706); }
@@ -126,57 +126,82 @@
   <div class="container">
     <div class="svc-hero">
       <div class="ic">🖨️</div>
-      <h1>خدمة طباعة وتغليف دفاتر وسجلات الأستاذ (مطبوعة ومغلفة)</h1>
-      <p>طباعة ليزرية رقمية فاخرة بفرز الألوان على ورق ممتاز، مع تغليف حلزوني وتجليد حراري مقوى يضمن متانة السجلات طوال السنة الدراسية، وتوصيل سريع حتى مؤسستك في 58 ولاية.</p>
+      <h1>خدمة طباعة وتغليف دفاتر وسجلات الأستاذ (توصيل للمؤسسة)</h1>
+      <p>طباعة ليزرية رقمية فاخرة بالحجمين A4 و A5 على ورق ممتاز، مع تغليف حلزوني وحراري مقوى يضمن متانة الدفاتر طوال السنة الدراسية، وتوصيل سريع حتى باب متوسطتك في 58 ولاية.</p>
       <div class="tag-badge">🚚 خدمة التوصيل السريع والمضمون (Yalidine / ZR Express) لجميع الولايات</div>
     </div>
 
     <div class="svc-page-box">
-      <h2>📌 مواصفات ومعايير الجودة في الطباعة والتغليف</h2>
-      <ul>
-        <li><b>أغلفة خارجية مقواة وفاخرة (Papier Couché 300g):</b> طباعة الأغلفة الأمامية والخلفية على ورق سميك ناصع البياض عالي اللمعان يحمل شعار المؤسسة والبيانات الشخصية للأستاذ(ة) بتصاميم ملكية.</li>
-        <li><b>تغليف حراري واقٍ (Pelliculage / Plastification):</b> إضافة طبقة حماية حرارية للغلاف تقيه من الرطوبة والتمزق وبقع الحبر طوال فصول السنة.</li>
-        <li><b>تجليد حلزوني متين وسلس (Reliure Spirale):</b> استخدام حلقات حلزونية متينة تسمح بفتح دفتر النصوص أو السجل بزاوية 360 درجة لسهولة الكتابة داخل القسم.</li>
-        <li><b>ورق داخلي ممتاز بياض ناصع (80g / 90g):</b> طباعة الصفحات الداخلية وجداول التقويم والمتابعة على ورق ممتاز لا يشرب الحبر ولا يشف، ومريح جداً للكتابة اليومية.</li>
-        <li><b>فرز ألوان ليزري دقيق (Impression Laser CMYK):</b> وضوح فائق للخطوط، الجداول، وألوان المنحنيات والرسومات التوضيحية داخل دفاتر المخططات.</li>
-        <li><b>توصيل سريع حتى مؤسستك أو منزلك:</b> شحن السجلات مغلفة بعناية فائقة عبر شركات التوصيل المعتمدة ليصلك الطرد في غضون أيام قليلة إلى أي ولاية أو بلدية.</li>
-      </ul>
-    </div>
-
-    <div class="svc-page-box">
-      <h2>💳 جدول وباقات الأسعار لطباعة وتغليف الدفاتر</h2>
+      <h2>📌 قائمة الأسعار الرسمية حسب الحجم (A4 مقابل A5)</h2>
       <div class="grid-pkg">
         
         <div class="pkg-card">
           <div>
-            <div class="pkg-title">طباعة دفتر النصوص السنوي</div>
-            <div class="pkg-desc">طباعة ملونة فاخرة لدفتر النصوص السنوي المخصص باسمك + غلاف 300g مقوى + تغليف حلزوني فخم.</div>
+            <div class="pkg-title">التوزيع السنوي (المخطط السنوي)</div>
+            <div class="pkg-desc">طباعة وتغليف التوزيع السنوي الرسمي المخصص باسمك ومؤسستك جاهز للتعليق أو الإدراج.</div>
           </div>
           <div>
-            <div class="pkg-price">1,500 <span>د.ج + التوصيل</span></div>
-            <button class="btn-select" onclick="selectPackage('طباعة وتغليف دفتر النصوص السنوي الفاخر (1,500 د.ج)')">اختر هذه الباقة ↓</button>
+            <div class="pkg-price">200 <span>د.ج / للمستوى الواحد</span></div>
+            <button class="btn-select" onclick="selectPrintOption('A4', 'التوزيع السنوي (المخطط السنوي) - 200 د.ج / للمستوى')">اختر هذه الوثيقة ↓</button>
           </div>
         </div>
 
         <div class="pkg-card featured">
           <div>
-            <div class="pkg-title">باقة الدفترين (نصوص + تقويم)</div>
-            <div class="pkg-desc">طباعة وتغليف دفتر النصوص السنوي + سجل التقويم والمتابعة المستمرة لجميع الأقسام مطبوعين باحترافية.</div>
+            <div class="pkg-title">الدّفتر الشّامل (150 صفحة)</div>
+            <div class="pkg-desc">دفتر بيداغوجي متكامل يجمع التخطيط، الأنشطة، والمتابعة طوال السنة الدراسية في 150 صفحة.</div>
           </div>
           <div>
-            <div class="pkg-price">2,400 <span>د.ج + التوصيل</span></div>
-            <button class="btn-select" onclick="selectPackage('باقة الدفترين المطبوعين (نصوص + تقويم ومتابعة) (2,400 د.ج)')">اختر هذه الباقة ⭐ ↓</button>
+            <div class="pkg-price" style="font-size:1.3rem;">A4: <b>2,000 د.ج</b> | A5: <b>1,000 د.ج</b></div>
+            <button class="btn-select" onclick="selectPrintOption('A4', 'الدّفتر الشّامل (150 صفحة - A4) - 2,000 د.ج')">اختر الحجم A4 ⭐ ↓</button>
+            <button class="btn-select" style="background:#475569; margin-top:8px;" onclick="selectPrintOption('A5', 'الدّفتر الشّامل (150 صفحة - A5) - 1,000 د.ج')">اختر الحجم A5 ↓</button>
           </div>
         </div>
 
         <div class="pkg-card">
           <div>
-            <div class="pkg-title">الحقيبة المكتبية المطبوعة المتكاملة</div>
-            <div class="pkg-desc">طباعة جميع سجلات ودفاتر ومخططات الأستاذ + 4 مخططات جدارية ملونة + التوصيل السريع لولايتك.</div>
+            <div class="pkg-title">الدّفتر اليومي (100 صفحة)</div>
+            <div class="pkg-desc">سجل يومي ومذكرة متابعة الأنشطة والكفاءات وسجل التقويم في 100 صفحة عالية الجودة.</div>
           </div>
           <div>
-            <div class="pkg-price">3,500 <span>د.ج (شامل التوصيل!)</span></div>
-            <button class="btn-select" onclick="selectPackage('الحقيبة المكتبية المطبوعة المتكاملة للأستاذ (3,500 د.ج)')">اختر هذه الباقة ↓</button>
+            <div class="pkg-price" style="font-size:1.3rem;">A4: <b>1,000 د.ج</b> | A5: <b>500 د.ج</b></div>
+            <button class="btn-select" onclick="selectPrintOption('A4', 'الدّفتر اليومي (100 صفحة - A4) - 1,000 د.ج')">اختر الحجم A4 ↓</button>
+            <button class="btn-select" style="background:#475569; margin-top:8px;" onclick="selectPrintOption('A5', 'الدّفتر اليومي (100 صفحة - A5) - 500 د.ج')">اختر الحجم A5 ↓</button>
+          </div>
+        </div>
+
+        <div class="pkg-card">
+          <div>
+            <div class="pkg-title">دفتر التّنقيط (50 تلميذ + 8 أقسام)</div>
+            <div class="pkg-desc">سجل تنقيط وتقويم مستمر مهيأ لـ 8 أقسام كاملة، كل قسم يتسع لـ 50 تلميذ (صفحتين للحجم A5).</div>
+          </div>
+          <div>
+            <div class="pkg-price">500 <span>د.ج (للحجمين A4 أو A5)</span></div>
+            <button class="btn-select" onclick="selectPrintOption('A4', 'دفتر التّنقيط (50 تلميذ + 8 أقسام - A4) - 500 د.ج')">اختر هذه الوثيقة ↓</button>
+          </div>
+        </div>
+
+        <div class="pkg-card featured">
+          <div>
+            <div class="pkg-title">دفتر الوثائق الرّسمية (ملون)</div>
+            <div class="pkg-desc">يضم المنهاج، المخططات، الوثيقة المرافقة، ودليل بناء الاختبارات مطبوعة بفرز ألوان فاخر ومغلفة.</div>
+          </div>
+          <div>
+            <div class="pkg-price" style="font-size:1.3rem;">A4: <b>2,000 د.ج</b> | A5: <b>1,000 د.ج</b></div>
+            <button class="btn-select" onclick="selectPrintOption('A4', 'دفتر الوثائق الرّسمية ملون (المنهاج، المخططات، الوثيقة المرافقة، دليل بناء الاختبارات - A4) - 2,000 د.ج')">اختر الحجم A4 ⭐ ↓</button>
+            <button class="btn-select" style="background:#475569; margin-top:8px;" onclick="selectPrintOption('A5', 'دفتر الوثائق الرّسمية ملون (المنهاج، المخططات، الوثيقة المرافقة، دليل بناء الاختبارات - A5) - 1,000 د.ج')">اختر الحجم A5 ↓</button>
+          </div>
+        </div>
+
+        <div class="pkg-card">
+          <div>
+            <div class="pkg-title">عدد أوراق مخصص (تحديد ذاتي)</div>
+            <div class="pkg-desc">اختر عدد الأوراق وحدك لتحسب الحاسبة السعر: الصفحة A4 بـ 15 د.ج، والصفحة A5 بـ 7 د.ج فقط.</div>
+          </div>
+          <div>
+            <div class="pkg-price" style="font-size:1.3rem;">A4: <b>15 د.ج/ص</b> | A5: <b>7 د.ج/ص</b></div>
+            <button class="btn-select" onclick="selectPrintOption('A4', 'اختيار عدد أوراق مخصص وحدك (A4 - 15 د.ج/للصفحة)')">احسب للحجم A4 ↓</button>
+            <button class="btn-select" style="background:#475569; margin-top:8px;" onclick="selectPrintOption('A5', 'اختيار عدد أوراق مخصص وحدك (A5 - 7 د.ج/للصفحة)')">احسب للحجم A5 ↓</button>
           </div>
         </div>
 
@@ -193,35 +218,59 @@
             <input type="text" id="srvInputName" placeholder="مثال: الأستاذة نسرين بوعلام" required>
           </div>
           <div class="field">
-            <label>📧 رقم الهاتف / واتساب للتواصل مع شركة التوصيل:</label>
+            <label>📧 رقم الهاتف / واتساب للتواصل مع التوصيل:</label>
             <input type="text" id="srvInputContact" placeholder="مثال: 0551122334 (ضروري للاتصال عند التوصيل)" required>
           </div>
           <div class="field">
             <label>🌐 رابط حسابك على مواقع التواصل (فيسبوك / تلغرام / انستغرام):</label>
             <input type="text" id="srvInputSocial" placeholder="مثال: رابط حسابك على فيسبوك Facebook أو تلغرام Telegram للتواصل السريع">
           </div>
-
         </div>
 
         <div class="form-grid">
           <div class="field">
-            <label>📍 عنوان التوصيل (الولاية، البلدية، المؤسسة أو مكتب التوصيل):</label>
+            <label>📍 عنوان التوصيل (الولاية، البلدية، المتوسطة أو مكتب التوصيل):</label>
             <input type="text" id="srvInputLevel" placeholder="مثال: ولاية سطيف - بلدية العلمة - متوسطة الأمير عبد القادر / أو مكتب Yalidine" required>
           </div>
           <div class="field">
-            <label>📦 الباقة المطلوبة:</label>
-            <select id="srvInputPackage" required>
-              <option value="طباعة وتغليف دفتر النصوص السنوي الفاخر (1,500 د.ج)">طباعة وتغليف دفتر النصوص السنوي الفاخر (1,500 د.ج)</option>
-              <option value="باقة الدفترين المطبوعين (نصوص + تقويم ومتابعة) (2,400 د.ج)" selected>باقة الدفترين المطبوعين (نصوص + تقويم ومتابعة) (2,400 د.ج)</option>
-              <option value="الحقيبة المكتبية المطبوعة المتكاملة للأستاذ (3,500 د.ج)">الحقيبة المكتبية المطبوعة المتكاملة للأستاذ (3,500 د.ج)</option>
-              <option value="طلب طباعة كمية كبيرة أو مجلات خاصة">طلب طباعة كمية كبيرة أو مجلات خاصة</option>
+            <label>📏 الحجم الورقي المطلوب (Format):</label>
+            <select id="srvPrintSize" onchange="updatePrintPackagesAndPrice()" required>
+              <option value="A4">الحجم الكبير (A4 - 21x29.7 سم)</option>
+              <option value="A5">الحجم المتوسط (A5 - 14.8x21 سم)</option>
             </select>
           </div>
         </div>
 
         <div class="field">
-          <label>📝 تفاصيل الطباعة والتخصيص (اسم المتوسطة بدقة، أسماء أقسامك، هل تريد التوصيل للباب أم للمكتب):</label>
-          <textarea id="srvInputDetails" rows="4" placeholder="اكتب هنا الاسم الكامل لمتوسطتك، المقاطعة التفتيشية، أسماء أقسامك (مثلا 2م1، 4م2)، وهل تفضل التوصيل لمقر عملك/منزلك أم استلام الطرد من مكتب التوصيل..." required></textarea>
+          <label>📦 اختيار الوثيقة أو الدفتر المطلوب:</label>
+          <select id="srvInputPackage" onchange="updatePrintPackagesAndPrice()" required>
+            <option value="التوزيع السنوي (المخطط السنوي) - 200 د.ج / للمستوى">التوزيع السنوي (المخطط السنوي) - 200 د.ج / للمستوى</option>
+            <option value="الدّفتر الشّامل (150 صفحة - A4) - 2,000 د.ج" selected>الدّفتر الشّامل (150 صفحة - A4) - 2,000 د.ج</option>
+            <option value="الدّفتر اليومي (100 صفحة - A4) - 1,000 د.ج">الدّفتر اليومي (100 صفحة - A4) - 1,000 د.ج</option>
+            <option value="دفتر التّنقيط (50 تلميذ + 8 أقسام - A4) - 500 د.ج">دفتر التّنقيط (50 تلميذ + 8 أقسام - A4) - 500 د.ج</option>
+            <option value="دفتر الوثائق الرّسمية ملون (المنهاج، المخططات، الوثيقة المرافقة، دليل بناء الاختبارات - A4) - 2,000 د.ج">دفتر الوثائق الرّسمية ملون (المنهاج، المخططات، الوثيقة المرافقة، دليل بناء الاختبارات - A4) - 2,000 د.ج</option>
+            <option value="اختيار عدد أوراق مخصص وحدك (A4 - 15 د.ج/للصفحة)">اختيار عدد أوراق مخصص وحدك (A4 - 15 د.ج/للصفحة)</option>
+          </select>
+        </div>
+
+        <!-- حاسبة عدد الأوراق المخصص -->
+        <div id="customPagesBox" style="display:none; background:rgba(13, 148, 136, 0.08); border:2px dashed #0d9488; border-radius:16px; padding:18px; margin:15px 0;">
+          <div style="font-weight:900; color:#0d9488; margin-bottom:10px; font-size:1.02rem;">🧮 حاسبة عدد الأوراق المخصص (<span id="customRateLabel" style="font-weight:900;">15 د.ج/للصفحة A4</span>):</div>
+          <div class="form-grid" style="margin-bottom:0; gap:15px;">
+            <div class="field" style="margin-bottom:0;">
+              <label style="color:var(--green-d); font-weight:800;">أدخل عدد الأوراق المطلوب:</label>
+              <input type="number" id="srvCustomPages" min="1" placeholder="مثال: 60 صفحة..." oninput="calculateCustomPrice()" style="font-weight:800; font-size:1.05rem;">
+            </div>
+            <div class="field" style="margin-bottom:0;">
+              <label style="color:var(--green-d); font-weight:800;">السعر الإجمالي المحسوب تلقائياً:</label>
+              <input type="text" id="srvCustomPriceDisplay" readonly value="0 د.ج" style="background:#f1f5f9; color:#0d9488; font-weight:900; font-size:1.15rem; border:2px solid #0d9488;">
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>📝 مساحة فارغة لكتابة التعديلات والمواصفات (اسم المتوسطة بدقة، أسماء الأقسام، التعديلات المطلوبة):</label>
+          <textarea id="srvInputDetails" rows="4" placeholder="اكتب هنا التعديلات ومواصفات التخصيص (اسم المؤسسة، المقاطعة، أسماء الأقسام مثلاً 1م1، 4م3، وأي ملاحظة إضافية)..." required></textarea>
         </div>
 
         <div class="form-grid">
@@ -230,16 +279,13 @@
             <input type="date" id="srvInputDate">
           </div>
           <div class="field">
-            <label>📎 إرفاق ملف جاهز للطباعة أو شعار المؤسسة (PDF / صور):</label>
+            <label>📎 إرفاق نموذجك الخاص إذا كان لديك (Choose files - التدرج، شعار المؤسسة، أو مسودة):</label>
             <input type="file" id="srvFileInput" accept=".pdf,.doc,.docx,.jpg,.png,.zip" multiple>
-            <span style="font-size:0.82rem; color:var(--muted); font-weight:600;">يمكنك إرفاق أكثر من ملف أو مستند لطباعته وتغليفه (حدد عدة ملفات معاً)</span>
+            <span style="font-size:0.82rem; color:var(--muted); font-weight:600;">إلا عندو نموذج وحاب نخدملو كيفو أو وثيقة معينة ارفع الملفات هنا (يمكن إرفاق أكثر من ملف)</span>
           </div>
         </div>
 
-        
-        <!-- قسم اختيار وتسديد رسوم الباقة أونلاين -->
-        
-        <!-- قسم اختيار وتسديد رسوم الباقة أونلاين -->
+        <!-- قسم تسديد رسوم الخدمة -->
         <div class="pay-section" style="background:rgba(250, 204, 21, 0.14); border:2px dashed #f59e0b; border-radius:18px; padding:22px; margin:25px 0;">
           <h4 style="color:var(--green-d); font-size:1.15rem; font-weight:900; margin-bottom:14px; display:flex; align-items:center; gap:8px;">
             <span>💳 تسديد رسوم الخدمة (التحويل الفوري عبر بريدي موب أو البريد):</span>
@@ -247,14 +293,13 @@
           
           <div class="field" style="margin-bottom:15px;">
             <label style="color:var(--green-d); font-weight:800;">اختر وسيلة التحويل المناسبة لكِ/لك:</label>
-            <select id="srvInputPayMethod" onchange="togglePaymentBox()" required style="font-weight:700;">
+            <select id="srvInputPayMethod" required style="font-weight:700;">
               <option value="بريدي موب (BaridiMob) - تحويل فوري">📲 تحويل فوري عبر تطبيق بريدي موب (BaridiMob / RIP)</option>
               <option value="تحويل بريدي عادي (CCP - مكتب البريد)">🏦 تحويل بريدي عادي (CCP من مكتب البريد)</option>
             </select>
           </div>
 
-          <!-- بيانات بريدي موب / الـ CCP (دائماً بالأسود سواء فالليل أو النهار) -->
-          <!-- بيانات بريدي موب / الـ CCP (دائماً بالأسود سواء فالليل أو النهار) -->
+          <!-- بيانات بريدي موب / الـ CCP -->
           <div id="baridimobBox" style="background:#ffffff !important; padding:18px; border-radius:16px; border:2px solid #0d9488; margin-bottom:15px; font-size:0.95rem; line-height:1.8; color:#0f172a !important;">
             <div class="title-pay" style="font-weight:900; color:#0d9488 !important; margin-bottom:8px; font-size:1.02rem;">📌 معلومات الحساب البريدي لتسديد الرسوم (التحويل الفوري):</div>
             <div style="color:#0f172a !important;"><b>رقم الحساب البريدي (CCP):</b> <span class="ccp-num" style="font-family:monospace; font-weight:900; color:#0f172a !important; background:#f1f5f9 !important; padding:2px 10px; border-radius:6px; font-size:1.05rem;">20879906</span> (المفتاح <b>81</b>)</div>
@@ -273,7 +318,6 @@
             </div>
           </div>
         </div>
-/div>
 
         <button type="submit" class="btn-submit">🚀 إرسال وتأكيد الطلب الآن</button>
         <div id="srvMsg"></div>
@@ -287,27 +331,75 @@
   </footer>
 
   <script>
-    function selectPackage(pkgName) {
-      const selectEl = document.getElementById('srvInputPackage');
-      if (selectEl) {
-        for (let i = 0; i < selectEl.options.length; i++) {
-          if (selectEl.options[i].value === pkgName) {
-            selectEl.selectedIndex = i;
-            break;
-          }
-        }
+    function selectPrintOption(targetSize, pkgValue) {
+      const sizeEl = document.getElementById('srvPrintSize');
+      if (sizeEl) {
+        sizeEl.value = targetSize;
       }
+      updatePrintPackagesAndPrice(pkgValue);
       const formArea = document.getElementById('orderFormArea');
       if (formArea) formArea.scrollIntoView({ behavior: 'smooth' });
     }
 
-    
-    function togglePaymentBox() {
-      const bBox = document.getElementById('baridimobBox');
-      const rBox = document.getElementById('receiptBox');
-      if (bBox && rBox) {
-        bBox.style.display = 'block';
-        rBox.style.display = 'block';
+    function updatePrintPackagesAndPrice(targetPkgValue = '') {
+      const size = document.getElementById('srvPrintSize')?.value || 'A4';
+      const pkgSelect = document.getElementById('srvInputPackage');
+      const customBox = document.getElementById('customPagesBox');
+      const rateLabel = document.getElementById('customRateLabel');
+
+      if (pkgSelect) {
+        if (size === 'A4') {
+          pkgSelect.innerHTML = `
+            <option value="التوزيع السنوي (المخطط السنوي) - 200 د.ج / للمستوى">التوزيع السنوي (المخطط السنوي) - 200 د.ج / للمستوى</option>
+            <option value="الدّفتر الشّامل (150 صفحة - A4) - 2,000 د.ج">الدّفتر الشّامل (150 صفحة - A4) - 2,000 د.ج</option>
+            <option value="الدّفتر اليومي (100 صفحة - A4) - 1,000 د.ج">الدّفتر اليومي (100 صفحة - A4) - 1,000 د.ج</option>
+            <option value="دفتر التّنقيط (50 تلميذ + 8 أقسام - A4) - 500 د.ج">دفتر التّنقيط (50 تلميذ + 8 أقسام - A4) - 500 د.ج</option>
+            <option value="دفتر الوثائق الرّسمية ملون (المنهاج، المخططات، الوثيقة المرافقة، دليل بناء الاختبارات - A4) - 2,000 د.ج">دفتر الوثائق الرّسمية ملون (المنهاج، المخططات، الوثيقة المرافقة، دليل بناء الاختبارات - A4) - 2,000 د.ج</option>
+            <option value="اختيار عدد أوراق مخصص وحدك (A4 - 15 د.ج/للصفحة)">اختيار عدد أوراق مخصص وحدك (A4 - 15 د.ج/للصفحة)</option>
+          `;
+        } else {
+          pkgSelect.innerHTML = `
+            <option value="التوزيع السنوي (المخطط السنوي) - 200 د.ج / للمستوى">التوزيع السنوي (المخطط السنوي) - 200 د.ج / للمستوى</option>
+            <option value="الدّفتر الشّامل (150 صفحة - A5) - 1,000 د.ج">الدّفتر الشّامل (150 صفحة - A5) - 1,000 د.ج</option>
+            <option value="الدّفتر اليومي (100 صفحة - A5) - 500 د.ج">الدّفتر اليومي (100 صفحة - A5) - 500 د.ج</option>
+            <option value="دفتر التّنقيط (50 تلميذ في صفحتين + 8 أقسام - A5) - 500 د.ج">دفتر التّنقيط (50 تلميذ في صفحتين + 8 أقسام - A5) - 500 د.ج</option>
+            <option value="دفتر الوثائق الرّسمية ملون (المنهاج، المخططات، الوثيقة المرافقة، دليل بناء الاختبارات - A5) - 1,000 د.ج">دفتر الوثائق الرّسمية ملون (المنهاج، المخططات، الوثيقة المرافقة، دليل بناء الاختبارات - A5) - 1,000 د.ج</option>
+            <option value="اختيار عدد أوراق مخصص وحدك (A5 - 7 د.ج/للصفحة)">اختيار عدد أوراق مخصص وحدك (A5 - 7 د.ج/للصفحة)</option>
+          `;
+        }
+
+        if (targetPkgValue) {
+          for (let i = 0; i < pkgSelect.options.length; i++) {
+            if (pkgSelect.options[i].value === targetPkgValue) {
+              pkgSelect.selectedIndex = i;
+              break;
+            }
+          }
+        }
+      }
+
+      const selectedPkg = pkgSelect?.value || '';
+      if (customBox) {
+        if (selectedPkg.includes('اختيار عدد أوراق مخصص')) {
+          customBox.style.display = 'block';
+          if (rateLabel) rateLabel.textContent = size === 'A4' ? '15 د.ج/للصفحة A4' : '7 د.ج/للصفحة A5';
+          calculateCustomPrice();
+        } else {
+          customBox.style.display = 'none';
+        }
+      }
+    }
+
+    function calculateCustomPrice() {
+      const size = document.getElementById('srvPrintSize')?.value || 'A4';
+      const pagesVal = parseInt(document.getElementById('srvCustomPages')?.value || '0', 10);
+      const display = document.getElementById('srvCustomPriceDisplay');
+      if (display && !isNaN(pagesVal) && pagesVal > 0) {
+        const rate = size === 'A4' ? 15 : 7;
+        const total = pagesVal * rate;
+        display.value = `${total.toLocaleString()} د.ج (${pagesVal} صفحة ${size})`;
+      } else if (display) {
+        display.value = '0 د.ج';
       }
     }
 
@@ -317,7 +409,10 @@
       const contactInput = document.getElementById('srvInputContact');
       const socialInput = document.getElementById('srvInputSocial');
       const levelInput = document.getElementById('srvInputLevel');
+      const sizeInput = document.getElementById('srvPrintSize');
       const packageInput = document.getElementById('srvInputPackage');
+      const customPagesInput = document.getElementById('srvCustomPages');
+      const customPriceDisplay = document.getElementById('srvCustomPriceDisplay');
       const detailsInput = document.getElementById('srvInputDetails');
       const dateInput = document.getElementById('srvInputDate');
       const fileInput = document.getElementById('srvFileInput');
@@ -329,14 +424,23 @@
       const contact = contactInput ? contactInput.value.trim() : '';
       const socialLink = socialInput ? socialInput.value.trim() : '';
       const level = levelInput ? levelInput.value : '';
-      const pkg = packageInput ? packageInput.value : '';
+      const size = sizeInput ? sizeInput.value : 'A4';
+      let pkg = packageInput ? packageInput.value : '';
       const details = detailsInput ? detailsInput.value.trim() : '';
       const date = dateInput ? dateInput.value : '';
       const payMethod = payMethodInput ? payMethodInput.value : 'بريدي موب (BaridiMob)';
 
+      if (pkg.includes('اختيار عدد أوراق مخصص')) {
+        const pNum = customPagesInput ? customPagesInput.value : '0';
+        const pPrice = customPriceDisplay ? customPriceDisplay.value : '0 د.ج';
+        pkg = `${pkg} - (عدد الصفحات المختار: ${pNum} صفحة ${size} = السعر: ${pPrice})`;
+      } else {
+        pkg = `[حجم ${size}] ` + pkg;
+      }
+
       if (!name || !contact || !details) {
         if (msgEl) {
-          msgEl.innerHTML = `<div style="color:#ef4444; background:rgba(239,68,68,0.1); padding:12px; border-radius:10px; border:1px solid #ef4444; font-weight:800;">⚠️ الرجاء ملء حقول الاسم وتفاصيل الطلب ووسيلة التواصل.</div>`;
+          msgEl.innerHTML = `<div style="color:#ef4444; background:rgba(239,68,68,0.1); padding:12px; border-radius:10px; border:1px solid #ef4444; font-weight:800;">⚠️ الرجاء ملء حقول الاسم وتفاصيل ومواصفات الطلب وعنوان التوصيل.</div>`;
         }
         return;
       }
@@ -352,7 +456,7 @@
         msgEl.innerHTML = `<div style="color:#0d9488; background:rgba(13,148,136,0.1); padding:12px; border-radius:10px; border:1px solid #0d9488; font-weight:800;">⏳ جاري رفع المرفقات وصورة وصل الدفع وتسجيل طلبكِ في قاعدة بيانات SAC · SVT prof...</div>`;
       }
 
-      // 1. معالجة ورفع المرفقات المتعددة (Multiple files)
+      // معالجة المرفقات المتعددة
       let fileUrls = [];
       let fileNames = [];
       if (fileInput && fileInput.files && fileInput.files.length > 0) {
@@ -387,7 +491,7 @@
         }
       }
 
-      // 2. رفع صورة وصل التحويل (Payment receipt photo)
+      // معالجة وصل التحويل
       let payReceiptUrl = '';
       if (payFileInput && payFileInput.files && payFileInput.files[0]) {
         const pFile = payFileInput.files[0];
@@ -420,7 +524,7 @@
         id: 'REQ-' + Date.now(),
         payment_method: payMethod,
         payment_receipt: payReceiptUrl || 'تم إرفاق صورة الوصل 🧾',
-        type: document.title.split('—')[0].replace('SAC · SVT prof |', '').trim() || 'طلب خدمة مخصصة',
+        type: '𖨨 دفاتر وسجلات الأستاذ (مطبوعة ومغلفة)',
         name: name,
         contact: contact,
         social_link: socialLink,
@@ -446,8 +550,8 @@
 
       if (msgEl) {
         msgEl.innerHTML = `<div style="color:#10b981; background:rgba(16,185,129,0.15); padding:16px; border-radius:12px; border:2px solid #10b981; font-weight:800; text-align:center;">
-          🎉 تمت عملية إرسال طلبكِ بنجاح تام مع صورة وصل التحويل!<br>
-          <span style="font-size:0.92rem; font-weight:600; color:inherit;">سيقوم فريق إنجاز SAC بمراجعة الوصل والتفاصيل والمباشرة في إعداد طلبكِ، وسيتم التواصل معكِ عبر (${contact}${socialLink ? ' أو رابط حسابك للتواصل' : ''}) في أقرب وقت لإتمام الإنجاز والتسليم.</span>
+          🎉 تمت عملية إرسال طلب الطباعة بنجاح تام مع وصل التحويل!<br>
+          <span style="font-size:0.92rem; font-weight:600; color:inherit;">سيقوم فريق الطباعة والتوصيل بمراجعة طلبكِ والمباشرة فوراً في الطباعة والتجليد وشحن الطرد إلى العنوان (${level})، وسيتم التواصل معكِ عبر (${contact}${socialLink ? ' أو حسابك للتواصل' : ''}) لتأكيد الشحن.</span>
         </div>`;
       }
 
