@@ -517,9 +517,15 @@
             z-index: 0 !important;
             min-height: 100vh !important;
           }
+          /* جعل الحاويات الكبرى شفافة تماماً لعدم تراكم الطبقات المعتمة */
+          main, section, .container, .grid, .table-wrap {
+            background: transparent !important;
+            position: relative !important;
+            z-index: 10 !important;
+          }
           /* حماية وضمان ظهور جميع عناصر الصفحة وتأثير الزجاج الضبابي الفاخر لإظهار زخات الشهب والمشهد الطبيعي خلف الإطارات الشفافة */
-          main, section, .container, .card, .card-box, .intro, .intro-box, .qa-box, .panel-in, .svc, .stat, .def, .struct, .hubcard, .user-card, .doc-card, .table-wrap, table, th, td, .comment-card, .reply-card, .dlbox, .example, .newbie, .setup-banner, .strat, .tip, .tips, #boardUsers, #boardContent, #boardFiles, #boardComments {
-            background: rgba(21, 31, 50, 0.68) !important;
+          .card, .card-box, .intro, .intro-box, .qa-box, .panel-in, .svc, .stat, .def, .struct, .hubcard, .user-card, .doc-card, table, th, td, .comment-card, .reply-card, .dlbox, .example, .newbie, .setup-banner, .strat, .tip, .tips, #boardUsers, #boardContent, #boardFiles, #boardComments {
+            background: rgba(21, 31, 50, 0.60) !important;
             backdrop-filter: blur(10px) !important;
             -webkit-backdrop-filter: blur(10px) !important;
             color: #f8fafc !important;
@@ -699,8 +705,13 @@
             backdrop-filter: blur(8px) !important;
             -webkit-backdrop-filter: blur(8px) !important;
           }
-          main, section, .container, .card, .card-box, .intro, .intro-box, .qa-box, .panel-in, .svc, .stat, .def, .struct, .hubcard, .user-card, .doc-card, .table-wrap, .strat, .tip, .tips, #boardUsers, #boardContent, #boardFiles, #boardComments {
-            background: rgba(255, 255, 255, 0.74) !important;
+          main, section, .container, .grid, .table-wrap {
+            background: transparent !important;
+            position: relative !important;
+            z-index: 10 !important;
+          }
+          .card, .card-box, .intro, .intro-box, .qa-box, .panel-in, .svc, .stat, .def, .struct, .hubcard, .user-card, .doc-card, .strat, .tip, .tips, #boardUsers, #boardContent, #boardFiles, #boardComments {
+            background: rgba(255, 255, 255, 0.70) !important;
             backdrop-filter: blur(12px) !important;
             -webkit-backdrop-filter: blur(12px) !important;
             border: 1.5px solid rgba(13, 148, 136, 0.3) !important;
