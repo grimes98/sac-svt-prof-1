@@ -25,7 +25,7 @@
   // 2. إنشاء وتجهيز كانفاس الخلفية الطبيعية الفخمة
   const canvas = document.createElement('canvas');
   canvas.id = 'sacCursorBirdsCanvas';
-  canvas.style.cssText = 'position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:0; pointer-events:none; overflow:hidden; transition:opacity 0.8s ease;';
+  canvas.style.cssText = 'position:fixed !important; top:0 !important; left:0 !important; width:100vw !important; height:100vh !important; z-index:-9999 !important; pointer-events:none !important; overflow:hidden !important; transition:opacity 0.8s ease;';
   
   function attachCanvas() {
     if (document.body) {
@@ -563,6 +563,21 @@
           .badge, .hero-tag, .newbie b, .why b, .example b, .note b {
             color: #facc15 !important;
           }
+          /* حماية وضمان ظهور لوحة إدارة المستخدمين وكافة شاشات ومحتويات المنصة فوق الكانفاس في جميع المتصفحات والأجهزة */
+          body > *:not(#sacCursorBirdsCanvas) {
+            position: relative !important;
+            z-index: 10 !important;
+          }
+          header, #header, #sacTopAdminToolbar, #adminGateModal, .modal-bg, .modal, #adminModal, #upgradeModal, #viewerModal {
+            z-index: 99999 !important;
+          }
+          main, section, .container, .board-sec, .users-form-card, .data-card, .table-card, #adminUsers, #adminPanel, #boardUsers, #boardContent, #boardFiles, #boardComments {
+            position: relative;
+            z-index: 20 !important;
+          }
+          .board-sec[style*="display: block"], .board-sec[style*="display:block"], #adminUsers[style*="display: block"], #adminUsers[style*="display:block"] {
+            display: block !important;
+          }
           .btn.ghost, .hero .cta .btn.ghost {
             background: rgba(15, 23, 42, 0.88) !important;
             color: #38bdf8 !important;
@@ -743,6 +758,21 @@
             background: rgba(13, 148, 136, 0.12) !important;
             border-color: #0d9488 !important;
             color: #0f766e !important;
+          }
+          /* حماية وضمان ظهور لوحة إدارة المستخدمين وكافة شاشات ومحتويات المنصة فوق الكانفاس في جميع المتصفحات والأجهزة */
+          body > *:not(#sacCursorBirdsCanvas) {
+            position: relative !important;
+            z-index: 10 !important;
+          }
+          header, #header, #sacTopAdminToolbar, #adminGateModal, .modal-bg, .modal, #adminModal, #upgradeModal, #viewerModal {
+            z-index: 99999 !important;
+          }
+          main, section, .container, .board-sec, .users-form-card, .data-card, .table-card, #adminUsers, #adminPanel, #boardUsers, #boardContent, #boardFiles, #boardComments {
+            position: relative;
+            z-index: 20 !important;
+          }
+          .board-sec[style*="display: block"], .board-sec[style*="display:block"], #adminUsers[style*="display: block"], #adminUsers[style*="display:block"] {
+            display: block !important;
           }
         `;
         document.head.appendChild(dayStyle);
