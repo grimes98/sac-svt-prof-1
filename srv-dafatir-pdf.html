@@ -238,6 +238,45 @@
           </div>
         </div>
 
+        
+        <!-- قسم اختيار وتسديد رسوم الباقة أونلاين -->
+        <div class="pay-section" style="background:rgba(250, 204, 21, 0.14); border:2px dashed #f59e0b; border-radius:18px; padding:22px; margin:25px 0;">
+          <h4 style="color:var(--green-d); font-size:1.15rem; font-weight:900; margin-bottom:14px; display:flex; align-items:center; gap:8px;">
+            <span>💳 تسديد رسوم الخدمة أونلاين (الدفع الإلكتروني وبريدي موب):</span>
+          </h4>
+          
+          <div class="field" style="margin-bottom:15px;">
+            <label style="color:var(--green-d); font-weight:800;">اختر وسيلة الدفع المناسبة لكِ/لك:</label>
+            <select id="srvInputPayMethod" onchange="togglePaymentBox()" required style="font-weight:700;">
+              <option value="بريدي موب (BaridiMob) - تحويل فوري">📲 تحويل فوري عبر تطبيق بريدي موب (BaridiMob / RIP)</option>
+              <option value="تحويل بريدي عادي (CCP - مكتب البريد)">🏦 تحويل بريدي عادي (CCP من مكتب البريد)</option>
+              <option value="دفع إلكتروني بالبطاقة الذهبية (Edahabia / CIB)">💳 دفع إلكتروني مباشر بالبطاقة الذهبية (Edahabia / CIB - بوابة Chargily Pay)</option>
+              <option value="دفع عند التوصيل (للمطبوعات والتوصيل فقط)">🤝 الدفع نقداً عند استلام الطرد (للمطبوعات والتوصيل فقط)</option>
+            </select>
+          </div>
+
+          <!-- بيانات بريدي موب / الـ CCP -->
+          <div id="baridimobBox" style="background:rgba(255,255,255,0.88); padding:16px; border-radius:14px; border:1.5px solid rgba(13,148,136,0.35); margin-bottom:15px; font-size:0.94rem; line-height:1.7;">
+            <div style="font-weight:800; color:#0d9488; margin-bottom:6px;">📌 معلومات الحساب لتسديد تكلفة الباقة:</div>
+            <div><b>رقم الحساب البريدي (CCP):</b> <span style="font-family:monospace; font-weight:800; color:#0f172a; background:#f1f5f9; padding:2px 8px; border-radius:6px;">00799999 99</span> (المفتاح <b>99</b>)</div>
+            <div style="margin-top:4px;"><b>رقم الـ (RIP BaridiMob):</b> <span style="font-family:monospace; font-weight:800; color:#0f172a; background:#f1f5f9; padding:2px 8px; border-radius:6px;">00799999000000000099</span></div>
+            <div style="margin-top:4px;"><b>اسم صاحبة الحساب:</b> <span style="color:#0f172a; font-weight:700;">GRIMES AMANI</span></div>
+            <div style="margin-top:8px; font-size:0.86rem; color:#475569;">💡 يمكنك التحويل الآن من هاتفك في ثوانٍ، ثم إدخال رقم العملية بالأسفل أو إرفاق صورة لقطة الشاشة (Capture) لتأكيد الدفع فورا.</div>
+          </div>
+
+          <!-- حقل رقم العملية أو رفع الوصل -->
+          <div id="receiptBox" class="form-grid" style="margin-bottom:0;">
+            <div class="field" style="margin-bottom:0;">
+              <label style="color:var(--green-d); font-weight:800;">🧾 رقم عملية التحويل (Numéro de transaction):</label>
+              <input type="text" id="srvInputTransId" placeholder="مثال: 0012345678 (من بريدي موب أو الوصل)">
+            </div>
+            <div class="field" style="margin-bottom:0;">
+              <label style="color:var(--green-d); font-weight:800;">📸 أو رفع صورة وصل الدفع (Capture d'écran):</label>
+              <input type="file" id="srvInputPayFile" accept=".jpg,.png,.jpeg,.pdf">
+            </div>
+          </div>
+        </div>
+
         <button type="submit" class="btn-submit">🚀 إرسال وتأكيد الطلب الآن (حفظ في المنصة والسحابة)</button>
         <div id="srvMsg"></div>
       </form>
@@ -264,6 +303,32 @@
       if (formArea) formArea.scrollIntoView({ behavior: 'smooth' });
     }
 
+    
+    function togglePaymentBox() {
+      const method = document.getElementById('srvInputPayMethod')?.value || '';
+      const bBox = document.getElementById('baridimobBox');
+      const rBox = document.getElementById('receiptBox');
+      if (bBox && rBox) {
+        if (method.includes('التوصيل')) {
+          bBox.style.display = 'none';
+          rBox.style.display = 'none';
+        } else if (method.includes('الذهبية')) {
+          bBox.innerHTML = `<div style="font-weight:800; color:#0d9488; margin-bottom:6px;">💳 الدفع الآمن بالبطاقة الذهبية أو البنكية (Edahabia / CIB):</div>
+          <p style="color:#475569; font-size:0.9rem;">عند الضغط على "إرسال وتأكيد الطلب الآن"، سيتم تسجيل طلبكِ بأمان وفتح رابط التسديد الإلكتروني المشفر لبوابة (SATIM / Chargily Pay) لإتمام عملية الدفع بالبطاقة الذهبية في ثوانٍ.</p>`;
+          bBox.style.display = 'block';
+          rBox.style.display = 'none';
+        } else {
+          bBox.innerHTML = `<div style="font-weight:800; color:#0d9488; margin-bottom:6px;">📌 معلومات الحساب لتسديد تكلفة الباقة:</div>
+            <div><b>رقم الحساب البريدي (CCP):</b> <span style="font-family:monospace; font-weight:800; color:#0f172a; background:#f1f5f9; padding:2px 8px; border-radius:6px;">00799999 99</span> (المفتاح <b>99</b>)</div>
+            <div style="margin-top:4px;"><b>رقم الـ (RIP BaridiMob):</b> <span style="font-family:monospace; font-weight:800; color:#0f172a; background:#f1f5f9; padding:2px 8px; border-radius:6px;">00799999000000000099</span></div>
+            <div style="margin-top:4px;"><b>اسم صاحبة الحساب:</b> <span style="color:#0f172a; font-weight:700;">GRIMES AMANI</span></div>
+            <div style="margin-top:8px; font-size:0.86rem; color:#475569;">💡 يمكنك التحويل الآن من هاتفك في ثوانٍ، ثم إدخال رقم العملية بالأسفل أو إرفاق صورة لقطة الشاشة (Capture) لتأكيد الدفع فورا.</div>`;
+          bBox.style.display = 'block';
+          rBox.style.display = 'grid';
+        }
+      }
+    }
+
     async function submitServiceOrder(e) {
       if (e && e.preventDefault) e.preventDefault();
       const nameInput = document.getElementById('srvInputName');
@@ -273,7 +338,12 @@
       const detailsInput = document.getElementById('srvInputDetails');
       const dateInput = document.getElementById('srvInputDate');
       const fileInput = document.getElementById('srvFileInput');
+      const payMethodInput = document.getElementById('srvInputPayMethod');
+      const transIdInput = document.getElementById('srvInputTransId');
+      const payFileInput = document.getElementById('srvInputPayFile');
       const msgEl = document.getElementById('srvMsg');
+      const payMethod = payMethodInput ? payMethodInput.value : 'بريدي موب (BaridiMob)';
+      const transId = transIdInput ? transIdInput.value.trim() : '';
 
       const name = nameInput ? nameInput.value.trim() : '';
       const contact = contactInput ? contactInput.value.trim() : '';
@@ -326,8 +396,38 @@
         }
       }
 
+      let payReceiptUrl = transId ? `رقم العملية: ${transId}` : '';
+      if (payFileInput && payFileInput.files && payFileInput.files[0]) {
+        const pFile = payFileInput.files[0];
+        try {
+          if (window.supabaseClient) {
+            const pPath = `orders/pay_${Date.now()}_${pFile.name.replace(/[^a-zA-Z0-9.\-_]/g, '_')}`;
+            const { data: pUploadData, error: pErr } = await window.supabaseClient.storage.from('sac-uploads').upload(pPath, pFile, { cacheControl: '3600', upsert: true });
+            if (!pErr && pUploadData) {
+              const { data: pUrlData } = window.supabaseClient.storage.from('sac-uploads').getPublicUrl(pPath);
+              if (pUrlData && pUrlData.publicUrl) payReceiptUrl = pUrlData.publicUrl;
+            }
+          }
+        } catch(e){}
+        if (!payReceiptUrl || !payReceiptUrl.startsWith('http')) {
+          if (pFile.size <= 2 * 1024 * 1024) {
+            const b64 = await new Promise((res) => {
+              const r = new FileReader();
+              r.onload = () => res(r.result);
+              r.onerror = () => res('');
+              r.readAsDataURL(pFile);
+            });
+            if (b64) payReceiptUrl = b64;
+          } else {
+            payReceiptUrl = `[صورة وصل دفع: ${pFile.name}]`;
+          }
+        }
+      }
+
       const newOrder = {
         id: 'REQ-' + Date.now(),
+        payment_method: payMethod,
+        payment_receipt: payReceiptUrl || (payMethod.includes('التوصيل') ? 'دفع عند التوصيل 🤝' : 'بانتظار الوصل / الدفع'),
         type: '📒 دفاتر الأستاذ والتدرجات (PDF)',
         name: name,
         contact: contact,
@@ -352,8 +452,9 @@
       } catch (e) { console.error('Supabase DB insert error:', e); }
 
       if (msgEl) {
+        let extraPayText = payMethod.includes('الذهبية') ? `<br><br><a href="https://epay.chargily.com.dz/demo-link" target="_blank" style="background:#f59e0b; color:#fff; padding:10px 18px; border-radius:12px; text-decoration:none; display:inline-block; font-weight:900; margin-top:10px;">💳 اضغطي هنا للانتقال إلى بوابة الدفع بالبطاقة الذهبية (Edahabia) ←</a>` : '';
         msgEl.innerHTML = `<div style="color:#10b981; background:rgba(16,185,129,0.15); padding:16px; border-radius:12px; border:2px solid #10b981; font-weight:800; text-align:center;">
-          🎉 تمت عملية إرسال طلبكِ بنجاح تام!<br>
+          🎉 تمت عملية إرسال طلبكِ بنجاح تام! ${payMethod.includes('الذهبية') ? 'يرجى إتمام التسديد عبر البطاقة الذهبية:' : ''}<br>${extraPayText}<br>
           <span style="font-size:0.92rem; font-weight:600; color:inherit;">سيقوم فريق إنجاز SAC بمراجعة المواصفات ${fileName ? '(مع الملف المرفق ' + fileName + ')' : ''} والتواصل معكِ عبر (${contact}) في أقرب وقت لإتمام الإنجاز والتسليم.</span>
         </div>`;
       }
