@@ -511,19 +511,27 @@
             --shadow: 0 12px 35px rgba(0, 0, 0, 0.75) !important;
           }
           body, html {
-            background: rgba(11, 17, 30, 0.94) !important;
+            background: transparent !important;
             color: #f8fafc !important;
             position: relative !important;
             z-index: 0 !important;
             min-height: 100vh !important;
           }
-          /* حماية وضمان ظهور جميع عناصر الصفحة ولوحات تحكم الأدمين فوق الخلفية وبوضوح تام */
+          /* حماية وضمان ظهور جميع عناصر الصفحة وتأثير الزجاج الضبابي الفاخر لإظهار زخات الشهب والمشهد الطبيعي خلف الإطارات الشفافة */
           main, section, .container, .card, .card-box, .intro, .intro-box, .qa-box, .panel-in, .svc, .stat, .def, .struct, .hubcard, .user-card, .doc-card, .table-wrap, table, th, td, .comment-card, .reply-card, .dlbox, .example, .newbie, .setup-banner, .strat, .tip, .tips, #boardUsers, #boardContent, #boardFiles, #boardComments {
-            background: rgba(21, 31, 50, 0.95) !important;
+            background: rgba(21, 31, 50, 0.68) !important;
+            backdrop-filter: blur(10px) !important;
+            -webkit-backdrop-filter: blur(10px) !important;
             color: #f8fafc !important;
-            border-color: rgba(45, 212, 191, 0.3) !important;
+            border-color: rgba(45, 212, 191, 0.35) !important;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.55) !important;
             position: relative !important;
             z-index: 10 !important;
+          }
+          .hero, .dash-hero {
+            background: rgba(11, 17, 30, 0.62) !important;
+            backdrop-filter: blur(8px) !important;
+            -webkit-backdrop-filter: blur(8px) !important;
           }
           /* إجبار الترويسة العلوية وودجت التاريخ والوقت وشريط الأدمين على البقاء مثبتة دائماً في أعلى الشاشة عند التمرير لجميع الزوار والأساتذة والأدمين */
           header, .header, #header, #sacTopAdminToolbar {
@@ -531,7 +539,9 @@
             top: 0 !important;
             z-index: 99999 !important;
             width: 100% !important;
-            background: rgba(15, 23, 42, 0.96) !important;
+            background: rgba(15, 23, 42, 0.90) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
             border-bottom: 1px solid rgba(45, 212, 191, 0.35) !important;
             box-shadow: 0 4px 20px rgba(0,0,0,0.8) !important;
           }
@@ -678,13 +688,23 @@
             --shadow: 0 15px 35px rgba(13, 148, 136, 0.08), 0 5px 15px rgba(0, 0, 0, 0.04) !important;
           }
           body, html {
-            background: ${seasonBgGradient} !important;
+            background: transparent !important;
             color: #0f172a !important;
             position: relative !important;
             z-index: 0 !important;
             min-height: 100vh !important;
           }
+          .hero, .dash-hero {
+            background: rgba(4, 47, 46, 0.65) !important;
+            backdrop-filter: blur(8px) !important;
+            -webkit-backdrop-filter: blur(8px) !important;
+          }
           main, section, .container, .card, .card-box, .intro, .intro-box, .qa-box, .panel-in, .svc, .stat, .def, .struct, .hubcard, .user-card, .doc-card, .table-wrap, .strat, .tip, .tips, #boardUsers, #boardContent, #boardFiles, #boardComments {
+            background: rgba(255, 255, 255, 0.74) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+            border: 1.5px solid rgba(13, 148, 136, 0.3) !important;
+            box-shadow: 0 15px 35px rgba(13, 148, 136, 0.12), 0 5px 15px rgba(0, 0, 0, 0.04) !important;
             position: relative !important;
             z-index: 10 !important;
           }
@@ -694,7 +714,9 @@
             top: 0 !important;
             z-index: 99999 !important;
             width: 100% !important;
-            background: rgba(255, 255, 255, 0.95) !important;
+            background: rgba(255, 255, 255, 0.90) !important;
+            backdrop-filter: blur(14px) !important;
+            -webkit-backdrop-filter: blur(14px) !important;
             border-bottom: 2px solid #0d9488 !important;
             box-shadow: 0 4px 20px rgba(13, 148, 136, 0.12) !important;
           }
