@@ -1,7 +1,7 @@
 /* =========================================================================
    👑🏔️🌌 محرك SAC · SVT prof الفخم لخلفيات الطبيعة المرسومة (Vector Nature Landscape)
    (4-Seasons Illustrated Landscape: Mountains, Forests, Seasonal Foliage, Day/Night & Shooting Stars)
-   مصمم بدقة عالية ليحاكي صور الطبيعة المرسومة وتغيرها الساحر بين الصيف، الخريف، الشتاء، والربيع
+   تم تأمين وتجهيز الطبقات (z-index: -99999) لضمان عدم حجب أي كتابة أو عنصر أو شاشة إدارة في كل الصفحات
    ========================================================================= */
 
 (function() {
@@ -22,14 +22,13 @@
     window.sacCurrentSeason = 'winter';   // ❄️ الشتاء (أغصان برك وثلج)
   }
 
-  // 2. إنشاء وتجهيز كانفاس الخلفية الطبيعية الفخمة
+  // 2. إنشاء وتجهيز كانفاس الخلفية الطبيعية الفخمة (في أعمق خلفية ممكنة z-index: -99999)
   const canvas = document.createElement('canvas');
   canvas.id = 'sacCursorBirdsCanvas';
-  canvas.style.cssText = 'position:fixed !important; top:0 !important; left:0 !important; width:100vw !important; height:100vh !important; z-index:-9999 !important; pointer-events:none !important; overflow:hidden !important; transition:opacity 0.8s ease;';
+  canvas.style.cssText = 'position:fixed !important; top:0 !important; left:0 !important; width:100vw !important; height:100vh !important; z-index:-99999 !important; pointer-events:none !important; overflow:hidden !important; transition:opacity 0.8s ease !important;';
   
   function attachCanvas() {
     if (document.body) {
-      // وضعه كأول عنصر خلفي في الصفحة
       if (document.body.firstChild) {
         document.body.insertBefore(canvas, document.body.firstChild);
       } else {
@@ -191,28 +190,23 @@
     ctx.fill();
 
     // 5. غابة أشجار الصنوبر والأشجار على الجانبين (Foreground Silhouette Pine Forests)
-    // رسم أشجار صنوبر على اليمين واليسار (كما في الصورة المرفقة بالضبط)
     ctx.globalAlpha = 0.88;
     const treeColor = theme === 'dark' ? '#020617' : (season === 'autumn' ? '#431407' : (season === 'winter' ? '#334155' : '#042f2e'));
     ctx.fillStyle = treeColor;
 
-    // دالة مساعدة لرسم شجرة صنوبر أو شجرة فصلية
     function drawPineTree(tx, ty, tSize, isBareWinter = false, isSpringBlossom = false) {
       if (isBareWinter) {
-        // الشتاء: أغصان برك (Bare Branches) وثلج فوق الأغصان
         ctx.strokeStyle = treeColor;
         ctx.lineWidth = Math.max(2, tSize * 0.08);
         ctx.beginPath();
         ctx.moveTo(tx, ty);
         ctx.lineTo(tx, ty - tSize * 1.3);
-        // فروع عارية
         ctx.moveTo(tx, ty - tSize * 0.4); ctx.lineTo(tx - tSize * 0.35, ty - tSize * 0.65);
         ctx.moveTo(tx, ty - tSize * 0.5); ctx.lineTo(tx + tSize * 0.35, ty - tSize * 0.75);
         ctx.moveTo(tx, ty - tSize * 0.8); ctx.lineTo(tx - tSize * 0.25, ty - tSize * 1.0);
         ctx.moveTo(tx, ty - tSize * 0.85); ctx.lineTo(tx + tSize * 0.25, ty - tSize * 1.05);
         ctx.stroke();
 
-        // ثلج ناصع فوق الجذع والأغصان (Snow Caps)
         ctx.fillStyle = '#ffffff';
         ctx.beginPath();
         ctx.arc(tx - tSize * 0.35, ty - tSize * 0.65, tSize * 0.08, 0, Math.PI * 2);
@@ -221,7 +215,6 @@
         ctx.fill();
         ctx.fillStyle = treeColor;
       } else {
-        // أشجار صنوبر متدرجة الطبقات (Pine Silhouette)
         ctx.beginPath();
         ctx.moveTo(tx, ty - tSize * 1.4);
         ctx.lineTo(tx + tSize * 0.25, ty - tSize * 1.0); ctx.lineTo(tx + tSize * 0.12, ty - tSize * 1.0);
@@ -235,7 +228,6 @@
         ctx.closePath();
         ctx.fill();
 
-        // في الربيع: إضافة أزهار وردية فوق الأشجار (Spring Blossoms)
         if (isSpringBlossom && theme !== 'dark') {
           ctx.fillStyle = '#f472b6';
           ctx.beginPath();
@@ -251,7 +243,6 @@
     const isBare = (season === 'winter');
     const isBlossom = (season === 'spring');
 
-    // غابة الجانب الأيسر (Left Side Forest)
     for (let i = 0; i < 9; i++) {
       const tx = (i * 45) + (Math.sin(i * 1.5) * 15);
       const ty = h - 10 + (i % 2 === 0 ? 15 : -15);
@@ -259,7 +250,6 @@
       drawPineTree(tx, ty, tSize, isBare, isBlossom);
     }
 
-    // غابة الجانب الأيمن (Right Side Forest)
     for (let i = 0; i < 9; i++) {
       const tx = w - (i * 45) - (Math.cos(i * 1.7) * 15);
       const ty = h - 10 + (i % 2 === 0 ? 15 : -15);
@@ -267,7 +257,7 @@
       drawPineTree(tx, ty, tSize, isBare, isBlossom);
     }
 
-    // 6. أرضية الغابة والمسار أسفل الشاشة (Forest Ground)
+    // 6. أرضية الغابة
     ctx.beginPath();
     ctx.moveTo(0, h * 0.88);
     ctx.bezierCurveTo(w * 0.3, h * 0.82, w * 0.7, h * 0.92, w, h * 0.86);
@@ -280,7 +270,6 @@
 
   // =========================================================================
   // 🍃 ثانياً: محرك أوراق الشجر التفاعلية حسب الفصل (Seasonal Foliage & Particles)
-  // (الصيف: أوراق خضراء ومشمسة | الخريف: أوراق محمرة | الشتاء: ثلج | الربيع: أزهار)
   // =========================================================================
   class SeasonalLeaf {
     constructor() {
@@ -299,7 +288,6 @@
 
       const season = window.sacCurrentSeason;
       if (season === 'autumn') {
-        // أوراق خريفية محمرة ومائلة للبرتقالي والعنبري (مطابق للصورة)
         const colors = ['#dc2626', '#ea580c', '#d97706', '#b45309', '#f59e0b', '#991b1b'];
         this.color = colors[Math.floor(Math.random() * colors.length)];
         this.leafType = 'maple';
@@ -308,12 +296,10 @@
         this.color = colors[Math.floor(Math.random() * colors.length)];
         this.leafType = 'oval';
       } else if (season === 'winter') {
-        // بلورات وندف ثلج شتوية
         const colors = ['#ffffff', '#e0f2fe', '#bae6fd', '#38bdf8'];
         this.color = colors[Math.floor(Math.random() * colors.length)];
         this.leafType = 'snow';
       } else {
-        // الصيف (جوان، جويلية، أوت - الحالي): أوراق خضراء ناضجة وشمس دافئة
         const colors = ['#10b981', '#059669', '#0d9488', '#14b8a6', '#facc15', '#84cc16'];
         this.color = colors[Math.floor(Math.random() * colors.length)];
         this.leafType = Math.random() > 0.3 ? 'oval' : 'sunLeaf';
@@ -345,7 +331,6 @@
 
       ctx.beginPath();
       if (this.leafType === 'maple') {
-        // ورقة قيقب خريفية محمرة
         ctx.moveTo(0, -this.size);
         ctx.lineTo(this.size * 0.4, -this.size * 0.4);
         ctx.lineTo(this.size, -this.size * 0.3);
@@ -358,10 +343,8 @@
         ctx.lineTo(-this.size * 0.4, -this.size * 0.4);
         ctx.closePath();
       } else if (this.leafType === 'snow') {
-        // بلورة ثلج ناصعة البياض
         ctx.arc(0, 0, this.size * 0.4, 0, Math.PI * 2);
       } else {
-        // ورقة نباتية بيضاوية خضراء (أو صيفية)
         ctx.moveTo(0, -this.size);
         ctx.bezierCurveTo(this.size * 0.85, -this.size * 0.5, this.size * 0.85, this.size * 0.5, 0, this.size);
         ctx.bezierCurveTo(-this.size * 0.85, this.size * 0.5, -this.size * 0.85, -this.size * 0.5, 0, -this.size);
@@ -496,10 +479,11 @@
 
   // =========================================================================
   // 🎨 رابعاً: إدارة الألوان الفصليّة واللوقو وزر تبديل النهار/الليل (Theme Controller)
+  // مع ضمان عدم تأثر الكتابة أو إخفاء أي عنصر أو لوحة أدمين نهائياً
   // =========================================================================
   function applyThemeVisuals() {
     if (canvas) {
-      canvas.style.opacity = '1'; // إظهار المشهد الطبيعي المرسوم بوضوح وجمالية
+      canvas.style.opacity = '1';
     }
 
     let darkStyle = document.getElementById('sacDarkThemeStyles');
@@ -512,7 +496,7 @@
         darkStyle.id = 'sacDarkThemeStyles';
         darkStyle.innerHTML = `
           /* =========================================================================
-             🌙 وضع الظلام الكوني (SAC Cosmic Dark Mode - High Contrast & Legibility)
+             🌙 وضع الظلام الكوني (SAC Cosmic Dark Mode - High Contrast & Safe Stacking)
              ========================================================================= */
           :root {
             --green: #2dd4bf !important;
@@ -527,19 +511,22 @@
             --shadow: 0 12px 35px rgba(0, 0, 0, 0.75) !important;
           }
           body, html {
-            background: transparent !important;
+            background: rgba(11, 17, 30, 0.94) !important;
             color: #f8fafc !important;
           }
-          header, .header, #header {
-            background: rgba(15, 23, 42, 0.93) !important;
-            border-bottom: 1px solid rgba(45, 212, 191, 0.35) !important;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.8) !important;
-          }
-          .card, .card-box, .intro, .intro-box, .qa-box, .panel, .panel-in, .acc-item, .modal, #authLogin, #authReg, .svc, .stat, .def, .struct, .hubcard, .user-card, .doc-card, .table-wrap, table, th, td, .comment-card, .reply-card, .dlbox, .example, .newbie, .setup-banner, .strat, .tip, .tips {
-            background: rgba(21, 31, 50, 0.94) !important;
+          /* حماية وضمان ظهور جميع عناصر الصفحة ولوحات تحكم الأدمين فوق الخلفية وبوضوح تام */
+          main, section, header, .header, #header, .container, .card, .card-box, .intro, .intro-box, .qa-box, .panel-in, .svc, .stat, .def, .struct, .hubcard, .user-card, .doc-card, .table-wrap, table, th, td, .comment-card, .reply-card, .dlbox, .example, .newbie, .setup-banner, .strat, .tip, .tips, #boardUsers, #boardContent, #boardFiles, #boardComments {
+            background: rgba(21, 31, 50, 0.95) !important;
             color: #f8fafc !important;
             border-color: rgba(45, 212, 191, 0.3) !important;
-            backdrop-filter: blur(8px) !important;
+            position: relative;
+            z-index: 2;
+          }
+          header, #header, #sacTopAdminToolbar, #adminGateModal, .modal-bg, .modal, #adminModal, #upgradeModal, #viewerModal {
+            z-index: 99999 !important;
+          }
+          .board-sec[style*="display: block"], .board-sec[style*="display:block"], #adminUsers[style*="display: block"], #adminUsers[style*="display:block"] {
+            display: block !important;
           }
           h1, h2, h3, h4, h5, h6, .sec-title, .card h3, .card-header h3, .qa-q .qtext, .brand span, .logo-box h1, .intro h2, .intro-box h2, .docgroup .gh h3, .struct .head, .def .term, .hubcard .htx b, .c-name {
             color: #38bdf8 !important;
@@ -562,21 +549,6 @@
           }
           .badge, .hero-tag, .newbie b, .why b, .example b, .note b {
             color: #facc15 !important;
-          }
-          /* حماية وضمان ظهور لوحة إدارة المستخدمين وكافة شاشات ومحتويات المنصة فوق الكانفاس في جميع المتصفحات والأجهزة */
-          body > *:not(#sacCursorBirdsCanvas) {
-            position: relative !important;
-            z-index: 10 !important;
-          }
-          header, #header, #sacTopAdminToolbar, #adminGateModal, .modal-bg, .modal, #adminModal, #upgradeModal, #viewerModal {
-            z-index: 99999 !important;
-          }
-          main, section, .container, .board-sec, .users-form-card, .data-card, .table-card, #adminUsers, #adminPanel, #boardUsers, #boardContent, #boardFiles, #boardComments {
-            position: relative;
-            z-index: 20 !important;
-          }
-          .board-sec[style*="display: block"], .board-sec[style*="display:block"], #adminUsers[style*="display: block"], #adminUsers[style*="display:block"] {
-            display: block !important;
           }
           .btn.ghost, .hero .cta .btn.ghost {
             background: rgba(15, 23, 42, 0.88) !important;
@@ -639,7 +611,7 @@
             color: #94a3b8 !important;
           }
           .hero, .dash-hero, .dash-hero h2, .hero h1, .hero p, .hero span {
-            background: rgba(15, 23, 42, 0.85) !important;
+            background: rgba(15, 23, 42, 0.88) !important;
             color: #ffffff !important;
           }
           .hero h1, .dash-hero h2 {
@@ -665,6 +637,15 @@
     } else {
       if (darkStyle) darkStyle.remove();
       if (!dayStyle) {
+        let seasonBgGradient = 'linear-gradient(135deg, rgba(254, 252, 232, 0.93) 0%, rgba(254, 249, 195, 0.93) 45%, rgba(236, 253, 245, 0.93) 100%)'; // ☀️ الصيف
+        if (window.sacCurrentSeason === 'spring') {
+          seasonBgGradient = 'linear-gradient(135deg, rgba(240, 253, 244, 0.93) 0%, rgba(236, 253, 245, 0.93) 50%, rgba(224, 242, 254, 0.93) 100%)'; // 🌸 الربيع
+        } else if (window.sacCurrentSeason === 'autumn') {
+          seasonBgGradient = 'linear-gradient(135deg, rgba(255, 251, 235, 0.93) 0%, rgba(254, 243, 199, 0.93) 50%, rgba(253, 230, 138, 0.93) 100%)'; // 🍂 الخريف
+        } else if (window.sacCurrentSeason === 'winter') {
+          seasonBgGradient = 'linear-gradient(135deg, rgba(248, 250, 252, 0.93) 0%, rgba(241, 245, 249, 0.93) 50%, rgba(226, 232, 240, 0.93) 100%)'; // ❄️ الشتاء
+        }
+
         dayStyle = document.createElement('style');
         dayStyle.id = 'sacDayThemeStyles';
         dayStyle.innerHTML = `
@@ -676,28 +657,32 @@
             --green-d: #042f2e !important;
             --green-l: #14b8a6 !important;
             --gold: #d97706 !important;
-            --bg: transparent !important;
-            --card: rgba(255, 255, 255, 0.94) !important;
+            --bg: #f8fafc !important;
+            --card: #ffffff !important;
             --ink: #0f172a !important;
             --muted: #475569 !important;
             --line: rgba(13, 148, 136, 0.22) !important;
             --shadow: 0 15px 35px rgba(13, 148, 136, 0.08), 0 5px 15px rgba(0, 0, 0, 0.04) !important;
           }
           body, html {
-            background: transparent !important;
+            background: ${seasonBgGradient} !important;
             color: #0f172a !important;
           }
-          header, .header, #header {
-            background: rgba(255, 255, 255, 0.94) !important;
-            border-bottom: 2px solid #0d9488 !important;
-            box-shadow: 0 4px 20px rgba(13, 148, 136, 0.12) !important;
+          main, section, header, .header, #header, .container, .card, .card-box, .intro, .intro-box, .qa-box, .panel-in, .svc, .stat, .def, .struct, .hubcard, .user-card, .doc-card, .table-wrap, .strat, .tip, .tips, #boardUsers, #boardContent, #boardFiles, #boardComments {
+            position: relative;
+            z-index: 2;
           }
-          .card, .card-box, .intro, .intro-box, .qa-box, .panel, .panel-in, .acc-item, .modal, #authLogin, #authReg, .svc, .stat, .def, .struct, .hubcard, .user-card, .doc-card, .table-wrap, .strat, .tip, .tips {
-            background: rgba(255, 255, 255, 0.94) !important;
+          header, #header, #sacTopAdminToolbar, #adminGateModal, .modal-bg, .modal, #adminModal, #upgradeModal, #viewerModal {
+            z-index: 99999 !important;
+          }
+          .board-sec[style*="display: block"], .board-sec[style*="display:block"], #adminUsers[style*="display: block"], #adminUsers[style*="display:block"] {
+            display: block !important;
+          }
+          .card, .card-box, .intro, .intro-box, .qa-box, .panel-in, .svc, .stat, .def, .struct, .hubcard, .user-card, .doc-card, .table-wrap, .strat, .tip, .tips {
+            background: #ffffff !important;
             border: 1.5px solid rgba(13, 148, 136, 0.22) !important;
             box-shadow: 0 15px 35px rgba(13, 148, 136, 0.08), 0 5px 15px rgba(0, 0, 0, 0.04) !important;
             transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease !important;
-            backdrop-filter: blur(8px) !important;
           }
           .card:hover, .card-box:hover, .strat:hover, .hubcard:hover {
             transform: translateY(-6px) !important;
@@ -759,21 +744,6 @@
             border-color: #0d9488 !important;
             color: #0f766e !important;
           }
-          /* حماية وضمان ظهور لوحة إدارة المستخدمين وكافة شاشات ومحتويات المنصة فوق الكانفاس في جميع المتصفحات والأجهزة */
-          body > *:not(#sacCursorBirdsCanvas) {
-            position: relative !important;
-            z-index: 10 !important;
-          }
-          header, #header, #sacTopAdminToolbar, #adminGateModal, .modal-bg, .modal, #adminModal, #upgradeModal, #viewerModal {
-            z-index: 99999 !important;
-          }
-          main, section, .container, .board-sec, .users-form-card, .data-card, .table-card, #adminUsers, #adminPanel, #boardUsers, #boardContent, #boardFiles, #boardComments {
-            position: relative;
-            z-index: 20 !important;
-          }
-          .board-sec[style*="display: block"], .board-sec[style*="display:block"], #adminUsers[style*="display: block"], #adminUsers[style*="display:block"] {
-            display: block !important;
-          }
         `;
         document.head.appendChild(dayStyle);
       }
@@ -818,7 +788,7 @@
   }
 
   // =========================================================================
-  // 📅 خامساً: حقن ودجت التاريخ والوقت (Glassmorphism Date/Time Clock Widget)
+  // 📅 رابعاً: حقن ودجت التاريخ والوقت (Glassmorphism Date/Time Clock Widget)
   // =========================================================================
   function updateDateTimeWidget() {
     const el = document.getElementById('sacDateTimeContent');
@@ -906,7 +876,7 @@
   }
 
   // =========================================================================
-  // 🎬 سادساً: حلقة التنشيط المستمرة (Animation Loop - مشهد الطبيعة + الشهب والأوراق)
+  // 🎬 خامساً: حلقة التنشيط المستمرة (Animation Loop - مشهد الطبيعة + الشهب والأوراق)
   // =========================================================================
   function animate() {
     ctx.clearRect(0, 0, width, height);
