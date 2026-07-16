@@ -157,6 +157,7 @@
     <button class="pill" id="pillContent" onclick="switchBoard('content')">📚 إدارة محتويات وموارد المنصة</button>
     <button class="pill" id="pillFiles" onclick="switchBoard('files')">📂 الملفات المرفوعة من الأساتذة</button>
     <button class="pill" id="pillComments" onclick="switchBoard('comments')">💬 إدارة التعليقات والمناقشات</button>
+    <button class="pill" id="pillOrders" onclick="switchBoard('orders')">📋 طلبات الخدمات المخصصة</button>
   </div>
 
   <!-- SECTION 1: USERS & ADMINS MANAGEMENT (Exact Screenshot Layout) -->
@@ -363,6 +364,40 @@
     </div>
   </section>
 
+  <!-- SECTION 5: SERVICE ORDERS MANAGEMENT -->
+  <section id="boardOrders" class="board-sec" style="display:none">
+    <div class="table-card">
+      <div class="table-header">
+        <div>
+          <div class="table-title">service_orders</div>
+          <div class="table-desc">سجل طلبات الخدمات البيداغوجية المخصصة المرسلة من الأساتذة (مذكرات، فروض، دفاتر، شهادات)</div>
+        </div>
+        <div class="badge-sql">table: service_orders</div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>رقم الطلب</th>
+              <th>الخدمة المطلوبة</th>
+              <th>اسم الأستاذ</th>
+              <th>التواصل (بريد / هاتف)</th>
+              <th>المستوى</th>
+              <th>التفاصيل والمواصفات</th>
+              <th>موعد التسليم</th>
+              <th>تاريخ الطلب</th>
+              <th>الحالة</th>
+              <th>الإجراء</th>
+            </tr>
+          </thead>
+          <tbody id="ordersTbody">
+            <!-- Dynamic -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
 </main>
 
 <script>
@@ -408,6 +443,7 @@ function switchBoard(sec){
   if (targetBoard) targetBoard.style.display = 'block';
   if (targetPill) targetPill.classList.add('active');
   if (typeof renderTopAdminToolbar === 'function') renderTopAdminToolbar();
+  if (sec === 'orders' && typeof renderOrdersTable === 'function') renderOrdersTable();
 }
 
 async function doGateAdminLogin(){
@@ -890,6 +926,71 @@ async function deleteCommentItem(id){
   await renderCommentsTable();
 }
 
+async function renderOrdersTable() {
+  const tbody = document.getElementById('ordersTbody');
+  if(!tbody) return;
+  let orders = [];
+  try { orders = JSON.parse(localStorage.getItem('sac_service_orders') || '[]'); } catch(e){}
+
+  if(supabaseClient) {
+    try {
+      const { data, error } = await supabaseClient.from('service_orders').select('*').order('created_at', { ascending: false });
+      if(!error && data) orders = data;
+    } catch(e){}
+  }
+
+  if(orders.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="10" style="text-align:center;color:var(--muted);padding:24px;">لا توجد طلبات خدمات مخصصة مسجلة حالياً</td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = orders.map(o => `
+    <tr>
+      <td><b style="color:#0d9488">${o.id}</b></td>
+      <td><span style="background:rgba(250,204,21,0.18);color:#facc15;padding:4px 10px;border-radius:8px;font-weight:800;">${o.type}</span></td>
+      <td><b>${o.name}</b></td>
+      <td style="color:#38bdf8;font-family:monospace">${o.contact}</td>
+      <td>${o.level}</td>
+      <td style="max-width:240px;line-height:1.6;font-size:0.88rem;">${o.details}</td>
+      <td><span style="color:#f59e0b">${o.target_date || 'غير محدد'}</span></td>
+      <td style="font-size:0.82rem;color:var(--muted)">${new Date(o.created_at).toLocaleDateString('ar-DZ')}</td>
+      <td><button onclick="toggleOrderStatus('${o.id}')" style="background:#10b981;color:#fff;border:none;padding:5px 12px;border-radius:8px;font-weight:800;cursor:pointer;font-size:0.82rem;">${o.status || 'قيد المعالجة 🚀'}</button></td>
+      <td><button class="btn-del" onclick="deleteOrder('${o.id}')">حذف</button></td>
+    </tr>
+  `).join('');
+}
+
+async function toggleOrderStatus(id) {
+  let orders = JSON.parse(localStorage.getItem('sac_service_orders') || '[]');
+  const idx = orders.findIndex(o => o.id === id);
+  if(idx !== -1) {
+    orders[idx].status = orders[idx].status.includes('✔') ? 'قيد المعالجة والإنجاز 🚀' : '✔ تم الإنجاز والتسليم';
+    localStorage.setItem('sac_service_orders', JSON.stringify(orders));
+  }
+  if(supabaseClient) {
+    try {
+      const { data } = await supabaseClient.from('service_orders').select('*').eq('id', id);
+      if(data && data[0]) {
+        const newSt = data[0].status.includes('✔') ? 'قيد المعالجة والإنجاز 🚀' : '✔ تم الإنجاز والتسليم';
+        await supabaseClient.from('service_orders').update({ status: newSt }).eq('id', id);
+      }
+    } catch(e){}
+  }
+  renderOrdersTable();
+}
+
+async function deleteOrder(id) {
+  if(!confirm('هل أنتِ متأكدة من حذف هذا الطلب نهائياً؟')) return;
+  let orders = JSON.parse(localStorage.getItem('sac_service_orders') || '[]');
+  orders = orders.filter(o => o.id !== id);
+  localStorage.setItem('sac_service_orders', JSON.stringify(orders));
+
+  if(supabaseClient) {
+    try { await supabaseClient.from('service_orders').delete().eq('id', id); } catch(e){}
+  }
+  renderOrdersTable();
+}
+
 // Initial Render
 (function(){
   checkAdminGateOnLoad();
@@ -897,6 +998,7 @@ async function deleteCommentItem(id){
   renderContentsTable();
   renderFilesTable();
   renderCommentsTable();
+  renderOrdersTable();
 })();
 </script>
 <!-- ========================================================================= -->
@@ -1173,20 +1275,7 @@ html, body {
     }
   }, 1000);
 
-  // 8. نظام الخاتم المائي الديناميكي المقاوم لتصوير الهاتف واستخراج النصوص (Anti-OCR & Camera Shield)
-  try {
-    const sess = localStorage.getItem("sac_session") || localStorage.getItem("sac_role") || "SAC · SVT prof";
-    const stampText = sess !== "SAC · SVT prof" ? `⚠️ منصة SAC · SVT prof · إنجاز وتجميع قائم على أعمال نخبة من أساتذة المادة ⚠️ نسخة مرخصة لحساب (${sess})` : "⚠️ منصة SAC · SVT prof · إنجاز وتجميع قائم على أعمال نخبة من أساتذة المادة ⚠️";
-    const watermarkDiv = document.createElement("div");
-    watermarkDiv.id = "sacAntiOcrWatermark";
-    watermarkDiv.style.cssText = "position:fixed;inset:-200px;z-index:999998;pointer-events:none;display:flex;flex-wrap:wrap;align-content:space-around;justify-content:space-around;overflow:hidden;opacity:0.045;user-select:none;font-family:Tajawal,sans-serif;font-weight:800;font-size:1.15rem;color:#0a5860;transform:rotate(-24deg);white-space:nowrap;";
-    let patternHTML = "";
-    for(let i=0; i<60; i++) {
-      patternHTML += `<span style="padding:32px 48px;letter-spacing:1px;">${stampText}</span>`;
-    }
-    watermarkDiv.innerHTML = patternHTML;
-    document.body.appendChild(watermarkDiv);
-  } catch(e) {}
+  
 
   // 9. شريط التحكم الشامل والأبدي للأدمين (Top Admin Toolbar across all pages)
   window.renderTopAdminToolbar = function() {

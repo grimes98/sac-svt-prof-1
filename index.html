@@ -545,33 +545,26 @@ const svt = [
 
 const services = [
   {e:"🔬", t:"أداة «تحليل مذكرتي» بالذكاء الاصطناعي", d:"ارفع مذكرتك بصيغة PDF ليقوم الذكاء الاصطناعي البيداغوجي بتحليلها وإعطائك الإيجابيات، السلبيات، واقتراحات التحسين فورا.", tag:"أداة ذكية", link:"javascript:openSacMemoAnalyzer()", free:true},
-  {e:"📝",t:"إنجاز الفروض والاختبارات",d:"طلب إنجاز فروض واختبارات مخصّصة.",url:"https://forms.gle/r79ytG9zmXdFGeK2A"},
-  {e:"🗂️",t:"إنجاز مذكرات الأستاذ",d:"لجميع المستويات: 1م · 2م · 3م · 4م.",url:"https://forms.gle/iVxFVQbYEH8P9zZE8"},
-  {e:"📒",t:"دفاتر الأستاذ (PDF)",d:"لجميع الموادّ بصيغة PDF — نماذج جاهزة.",url:"https://forms.gle/ZLn5GBRTz1q72aHz8"},
-  {e:"🖨️",t:"دفاتر الأستاذ (مطبوعة)",d:"لجميع الموادّ وجميع الأطوار مطبوعة.",url:"https://forms.gle/ZLn5GBRTz1q72aHz8"},
-  {e:"🏅",t:"شهادات للتلاميذ",d:"إنجاز شهادات تقدير وتشجيع للتلاميذ.",url:"https://forms.gle/ZLn5GBRTz1q72aHz8"},
+  {e:"📝", t:"إنجاز الفروض والاختبارات المخصصة", d:"طلب إنجاز فروض واختبارات مخصّصة وفق منهاج الجيل الثاني وشبكات التقويم ومؤشرات الكفاءة ¾ والربع.", tag:"خدمة مخصصة", link:"javascript:openSacServiceModal('📝', 'إنجاز الفروض والاختبارات المخصصة', 'إعداد مواضيع تقويمية نموذجية ومحلولة مع وضعيات إدماجية وسلالم التنقيط ¾ والربع.')", free:false},
+  {e:"🗂️", t:"إنجاز وتطوير مذكرات الأستاذ", d:"طلب إنجاز وتطوير مذكرات بيداغوجية تفصيلية لجميع المستويات: 1م · 2م · 3م · 4م وفق المسعى العلمي.", tag:"خدمة مخصصة", link:"javascript:openSacServiceModal('🗂️', 'إنجاز مذكرات الأستاذ البيداغوجية', 'بناء مذكرات وفق المسعى العلمي (ملاحظة، فرضية، تجريب، استنتاج) وتوجيهات الوثيقة المرافقة.')", free:false},
+  {e:"📒", t:"دفاتر الأستاذ والتدرجات (PDF)", d:"طلب إعداد وتنسيق دفاتر الأستاذ والتنظيم السنوي بصيغة PDF عالية الدقة جاهزة للطباعة المباشرة.", tag:"خدمة مخصصة", link:"javascript:openSacServiceModal('📒', 'دفاتر الأستاذ والتدرجات بصيغة (PDF)', 'تنسيق واحترافية عالية لدفتر النصوص لسجلات المتابعة والتقويم المستمر.')", free:false},
+  {e:"🖨️", t:"دفاتر وسجلات الأستاذ (مطبوعة ومغلفة)", d:"طلب دفاتر الأستاذ وسجلات التقويم مطبوعة بأعلى جودة فاخرة وملونة وتوصيلها لمؤسستك التربوية.", tag:"خدمة مخصصة", link:"javascript:openSacServiceModal('🖨️', 'دفاتر وسجلات الأستاذ (مطبوعة ومغلفة)', 'طباعة فاخرة وملونة لجميع السجلات الإدارية والبيداغوجية لمادة العلوم الطبيعية.')", free:false},
+  {e:"🏅", t:"شهادات التقدير والتشجيع للتلاميذ", d:"طلب تصميم وإنجاز شهادات تفوق وتقدير بيداغوجية محفزة لتلاميذ القسم تحمل اسم مؤسستك.", tag:"خدمة مخصصة", link:"javascript:openSacServiceModal('🏅', 'شهادات التقدير والتشجيع للتلاميذ', 'تصاميم فخمة وأنيقة تحمل اسم مؤسستك وشعار التميز لتحفيز التلاميذ المتفوقين والمجتهدين.')", free:false},
 ];
 
 /* ============ RENDER ============ */
 function card(item, isService){
   if(isService){
-    if(item.link){
-      return `<a class="svc" href="${item.link}" style="border:2px solid #00a8a8; background:linear-gradient(135deg, #f2fafa, #eefaf7); box-shadow:0 6px 20px rgba(0,168,168,0.15);">
-        <div class="ic" style="background:#00a8a8; color:#fff; border-radius:12px; padding:10px;">${item.e}</div>
-        <div class="info">
-          <h4 style="color:#0a5860; font-weight:800; display:flex; align-items:center; gap:8px;">
-            <span>${item.t}</span>
-            <span style="background:#dcfce7; color:#166534; font-size:0.72rem; padding:2px 8px; border-radius:10px; border:1px solid #22c55e;">✨ جديد</span>
-          </h4>
-          <p style="color:#173a3a; font-weight:500;">${item.d}</p>
-        </div>
-        <div class="arrow" style="color:#00a8a8; font-weight:800; font-size:0.95rem;">🚀 ابدأ التحليل ←</div>
-      </a>`;
-    }
-    return `<a class="svc" href="${item.url}" target="_blank" rel="noopener">
-      <div class="ic">${item.e}</div>
-      <div class="info"><h4>${item.t}</h4><p>${item.d}</p></div>
-      <div class="arrow">تقديم الطلب ←</div>
+    return `<a class="svc" href="${item.link}" style="border:2px solid rgba(13, 148, 136, 0.35); background:rgba(255,255,255,0.72); backdrop-filter:blur(10px); box-shadow:0 6px 20px rgba(13,148,136,0.15); transition:all 0.25s ease;">
+      <div class="ic" style="background:linear-gradient(135deg,#0d9488,#14b8a6); color:#fff; border-radius:14px; padding:12px; font-size:1.6rem; display:grid; place-items:center;">${item.e}</div>
+      <div class="info">
+        <h4 style="color:#042f2e; font-weight:800; display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+          <span>${item.t}</span>
+          <span style="background:rgba(250,204,21,0.18); color:#facc15; font-size:0.75rem; padding:2px 10px; border-radius:10px; border:1px solid #facc15;">${item.tag || 'خدمة مخصصة'}</span>
+        </h4>
+        <p style="color:#1e293b; font-weight:500; font-size:0.95rem; margin-top:4px;">${item.d}</p>
+      </div>
+      <div class="arrow" style="color:#0d9488; font-weight:800; font-size:0.95rem;">🚀 تقديم الطلب داخل المنصة ←</div>
     </a>`;
   }
   const soon = item.tag === 'قريبًا';
@@ -1476,6 +1469,136 @@ html, body {
 })();
 </script>
 <!-- ========================================================================= -->
+<!-- ========================================================================= -->
+<!-- بوّابة طلب الخدمات وإنجاز الأعمال البيداغوجية المباشرة (In-App Service Portal) -->
+<!-- ========================================================================= -->
+<div class="modal-bg" id="sacServiceModal" style="z-index:999999;">
+  <div class="modal" style="max-width:540px; border:2px solid #2dd4bf; border-radius:24px; box-shadow:0 25px 70px rgba(0,0,0,0.65); overflow:hidden;">
+    <button class="close" onclick="closeSacServiceModal()" style="top:18px; left:18px; background:#ef4444; color:#fff; width:34px; height:34px; border-radius:50%; display:grid; place-items:center; font-size:1.1rem; opacity:1;">✕</button>
+    
+    <div style="text-align:center; margin-bottom:18px;">
+      <div id="srvModalIcon" style="font-size:3.2rem; margin-bottom:8px; filter:drop-shadow(0 0 12px rgba(45,212,191,0.5));">📝</div>
+      <h3 id="srvModalTitle" style="color:#0d9488; font-size:1.4rem; font-weight:800; margin-bottom:6px;">طلب إنجاز الفروض والاختبارات</h3>
+      <p id="srvModalDesc" style="color:#64748b; font-size:0.94rem; line-height:1.7; max-width:440px; margin:0 auto;">سيقوم فريق إنجاز SAC · SVT prof بإعداد وتطوير المورد البيداغوجي وفق مواصفاتك الدقيقة ومنهاج الجيل الثاني.</p>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:14px; text-align:right;">
+      <div class="field" style="margin:0;">
+        <label style="font-weight:700; color:#0f172a; margin-bottom:4px; display:block;">👤 الاسم واللقب (اسم الأستاذ الكامل) *</label>
+        <input type="text" id="srvInputName" placeholder="مثال: الأستاذ(ة) قريمس أماني" style="width:100%; padding:12px 14px; border-radius:12px; border:1.5px solid rgba(13,148,136,0.35); font-size:0.95rem;">
+      </div>
+
+      <div class="field" style="margin:0;">
+        <label style="font-weight:700; color:#0f172a; margin-bottom:4px; display:block;">📧 البريد الإلكتروني أو رقم الهاتف/واتساب للتواصل *</label>
+        <input type="text" id="srvInputContact" placeholder="مثال: prof@sac-svt.dz أو 0664783315" style="width:100%; padding:12px 14px; border-radius:12px; border:1.5px solid rgba(13,148,136,0.35); font-size:0.95rem;">
+      </div>
+
+      <div class="field" style="margin:0;">
+        <label style="font-weight:700; color:#0f172a; margin-bottom:4px; display:block;">🎓 المستوى الدراسي والمقطع البيداغوجي *</label>
+        <select id="srvInputLevel" style="width:100%; padding:12px 14px; border-radius:12px; border:1.5px solid rgba(13,148,136,0.35); font-size:0.95rem; background:#fff;">
+          <option value="السنة الرابعة متوسط (4م)">السنة الرابعة متوسط (4م)</option>
+          <option value="السنة الثالثة متوسط (3م)">السنة الثالثة متوسط (3م)</option>
+          <option value="السنة الثانية متوسط (2م)">السنة الثانية متوسط (2م)</option>
+          <option value="السنة الأولى متوسط (1م)">السنة الأولى متوسط (1م)</option>
+          <option value="عام لكل المستويات المتوسطة">عام لكل المستويات المتوسطة</option>
+        </select>
+      </div>
+
+      <div class="field" style="margin:0;">
+        <label style="font-weight:700; color:#0f172a; margin-bottom:4px; display:block;">📝 تفاصيل ومواصفات المورد البيداغوجي المطلوب *</label>
+        <textarea id="srvInputDetails" rows="3" placeholder="مثال: أرجو إعداد اختبار الفصل الأول مع وضعية إدماجية نموذجية حول التغذية وشبكة التقويم ¾ والربع..." style="width:100%; padding:12px 14px; border-radius:12px; border:1.5px solid rgba(13,148,136,0.35); font-size:0.95rem; font-family:inherit; resize:vertical;"></textarea>
+      </div>
+
+      <div class="field" style="margin:0;">
+        <label style="font-weight:700; color:#0f172a; margin-bottom:4px; display:block;">📅 موعد الاستلام المفضل (اختياري)</label>
+        <input type="date" id="srvInputDate" style="width:100%; padding:10px 14px; border-radius:12px; border:1.5px solid rgba(13,148,136,0.35); font-size:0.95rem;">
+      </div>
+
+      <button class="btn" onclick="submitSacServiceRequest()" style="background:linear-gradient(135deg, #0d9488, #14b8a6); color:#fff; font-weight:800; font-size:1.08rem; padding:14px; border-radius:14px; width:100%; justify-content:center; box-shadow:0 6px 20px rgba(13,148,136,0.35); border:2px solid #facc15; margin-top:8px;">🚀 إرسال الطلب الآن المباشر</button>
+      <div id="srvMsg" style="font-size:0.9rem; font-weight:700; text-align:center; min-height:22px; margin-top:4px;"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+let currentSacServiceType = '';
+function openSacServiceModal(icon, title, desc){
+  currentSacServiceType = title;
+  const modal = document.getElementById('sacServiceModal');
+  const icEl = document.getElementById('srvModalIcon');
+  const ttEl = document.getElementById('srvModalTitle');
+  const dsEl = document.getElementById('srvModalDesc');
+  const msgEl = document.getElementById('srvMsg');
+  if(icEl) icEl.textContent = icon || '📝';
+  if(ttEl) ttEl.textContent = title || 'طلب خدمة بيداغوجية مخصصة';
+  if(dsEl) dsEl.textContent = desc || 'سيقوم فريق إنجاز SAC · SVT prof بإعداد المورد البيداغوجي وفق مواصفاتك الدقيقة.';
+  if(msgEl) { msgEl.textContent = ''; msgEl.className = ''; }
+  if(modal) modal.classList.add('open');
+}
+function closeSacServiceModal(){
+  const modal = document.getElementById('sacServiceModal');
+  if(modal) modal.classList.remove('open');
+}
+async function submitSacServiceRequest(){
+  const nameInput = document.getElementById('srvInputName');
+  const contactInput = document.getElementById('srvInputContact');
+  const levelInput = document.getElementById('srvInputLevel');
+  const detailsInput = document.getElementById('srvInputDetails');
+  const dateInput = document.getElementById('srvInputDate');
+  const msgEl = document.getElementById('srvMsg');
+
+  const name = nameInput ? nameInput.value.trim() : '';
+  const contact = contactInput ? contactInput.value.trim() : '';
+  const level = levelInput ? levelInput.value : '';
+  const details = detailsInput ? detailsInput.value.trim() : '';
+  const date = dateInput ? dateInput.value : '';
+
+  if(!name || !contact || !details){
+    if(msgEl){
+      msgEl.textContent = '⚠️ الرجاء ملء حقول الاسم وتفاصيل الطلب ووسيلة التواصل.';
+      msgEl.style.color = '#ef4444';
+    }
+    return;
+  }
+
+  if(msgEl){
+    msgEl.textContent = '⏳ جاري إرسال وتسجيل طلبك في سجلات المنصة...';
+    msgEl.style.color = '#0d9488';
+  }
+
+  const newOrder = {
+    id: 'REQ-' + Date.now(),
+    type: currentSacServiceType,
+    name: name,
+    contact: contact,
+    level: level,
+    details: details,
+    target_date: date || 'في أقرب وقت ممكن',
+    created_at: new Date().toISOString(),
+    status: 'قيد المعالجة والإنجاز 🚀'
+  };
+
+  const existingOrders = JSON.parse(localStorage.getItem('sac_service_orders') || '[]');
+  existingOrders.unshift(newOrder);
+  localStorage.setItem('sac_service_orders', JSON.stringify(existingOrders));
+
+  try {
+    const sbClient = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
+    if(sbClient){
+      await sbClient.from('service_orders').insert([newOrder]);
+    }
+  } catch(e){}
+
+  if(msgEl){
+    msgEl.innerHTML = `<span style="color:#10b981; font-size:1rem;">🎉 تم استلام طلبكِ بنجاح! سيقوم فريق إنجاز SAC بمراجعة المواصفات والتواصل معكِ في أقرب وقت.</span>`;
+  }
+  setTimeout(() => {
+    closeSacServiceModal();
+    if(nameInput) nameInput.value = '';
+    if(detailsInput) detailsInput.value = '';
+  }, 3200);
+}
+</script>
 <script src="sac-chatbot.js"></script>
 <script src="sac-memo-analyzer.js"></script>
 <script src="sac-cursor-birds.js"></script>
