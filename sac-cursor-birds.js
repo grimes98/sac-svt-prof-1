@@ -1,6 +1,7 @@
 /* =========================================================================
-   🕊️🌌 محرك SAC · SVT prof الموحد للثيم الكوني والمؤثرات البصرية
-   (Day Mode: Small Emerald Phoenix Birds | Night Mode: Cosmic Shooting Stars & High-Contrast Typography)
+   👑🌌 محرك SAC · SVT prof الفخم للمؤثرات البصرية والثيمات (النهار الملكي / الليل الكوني)
+   (Day Mode: Luxurious Emerald Bokeh & Sun Motes | Night Mode: Cosmic Shooting Stars)
+   تم إزالة سرب الطيور بالكامل بناءً على طلب الأستاذة وتصميم واجهة نهارية فخمة جداً
    ========================================================================= */
 
 (function() {
@@ -34,7 +35,6 @@
     height = canvas.height = window.innerHeight || 800;
   });
 
-  // موقع الكيرسور وحالة التحليق
   const mouse = {
     x: width / 2,
     y: height / 2,
@@ -56,123 +56,62 @@
   }, 300);
 
   // =========================================================================
-  // ☀️ أولاً: محرك طيور العنقاء الزمردية الصغيرة (النهار — Small Emerald Phoenixes)
+  // ☀️ أولاً: محرك الجزيئات البصرية الملكية الزمردية والذهبية (النهار — Royal Day Motes)
+  // (بديل فخم جداً للطيور يضفي رونقاً وأناقة هادئة دون تشويش)
   // =========================================================================
-  const PHOENIX_COLORS = [
-    '#2dd4bf', '#14b8a6', '#0d9488', '#5eead4', '#99f6e4',
-    '#a7f3d0', '#6ee7b7', '#34d399', '#38bdf8', '#7dd3fc'
+  const DAY_MOTES_COLORS = [
+    'rgba(13, 148, 136, 0.45)', 'rgba(45, 212, 191, 0.4)', 'rgba(20, 184, 166, 0.35)',
+    'rgba(250, 204, 21, 0.35)', 'rgba(234, 179, 8, 0.3)', 'rgba(56, 189, 248, 0.35)'
   ];
 
-  class PhoenixBird {
-    constructor(index, color) {
-      this.index = index;
-      this.color = color;
-      this.x = Math.random() * width;
+  class DayMote {
+    constructor() {
+      this.reset();
       this.y = Math.random() * height;
-      this.vx = (Math.random() - 0.5) * 1.8;
-      this.vy = (Math.random() - 0.5) * 1.8;
-      this.size = 11 + Math.random() * 5; // طيور عنقاء صغيرة وأنيقة
+    }
+    reset() {
+      this.x = Math.random() * width;
+      this.y = height + 30 + Math.random() * 100;
+      this.radius = 3 + Math.random() * 8;
+      this.vy = -(0.3 + Math.random() * 0.7);
+      this.vx = (Math.random() - 0.5) * 0.4;
+      this.color = DAY_MOTES_COLORS[Math.floor(Math.random() * DAY_MOTES_COLORS.length)];
       this.angle = Math.random() * Math.PI * 2;
-      this.wingSpeed = 0.08 + Math.random() * 0.05;
-      this.wingAngle = Math.random() * Math.PI;
+      this.pulseSpeed = 0.02 + Math.random() * 0.02;
     }
-
-    update(birds) {
-      this.wingAngle += this.wingSpeed;
-
-      let targetX = mouse.x;
-      let targetY = mouse.y;
-
-      if (mouse.isIdle) {
-        const orbitRadius = 130 + (this.index % 4) * 45;
-        const orbitSpeed = 0.0006 + (this.index % 3) * 0.0002;
-        const time = Date.now() * orbitSpeed;
-        const offsetAngle = (this.index / 12) * Math.PI * 2;
-        targetX = mouse.x + Math.cos(time + offsetAngle) * orbitRadius;
-        targetY = mouse.y + Math.sin(time * 1.3 + offsetAngle) * (orbitRadius * 0.65);
-      } else {
-        const row = Math.floor(this.index / 2);
-        const side = (this.index % 2 === 0) ? -1 : 1;
-        const spacingX = 40;
-        const spacingY = 34;
-        const dirAngle = Math.atan2(mouse.y - height / 2, mouse.x - width / 2) || 0;
-        const perpAngle = dirAngle + Math.PI / 2;
-        
-        targetX = mouse.x - Math.cos(dirAngle) * (row * spacingY) + Math.cos(perpAngle) * (side * row * spacingX);
-        targetY = mouse.y - Math.sin(dirAngle) * (row * spacingY) + Math.sin(perpAngle) * (side * row * spacingX);
-      }
-
-      const dx = targetX - this.x;
-      const dy = targetY - this.y;
-      this.vx += dx * 0.0008;
-      this.vy += dy * 0.0008;
-
-      birds.forEach(other => {
-        if (other !== this) {
-          const dist = Math.hypot(other.x - this.x, other.y - this.y);
-          if (dist < 36) {
-            this.vx -= (other.x - this.x) * 0.003;
-            this.vy -= (other.y - this.y) * 0.003;
-          }
-        }
-      });
-
-      this.vx *= 0.96;
-      this.vy *= 0.96;
-
-      const speed = Math.hypot(this.vx, this.vy);
-      const maxSpeed = mouse.isIdle ? 1.7 : 2.4;
-      if (speed > maxSpeed) {
-        this.vx = (this.vx / speed) * maxSpeed;
-        this.vy = (this.vy / speed) * maxSpeed;
-      }
-
-      this.x += this.vx;
+    update() {
       this.y += this.vy;
-      this.angle = Math.atan2(this.vy, this.vx);
-    }
+      this.x += Math.sin(this.angle) * 0.3 + this.vx;
+      this.angle += this.pulseSpeed;
 
+      // تفاعل لطيف مع الفأرة
+      const dx = mouse.x - this.x;
+      const dy = mouse.y - this.y;
+      const dist = Math.hypot(dx, dy);
+      if (dist < 100) {
+        this.x -= (dx / dist) * 1.2;
+        this.y -= (dy / dist) * 1.2;
+      }
+
+      if (this.y < -30 || this.x < -50 || this.x > width + 50) {
+        this.reset();
+      }
+    }
     draw(ctx) {
       ctx.save();
-      ctx.translate(this.x, this.y);
-      ctx.rotate(this.angle);
-
-      const wingSpread = Math.sin(this.wingAngle) * (this.size * 0.75);
-
-      // رسم أجنحة وجسد طائر العنقاء الصغير (Articulated Phoenix Wings & Tail)
       ctx.beginPath();
-      ctx.moveTo(this.size * 1.2, 0);
-      ctx.bezierCurveTo(this.size * 0.5, -wingSpread * 0.8, -this.size * 0.3, -wingSpread * 1.5, -this.size * 0.7, -wingSpread * 1.2);
-      ctx.bezierCurveTo(-this.size * 0.5, -wingSpread * 0.5, -this.size * 0.9, -this.size * 0.2, -this.size * 1.4, -this.size * 0.3);
-      ctx.lineTo(-this.size * 1.6, 0);
-      ctx.lineTo(-this.size * 1.4, this.size * 0.3);
-      ctx.bezierCurveTo(-this.size * 0.9, this.size * 0.2, -this.size * 0.5, wingSpread * 0.5, -this.size * 0.7, wingSpread * 1.2);
-      ctx.bezierCurveTo(-this.size * 0.3, wingSpread * 1.5, this.size * 0.5, wingSpread * 0.8, this.size * 1.2, 0);
-      ctx.closePath();
-
-      const grad = ctx.createLinearGradient(-this.size * 1.6, 0, this.size * 1.2, 0);
-      grad.addColorStop(0, '#0d9488');
-      grad.addColorStop(0.6, this.color);
-      grad.addColorStop(1, '#38bdf8');
-
-      ctx.fillStyle = grad;
-      ctx.shadowBlur = 6;
+      ctx.arc(this.x, this.y, this.radius + Math.sin(this.angle) * 1.5, 0, Math.PI * 2);
+      ctx.fillStyle = this.color;
+      ctx.shadowBlur = 10;
       ctx.shadowColor = this.color;
       ctx.fill();
-
-      // تاج العنقاء الصغير على الرأس
-      ctx.beginPath();
-      ctx.arc(this.size * 0.9, 0, this.size * 0.2, 0, Math.PI * 2);
-      ctx.fillStyle = '#facc15';
-      ctx.fill();
-
       ctx.restore();
     }
   }
 
-  const birds = [];
-  for (let i = 0; i < 12; i++) {
-    birds.push(new PhoenixBird(i, PHOENIX_COLORS[i % PHOENIX_COLORS.length]));
+  const dayMotes = [];
+  for (let i = 0; i < 35; i++) {
+    dayMotes.push(new DayMote());
   }
 
   // =========================================================================
@@ -282,11 +221,14 @@
   // =========================================================================
   function applyThemeVisuals() {
     if (canvas) {
-      canvas.style.opacity = window.sacCurrentTheme === 'dark' ? '0.88' : '0.35';
+      canvas.style.opacity = window.sacCurrentTheme === 'dark' ? '0.88' : '0.45';
     }
 
     let darkStyle = document.getElementById('sacDarkThemeStyles');
+    let dayStyle = document.getElementById('sacDayThemeStyles');
+
     if (window.sacCurrentTheme === 'dark') {
+      if (dayStyle) dayStyle.remove();
       if (!darkStyle) {
         darkStyle = document.createElement('style');
         darkStyle.id = 'sacDarkThemeStyles';
@@ -315,7 +257,7 @@
             border-bottom: 1px solid rgba(45, 212, 191, 0.35) !important;
             box-shadow: 0 4px 20px rgba(0,0,0,0.8) !important;
           }
-          .card, .card-box, .intro, .intro-box, .qa-box, .panel, .panel-in, .acc-item, .modal, #authLogin, #authReg, .svc, .stat, .def, .struct, .hubcard, .user-card, .doc-card, .table-wrap, table, th, td, .comment-card, .reply-card, .dlbox, .example, .newbie, .setup-banner {
+          .card, .card-box, .intro, .intro-box, .qa-box, .panel, .panel-in, .acc-item, .modal, #authLogin, #authReg, .svc, .stat, .def, .struct, .hubcard, .user-card, .doc-card, .table-wrap, table, th, td, .comment-card, .reply-card, .dlbox, .example, .newbie, .setup-banner, .strat, .tip, .tips {
             background: #151f32 !important;
             color: #f8fafc !important;
             border-color: rgba(45, 212, 191, 0.3) !important;
@@ -341,6 +283,56 @@
           }
           .badge, .hero-tag, .newbie b, .why b, .example b, .note b {
             color: #facc15 !important;
+          }
+          /* حماية أزرار البانر والبطاقات والشارات من البياض في الظلام */
+          .btn.ghost, .hero .cta .btn.ghost {
+            background: rgba(15, 23, 42, 0.88) !important;
+            color: #38bdf8 !important;
+            border: 2px solid #38bdf8 !important;
+          }
+          .btn.ghost:hover {
+            background: #38bdf8 !important;
+            color: #0b111e !important;
+          }
+          .hero .cta .btn.gold, .btn.gold {
+            background: linear-gradient(135deg, #facc15, #ca8a04) !important;
+            color: #0f172a !important;
+            font-weight: 800 !important;
+            border: none !important;
+          }
+          /* شارات البطاقات والأقفال */
+          .tag, .lock-badge, [style*="background:#fde9d6"], [style*="background: #fde9d6"], [style*="background:#fef3c7"], [style*="background: #fef3c7"], [style*="background:#fef08a"], [style*="background: #fef08a"], [style*="background:#fff1f2"], [style*="background: #fff1f2"] {
+            background: rgba(250, 204, 21, 0.18) !important;
+            color: #facc15 !important;
+            border: 1px solid #facc15 !important;
+          }
+          [style*="background:#d9f5e7"], [style*="background: #d9f5e7"], [style*="background:#dcfce7"], [style*="background: #dcfce7"], [style*="background:#e0f2fe"], [style*="background: #e0f2fe"], [style*="background:#f0fdf4"], [style*="background: #f0fdf4"] {
+            background: rgba(45, 212, 191, 0.18) !important;
+            color: #2dd4bf !important;
+            border: 1px solid #2dd4bf !important;
+          }
+          /* مربعات الأقفال وتنبيهات الجيل الثاني */
+          .panel-in div[style*="background:#fef3c7"], div[style*="background:#fef3c7"], div[style*="background: #fef3c7"] {
+            background: #1e293b !important;
+            border: 2px solid #facc15 !important;
+            color: #f8fafc !important;
+          }
+          .panel-in div[style*="background:#fef3c7"] h3, div[style*="background:#fef3c7"] h3 {
+            color: #facc15 !important;
+          }
+          .panel-in div[style*="background:#fef3c7"] p, div[style*="background:#fef3c7"] p {
+            color: #cbd5e1 !important;
+          }
+          /* شريط البحث */
+          .search-wrap input, #globalSearch {
+            background: #1e293b !important;
+            color: #f8fafc !important;
+            border: 2px solid #38bdf8 !important;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.65) !important;
+          }
+          .search-wrap .ico {
+            color: #38bdf8 !important;
+            opacity: 1 !important;
           }
           [style*="color:#173a3a"], [style*="color: #173a3a"], [style*="color:#0a5860"], [style*="color: #0a5860"], [style*="color:#007878"], [style*="color: #007878"], [style*="color:#00a8a8"], [style*="color: #00a8a8"], [style*="color:#5f7d7d"], [style*="color: #5f7d7d"], [style*="color:#333"], [style*="color:#000"] {
             color: #f8fafc !important;
@@ -368,6 +360,88 @@
       }
     } else {
       if (darkStyle) darkStyle.remove();
+      if (!dayStyle) {
+        dayStyle = document.createElement('style');
+        dayStyle.id = 'sacDayThemeStyles';
+        dayStyle.innerHTML = `
+          /* =========================================================================
+             ☀️ وضع النهار الفخم والراقي (SAC Royal Day Mode - Prestigious Elegance)
+             ========================================================================= */
+          :root {
+            --green: #0d9488 !important;
+            --green-d: #042f2e !important;
+            --green-l: #14b8a6 !important;
+            --gold: #d97706 !important;
+            --bg: #f8fafc !important;
+            --card: #ffffff !important;
+            --ink: #0f172a !important;
+            --muted: #475569 !important;
+            --line: rgba(13, 148, 136, 0.22) !important;
+            --shadow: 0 15px 35px rgba(13, 148, 136, 0.08), 0 5px 15px rgba(0, 0, 0, 0.04) !important;
+          }
+          body, html {
+            background: linear-gradient(135deg, #f8fafc 0%, #edfcf9 50%, #f1f8f6 100%) !important;
+            color: #0f172a !important;
+          }
+          header, .header, #header {
+            background: rgba(255, 255, 255, 0.94) !important;
+            border-bottom: 2px solid #0d9488 !important;
+            box-shadow: 0 4px 20px rgba(13, 148, 136, 0.12) !important;
+          }
+          .card, .card-box, .intro, .intro-box, .qa-box, .panel, .panel-in, .acc-item, .modal, #authLogin, #authReg, .svc, .stat, .def, .struct, .hubcard, .user-card, .doc-card, .table-wrap, .strat, .tip, .tips {
+            background: #ffffff !important;
+            border: 1.5px solid rgba(13, 148, 136, 0.22) !important;
+            box-shadow: 0 15px 35px rgba(13, 148, 136, 0.08), 0 5px 15px rgba(0, 0, 0, 0.04) !important;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease !important;
+          }
+          .card:hover, .card-box:hover, .strat:hover, .hubcard:hover {
+            transform: translateY(-6px) !important;
+            box-shadow: 0 20px 45px rgba(13, 148, 136, 0.18) !important;
+            border-color: #0d9488 !important;
+          }
+          h1, h2, h3, h4, h5, h6, .sec-title, .card h3, .card-header h3, .qa-q .qtext, .brand span, .logo-box h1, .intro h2, .intro-box h2, .docgroup .gh h3, .struct .head, .def .term, .hubcard .htx b, .c-name {
+            color: #042f2e !important;
+            font-weight: 800 !important;
+          }
+          p, .card p, .intro p, .intro-box p, .qa-a-body, .panel-in p, .struct .el .d, .def .body, .hubcard .htx span, .c-text {
+            color: #1e293b !important;
+            font-weight: 500 !important;
+          }
+          .hint, .sub, .sec-sub, .dltx span, .card-meta, .c-date, .n, .lbl {
+            color: #475569 !important;
+          }
+          .hero, .dash-hero {
+            background: linear-gradient(135deg, #042f2e 0%, #0d9488 50%, #14b8a6 100%) !important;
+            color: #ffffff !important;
+            box-shadow: 0 15px 40px rgba(13, 148, 136, 0.25) !important;
+          }
+          .hero h1, .dash-hero h2, .hero p, .hero span {
+            color: #ffffff !important;
+          }
+          .badge, .hero-tag {
+            background: rgba(250, 204, 21, 0.2) !important;
+            color: #facc15 !important;
+            border: 1px solid #facc15 !important;
+          }
+          .btn, .acc-btn, .nav-free, .qnum, .card-header-ic, .dlic, .gic {
+            background: linear-gradient(135deg, #0d9488, #14b8a6) !important;
+            color: #ffffff !important;
+            box-shadow: 0 6px 18px rgba(13, 148, 136, 0.3) !important;
+          }
+          .btn.gold, .hero .cta .btn.gold {
+            background: linear-gradient(135deg, #f59e0b, #d97706) !important;
+            color: #ffffff !important;
+            box-shadow: 0 6px 18px rgba(245, 158, 11, 0.35) !important;
+          }
+          .search-wrap input, #globalSearch {
+            background: #ffffff !important;
+            color: #0f172a !important;
+            border: 2px solid #0d9488 !important;
+            box-shadow: 0 12px 35px rgba(13, 148, 136, 0.15) !important;
+          }
+        `;
+        document.head.appendChild(dayStyle);
+      }
     }
 
     // تبديل شعار المنصة (اللوقو) بين النهار والليل في كافة أنحاء الصفحة
@@ -445,13 +519,13 @@
   }
 
   // =========================================================================
-  // 🎬 رابعاً: حلقة التنشيط المستمرة (Animation Loop)
+  // 🎬 رابعاً: حلقة التنشيط المستمرة (Animation Loop - شهب الليل وجزيئات ضوء النهار)
   // =========================================================================
   function animate() {
     ctx.clearRect(0, 0, width, height);
 
     if (window.sacCurrentTheme === 'dark') {
-      // 🌌 وضع الظلام: النجوم والشهب البراقة (Shooting Stars)
+      // 🌌 وضع الظلام الكوني: النجوم والشهب البراقة (Shooting Stars)
       stars.forEach(star => {
         star.update();
         star.draw(ctx);
@@ -461,10 +535,10 @@
         sStar.draw(ctx);
       });
     } else {
-      // ☀️ وضع النهار: طيور العنقاء الزمردية الصغيرة (Small Emerald Phoenixes)
-      birds.forEach(bird => {
-        bird.update(birds);
-        bird.draw(ctx);
+      // ☀️ وضع النهار الملكي الفخم: الجزيئات البصرية الزمردية والذهبية (Royal Day Motes - بديل الطيور)
+      dayMotes.forEach(mote => {
+        mote.update();
+        mote.draw(ctx);
       });
     }
 
