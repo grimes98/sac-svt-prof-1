@@ -529,7 +529,7 @@
             z-index: 10 !important;
           }
           /* حماية وضمان ظهور جميع عناصر الصفحة وتأثير الزجاج الضبابي الفاخر لإظهار زخات الشهب والمشهد الطبيعي خلف الإطارات الشفافة */
-          .card, .card-box, .intro, .intro-box, .qa-box, .panel-in, .svc, .stat, .def, .struct, .hubcard, .user-card, .doc-card, table, th, td, .comment-card, .reply-card, .dlbox, .example, .newbie, .setup-banner, .strat, .tip, .tips, #boardUsers, #boardContent, #boardFiles, #boardComments {
+          .card, .card-box, .intro, .intro-box, .qa-box, .panel-in, .svc, .stat, .def, .struct, .hubcard, .user-card, .doc-card, table, th, td, .comment-card, .reply-card, .dlbox, .example, .newbie, .setup-banner, .strat, .tip, .tips, #boardUsers, #boardContent, #boardFiles, #boardComments, #boardOrders, .svc-page-box, .svc-price-card, .srv-form, .srv-package, .spec-box, .price-card, .pkg-card {
             background: rgba(21, 31, 50, 0.60) !important;
             backdrop-filter: blur(10px) !important;
             -webkit-backdrop-filter: blur(10px) !important;
@@ -562,6 +562,7 @@
           .board-sec[style*="display: block"], .board-sec[style*="display:block"], #adminUsers[style*="display: block"], #adminUsers[style*="display:block"] {
             display: block !important;
           }
+          input, select, textarea { background: rgba(15, 23, 42, 0.90) !important; color: #f8fafc !important; border-color: rgba(45, 212, 191, 0.4) !important; }
           h1, h2, h3, h4, h5, h6, .sec-title, .card h3, .card-header h3, .qa-q .qtext, .brand span, .logo-box h1, .intro h2, .intro-box h2, .docgroup .gh h3, .struct .head, .def .term, .hubcard .htx b, .c-name {
             color: #38bdf8 !important;
           }
@@ -720,7 +721,7 @@
             position: relative !important;
             z-index: 10 !important;
           }
-          .card, .card-box, .intro, .intro-box, .qa-box, .panel-in, .svc, .stat, .def, .struct, .hubcard, .user-card, .doc-card, .strat, .tip, .tips, #boardUsers, #boardContent, #boardFiles, #boardComments {
+          .card, .card-box, .intro, .intro-box, .qa-box, .panel-in, .svc, .stat, .def, .struct, .hubcard, .user-card, .doc-card, .strat, .tip, .tips, #boardUsers, #boardContent, #boardFiles, #boardComments, #boardOrders, .svc-page-box, .svc-price-card, .srv-form, .srv-package, .spec-box, .price-card, .pkg-card {
             background: rgba(255, 255, 255, 0.70) !important;
             backdrop-filter: blur(12px) !important;
             -webkit-backdrop-filter: blur(12px) !important;
@@ -747,8 +748,10 @@
           .board-sec[style*="display: block"], .board-sec[style*="display:block"], #adminUsers[style*="display: block"], #adminUsers[style*="display:block"] {
             display: block !important;
           }
-          .card, .card-box, .intro, .intro-box, .qa-box, .panel-in, .svc, .stat, .def, .struct, .hubcard, .user-card, .doc-card, .table-wrap, .strat, .tip, .tips {
-            background: #ffffff !important;
+          .card, .card-box, .intro, .intro-box, .qa-box, .panel-in, .svc, .stat, .def, .struct, .hubcard, .user-card, .doc-card, .table-wrap, .strat, .tip, .tips, #boardUsers, #boardContent, #boardFiles, #boardComments, #boardOrders, .svc-page-box, .svc-price-card, .srv-form, .srv-package, .spec-box, .price-card, .pkg-card {
+            background: rgba(255, 255, 255, 0.76) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
             border: 1.5px solid rgba(13, 148, 136, 0.22) !important;
             box-shadow: 0 15px 35px rgba(13, 148, 136, 0.08), 0 5px 15px rgba(0, 0, 0, 0.04) !important;
             transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease !important;
@@ -758,6 +761,7 @@
             box-shadow: 0 20px 45px rgba(13, 148, 136, 0.18) !important;
             border-color: #0d9488 !important;
           }
+          input, select, textarea { background: rgba(15, 23, 42, 0.90) !important; color: #f8fafc !important; border-color: rgba(45, 212, 191, 0.4) !important; }
           h1, h2, h3, h4, h5, h6, .sec-title, .card h3, .card-header h3, .qa-q .qtext, .brand span, .logo-box h1, .intro h2, .intro-box h2, .docgroup .gh h3, .struct .head, .def .term, .hubcard .htx b, .c-name {
             color: #042f2e !important;
             font-weight: 800 !important;
@@ -937,13 +941,79 @@
     }
   }
 
+  
+  // =========================================================================
+  // 👑 شريط المسؤول الشامل (Universal Top Admin Toolbar Engine)
+  // =========================================================================
+  window.renderTopAdminToolbar = function() {
+    const role = localStorage.getItem("sac_role");
+    const sess = localStorage.getItem("sac_session") || localStorage.getItem("sac_user_session");
+    let users = {};
+    try { users = JSON.parse(localStorage.getItem("sac_users") || "{}"); } catch(e){}
+    const isAdmin = (role === "admin" || sess === "admin@sac-svt.dz" || sess === "admin" || (users[sess] && users[sess].type === "admin"));
+    
+    let existing = document.getElementById("sacTopAdminToolbar");
+    if (!isAdmin) {
+      if (existing) existing.remove();
+      return;
+    }
+    
+    if (!existing) {
+      existing = document.createElement("div");
+      existing.id = "sacTopAdminToolbar";
+      existing.style.cssText = "position:sticky !important; top:0 !important; left:0 !important; right:0 !important; z-index:999999 !important; background:linear-gradient(135deg, #0a3a40, #115860) !important; border-bottom:2px solid #f59e0b !important; padding:8px 16px !important; display:flex !important; flex-wrap:wrap !important; align-items:center !important; justify-content:center !important; gap:8px !important; box-shadow:0 4px 20px rgba(0,0,0,0.3) !important; font-family:Tajawal,sans-serif !important; direction:rtl !important; width:100% !important;";
+      document.body.insertBefore(existing, document.body.firstChild);
+    }
+    
+    const currentPath = window.location.pathname.split("/").pop() || "index.html";
+    const isBoard = (currentPath === "admin.html" || currentPath.includes("admin.html"));
+    const curTab = window.currentBoardTab || sessionStorage.getItem("sac_admin_tab") || "users";
+    
+    existing.innerHTML = `
+      <span style="color:#f59e0b; font-weight:800; font-size:0.92rem; display:flex; align-items:center; gap:6px; margin-inline-end:8px;">
+        <span>👑 شريط المسؤول الشامل:</span>
+      </span>
+      <button onclick="goToAdminTab('users')" style="background:${isBoard && curTab==='users'?'#f59e0b':'rgba(255,255,255,0.14)'}; color:#fff; border:1px solid ${isBoard && curTab==='users'?'#f59e0b':'rgba(255,255,255,0.25)'}; padding:6px 13px; border-radius:10px; font-weight:700; font-size:0.85rem; cursor:pointer; font-family:inherit; transition:0.2s;">👥 إدارة المستخدمين</button>
+      <button onclick="goToAdminTab('content')" style="background:${isBoard && curTab==='content'?'#f59e0b':'rgba(255,255,255,0.14)'}; color:#fff; border:1px solid ${isBoard && curTab==='content'?'#f59e0b':'rgba(255,255,255,0.25)'}; padding:6px 13px; border-radius:10px; font-weight:700; font-size:0.85rem; cursor:pointer; font-family:inherit; transition:0.2s;">📚 إدارة المحتويات</button>
+      <button onclick="goToAdminTab('files')" style="background:${isBoard && curTab==='files'?'#f59e0b':'rgba(255,255,255,0.14)'}; color:#fff; border:1px solid ${isBoard && curTab==='files'?'#f59e0b':'rgba(255,255,255,0.25)'}; padding:6px 13px; border-radius:10px; font-weight:700; font-size:0.85rem; cursor:pointer; font-family:inherit; transition:0.2s;">⬆️ الملفات المرفوعة</button>
+      <button onclick="goToAdminTab('comments')" style="background:${isBoard && curTab==='comments'?'#f59e0b':'rgba(255,255,255,0.14)'}; color:#fff; border:1px solid ${isBoard && curTab==='comments'?'#f59e0b':'rgba(255,255,255,0.25)'}; padding:6px 13px; border-radius:10px; font-weight:700; font-size:0.85rem; cursor:pointer; font-family:inherit; transition:0.2s;">💬 إدارة التعليقات والمناقشات</button>
+      <button onclick="goToAdminTab('orders')" style="background:${isBoard && curTab==='orders'?'#f59e0b':'rgba(255,255,255,0.14)'}; color:#fff; border:1px solid ${isBoard && curTab==='orders'?'#f59e0b':'rgba(255,255,255,0.25)'}; padding:6px 13px; border-radius:10px; font-weight:700; font-size:0.85rem; cursor:pointer; font-family:inherit; transition:0.2s;">📋 طلبات الخدمات المخصصة</button>
+      <button onclick="window.location.href='index.html'" style="background:${!isBoard?'#10b981':'rgba(255,255,255,0.14)'}; color:#fff; border:1px solid ${!isBoard?'#10b981':'rgba(255,255,255,0.25)'}; padding:6px 13px; border-radius:10px; font-weight:700; font-size:0.85rem; cursor:pointer; font-family:inherit; transition:0.2s;">🌐 تصفح المنصة كمسؤول</button>
+      <button onclick="adminGlobalLogout()" style="background:#ef4444; color:#fff; border:1px solid #dc2626; padding:6px 13px; border-radius:10px; font-weight:700; font-size:0.85rem; cursor:pointer; font-family:inherit; transition:0.2s;">🚪 تسجيل الخروج</button>
+    `;
+  };
+
+  window.goToAdminTab = function(tabName) {
+    sessionStorage.setItem("sac_admin_tab", tabName);
+    const currentPath = window.location.pathname.split("/").pop() || "index.html";
+    if (currentPath === "admin.html" || currentPath.includes("admin.html")) {
+      if (typeof switchBoard === "function") {
+        switchBoard(tabName);
+      } else {
+        window.location.reload();
+      }
+    } else {
+      window.location.href = "admin.html";
+    }
+  };
+
+  if (!window.adminGlobalLogout) {
+    window.adminGlobalLogout = function() {
+      localStorage.removeItem("sac_session");
+      localStorage.removeItem("sac_role");
+      window.location.href = "index.html";
+    };
+  }
+
   if (document.readyState === 'complete' || document.readyState === 'interactive') {
     applyThemeVisuals();
     injectHeaderWidgets();
+    if (typeof window.renderTopAdminToolbar === 'function') window.renderTopAdminToolbar();
   } else {
     window.addEventListener('DOMContentLoaded', () => {
       applyThemeVisuals();
       injectHeaderWidgets();
+    if (typeof window.renderTopAdminToolbar === 'function') window.renderTopAdminToolbar();
     });
   }
 

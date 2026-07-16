@@ -379,11 +379,11 @@
           <thead>
             <tr>
               <th>رقم الطلب</th>
-              <th>الخدمة المطلوبة</th>
+              <th>الخدمة والباقة المطلوبة</th>
               <th>اسم الأستاذ</th>
               <th>التواصل (بريد / هاتف)</th>
               <th>المستوى</th>
-              <th>التفاصيل والمواصفات</th>
+              <th>التفاصيل والمرفقات 📎</th>
               <th>موعد التسليم</th>
               <th>تاريخ الطلب</th>
               <th>الحالة</th>
@@ -947,14 +947,20 @@ async function renderOrdersTable() {
   tbody.innerHTML = orders.map(o => `
     <tr>
       <td><b style="color:#0d9488">${o.id}</b></td>
-      <td><span style="background:rgba(250,204,21,0.18);color:#facc15;padding:4px 10px;border-radius:8px;font-weight:800;">${o.type}</span></td>
+      <td>
+        <span style="background:rgba(250,204,21,0.18);color:#facc15;padding:4px 10px;border-radius:8px;font-weight:800;display:inline-block;margin-bottom:6px;">${o.type}</span><br>
+        <span style="font-size:0.82rem;color:#2dd4bf;font-weight:700;">📦 ${o.package || 'باقة مخصصة'}</span>
+      </td>
       <td><b>${o.name}</b></td>
-      <td style="color:#38bdf8;font-family:monospace">${o.contact}</td>
-      <td>${o.level}</td>
-      <td style="max-width:240px;line-height:1.6;font-size:0.88rem;">${o.details}</td>
-      <td><span style="color:#f59e0b">${o.target_date || 'غير محدد'}</span></td>
+      <td style="color:#38bdf8;font-family:monospace;font-weight:700;">${o.contact}</td>
+      <td>${o.level || 'عام'}</td>
+      <td style="max-width:260px;line-height:1.6;font-size:0.88rem;">
+        <div>${o.details || '-'}</div>
+        ${o.file_url ? `<div style="margin-top:8px;"><a href="${o.file_url}" target="_blank" download="${o.file_name || 'sac_attachment'}" style="background:#0d9488;color:#fff;padding:6px 12px;border-radius:8px;text-decoration:none;font-weight:800;display:inline-flex;align-items:center;gap:6px;font-size:0.82rem;box-shadow:0 3px 10px rgba(13,148,136,0.3);">📎 ${o.file_name || 'تحميل المرفق'}</a></div>` : `<div style="margin-top:6px;font-size:0.78rem;color:var(--muted)">📁 بدون مرفقات</div>`}
+      </td>
+      <td><span style="color:#f59e0b;font-weight:700;">${o.target_date || 'غير محدد'}</span></td>
       <td style="font-size:0.82rem;color:var(--muted)">${new Date(o.created_at).toLocaleDateString('ar-DZ')}</td>
-      <td><button onclick="toggleOrderStatus('${o.id}')" style="background:#10b981;color:#fff;border:none;padding:5px 12px;border-radius:8px;font-weight:800;cursor:pointer;font-size:0.82rem;">${o.status || 'قيد المعالجة 🚀'}</button></td>
+      <td><button onclick="toggleOrderStatus('${o.id}')" style="background:#10b981;color:#fff;border:none;padding:6px 14px;border-radius:8px;font-weight:800;cursor:pointer;font-size:0.82rem;">${o.status || 'قيد المعالجة 🚀'}</button></td>
       <td><button class="btn-del" onclick="deleteOrder('${o.id}')">حذف</button></td>
     </tr>
   `).join('');
@@ -1310,6 +1316,7 @@ html, body {
       <button onclick="goToAdminTab('content')" style="background:${isBoard && curTab==='content'?'#f59e0b':'rgba(255,255,255,0.14)'}; color:#fff; border:1px solid ${isBoard && curTab==='content'?'#f59e0b':'rgba(255,255,255,0.25)'}; padding:6px 13px; border-radius:10px; font-weight:700; font-size:0.85rem; cursor:pointer; font-family:inherit; transition:0.2s;">📚 إدارة المحتويات</button>
       <button onclick="goToAdminTab('files')" style="background:${isBoard && curTab==='files'?'#f59e0b':'rgba(255,255,255,0.14)'}; color:#fff; border:1px solid ${isBoard && curTab==='files'?'#f59e0b':'rgba(255,255,255,0.25)'}; padding:6px 13px; border-radius:10px; font-weight:700; font-size:0.85rem; cursor:pointer; font-family:inherit; transition:0.2s;">⬆️ الملفات المرفوعة</button>
       <button onclick="goToAdminTab('comments')" style="background:${isBoard && curTab==='comments'?'#f59e0b':'rgba(255,255,255,0.14)'}; color:#fff; border:1px solid ${isBoard && curTab==='comments'?'#f59e0b':'rgba(255,255,255,0.25)'}; padding:6px 13px; border-radius:10px; font-weight:700; font-size:0.85rem; cursor:pointer; font-family:inherit; transition:0.2s;">💬 إدارة التعليقات والمناقشات</button>
+      <button onclick="goToAdminTab(\'orders\')" style="background:${isBoard && curTab===\'orders\'?\'#f59e0b\':\'rgba(255,255,255,0.14)\'}; color:#fff; border:1px solid ${isBoard && curTab===\'orders\'?\'#f59e0b\':\'rgba(255,255,255,0.25)\'}; padding:6px 13px; border-radius:10px; font-weight:700; font-size:0.85rem; cursor:pointer; font-family:inherit; transition:0.2s;">📋 طلبات الخدمات المخصصة</button>
       <button onclick="window.location.href='index.html'" style="background:${!isBoard?'#10b981':'rgba(255,255,255,0.14)'}; color:#fff; border:1px solid ${!isBoard?'#10b981':'rgba(255,255,255,0.25)'}; padding:6px 13px; border-radius:10px; font-weight:700; font-size:0.85rem; cursor:pointer; font-family:inherit; transition:0.2s;">🌐 تصفح المنصة كمسؤول</button>
       <button onclick="adminGlobalLogout()" style="background:#ef4444; color:#fff; border:1px solid #dc2626; padding:6px 13px; border-radius:10px; font-weight:700; font-size:0.85rem; cursor:pointer; font-family:inherit; transition:0.2s;">🚪 تسجيل الخروج</button>
     `;

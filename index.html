@@ -545,11 +545,11 @@ const svt = [
 
 const services = [
   {e:"🔬", t:"أداة «تحليل مذكرتي» بالذكاء الاصطناعي", d:"ارفع مذكرتك بصيغة PDF ليقوم الذكاء الاصطناعي البيداغوجي بتحليلها وإعطائك الإيجابيات، السلبيات، واقتراحات التحسين فورا.", tag:"أداة ذكية", link:"javascript:openSacMemoAnalyzer()", free:true},
-  {e:"📝", t:"إنجاز الفروض والاختبارات المخصصة", d:"طلب إنجاز فروض واختبارات مخصّصة وفق منهاج الجيل الثاني وشبكات التقويم ومؤشرات الكفاءة ¾ والربع.", tag:"خدمة مخصصة", link:"javascript:openSacServiceModal('📝', 'إنجاز الفروض والاختبارات المخصصة', 'إعداد مواضيع تقويمية نموذجية ومحلولة مع وضعيات إدماجية وسلالم التنقيط ¾ والربع.')", free:false},
-  {e:"🗂️", t:"إنجاز وتطوير مذكرات الأستاذ", d:"طلب إنجاز وتطوير مذكرات بيداغوجية تفصيلية لجميع المستويات: 1م · 2م · 3م · 4م وفق المسعى العلمي.", tag:"خدمة مخصصة", link:"javascript:openSacServiceModal('🗂️', 'إنجاز مذكرات الأستاذ البيداغوجية', 'بناء مذكرات وفق المسعى العلمي (ملاحظة، فرضية، تجريب، استنتاج) وتوجيهات الوثيقة المرافقة.')", free:false},
-  {e:"📒", t:"دفاتر الأستاذ والتدرجات (PDF)", d:"طلب إعداد وتنسيق دفاتر الأستاذ والتنظيم السنوي بصيغة PDF عالية الدقة جاهزة للطباعة المباشرة.", tag:"خدمة مخصصة", link:"javascript:openSacServiceModal('📒', 'دفاتر الأستاذ والتدرجات بصيغة (PDF)', 'تنسيق واحترافية عالية لدفتر النصوص لسجلات المتابعة والتقويم المستمر.')", free:false},
-  {e:"🖨️", t:"دفاتر وسجلات الأستاذ (مطبوعة ومغلفة)", d:"طلب دفاتر الأستاذ وسجلات التقويم مطبوعة بأعلى جودة فاخرة وملونة وتوصيلها لمؤسستك التربوية.", tag:"خدمة مخصصة", link:"javascript:openSacServiceModal('🖨️', 'دفاتر وسجلات الأستاذ (مطبوعة ومغلفة)', 'طباعة فاخرة وملونة لجميع السجلات الإدارية والبيداغوجية لمادة العلوم الطبيعية.')", free:false},
-  {e:"🏅", t:"شهادات التقدير والتشجيع للتلاميذ", d:"طلب تصميم وإنجاز شهادات تفوق وتقدير بيداغوجية محفزة لتلاميذ القسم تحمل اسم مؤسستك.", tag:"خدمة مخصصة", link:"javascript:openSacServiceModal('🏅', 'شهادات التقدير والتشجيع للتلاميذ', 'تصاميم فخمة وأنيقة تحمل اسم مؤسستك وشعار التميز لتحفيز التلاميذ المتفوقين والمجتهدين.')", free:false},
+  {e:"📝", t:"إنجاز الفروض والاختبارات المخصصة", d:"طلب إنجاز فروض واختبارات مخصّصة وفق منهاج الجيل الثاني وشبكات التقويم ومؤشرات الكفاءة ¾ والربع مع سلالم التنقيط.", tag:"خدمة مخصصة", link:"srv-froud.html", free:false},
+  {e:"🗂️", t:"إنجاز وتطوير مذكرات الأستاذ", d:"طلب إنجاز وتطوير مذكرات بيداغوجية تفصيلية لجميع المستويات: 1م · 2م · 3م · 4م وفق المسعى العلمي التجريبي والاستقصائي.", tag:"خدمة مخصصة", link:"srv-mothakirat.html", free:false},
+  {e:"📒", t:"دفاتر الأستاذ والتدرجات (PDF)", d:"طلب إعداد وتنسيق دفاتر الأستاذ وسجلات التقويم والتدرج السنوي المخصص باسمك بصيغة PDF عالية الدقة جاهزة للطباعة.", tag:"خدمة مخصصة", link:"srv-dafatir-pdf.html", free:false},
+  {e:"🖨️", t:"دفاتر وسجلات الأستاذ (مطبوعة ومغلفة)", d:"طلب طباعة دفاتر وسجلات التقويم بأعلى جودة فاخرة وملونة مع تغليف حلزوني وتوصيل سريع لمؤسستك في 58 ولاية.", tag:"خدمة مخصصة", link:"srv-dafatir-print.html", free:false},
+  {e:"🏅", t:"شهادات التقدير والتشجيع للتلاميذ", d:"طلب تصميم وطباعة شهادات تفوق وتقدير بيداغوجية محفزة لتلاميذ القسم تحمل اسم مؤسستك التربوية وشعار التميز.", tag:"خدمة مخصصة", link:"srv-chahadat.html", free:false},
 ];
 
 /* ============ RENDER ============ */
@@ -564,7 +564,7 @@ function card(item, isService){
         </h4>
         <p style="color:#1e293b; font-weight:500; font-size:0.95rem; margin-top:4px;">${item.d}</p>
       </div>
-      <div class="arrow" style="color:#0d9488; font-weight:800; font-size:0.95rem;">🚀 تقديم الطلب داخل المنصة ←</div>
+      <div class="arrow" style="color:#0d9488; font-weight:800; font-size:0.95rem;">🚀 استعراض الأسعار وتقديم الطلب ←</div>
     </a>`;
   }
   const soon = item.tag === 'قريبًا';
@@ -1366,6 +1366,7 @@ html, body {
       <button onclick="goToAdminTab('content')" style="background:${isBoard && curTab==='content'?'#f59e0b':'rgba(255,255,255,0.14)'}; color:#fff; border:1px solid ${isBoard && curTab==='content'?'#f59e0b':'rgba(255,255,255,0.25)'}; padding:6px 13px; border-radius:10px; font-weight:700; font-size:0.85rem; cursor:pointer; font-family:inherit; transition:0.2s;">📚 إدارة المحتويات</button>
       <button onclick="goToAdminTab('files')" style="background:${isBoard && curTab==='files'?'#f59e0b':'rgba(255,255,255,0.14)'}; color:#fff; border:1px solid ${isBoard && curTab==='files'?'#f59e0b':'rgba(255,255,255,0.25)'}; padding:6px 13px; border-radius:10px; font-weight:700; font-size:0.85rem; cursor:pointer; font-family:inherit; transition:0.2s;">⬆️ الملفات المرفوعة</button>
       <button onclick="goToAdminTab('comments')" style="background:${isBoard && curTab==='comments'?'#f59e0b':'rgba(255,255,255,0.14)'}; color:#fff; border:1px solid ${isBoard && curTab==='comments'?'#f59e0b':'rgba(255,255,255,0.25)'}; padding:6px 13px; border-radius:10px; font-weight:700; font-size:0.85rem; cursor:pointer; font-family:inherit; transition:0.2s;">💬 إدارة التعليقات والمناقشات</button>
+      <button onclick="goToAdminTab(\'orders\')" style="background:${isBoard && curTab===\'orders\'?\'#f59e0b\':\'rgba(255,255,255,0.14)\'}; color:#fff; border:1px solid ${isBoard && curTab===\'orders\'?\'#f59e0b\':\'rgba(255,255,255,0.25)\'}; padding:6px 13px; border-radius:10px; font-weight:700; font-size:0.85rem; cursor:pointer; font-family:inherit; transition:0.2s;">📋 طلبات الخدمات المخصصة</button>
       <button onclick="window.location.href='index.html'" style="background:${!isBoard?'#10b981':'rgba(255,255,255,0.14)'}; color:#fff; border:1px solid ${!isBoard?'#10b981':'rgba(255,255,255,0.25)'}; padding:6px 13px; border-radius:10px; font-weight:700; font-size:0.85rem; cursor:pointer; font-family:inherit; transition:0.2s;">🌐 تصفح المنصة كمسؤول</button>
       <button onclick="adminGlobalLogout()" style="background:#ef4444; color:#fff; border:1px solid #dc2626; padding:6px 13px; border-radius:10px; font-weight:700; font-size:0.85rem; cursor:pointer; font-family:inherit; transition:0.2s;">🚪 تسجيل الخروج</button>
     `;

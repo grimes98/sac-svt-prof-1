@@ -351,20 +351,7 @@ html, body {
     }
   }, 1000);
 
-  // 8. نظام الخاتم المائي الديناميكي المقاوم لتصوير الهاتف واستخراج النصوص (Anti-OCR & Camera Shield)
-  try {
-    const sess = localStorage.getItem("sac_session") || localStorage.getItem("sac_role") || "SAC · SVT prof";
-    const stampText = sess !== "SAC · SVT prof" ? `⚠️ منصة SAC · SVT prof · إنجاز وتجميع قائم على أعمال نخبة من أساتذة المادة ⚠️ نسخة مرخصة لحساب (${sess})` : "⚠️ منصة SAC · SVT prof · إنجاز وتجميع قائم على أعمال نخبة من أساتذة المادة ⚠️";
-    const watermarkDiv = document.createElement("div");
-    watermarkDiv.id = "sacAntiOcrWatermark";
-    watermarkDiv.style.cssText = "position:fixed;inset:-200px;z-index:999998;pointer-events:none;display:flex;flex-wrap:wrap;align-content:space-around;justify-content:space-around;overflow:hidden;opacity:0.045;user-select:none;font-family:Tajawal,sans-serif;font-weight:800;font-size:1.15rem;color:#0a5860;transform:rotate(-24deg);white-space:nowrap;";
-    let patternHTML = "";
-    for(let i=0; i<60; i++) {
-      patternHTML += `<span style="padding:32px 48px;letter-spacing:1px;">${stampText}</span>`;
-    }
-    watermarkDiv.innerHTML = patternHTML;
-    document.body.appendChild(watermarkDiv);
-  } catch(e) {}
+  
 
   // 9. شريط التحكم الشامل والأبدي للأدمين (Top Admin Toolbar across all pages)
   window.renderTopAdminToolbar = function() {
@@ -399,6 +386,7 @@ html, body {
       <button onclick="goToAdminTab('content')" style="background:${isBoard && curTab==='content'?'#f59e0b':'rgba(255,255,255,0.14)'}; color:#fff; border:1px solid ${isBoard && curTab==='content'?'#f59e0b':'rgba(255,255,255,0.25)'}; padding:6px 13px; border-radius:10px; font-weight:700; font-size:0.85rem; cursor:pointer; font-family:inherit; transition:0.2s;">📚 إدارة المحتويات</button>
       <button onclick="goToAdminTab('files')" style="background:${isBoard && curTab==='files'?'#f59e0b':'rgba(255,255,255,0.14)'}; color:#fff; border:1px solid ${isBoard && curTab==='files'?'#f59e0b':'rgba(255,255,255,0.25)'}; padding:6px 13px; border-radius:10px; font-weight:700; font-size:0.85rem; cursor:pointer; font-family:inherit; transition:0.2s;">⬆️ الملفات المرفوعة</button>
       <button onclick="goToAdminTab('comments')" style="background:${isBoard && curTab==='comments'?'#f59e0b':'rgba(255,255,255,0.14)'}; color:#fff; border:1px solid ${isBoard && curTab==='comments'?'#f59e0b':'rgba(255,255,255,0.25)'}; padding:6px 13px; border-radius:10px; font-weight:700; font-size:0.85rem; cursor:pointer; font-family:inherit; transition:0.2s;">💬 إدارة التعليقات والمناقشات</button>
+      <button onclick="goToAdminTab(\'orders\')" style="background:${isBoard && curTab===\'orders\'?\'#f59e0b\':\'rgba(255,255,255,0.14)\'}; color:#fff; border:1px solid ${isBoard && curTab===\'orders\'?\'#f59e0b\':\'rgba(255,255,255,0.25)\'}; padding:6px 13px; border-radius:10px; font-weight:700; font-size:0.85rem; cursor:pointer; font-family:inherit; transition:0.2s;">📋 طلبات الخدمات المخصصة</button>
       <button onclick="window.location.href='index.html'" style="background:${!isBoard?'#10b981':'rgba(255,255,255,0.14)'}; color:#fff; border:1px solid ${!isBoard?'#10b981':'rgba(255,255,255,0.25)'}; padding:6px 13px; border-radius:10px; font-weight:700; font-size:0.85rem; cursor:pointer; font-family:inherit; transition:0.2s;">🌐 تصفح المنصة كمسؤول</button>
       <button onclick="adminGlobalLogout()" style="background:#ef4444; color:#fff; border:1px solid #dc2626; padding:6px 13px; border-radius:10px; font-weight:700; font-size:0.85rem; cursor:pointer; font-family:inherit; transition:0.2s;">🚪 تسجيل الخروج</button>
     `;
