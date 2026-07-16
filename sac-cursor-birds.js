@@ -1,7 +1,7 @@
 /* =========================================================================
-   👑🌌📅 محرك SAC · SVT prof الفخم للمؤثرات البصرية، الفصول الأربعة، والتاريخ والوقت
-   (Day Mode: 4-Seasons Botanical Leaves & Maple Animation | Night Mode: Cosmic Shooting Stars)
-   تم برمجة تساقط وتطاير أوراق الشجر حسب الفصول (الخريف، الصيف، الربيع، الشتاء) بدقة عالية
+   👑🏔️🌌 محرك SAC · SVT prof الفخم لخلفيات الطبيعة المرسومة (Vector Nature Landscape)
+   (4-Seasons Illustrated Landscape: Mountains, Forests, Seasonal Foliage, Day/Night & Shooting Stars)
+   مصمم بدقة عالية ليحاكي صور الطبيعة المرسومة وتغيرها الساحر بين الصيف، الخريف، الشتاء، والربيع
    ========================================================================= */
 
 (function() {
@@ -13,23 +13,28 @@
   
   const month = new Date().getMonth() + 1; // 1 to 12
   if (month >= 3 && month <= 5) {
-    window.sacCurrentSeason = 'spring';   // 🌸 الربيع (مارس، أفريل، ماي)
+    window.sacCurrentSeason = 'spring';   // 🌸 الربيع (أشجار مزهرة وبراعم)
   } else if (month >= 6 && month <= 8) {
-    window.sacCurrentSeason = 'summer';   // ☀️ الصيف (جوان، جويلية، أوت)
+    window.sacCurrentSeason = 'summer';   // ☀️ الصيف (أوراق خضراء وشمس دافئة)
   } else if (month >= 9 && month <= 11) {
-    window.sacCurrentSeason = 'autumn';   // 🍂 الخريف (سبتمبر، أكتوبر، نوفمبر)
+    window.sacCurrentSeason = 'autumn';   // 🍂 الخريف (أوراق محمرة وغروب دافئ كما في الصورة)
   } else {
-    window.sacCurrentSeason = 'winter';   // ❄️ الشتاء (ديسمبر، جانفي، فيفري)
+    window.sacCurrentSeason = 'winter';   // ❄️ الشتاء (أغصان برك وثلج)
   }
 
-  // 2. إنشاء وتجهيز كانفاس الخلفية
+  // 2. إنشاء وتجهيز كانفاس الخلفية الطبيعية الفخمة
   const canvas = document.createElement('canvas');
   canvas.id = 'sacCursorBirdsCanvas';
-  canvas.style.cssText = 'position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:1; pointer-events:none; overflow:hidden; transition:opacity 0.8s ease;';
+  canvas.style.cssText = 'position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:0; pointer-events:none; overflow:hidden; transition:opacity 0.8s ease;';
   
   function attachCanvas() {
     if (document.body) {
-      document.body.appendChild(canvas);
+      // وضعه كأول عنصر خلفي في الصفحة
+      if (document.body.firstChild) {
+        document.body.insertBefore(canvas, document.body.firstChild);
+      } else {
+        document.body.appendChild(canvas);
+      }
       applyThemeVisuals();
     } else {
       setTimeout(attachCanvas, 30);
@@ -67,8 +72,215 @@
   }, 300);
 
   // =========================================================================
-  // 🍃 أولاً: محرك أوراق الشجر الطبيعية التفاعلية (الفصول الأربعة — 4-Seasons Leaf Engine)
-  // (أوراق خريفية قيقبية ذهبية، أوراق صيفية خضراء وذهبية، بتلات ربيع، وبلورات شتاء)
+  // 🏔️ أولاً: محرك رسم المشهد الطبيعي الخلفي (Mountains & Seasonal Forests Vector Landscape)
+  // =========================================================================
+  function drawNatureLandscape(ctx, w, h, season, theme) {
+    ctx.save();
+
+    // 1. السماء والأفق (Sky & Atmosphere Gradient)
+    const skyGrad = ctx.createLinearGradient(0, 0, 0, h * 0.75);
+    if (theme === 'dark') {
+      if (season === 'autumn') {
+        skyGrad.addColorStop(0, '#0f172a');
+        skyGrad.addColorStop(0.5, '#311042');
+        skyGrad.addColorStop(1, '#4c1d95');
+      } else if (season === 'winter') {
+        skyGrad.addColorStop(0, '#030712');
+        skyGrad.addColorStop(0.6, '#0f172a');
+        skyGrad.addColorStop(1, '#1e293b');
+      } else if (season === 'spring') {
+        skyGrad.addColorStop(0, '#0b111e');
+        skyGrad.addColorStop(0.6, '#1e1b4b');
+        skyGrad.addColorStop(1, '#312e81');
+      } else {
+        // الصيف ليلاً
+        skyGrad.addColorStop(0, '#0b111e');
+        skyGrad.addColorStop(0.6, '#0f172a');
+        skyGrad.addColorStop(1, '#115e59');
+      }
+    } else {
+      if (season === 'autumn') {
+        // غروب خريفي محمر ومائل للبنفسجي والبرتقالي (مطابق لصورة الفيسبوك التي أرفقتها الأستاذة)
+        skyGrad.addColorStop(0, '#4c1d95');
+        skyGrad.addColorStop(0.35, '#be185d');
+        skyGrad.addColorStop(0.7, '#ea580c');
+        skyGrad.addColorStop(1, '#f59e0b');
+      } else if (season === 'winter') {
+        // شتاء فضي بارد وناصع
+        skyGrad.addColorStop(0, '#cbd5e1');
+        skyGrad.addColorStop(0.5, '#e2e8f0');
+        skyGrad.addColorStop(1, '#f8fafc');
+      } else if (season === 'spring') {
+        // ربيع مزهر لطيف
+        skyGrad.addColorStop(0, '#bae6fd');
+        skyGrad.addColorStop(0.6, '#e0f2fe');
+        skyGrad.addColorStop(1, '#fbcfe8');
+      } else {
+        // صيف أخضر ومشمس دافئ (جوان، جويلية، أوت - الحالي)
+        skyGrad.addColorStop(0, '#99f6e4');
+        skyGrad.addColorStop(0.5, '#ccfbf1');
+        skyGrad.addColorStop(1, '#fef9c3');
+      }
+    }
+    ctx.fillStyle = skyGrad;
+    ctx.fillRect(0, 0, w, h);
+
+    // 2. الشمس في النهار أو القمر في الليل (Sun / Moon)
+    ctx.beginPath();
+    const orbX = w * 0.5;
+    const orbY = h * 0.42;
+    const orbRadius = Math.min(w, h) * 0.14;
+    ctx.arc(orbX, orbY, orbRadius, 0, Math.PI * 2);
+    if (theme === 'dark') {
+      const moonGrad = ctx.createRadialGradient(orbX, orbY, 10, orbX, orbY, orbRadius);
+      moonGrad.addColorStop(0, 'rgba(255, 255, 255, 0.9)');
+      moonGrad.addColorStop(0.7, 'rgba(56, 189, 248, 0.3)');
+      moonGrad.addColorStop(1, 'rgba(15, 23, 42, 0)');
+      ctx.fillStyle = moonGrad;
+    } else {
+      const sunGrad = ctx.createRadialGradient(orbX, orbY, 10, orbX, orbY, orbRadius);
+      if (season === 'autumn') {
+        sunGrad.addColorStop(0, 'rgba(254, 240, 138, 0.95)');
+        sunGrad.addColorStop(0.5, 'rgba(251, 146, 60, 0.55)');
+        sunGrad.addColorStop(1, 'rgba(234, 88, 12, 0)');
+      } else {
+        sunGrad.addColorStop(0, 'rgba(255, 255, 255, 0.95)');
+        sunGrad.addColorStop(0.5, 'rgba(250, 204, 21, 0.45)');
+        sunGrad.addColorStop(1, 'rgba(20, 184, 166, 0)');
+      }
+      ctx.fillStyle = sunGrad;
+    }
+    ctx.fill();
+
+    // 3. سلسلة الجبال البعيدة (Back Mountain Range)
+    ctx.beginPath();
+    ctx.moveTo(0, h * 0.65);
+    ctx.bezierCurveTo(w * 0.2, h * 0.45, w * 0.35, h * 0.58, w * 0.55, h * 0.42);
+    ctx.bezierCurveTo(w * 0.75, h * 0.28, w * 0.88, h * 0.52, w, h * 0.48);
+    ctx.lineTo(w, h);
+    ctx.lineTo(0, h);
+    ctx.closePath();
+
+    let backMtnColor = '#0f766e';
+    if (theme === 'dark') {
+      backMtnColor = season === 'autumn' ? '#1e1b4b' : '#0f172a';
+    } else {
+      backMtnColor = season === 'autumn' ? '#7c2d12' : (season === 'winter' ? '#94a3b8' : (season === 'spring' ? '#10b981' : '#0d9488'));
+    }
+    ctx.fillStyle = backMtnColor;
+    ctx.globalAlpha = 0.45;
+    ctx.fill();
+
+    // 4. سلسلة الجبال والتلال القريبة (Mid Mountain Hills)
+    ctx.beginPath();
+    ctx.moveTo(0, h * 0.72);
+    ctx.bezierCurveTo(w * 0.25, h * 0.55, w * 0.45, h * 0.68, w * 0.7, h * 0.54);
+    ctx.bezierCurveTo(w * 0.85, h * 0.45, w * 0.95, h * 0.62, w, h * 0.58);
+    ctx.lineTo(w, h);
+    ctx.lineTo(0, h);
+    ctx.closePath();
+
+    let midMtnColor = '#042f2e';
+    if (theme === 'dark') {
+      midMtnColor = season === 'autumn' ? '#311042' : '#151f32';
+    } else {
+      midMtnColor = season === 'autumn' ? '#9a3412' : (season === 'winter' ? '#64748b' : (season === 'spring' ? '#059669' : '#0f766e'));
+    }
+    ctx.fillStyle = midMtnColor;
+    ctx.globalAlpha = 0.65;
+    ctx.fill();
+
+    // 5. غابة أشجار الصنوبر والأشجار على الجانبين (Foreground Silhouette Pine Forests)
+    // رسم أشجار صنوبر على اليمين واليسار (كما في الصورة المرفقة بالضبط)
+    ctx.globalAlpha = 0.88;
+    const treeColor = theme === 'dark' ? '#020617' : (season === 'autumn' ? '#431407' : (season === 'winter' ? '#334155' : '#042f2e'));
+    ctx.fillStyle = treeColor;
+
+    // دالة مساعدة لرسم شجرة صنوبر أو شجرة فصلية
+    function drawPineTree(tx, ty, tSize, isBareWinter = false, isSpringBlossom = false) {
+      if (isBareWinter) {
+        // الشتاء: أغصان برك (Bare Branches) وثلج فوق الأغصان
+        ctx.strokeStyle = treeColor;
+        ctx.lineWidth = Math.max(2, tSize * 0.08);
+        ctx.beginPath();
+        ctx.moveTo(tx, ty);
+        ctx.lineTo(tx, ty - tSize * 1.3);
+        // فروع عارية
+        ctx.moveTo(tx, ty - tSize * 0.4); ctx.lineTo(tx - tSize * 0.35, ty - tSize * 0.65);
+        ctx.moveTo(tx, ty - tSize * 0.5); ctx.lineTo(tx + tSize * 0.35, ty - tSize * 0.75);
+        ctx.moveTo(tx, ty - tSize * 0.8); ctx.lineTo(tx - tSize * 0.25, ty - tSize * 1.0);
+        ctx.moveTo(tx, ty - tSize * 0.85); ctx.lineTo(tx + tSize * 0.25, ty - tSize * 1.05);
+        ctx.stroke();
+
+        // ثلج ناصع فوق الجذع والأغصان (Snow Caps)
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.arc(tx - tSize * 0.35, ty - tSize * 0.65, tSize * 0.08, 0, Math.PI * 2);
+        ctx.arc(tx + tSize * 0.35, ty - tSize * 0.75, tSize * 0.08, 0, Math.PI * 2);
+        ctx.arc(tx, ty - tSize * 1.3, tSize * 0.1, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = treeColor;
+      } else {
+        // أشجار صنوبر متدرجة الطبقات (Pine Silhouette)
+        ctx.beginPath();
+        ctx.moveTo(tx, ty - tSize * 1.4);
+        ctx.lineTo(tx + tSize * 0.25, ty - tSize * 1.0); ctx.lineTo(tx + tSize * 0.12, ty - tSize * 1.0);
+        ctx.lineTo(tx + tSize * 0.35, ty - tSize * 0.65); ctx.lineTo(tx + tSize * 0.18, ty - tSize * 0.65);
+        ctx.lineTo(tx + tSize * 0.48, ty - tSize * 0.25); ctx.lineTo(tx + tSize * 0.12, ty - tSize * 0.25);
+        ctx.lineTo(tx + tSize * 0.12, ty);
+        ctx.lineTo(tx - tSize * 0.12, ty);
+        ctx.lineTo(tx - tSize * 0.12, ty - tSize * 0.25); ctx.lineTo(tx - tSize * 0.48, ty - tSize * 0.25);
+        ctx.lineTo(tx - tSize * 0.18, ty - tSize * 0.65); ctx.lineTo(tx - tSize * 0.35, ty - tSize * 0.65);
+        ctx.lineTo(tx - tSize * 0.12, ty - tSize * 1.0); ctx.lineTo(tx - tSize * 0.25, ty - tSize * 1.0);
+        ctx.closePath();
+        ctx.fill();
+
+        // في الربيع: إضافة أزهار وردية فوق الأشجار (Spring Blossoms)
+        if (isSpringBlossom && theme !== 'dark') {
+          ctx.fillStyle = '#f472b6';
+          ctx.beginPath();
+          ctx.arc(tx - tSize * 0.2, ty - tSize * 0.7, tSize * 0.08, 0, Math.PI * 2);
+          ctx.arc(tx + tSize * 0.25, ty - tSize * 0.5, tSize * 0.08, 0, Math.PI * 2);
+          ctx.arc(tx, ty - tSize * 1.2, tSize * 0.09, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = treeColor;
+        }
+      }
+    }
+
+    const isBare = (season === 'winter');
+    const isBlossom = (season === 'spring');
+
+    // غابة الجانب الأيسر (Left Side Forest)
+    for (let i = 0; i < 9; i++) {
+      const tx = (i * 45) + (Math.sin(i * 1.5) * 15);
+      const ty = h - 10 + (i % 2 === 0 ? 15 : -15);
+      const tSize = 90 + (i % 3) * 35 - (i * 4);
+      drawPineTree(tx, ty, tSize, isBare, isBlossom);
+    }
+
+    // غابة الجانب الأيمن (Right Side Forest)
+    for (let i = 0; i < 9; i++) {
+      const tx = w - (i * 45) - (Math.cos(i * 1.7) * 15);
+      const ty = h - 10 + (i % 2 === 0 ? 15 : -15);
+      const tSize = 95 + (i % 3) * 35 - (i * 4);
+      drawPineTree(tx, ty, tSize, isBare, isBlossom);
+    }
+
+    // 6. أرضية الغابة والمسار أسفل الشاشة (Forest Ground)
+    ctx.beginPath();
+    ctx.moveTo(0, h * 0.88);
+    ctx.bezierCurveTo(w * 0.3, h * 0.82, w * 0.7, h * 0.92, w, h * 0.86);
+    ctx.lineTo(w, h); ctx.lineTo(0, h); ctx.closePath();
+    ctx.fillStyle = treeColor;
+    ctx.fill();
+
+    ctx.restore();
+  }
+
+  // =========================================================================
+  // 🍃 ثانياً: محرك أوراق الشجر التفاعلية حسب الفصل (Seasonal Foliage & Particles)
+  // (الصيف: أوراق خضراء ومشمسة | الخريف: أوراق محمرة | الشتاء: ثلج | الربيع: أزهار)
   // =========================================================================
   class SeasonalLeaf {
     constructor() {
@@ -77,8 +289,8 @@
     reset(randomStart = false) {
       this.x = Math.random() * width;
       this.y = randomStart ? Math.random() * height : -40 - Math.random() * 80;
-      this.size = 11 + Math.random() * 13;
-      this.vy = 0.7 + Math.random() * 1.3;
+      this.size = 10 + Math.random() * 12;
+      this.vy = 0.6 + Math.random() * 1.2;
       this.vx = (Math.random() - 0.5) * 0.7;
       this.angle = Math.random() * Math.PI * 2;
       this.rotationSpeed = (Math.random() - 0.5) * 0.03;
@@ -87,22 +299,24 @@
 
       const season = window.sacCurrentSeason;
       if (season === 'autumn') {
-        const colors = ['#f59e0b', '#d97706', '#b45309', '#ea580c', '#fbbf24', '#c2410c'];
+        // أوراق خريفية محمرة ومائلة للبرتقالي والعنبري (مطابق للصورة)
+        const colors = ['#dc2626', '#ea580c', '#d97706', '#b45309', '#f59e0b', '#991b1b'];
         this.color = colors[Math.floor(Math.random() * colors.length)];
         this.leafType = 'maple';
       } else if (season === 'spring') {
-        const colors = ['#34d399', '#10b981', '#6ee7b7', '#f472b6', '#fbcfe8', '#059669'];
+        const colors = ['#34d399', '#10b981', '#f472b6', '#fbcfe8', '#6ee7b7'];
         this.color = colors[Math.floor(Math.random() * colors.length)];
         this.leafType = 'oval';
       } else if (season === 'winter') {
-        const colors = ['#38bdf8', '#7dd3fc', '#bae6fd', '#e2e8f0', '#94a3b8'];
+        // بلورات وندف ثلج شتوية
+        const colors = ['#ffffff', '#e0f2fe', '#bae6fd', '#38bdf8'];
         this.color = colors[Math.floor(Math.random() * colors.length)];
-        this.leafType = 'crystal';
+        this.leafType = 'snow';
       } else {
-        // الصيف (جوان، جويلية، أوت - الحالي)
-        const colors = ['#14b8a6', '#0d9488', '#2dd4bf', '#facc15', '#eab308', '#84cc16'];
+        // الصيف (جوان، جويلية، أوت - الحالي): أوراق خضراء ناضجة وشمس دافئة
+        const colors = ['#10b981', '#059669', '#0d9488', '#14b8a6', '#facc15', '#84cc16'];
         this.color = colors[Math.floor(Math.random() * colors.length)];
-        this.leafType = Math.random() > 0.4 ? 'oval' : 'sunLeaf';
+        this.leafType = Math.random() > 0.3 ? 'oval' : 'sunLeaf';
       }
     }
 
@@ -131,7 +345,7 @@
 
       ctx.beginPath();
       if (this.leafType === 'maple') {
-        // ورقة قيقبية خريفية مجزأة ومميزة (Maple Leaf - مثل فيديو الفيسبوك الريلز)
+        // ورقة قيقب خريفية محمرة
         ctx.moveTo(0, -this.size);
         ctx.lineTo(this.size * 0.4, -this.size * 0.4);
         ctx.lineTo(this.size, -this.size * 0.3);
@@ -143,15 +357,11 @@
         ctx.lineTo(-this.size, -this.size * 0.3);
         ctx.lineTo(-this.size * 0.4, -this.size * 0.4);
         ctx.closePath();
-      } else if (this.leafType === 'crystal') {
-        // بلورة شتوية
-        ctx.moveTo(0, -this.size);
-        ctx.lineTo(this.size * 0.5, 0);
-        ctx.lineTo(0, this.size);
-        ctx.lineTo(-this.size * 0.5, 0);
-        ctx.closePath();
+      } else if (this.leafType === 'snow') {
+        // بلورة ثلج ناصعة البياض
+        ctx.arc(0, 0, this.size * 0.4, 0, Math.PI * 2);
       } else {
-        // ورقة نباتية بيضاوية انسيابية (Botanical Oval Leaf)
+        // ورقة نباتية بيضاوية خضراء (أو صيفية)
         ctx.moveTo(0, -this.size);
         ctx.bezierCurveTo(this.size * 0.85, -this.size * 0.5, this.size * 0.85, this.size * 0.5, 0, this.size);
         ctx.bezierCurveTo(-this.size * 0.85, this.size * 0.5, -this.size * 0.85, -this.size * 0.5, 0, -this.size);
@@ -161,16 +371,17 @@
       ctx.fillStyle = this.color;
       ctx.shadowBlur = 8;
       ctx.shadowColor = this.color;
-      ctx.globalAlpha = 0.78;
+      ctx.globalAlpha = 0.85;
       ctx.fill();
 
-      // العصب الوسطي لورقة الشجر (Leaf Vein Detail)
-      ctx.beginPath();
-      ctx.moveTo(0, -this.size * 0.8);
-      ctx.lineTo(0, this.size * 0.8);
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.45)';
-      ctx.lineWidth = 1.3;
-      ctx.stroke();
+      if (this.leafType !== 'snow') {
+        ctx.beginPath();
+        ctx.moveTo(0, -this.size * 0.8);
+        ctx.lineTo(0, this.size * 0.8);
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.45)';
+        ctx.lineWidth = 1.3;
+        ctx.stroke();
+      }
 
       ctx.restore();
     }
@@ -182,7 +393,7 @@
   }
 
   // =========================================================================
-  // 🌌 ثانياً: محرك النجوم البراقة والشهب المتحركة (الليل — Shooting Stars)
+  // 🌌 ثالثاً: محرك النجوم البراقة والشهب المتحركة في وضع الليل (Shooting Stars)
   // =========================================================================
   class Star {
     constructor() {
@@ -284,11 +495,11 @@
   }
 
   // =========================================================================
-  // 🎨 ثالثاً: إدارة الألوان الفصليّة واللوقو وزر تبديل النهار/الليل (Theme Controller)
+  // 🎨 رابعاً: إدارة الألوان الفصليّة واللوقو وزر تبديل النهار/الليل (Theme Controller)
   // =========================================================================
   function applyThemeVisuals() {
     if (canvas) {
-      canvas.style.opacity = window.sacCurrentTheme === 'dark' ? '0.88' : '0.52';
+      canvas.style.opacity = '1'; // إظهار المشهد الطبيعي المرسوم بوضوح وجمالية
     }
 
     let darkStyle = document.getElementById('sacDarkThemeStyles');
@@ -316,18 +527,19 @@
             --shadow: 0 12px 35px rgba(0, 0, 0, 0.75) !important;
           }
           body, html {
-            background: #0b111e !important;
+            background: transparent !important;
             color: #f8fafc !important;
           }
           header, .header, #header {
-            background: rgba(15, 23, 42, 0.96) !important;
+            background: rgba(15, 23, 42, 0.93) !important;
             border-bottom: 1px solid rgba(45, 212, 191, 0.35) !important;
             box-shadow: 0 4px 20px rgba(0,0,0,0.8) !important;
           }
           .card, .card-box, .intro, .intro-box, .qa-box, .panel, .panel-in, .acc-item, .modal, #authLogin, #authReg, .svc, .stat, .def, .struct, .hubcard, .user-card, .doc-card, .table-wrap, table, th, td, .comment-card, .reply-card, .dlbox, .example, .newbie, .setup-banner, .strat, .tip, .tips {
-            background: #151f32 !important;
+            background: rgba(21, 31, 50, 0.94) !important;
             color: #f8fafc !important;
             border-color: rgba(45, 212, 191, 0.3) !important;
+            backdrop-filter: blur(8px) !important;
           }
           h1, h2, h3, h4, h5, h6, .sec-title, .card h3, .card-header h3, .qa-q .qtext, .brand span, .logo-box h1, .intro h2, .intro-box h2, .docgroup .gh h3, .struct .head, .def .term, .hubcard .htx b, .c-name {
             color: #38bdf8 !important;
@@ -412,7 +624,7 @@
             color: #94a3b8 !important;
           }
           .hero, .dash-hero, .dash-hero h2, .hero h1, .hero p, .hero span {
-            background: linear-gradient(135deg, #042f2e 0%, #0f172a 60%, #115e59 100%) !important;
+            background: rgba(15, 23, 42, 0.85) !important;
             color: #ffffff !important;
           }
           .hero h1, .dash-hero h2 {
@@ -438,15 +650,6 @@
     } else {
       if (darkStyle) darkStyle.remove();
       if (!dayStyle) {
-        let seasonBgGradient = 'linear-gradient(135deg, #fefce8 0%, #fef9c3 45%, #ecfdf5 100%)'; // ☀️ الصيف (افتراضي في جويلية)
-        if (window.sacCurrentSeason === 'spring') {
-          seasonBgGradient = 'linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 50%, #e0f2fe 100%)'; // 🌸 الربيع
-        } else if (window.sacCurrentSeason === 'autumn') {
-          seasonBgGradient = 'linear-gradient(135deg, #fffbeb 0%, #fef3c7 50%, #fde68a 100%)'; // 🍂 الخريف
-        } else if (window.sacCurrentSeason === 'winter') {
-          seasonBgGradient = 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%)'; // ❄️ الشتاء
-        }
-
         dayStyle = document.createElement('style');
         dayStyle.id = 'sacDayThemeStyles';
         dayStyle.innerHTML = `
@@ -458,27 +661,28 @@
             --green-d: #042f2e !important;
             --green-l: #14b8a6 !important;
             --gold: #d97706 !important;
-            --bg: #f8fafc !important;
-            --card: #ffffff !important;
+            --bg: transparent !important;
+            --card: rgba(255, 255, 255, 0.94) !important;
             --ink: #0f172a !important;
             --muted: #475569 !important;
             --line: rgba(13, 148, 136, 0.22) !important;
             --shadow: 0 15px 35px rgba(13, 148, 136, 0.08), 0 5px 15px rgba(0, 0, 0, 0.04) !important;
           }
           body, html {
-            background: ${seasonBgGradient} !important;
+            background: transparent !important;
             color: #0f172a !important;
           }
           header, .header, #header {
-            background: rgba(255, 255, 255, 0.95) !important;
+            background: rgba(255, 255, 255, 0.94) !important;
             border-bottom: 2px solid #0d9488 !important;
             box-shadow: 0 4px 20px rgba(13, 148, 136, 0.12) !important;
           }
           .card, .card-box, .intro, .intro-box, .qa-box, .panel, .panel-in, .acc-item, .modal, #authLogin, #authReg, .svc, .stat, .def, .struct, .hubcard, .user-card, .doc-card, .table-wrap, .strat, .tip, .tips {
-            background: #ffffff !important;
+            background: rgba(255, 255, 255, 0.94) !important;
             border: 1.5px solid rgba(13, 148, 136, 0.22) !important;
             box-shadow: 0 15px 35px rgba(13, 148, 136, 0.08), 0 5px 15px rgba(0, 0, 0, 0.04) !important;
             transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease !important;
+            backdrop-filter: blur(8px) !important;
           }
           .card:hover, .card-box:hover, .strat:hover, .hubcard:hover {
             transform: translateY(-6px) !important;
@@ -497,9 +701,10 @@
             color: #475569 !important;
           }
           .hero, .dash-hero {
-            background: linear-gradient(135deg, #042f2e 0%, #0d9488 50%, #14b8a6 100%) !important;
+            background: rgba(4, 47, 46, 0.88) !important;
             color: #ffffff !important;
             box-shadow: 0 15px 40px rgba(13, 148, 136, 0.25) !important;
+            backdrop-filter: blur(6px) !important;
           }
           .hero h1, .dash-hero h2, .hero p, .hero span {
             color: #ffffff !important;
@@ -583,7 +788,7 @@
   }
 
   // =========================================================================
-  // 📅 رابعاً: حقن ودجت التاريخ والوقت (Glassmorphism Date/Time Clock Widget)
+  // 📅 خامساً: حقن ودجت التاريخ والوقت (Glassmorphism Date/Time Clock Widget)
   // =========================================================================
   function updateDateTimeWidget() {
     const el = document.getElementById('sacDateTimeContent');
@@ -671,13 +876,16 @@
   }
 
   // =========================================================================
-  // 🎬 خامساً: حلقة التنشيط المستمرة (Animation Loop - شهب الليل وأوراق الفصول للنهار)
+  // 🎬 سادساً: حلقة التنشيط المستمرة (Animation Loop - مشهد الطبيعة + الشهب والأوراق)
   // =========================================================================
   function animate() {
     ctx.clearRect(0, 0, width, height);
 
+    // رسم المشهد الطبيعي المرسوم في الخلفية (Vector Landscape: جبال، تلال، أشجار وصنوبر متغيرة حسب الفصل)
+    drawNatureLandscape(ctx, width, height, window.sacCurrentSeason, window.sacCurrentTheme);
+
     if (window.sacCurrentTheme === 'dark') {
-      // 🌌 وضع الظلام الكوني: النجوم والشهب البراقة (Shooting Stars)
+      // 🌌 وضع الظلام الكوني: النجوم والشهب البراقة فوق الجبال (Shooting Stars)
       stars.forEach(star => {
         star.update();
         star.draw(ctx);
