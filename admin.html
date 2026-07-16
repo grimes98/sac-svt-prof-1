@@ -952,15 +952,26 @@ async function renderOrdersTable() {
         <span style="font-size:0.82rem;color:#2dd4bf;font-weight:700;">📦 ${o.package || 'باقة مخصصة'}</span>
       </td>
       <td><b>${o.name}</b></td>
-      <td style="color:#38bdf8;font-family:monospace;font-weight:700;">${o.contact}</td>
+      <td style="color:#38bdf8;font-family:monospace;font-weight:700;">
+        <div>${o.contact}</div>
+        ${o.social_link ? `<div style="margin-top:6px;"><a href="${o.social_link}" target="_blank" style="color:#0d9488; font-family:Tajawal,sans-serif; font-size:0.8rem; font-weight:800; text-decoration:underline; display:inline-flex; align-items:center; gap:4px; background:rgba(13,148,136,0.1); padding:3px 8px; border-radius:6px;">🌐 حساب التواصل ↗</a></div>` : ""}
+      </td>
       <td>
         <div style="font-weight:800; color:var(--ink); margin-bottom:4px;">${o.level || 'عام'}</div>
         <div style="font-size:0.8rem; background:rgba(13,148,136,0.12); color:#0d9488; padding:3px 8px; border-radius:6px; font-weight:700;">💳 ${o.payment_method || 'بريدي موب'}</div>
         ${o.payment_receipt ? (o.payment_receipt.startsWith('http') || o.payment_receipt.startsWith('data:') ? `<div style="margin-top:4px;"><a href="${o.payment_receipt}" target="_blank" style="color:#f59e0b; font-size:0.78rem; font-weight:800; text-decoration:underline;">🧾 عرض إيصال الدفع ↗</a></div>` : `<div style="margin-top:4px; font-size:0.76rem; color:#f59e0b; font-weight:700;">🧾 ${o.payment_receipt}</div>`) : ''}
       </td>
       <td style="max-width:260px;line-height:1.6;font-size:0.88rem;">
-        <div>${o.details || '-'}</div>
-        ${o.file_url ? `<div style="margin-top:8px;"><a href="${o.file_url}" target="_blank" download="${o.file_name || 'sac_attachment'}" style="background:#0d9488;color:#fff;padding:6px 12px;border-radius:8px;text-decoration:none;font-weight:800;display:inline-flex;align-items:center;gap:6px;font-size:0.82rem;box-shadow:0 3px 10px rgba(13,148,136,0.3);">📎 ${o.file_name || 'تحميل المرفق'}</a></div>` : `<div style="margin-top:6px;font-size:0.78rem;color:var(--muted)">📁 بدون مرفقات</div>`}
+        <div>${o.details || "-"}</div>
+        ${o.file_url ? (
+          o.file_url.includes(" | ") ? 
+          o.file_url.split(" | ").map((url, idx) => {
+            const names = (o.file_name || "").split(", ");
+            const dName = names[idx] ? names[idx].trim() : `مرفق ${idx+1}`;
+            return `<div style="margin-top:6px;"><a href="${url}" target="_blank" download="${dName}" style="background:#0d9488;color:#fff;padding:5px 10px;border-radius:8px;text-decoration:none;font-weight:800;display:inline-flex;align-items:center;gap:5px;font-size:0.8rem;box-shadow:0 2px 8px rgba(13,148,136,0.3);">📎 ${dName}</a></div>`;
+          }).join("") 
+          : `<div style="margin-top:6px;"><a href="${o.file_url}" target="_blank" download="${o.file_name || "sac_attachment"}" style="background:#0d9488;color:#fff;padding:6px 12px;border-radius:8px;text-decoration:none;font-weight:800;display:inline-flex;align-items:center;gap:6px;font-size:0.82rem;box-shadow:0 3px 10px rgba(13,148,136,0.3);">📎 ${o.file_name || "تحميل المرفق"}</a></div>`
+        ) : `<div style="margin-top:6px;font-size:0.78rem;color:var(--muted)">📁 بدون مرفقات</div>`}
       </td>
       <td><span style="color:#f59e0b;font-weight:700;">${o.target_date || 'غير محدد'}</span></td>
       <td style="font-size:0.82rem;color:var(--muted)">${new Date(o.created_at).toLocaleDateString('ar-DZ')}</td>

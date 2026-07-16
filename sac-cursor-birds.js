@@ -556,6 +556,48 @@
             border-bottom: 1px solid rgba(45, 212, 191, 0.35) !important;
             box-shadow: 0 4px 20px rgba(0,0,0,0.8) !important;
           }
+          
+          /* إجبار كتابة معلومات التحويل البريدي وبريدي موب على اللون الأسود دائماً سواء في الليل أو النهار */
+          #baridimobBox, #baridimobBox div, #baridimobBox span, #baridimobBox b, #baridimobBox p {
+            color: #0f172a !important;
+            background-color: #ffffff !important;
+          }
+          #baridimobBox span.ccp-num, #baridimobBox span.rip-num {
+            font-family: monospace !important;
+            font-weight: 900 !important;
+            color: #0f172a !important;
+            background: #f1f5f9 !important;
+            border: 1px solid #cbd5e1 !important;
+            padding: 2px 8px !important;
+            border-radius: 6px !important;
+          }
+          #baridimobBox .title-pay {
+            color: #0d9488 !important;
+            font-weight: 900 !important;
+            font-size: 1rem !important;
+          }
+
+          
+          /* إجبار كتابة معلومات التحويل البريدي وبريدي موب على اللون الأسود دائماً سواء في الليل أو النهار */
+          #baridimobBox, #baridimobBox div, #baridimobBox span, #baridimobBox b, #baridimobBox p {
+            color: #0f172a !important;
+            background-color: #ffffff !important;
+          }
+          #baridimobBox span.ccp-num, #baridimobBox span.rip-num {
+            font-family: monospace !important;
+            font-weight: 900 !important;
+            color: #0f172a !important;
+            background: #f1f5f9 !important;
+            border: 1px solid #cbd5e1 !important;
+            padding: 2px 8px !important;
+            border-radius: 6px !important;
+          }
+          #baridimobBox .title-pay {
+            color: #0d9488 !important;
+            font-weight: 900 !important;
+            font-size: 1rem !important;
+          }
+
           #adminGateModal, .modal-bg, .modal, #adminModal, #upgradeModal, #viewerModal {
             z-index: 999999 !important;
           }
