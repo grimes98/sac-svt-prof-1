@@ -1,15 +1,25 @@
 /* =========================================================================
-   👑🌌 محرك SAC · SVT prof الفخم للمؤثرات البصرية والثيمات (النهار الملكي / الليل الكوني)
-   (Day Mode: Luxurious Emerald Bokeh & Sun Motes | Night Mode: Cosmic Shooting Stars)
-   تم إزالة سرب الطيور بالكامل بناءً على طلب الأستاذة وتصميم واجهة نهارية فخمة جداً
+   👑🌌📅 محرك SAC · SVT prof الفخم للمؤثرات البصرية، الفصول الأربعة، والتاريخ والوقت
+   (Seasonal Academic Themes | Live Hijri & Gregorian Clock | Day Mode & Cosmic Dark Mode)
    ========================================================================= */
 
 (function() {
   if (window._sacThemeEngineInitialized) return;
   window._sacThemeEngineInitialized = true;
 
-  // 1. تحديد وحفظ حالة الثيم (النهار أو الليل)
+  // 1. تحديد وحفظ حالة الثيم (النهار أو الليل) والفصل الحالي (الربيع، الصيف، الخريف، الشتاء)
   window.sacCurrentTheme = localStorage.getItem('sac_theme') || 'light';
+  
+  const month = new Date().getMonth() + 1; // 1 to 12
+  if (month >= 3 && month <= 5) {
+    window.sacCurrentSeason = 'spring';   // 🌸 الربيع (مارس، أفريل، ماي)
+  } else if (month >= 6 && month <= 8) {
+    window.sacCurrentSeason = 'summer';   // ☀️ الصيف (جوان، جويلية، أوت)
+  } else if (month >= 9 && month <= 11) {
+    window.sacCurrentSeason = 'autumn';   // 🍂 الخريف (سبتمبر، أكتوبر، نوفمبر)
+  } else {
+    window.sacCurrentSeason = 'winter';   // ❄️ الشتاء (ديسمبر، جانفي، فيفري)
+  }
 
   // 2. إنشاء وتجهيز كانفاس الخلفية
   const canvas = document.createElement('canvas');
@@ -56,13 +66,14 @@
   }, 300);
 
   // =========================================================================
-  // ☀️ أولاً: محرك الجزيئات البصرية الملكية الزمردية والذهبية (النهار — Royal Day Motes)
-  // (بديل فخم جداً للطيور يضفي رونقاً وأناقة هادئة دون تشويش)
+  // ☀️ أولاً: محرك الجزيئات البصرية الملكية (تدرجات الفصول الأربعة — Seasonal Day Motes)
   // =========================================================================
-  const DAY_MOTES_COLORS = [
-    'rgba(13, 148, 136, 0.45)', 'rgba(45, 212, 191, 0.4)', 'rgba(20, 184, 166, 0.35)',
-    'rgba(250, 204, 21, 0.35)', 'rgba(234, 179, 8, 0.3)', 'rgba(56, 189, 248, 0.35)'
-  ];
+  const SEASONAL_MOTES_COLORS = {
+    spring: ['rgba(34, 197, 94, 0.4)', 'rgba(45, 212, 191, 0.4)', 'rgba(16, 185, 129, 0.35)', 'rgba(110, 231, 183, 0.35)'],
+    summer: ['rgba(250, 204, 21, 0.45)', 'rgba(234, 179, 8, 0.4)', 'rgba(245, 158, 11, 0.35)', 'rgba(13, 148, 136, 0.35)'],
+    autumn: ['rgba(217, 119, 6, 0.45)', 'rgba(180, 83, 9, 0.4)', 'rgba(234, 88, 12, 0.35)', 'rgba(251, 191, 36, 0.35)'],
+    winter: ['rgba(56, 189, 248, 0.4)', 'rgba(125, 211, 252, 0.4)', 'rgba(148, 163, 184, 0.35)', 'rgba(226, 232, 240, 0.35)']
+  };
 
   class DayMote {
     constructor() {
@@ -75,7 +86,8 @@
       this.radius = 3 + Math.random() * 8;
       this.vy = -(0.3 + Math.random() * 0.7);
       this.vx = (Math.random() - 0.5) * 0.4;
-      this.color = DAY_MOTES_COLORS[Math.floor(Math.random() * DAY_MOTES_COLORS.length)];
+      const colors = SEASONAL_MOTES_COLORS[window.sacCurrentSeason] || SEASONAL_MOTES_COLORS.summer;
+      this.color = colors[Math.floor(Math.random() * colors.length)];
       this.angle = Math.random() * Math.PI * 2;
       this.pulseSpeed = 0.02 + Math.random() * 0.02;
     }
@@ -84,7 +96,6 @@
       this.x += Math.sin(this.angle) * 0.3 + this.vx;
       this.angle += this.pulseSpeed;
 
-      // تفاعل لطيف مع الفأرة
       const dx = mouse.x - this.x;
       const dy = mouse.y - this.y;
       const dist = Math.hypot(dx, dy);
@@ -217,7 +228,7 @@
   }
 
   // =========================================================================
-  // 🎨 ثالثاً: إدارة الألوان واللوقو وزر تبديل النهار/الليل (Theme Controller)
+  // 🎨 ثالثاً: إدارة الألوان الفصليّة واللوقو وزر تبديل النهار/الليل (Theme Controller)
   // =========================================================================
   function applyThemeVisuals() {
     if (canvas) {
@@ -284,7 +295,6 @@
           .badge, .hero-tag, .newbie b, .why b, .example b, .note b {
             color: #facc15 !important;
           }
-          /* حماية أزرار البانر والبطاقات والشارات من البياض في الظلام */
           .btn.ghost, .hero .cta .btn.ghost {
             background: rgba(15, 23, 42, 0.88) !important;
             color: #38bdf8 !important;
@@ -300,7 +310,6 @@
             font-weight: 800 !important;
             border: none !important;
           }
-          /* شارات البطاقات والأقفال */
           .tag, .lock-badge, [style*="background:#fde9d6"], [style*="background: #fde9d6"], [style*="background:#fef3c7"], [style*="background: #fef3c7"], [style*="background:#fef08a"], [style*="background: #fef08a"], [style*="background:#fff1f2"], [style*="background: #fff1f2"] {
             background: rgba(250, 204, 21, 0.18) !important;
             color: #facc15 !important;
@@ -311,7 +320,6 @@
             color: #2dd4bf !important;
             border: 1px solid #2dd4bf !important;
           }
-          /* مربعات الأقفال وتنبيهات الجيل الثاني */
           .panel-in div[style*="background:#fef3c7"], div[style*="background:#fef3c7"], div[style*="background: #fef3c7"] {
             background: #1e293b !important;
             border: 2px solid #facc15 !important;
@@ -323,7 +331,6 @@
           .panel-in div[style*="background:#fef3c7"] p, div[style*="background:#fef3c7"] p {
             color: #cbd5e1 !important;
           }
-          /* شريط البحث */
           .search-wrap input, #globalSearch {
             background: #1e293b !important;
             color: #f8fafc !important;
@@ -355,17 +362,42 @@
           .hero h1, .dash-hero h2 {
             color: #38bdf8 !important;
           }
+          /* ألوان وتنسيق ودجت التاريخ في الدارك مود */
+          #sacDateTimeWidget {
+            background: rgba(15, 23, 42, 0.85) !important;
+            border-color: rgba(45, 212, 191, 0.45) !important;
+            color: #f8fafc !important;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5) !important;
+          }
+          #sacDateTimeWidget span {
+            color: #f8fafc !important;
+          }
+          #sacDateTimeWidget .sac-clock-badge {
+            background: rgba(45, 212, 191, 0.2) !important;
+            border-color: #2dd4bf !important;
+            color: #38bdf8 !important;
+          }
         `;
         document.head.appendChild(darkStyle);
       }
     } else {
       if (darkStyle) darkStyle.remove();
       if (!dayStyle) {
+        // تحديد التدرجات الفصلية للنهار (Seasonal Day Backgrounds)
+        let seasonBgGradient = 'linear-gradient(135deg, #fefce8 0%, #fef9c3 45%, #ecfdf5 100%)'; // ☀️ الصيف (افتراضي في جويلية)
+        if (window.sacCurrentSeason === 'spring') {
+          seasonBgGradient = 'linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 50%, #e0f2fe 100%)'; // 🌸 الربيع
+        } else if (window.sacCurrentSeason === 'autumn') {
+          seasonBgGradient = 'linear-gradient(135deg, #fffbeb 0%, #fef3c7 50%, #fde68a 100%)'; // 🍂 الخريف
+        } else if (window.sacCurrentSeason === 'winter') {
+          seasonBgGradient = 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%)'; // ❄️ الشتاء
+        }
+
         dayStyle = document.createElement('style');
         dayStyle.id = 'sacDayThemeStyles';
         dayStyle.innerHTML = `
           /* =========================================================================
-             ☀️ وضع النهار الفخم والراقي (SAC Royal Day Mode - Prestigious Elegance)
+             ☀️ واجهة النهار الفصول الأربعة الفخمة (SAC Royal Seasonal Day Mode)
              ========================================================================= */
           :root {
             --green: #0d9488 !important;
@@ -380,11 +412,11 @@
             --shadow: 0 15px 35px rgba(13, 148, 136, 0.08), 0 5px 15px rgba(0, 0, 0, 0.04) !important;
           }
           body, html {
-            background: linear-gradient(135deg, #f8fafc 0%, #edfcf9 50%, #f1f8f6 100%) !important;
+            background: ${seasonBgGradient} !important;
             color: #0f172a !important;
           }
           header, .header, #header {
-            background: rgba(255, 255, 255, 0.94) !important;
+            background: rgba(255, 255, 255, 0.95) !important;
             border-bottom: 2px solid #0d9488 !important;
             box-shadow: 0 4px 20px rgba(13, 148, 136, 0.12) !important;
           }
@@ -439,12 +471,25 @@
             border: 2px solid #0d9488 !important;
             box-shadow: 0 12px 35px rgba(13, 148, 136, 0.15) !important;
           }
+          #sacDateTimeWidget {
+            background: rgba(255, 255, 255, 0.75) !important;
+            border-color: rgba(13, 148, 136, 0.35) !important;
+            color: #1e293b !important;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05) !important;
+          }
+          #sacDateTimeWidget span {
+            color: #1e293b !important;
+          }
+          #sacDateTimeWidget .sac-clock-badge {
+            background: rgba(13, 148, 136, 0.12) !important;
+            border-color: #0d9488 !important;
+            color: #0f766e !important;
+          }
         `;
         document.head.appendChild(dayStyle);
       }
     }
 
-    // تبديل شعار المنصة (اللوقو) بين النهار والليل في كافة أنحاء الصفحة
     document.querySelectorAll('img').forEach(img => {
       const src = img.getAttribute('src') || '';
       if (src.includes('Sac.png') || src.includes('Sac-dark.png') || src.includes('Sac%20(3)') || img.classList.contains('hero-logo')) {
@@ -483,43 +528,103 @@
     }
   }
 
-  function injectThemeToggleBtn() {
-    if (document.getElementById('sacThemeToggleBtn')) return;
-    
-    const btn = document.createElement('button');
-    btn.id = 'sacThemeToggleBtn';
-    btn.onclick = window.sacToggleTheme;
-    btn.style.cssText = 'display:inline-flex; align-items:center; gap:6px; padding:6px 14px; border-radius:20px; border:1.5px solid #0d9488; cursor:pointer; box-shadow:0 4px 14px rgba(0,0,0,0.25); transition:all 0.25s ease; font-family:inherit; z-index:10001; margin-inline-start:10px;';
-    
-    const nav = document.querySelector('.nav') || document.querySelector('header .container') || document.querySelector('.nav-actions');
-    if (nav) {
-      const back = nav.querySelector('.back') || nav.querySelector('.nav-links');
-      if (back) {
-        nav.insertBefore(btn, back);
-      } else {
-        nav.appendChild(btn);
+  // =========================================================================
+  // 📅 رابعاً: حقن ودجت التاريخ والوقت (Glassmorphism Date/Time Clock Widget)
+  // =========================================================================
+  function updateDateTimeWidget() {
+    const el = document.getElementById('sacDateTimeContent');
+    if (!el) return;
+
+    const now = new Date();
+    // التقويم الميلادي بتوقيت الجزائر (Africa/Algiers)
+    const optionsGregorian = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Africa/Algiers' };
+    const gregorianStr = new Intl.DateTimeFormat('ar-DZ', optionsGregorian).format(now);
+
+    // حساب أو عرض التاريخ الهجري الدقيق بتوقيت الجزائر (أو التنسيق الأم القرى)
+    let hijriStr = '2 صفر 1448 هـ';
+    try {
+      const optionsHijri = { day: 'numeric', month: 'long', year: 'numeric', calendar: 'islamic-umalqura', timeZone: 'Africa/Algiers' };
+      hijriStr = new Intl.DateTimeFormat('ar-SA-u-ca-islamic-umalqura', optionsHijri).format(now);
+      if (!hijriStr.includes('هـ')) hijriStr += ' هـ';
+    } catch(e) {}
+
+    // الوقت المباشر بالثواني بتوقيت الجزائر (GMT+1)
+    const optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false, timeZone: 'Africa/Algiers' };
+    const timeStr = new Intl.DateTimeFormat('en-GB', optionsTime).format(now);
+
+    const seasonEmoji = window.sacCurrentSeason === 'spring' ? '🌸' : (window.sacCurrentSeason === 'summer' ? '☀️' : (window.sacCurrentSeason === 'autumn' ? '🍂' : '❄️'));
+    const seasonName = window.sacCurrentSeason === 'spring' ? 'الربيع' : (window.sacCurrentSeason === 'summer' ? 'الصيف' : (window.sacCurrentSeason === 'autumn' ? 'الخريف' : 'الشتاء'));
+
+    el.innerHTML = `
+      <span style="font-weight:700;">${seasonEmoji} ${seasonName} | 📅 ${gregorianStr}</span>
+      <span style="color:#0d9488; font-weight:800; margin:0 4px;">•</span>
+      <span style="font-weight:700;">☪ ${hijriStr}</span>
+      <span class="sac-clock-badge" style="display:inline-flex; align-items:center; gap:4px; padding:3px 10px; border-radius:10px; border:1px solid #0d9488; font-family:monospace; font-weight:800; font-size:0.85rem; letter-spacing:0.5px;">⏰ ${timeStr} GMT+1</span>
+    `;
+  }
+
+  function injectHeaderWidgets() {
+    // 1. حقن زر تبديل الثيم
+    if (!document.getElementById('sacThemeToggleBtn')) {
+      const btn = document.createElement('button');
+      btn.id = 'sacThemeToggleBtn';
+      btn.onclick = window.sacToggleTheme;
+      btn.style.cssText = 'display:inline-flex; align-items:center; gap:6px; padding:6px 14px; border-radius:20px; border:1.5px solid #0d9488; cursor:pointer; box-shadow:0 4px 14px rgba(0,0,0,0.25); transition:all 0.25s ease; font-family:inherit; z-index:10001; margin-inline-start:10px;';
+      
+      const nav = document.querySelector('.nav') || document.querySelector('header .container') || document.querySelector('.nav-actions');
+      if (nav) {
+        const back = nav.querySelector('.back') || nav.querySelector('.nav-links');
+        if (back) {
+          nav.insertBefore(btn, back);
+        } else {
+          nav.appendChild(btn);
+        }
+      } else if (document.body) {
+        btn.style.position = 'fixed';
+        btn.style.top = '14px';
+        btn.style.left = '16px';
+        document.body.appendChild(btn);
       }
-    } else if (document.body) {
-      btn.style.position = 'fixed';
-      btn.style.top = '14px';
-      btn.style.left = '16px';
-      document.body.appendChild(btn);
+      updateToggleButtonUI();
     }
-    updateToggleButtonUI();
+
+    // 2. حقن ودجت التاريخ والوقت الزجاجي الفخم (Glassmorphism Date/Time Clock Widget)
+    if (!document.getElementById('sacDateTimeWidget')) {
+      const widget = document.createElement('div');
+      widget.id = 'sacDateTimeWidget';
+      widget.style.cssText = 'display:inline-flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:8px; background:rgba(255,255,255,0.75); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border:1.5px solid rgba(13,148,136,0.35); padding:6px 16px; border-radius:20px; font-size:0.82rem; font-weight:600; color:#1e293b; box-shadow:0 4px 15px rgba(0,0,0,0.06); transition:all 0.3s ease; margin: 4px auto 0; max-width:98%; text-align:center; z-index:10000;';
+      widget.innerHTML = `<div id="sacDateTimeContent" style="display:flex; align-items:center; flex-wrap:wrap; justify-content:center; gap:6px;"></div>`;
+
+      // إضافة الودجت في الترويسة أو أسفل الترويسة مباشرة ليكون متجاوباً على كافة الشاشات
+      const header = document.querySelector('header');
+      if (header) {
+        // وضعه بشكل متجاوب داخل حاوية الهيدر أو تحت قائمة النزول
+        header.appendChild(widget);
+      } else if (document.body) {
+        widget.style.position = 'fixed';
+        widget.style.top = '72px';
+        widget.style.left = '50%';
+        widget.style.transform = 'translateX(-50%)';
+        document.body.appendChild(widget);
+      }
+
+      updateDateTimeWidget();
+      setInterval(updateDateTimeWidget, 1000);
+    }
   }
 
   if (document.readyState === 'complete' || document.readyState === 'interactive') {
     applyThemeVisuals();
-    injectThemeToggleBtn();
+    injectHeaderWidgets();
   } else {
     window.addEventListener('DOMContentLoaded', () => {
       applyThemeVisuals();
-      injectThemeToggleBtn();
+      injectHeaderWidgets();
     });
   }
 
   // =========================================================================
-  // 🎬 رابعاً: حلقة التنشيط المستمرة (Animation Loop - شهب الليل وجزيئات ضوء النهار)
+  // 🎬 خامساً: حلقة التنشيط المستمرة (Animation Loop - شهب الليل وجزيئات ضوء النهار)
   // =========================================================================
   function animate() {
     ctx.clearRect(0, 0, width, height);
@@ -535,7 +640,7 @@
         sStar.draw(ctx);
       });
     } else {
-      // ☀️ وضع النهار الملكي الفخم: الجزيئات البصرية الزمردية والذهبية (Royal Day Motes - بديل الطيور)
+      // ☀️ وضع النهار الفصلي الفخم: الجزيئات البصرية الزمردية والذهبية (Seasonal Day Motes - بديل الطيور)
       dayMotes.forEach(mote => {
         mote.update();
         mote.draw(ctx);
