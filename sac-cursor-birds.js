@@ -22,10 +22,10 @@
     window.sacCurrentSeason = 'winter';   // ❄️ الشتاء (أغصان برك وثلج)
   }
 
-  // 2. إنشاء وتجهيز كانفاس الخلفية الطبيعية الفخمة (في أعمق خلفية ممكنة z-index: -99999)
+  // 2. إنشاء وتجهيز كانفاس الخلفية الطبيعية الفخمة
   const canvas = document.createElement('canvas');
   canvas.id = 'sacCursorBirdsCanvas';
-  canvas.style.cssText = 'position:fixed !important; top:0 !important; left:0 !important; width:100vw !important; height:100vh !important; z-index:-99999 !important; pointer-events:none !important; overflow:hidden !important; transition:opacity 0.8s ease !important;';
+  canvas.style.cssText = 'position:fixed !important; top:0 !important; left:0 !important; width:100vw !important; height:100vh !important; z-index:-1 !important; pointer-events:none !important; overflow:hidden !important; transition:opacity 0.8s ease !important;';
   
   function attachCanvas() {
     if (document.body) {
@@ -513,14 +513,17 @@
           body, html {
             background: rgba(11, 17, 30, 0.94) !important;
             color: #f8fafc !important;
+            position: relative !important;
+            z-index: 0 !important;
+            min-height: 100vh !important;
           }
           /* حماية وضمان ظهور جميع عناصر الصفحة ولوحات تحكم الأدمين فوق الخلفية وبوضوح تام */
           main, section, .container, .card, .card-box, .intro, .intro-box, .qa-box, .panel-in, .svc, .stat, .def, .struct, .hubcard, .user-card, .doc-card, .table-wrap, table, th, td, .comment-card, .reply-card, .dlbox, .example, .newbie, .setup-banner, .strat, .tip, .tips, #boardUsers, #boardContent, #boardFiles, #boardComments {
             background: rgba(21, 31, 50, 0.95) !important;
             color: #f8fafc !important;
             border-color: rgba(45, 212, 191, 0.3) !important;
-            position: relative;
-            z-index: 2;
+            position: relative !important;
+            z-index: 10 !important;
           }
           /* إجبار الترويسة العلوية وودجت التاريخ والوقت وشريط الأدمين على البقاء مثبتة دائماً في أعلى الشاشة عند التمرير لجميع الزوار والأساتذة والأدمين */
           header, .header, #header, #sacTopAdminToolbar {
@@ -677,10 +680,13 @@
           body, html {
             background: ${seasonBgGradient} !important;
             color: #0f172a !important;
+            position: relative !important;
+            z-index: 0 !important;
+            min-height: 100vh !important;
           }
           main, section, .container, .card, .card-box, .intro, .intro-box, .qa-box, .panel-in, .svc, .stat, .def, .struct, .hubcard, .user-card, .doc-card, .table-wrap, .strat, .tip, .tips, #boardUsers, #boardContent, #boardFiles, #boardComments {
-            position: relative;
-            z-index: 2;
+            position: relative !important;
+            z-index: 10 !important;
           }
           /* إجبار الترويسة العلوية وودجت التاريخ والوقت وشريط الأدمين على البقاء مثبتة دائماً في أعلى الشاشة عند التمرير لجميع الزوار والأساتذة والأدمين */
           header, .header, #header, #sacTopAdminToolbar {
