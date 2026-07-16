@@ -515,15 +515,25 @@
             color: #f8fafc !important;
           }
           /* حماية وضمان ظهور جميع عناصر الصفحة ولوحات تحكم الأدمين فوق الخلفية وبوضوح تام */
-          main, section, header, .header, #header, .container, .card, .card-box, .intro, .intro-box, .qa-box, .panel-in, .svc, .stat, .def, .struct, .hubcard, .user-card, .doc-card, .table-wrap, table, th, td, .comment-card, .reply-card, .dlbox, .example, .newbie, .setup-banner, .strat, .tip, .tips, #boardUsers, #boardContent, #boardFiles, #boardComments {
+          main, section, .container, .card, .card-box, .intro, .intro-box, .qa-box, .panel-in, .svc, .stat, .def, .struct, .hubcard, .user-card, .doc-card, .table-wrap, table, th, td, .comment-card, .reply-card, .dlbox, .example, .newbie, .setup-banner, .strat, .tip, .tips, #boardUsers, #boardContent, #boardFiles, #boardComments {
             background: rgba(21, 31, 50, 0.95) !important;
             color: #f8fafc !important;
             border-color: rgba(45, 212, 191, 0.3) !important;
             position: relative;
             z-index: 2;
           }
-          header, #header, #sacTopAdminToolbar, #adminGateModal, .modal-bg, .modal, #adminModal, #upgradeModal, #viewerModal {
+          /* إجبار الترويسة العلوية وودجت التاريخ والوقت وشريط الأدمين على البقاء مثبتة دائماً في أعلى الشاشة عند التمرير لجميع الزوار والأساتذة والأدمين */
+          header, .header, #header, #sacTopAdminToolbar {
+            position: sticky !important;
+            top: 0 !important;
             z-index: 99999 !important;
+            width: 100% !important;
+            background: rgba(15, 23, 42, 0.96) !important;
+            border-bottom: 1px solid rgba(45, 212, 191, 0.35) !important;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.8) !important;
+          }
+          #adminGateModal, .modal-bg, .modal, #adminModal, #upgradeModal, #viewerModal {
+            z-index: 999999 !important;
           }
           .board-sec[style*="display: block"], .board-sec[style*="display:block"], #adminUsers[style*="display: block"], #adminUsers[style*="display:block"] {
             display: block !important;
@@ -668,12 +678,22 @@
             background: ${seasonBgGradient} !important;
             color: #0f172a !important;
           }
-          main, section, header, .header, #header, .container, .card, .card-box, .intro, .intro-box, .qa-box, .panel-in, .svc, .stat, .def, .struct, .hubcard, .user-card, .doc-card, .table-wrap, .strat, .tip, .tips, #boardUsers, #boardContent, #boardFiles, #boardComments {
+          main, section, .container, .card, .card-box, .intro, .intro-box, .qa-box, .panel-in, .svc, .stat, .def, .struct, .hubcard, .user-card, .doc-card, .table-wrap, .strat, .tip, .tips, #boardUsers, #boardContent, #boardFiles, #boardComments {
             position: relative;
             z-index: 2;
           }
-          header, #header, #sacTopAdminToolbar, #adminGateModal, .modal-bg, .modal, #adminModal, #upgradeModal, #viewerModal {
+          /* إجبار الترويسة العلوية وودجت التاريخ والوقت وشريط الأدمين على البقاء مثبتة دائماً في أعلى الشاشة عند التمرير لجميع الزوار والأساتذة والأدمين */
+          header, .header, #header, #sacTopAdminToolbar {
+            position: sticky !important;
+            top: 0 !important;
             z-index: 99999 !important;
+            width: 100% !important;
+            background: rgba(255, 255, 255, 0.95) !important;
+            border-bottom: 2px solid #0d9488 !important;
+            box-shadow: 0 4px 20px rgba(13, 148, 136, 0.12) !important;
+          }
+          #adminGateModal, .modal-bg, .modal, #adminModal, #upgradeModal, #viewerModal {
+            z-index: 999999 !important;
           }
           .board-sec[style*="display: block"], .board-sec[style*="display:block"], #adminUsers[style*="display: block"], #adminUsers[style*="display:block"] {
             display: block !important;
