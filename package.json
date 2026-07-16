@@ -4,13 +4,11 @@
   "description": "منصة SAC · SVT prof — مكتبة وتكوين رقمي للأساتذة",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "start": "node server.js",
-    "dev": "vite --host --port 5173",
-    "build": "vite build",
-    "preview": "vite preview --host --port 5173"
-  },
-  "devDependencies": {
-    "vite": "^5.4.0"
+    "build": "echo \"No build required. Standalone Node.js server ready.\""
   }
 }

@@ -146,6 +146,13 @@ const server = http.createServer(async (req, res) => {
   });
 });
 
-server.listen(PORT, () => {
+server.listen(PORT, "0.0.0.0", () => {
   console.log(`🚀 خادم منصة SAC · SVT prof يعمل بنجاح وبحماية HTTP Security Headers وتوجيه المساعد الذكي (/api/chat) على المنفذ: ${PORT}`);
+});
+
+process.on("SIGTERM", () => {
+  console.log("SIGTERM received. Shutting down gracefully...");
+  server.close(() => {
+    process.exit(0);
+  });
 });
