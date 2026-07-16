@@ -1081,20 +1081,7 @@ html, body {
     }
   }, 1000);
 
-  // 8. نظام الخاتم المائي الديناميكي المقاوم لتصوير الهاتف واستخراج النصوص (Anti-OCR & Camera Shield)
-  try {
-    const sess = localStorage.getItem('sac_session') || localStorage.getItem('sac_role') || 'SAC · SVT prof';
-    const stampText = sess !== "SAC · SVT prof" ? `⚠️ منصة SAC · SVT prof · إنجاز وتجميع قائم على أعمال نخبة من أساتذة المادة ⚠️ نسخة مرخصة لحساب (${sess})` : "⚠️ منصة SAC · SVT prof · إنجاز وتجميع قائم على أعمال نخبة من أساتذة المادة ⚠️";
-    const watermarkDiv = document.createElement('div');
-    watermarkDiv.id = 'sacAntiOcrWatermark';
-    watermarkDiv.style.cssText = 'position:fixed;inset:-200px;z-index:999998;pointer-events:none;display:flex;flex-wrap:wrap;align-content:space-around;justify-content:space-around;overflow:hidden;opacity:0.045;user-select:none;font-family:"Tajawal",sans-serif;font-weight:800;font-size:1.15rem;color:#0a5860;transform:rotate(-24deg);white-space:nowrap;';
-    let patternHTML = '';
-    for(let i=0; i<60; i++) {
-      patternHTML += `<span style="padding:32px 48px;letter-spacing:1px;">${stampText}</span>`;
-    }
-    watermarkDiv.innerHTML = patternHTML;
-    document.body.appendChild(watermarkDiv);
-  } catch(e) {}
+  
 
   // 9. شريط التحكم الشامل والأبدي للأدمين (Top Admin Toolbar across all pages)
   window.renderTopAdminToolbar = function() {

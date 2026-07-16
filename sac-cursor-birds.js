@@ -517,6 +517,11 @@
             z-index: 0 !important;
             min-height: 100vh !important;
           }
+          #sacAntiOcrWatermark {
+            display: none !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+          }
           /* جعل الحاويات الكبرى شفافة تماماً لعدم تراكم الطبقات المعتمة */
           main, section, .container, .grid, .table-wrap {
             background: transparent !important;
@@ -693,6 +698,11 @@
             --line: rgba(13, 148, 136, 0.22) !important;
             --shadow: 0 15px 35px rgba(13, 148, 136, 0.08), 0 5px 15px rgba(0, 0, 0, 0.04) !important;
           }
+          #sacAntiOcrWatermark {
+            display: none !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+          }
           body, html {
             background: transparent !important;
             color: #0f172a !important;
@@ -818,6 +828,9 @@
         }
       }
     });
+
+    const wm = document.getElementById('sacAntiOcrWatermark');
+    if(wm) wm.remove();
 
     updateToggleButtonUI();
   }
