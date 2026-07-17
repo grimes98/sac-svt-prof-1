@@ -30,30 +30,30 @@
       background: rgba(255, 255, 255, 0.94); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
       border-bottom: 2px solid var(--green); box-shadow: 0 4px 20px rgba(13, 148, 136, 0.14);
     }
-    .nav { max-width: 1360px; margin: 0 auto; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; gap: 15px; flex-wrap: wrap; }
+    .nav { max-width: 1380px; margin: 0 auto; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; gap: 15px; flex-wrap: wrap; }
     .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 900; font-size: 1.45rem; color: var(--green-d); }
     .brand img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2px solid var(--green); }
     .btn-back { background: var(--green); color: #fff !important; font-weight: 800; padding: 8px 18px; border-radius: 12px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; box-shadow: 0 4px 12px rgba(13, 148, 136, 0.25); }
     .btn-back:hover { background: var(--green-d); transform: translateY(-2px); }
 
-    .container { max-width: 1360px; margin: 35px auto 60px; padding: 0 20px; position: relative; z-index: 10; }
+    .container { max-width: 1380px; margin: 35px auto 60px; padding: 0 20px; position: relative; z-index: 10; }
     
     .tice-hero {
       background: rgba(13, 148, 136, 0.35) !important;
-      color: #fff !important; border-radius: 26px; padding: 45px 35px; text-align: center; margin-bottom: 35px;
+      color: #fff !important; border-radius: 26px; padding: 48px 38px; text-align: center; margin-bottom: 35px;
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.18) !important; border: none !important; outline: none !important;
       backdrop-filter: blur(14px) !important; -webkit-backdrop-filter: blur(14px) !important;
       position: relative; overflow: hidden;
     }
-    .tice-hero .ic { font-size: 3.8rem; display: inline-block; margin-bottom: 14px; background: rgba(255, 255, 255, 0.16); padding: 16px; border-radius: 22px; box-shadow: 0 8px 22px rgba(0,0,0,0.25); }
-    .tice-hero h1 { font-size: 2.2rem; font-weight: 900; margin-bottom: 12px; color: #fff !important; text-shadow: 0 2px 10px rgba(0,0,0,0.35); }
-    .tice-hero p { font-size: 1.12rem; color: #e2e8f0 !important; max-width: 960px; margin: 0 auto; line-height: 1.85; font-weight: 500; }
-    .tice-hero .tag-badge { display: inline-block; background: rgba(250, 204, 21, 0.24); color: #facc15 !important; border: 1.5px solid #facc15; padding: 6px 18px; border-radius: 25px; font-weight: 800; font-size: 0.92rem; margin-top: 18px; }
+    .tice-hero .ic { font-size: 4rem; display: inline-block; margin-bottom: 14px; background: rgba(255, 255, 255, 0.16); padding: 18px; border-radius: 24px; box-shadow: 0 8px 22px rgba(0,0,0,0.25); }
+    .tice-hero h1 { font-size: 2.3rem; font-weight: 900; margin-bottom: 14px; color: #fff !important; text-shadow: 0 2px 10px rgba(0,0,0,0.35); }
+    .tice-hero p { font-size: 1.14rem; color: #e2e8f0 !important; max-width: 980px; margin: 0 auto; line-height: 1.9; font-weight: 500; }
+    .tice-hero .tag-badge { display: inline-block; background: rgba(250, 204, 21, 0.24); color: #facc15 !important; border: 1.5px solid #facc15; padding: 7px 20px; border-radius: 25px; font-weight: 800; font-size: 0.94rem; margin-top: 20px; }
 
     /* الهيكلة الرئيسية المزدوجة: الفهرس الجانبي على اليمين + المحتوى على اليسار */
     .tice-layout {
       display: grid;
-      grid-template-columns: 330px 1fr;
+      grid-template-columns: 340px 1fr;
       gap: 32px;
       align-items: start;
     }
@@ -74,14 +74,16 @@
     .sidebar-toc::-webkit-scrollbar { width: 6px; }
     .sidebar-toc::-webkit-scrollbar-thumb { background: var(--green); border-radius: 6px; }
     .sidebar-toc h3 {
-      font-size: 1.28rem; font-weight: 900; color: var(--green-d); margin-bottom: 18px;
+      font-size: 1.3rem; font-weight: 900; color: var(--green-d); margin-bottom: 18px;
       padding-bottom: 12px; border-bottom: 2px solid var(--line); display: flex; align-items: center; gap: 8px;
     }
+    
+    .toc-section-title { font-weight: 900; font-size: 1rem; color: #f59e0b; margin: 16px 0 8px; padding-bottom: 4px; border-bottom: 1px dashed var(--line); display: block; }
     
     .toc-list { list-style: none; padding: 0; }
     .toc-item { margin-bottom: 14px; }
     .toc-unit-link {
-      display: block; font-weight: 900; font-size: 1.03rem; color: var(--green-d);
+      display: block; font-weight: 900; font-size: 1.02rem; color: var(--green-d);
       text-decoration: none; padding: 8px 12px; border-radius: 12px; transition: all 0.2s;
       background: rgba(13, 148, 136, 0.08); border-inline-start: 4px solid var(--green);
     }
@@ -96,6 +98,12 @@
 
     /* المحتوى الرئيسي على اليسار */
     .main-content { min-width: 0; }
+
+    .sec-divider {
+      background: linear-gradient(135deg, var(--green-d), var(--green)); color: #fff;
+      padding: 18px 25px; border-radius: 18px; margin: 40px 0 25px; font-size: 1.45rem; font-weight: 900;
+      box-shadow: 0 10px 25px rgba(13, 148, 136, 0.25); display: flex; align-items: center; gap: 12px;
+    }
 
     .unit-box {
       background: var(--card); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
@@ -165,7 +173,7 @@
     <div class="tice-hero">
       <div class="ic">🧠</div>
       <h1>علوم التربية وعلم النفس التربوي</h1>
-      <p>بوابة التكوين البيداغوجي المتخصصة لأساتذة علوم الطبيعة والحياة للتعليم المتوسط، مبنية حرفياً وبكل تفصيل على المقررات والمحاضرات الرسمية الكاملة للمدرسة العليا للأساتذة (<b>ENSET Skikda — Department of Natural Sciences — 1st year PEM/PES</b>). تم تصنيف وتنظيم المادة العلمية إلى <b>4 وحدات كبرى متكاملة</b> تغطي أصول التربية، تاريخ الفكر التربوي، النظريات والفلسفات الكبرى، وهيكلة المنظومة التربوية الجزائرية، مصحوبة بفهرس جانبي دقيق على يمين الشاشة لسرعة التنقل، ومكتوبة بنظام تنضيد وقراءة فائق الوضوح والترتيب دون أي اختصار للمعلومة.</p>
+      <p>بوابة التكوين البيداغوجي والسيكولوجي الموسعة لأساتذة علوم الطبيعة والحياة (التعليم المتوسط)، مبنية حرفياً وبكل تفصيل على المقررات الرسمية والمحاضرات الجامعية الـ 29 الكاملة (<b>Department of Natural Sciences — 1st year PEM/PES</b>). تم تنظيم المادة العلمية إلى <b>10 وحدات بيداغوجية كبرى متكاملة</b> مقسمة لجزأين رئيسيين: <b>أولاً: مدخل إلى علوم التربية وفلسفاتها والمنظومة الجزائرية (الوحدات 1 إلى 4)</b>، و<b>ثانياً: علم النفس التربوي وسيكولوجية التعلم والإدارة الصفية (الوحدات 5 إلى 10، محاضرات أ.د إبتسام غانم)</b>، مصحوبة بفهرس جانبي دقيق على يمين الشاشة لسرعة التنقل وبدون أي اختصار للمعلومة.</p>
       <div class="tag-badge">🛡️ قراءة وتكوين بيداغوجي تفاعلي مباشر داخل المنصة · بدون أزرار تحميل أو اختصار للمعلومة</div>
     </div>
 
@@ -177,8 +185,9 @@
       <!-- ========================================================================= -->
       <aside class="sidebar-toc">
         <h3>📑 فهرس المقرّر</h3>
+        
+        <span class="toc-section-title">🌟 الجزء الأول: علوم التربية</span>
         <ul class="toc-list">
-          
           <li class="toc-item">
             <a href="#unit1" class="toc-unit-link active" onclick="highlightToc(event)">🌱 الوحدة 1: ماهية علوم التربية وتاريخها</a>
             <ul class="toc-sub-list">
@@ -216,6 +225,67 @@
               <li><a href="#sub_4_2" class="toc-sub-link" onclick="highlightToc(event)">2- هيكلة ومراحل التعليم في الجزائر</a></li>
             </ul>
           </li>
+        </ul>
+
+        <span class="toc-section-title">🧠 الجزء الثاني: علم النفس التربوي</span>
+        <ul class="toc-list">
+          <li class="toc-item">
+            <a href="#unit5" class="toc-unit-link" onclick="highlightToc(event)">🔬 الوحدة 5: مدخل ومناهج علم النفس التربوي</a>
+            <ul class="toc-sub-list">
+              <li><a href="#sub_5_1" class="toc-sub-link" onclick="highlightToc(event)">1- النشأة والتطور والتعريف الرسمي</a></li>
+              <li><a href="#sub_5_2" class="toc-sub-link" onclick="highlightToc(event)">2- المجالات، المواضيع وأهداف علم النفس</a></li>
+              <li><a href="#sub_5_3" class="toc-sub-link" onclick="highlightToc(event)">3- الأهمية والفوائد للمربي في القسم</a></li>
+              <li><a href="#sub_5_4" class="toc-sub-link" onclick="highlightToc(event)">4- مناهج البحث العلمية (الوصفي والتجريبي...)</a></li>
+            </ul>
+          </li>
+
+          <li class="toc-item">
+            <a href="#unit6" class="toc-unit-link" onclick="highlightToc(event)">💡 الوحدة 6: سيكولوجية التعلم ونظرياته</a>
+            <ul class="toc-sub-list">
+              <li><a href="#sub_6_1" class="toc-sub-link" onclick="highlightToc(event)">1- التعلم: معناه، عناصره وأطواره</a></li>
+              <li><a href="#sub_6_2" class="toc-sub-link" onclick="highlightToc(event)">2- مميزات التعلم وأنواعه وشروطه العضوية</a></li>
+              <li><a href="#sub_6_3" class="toc-sub-link" onclick="highlightToc(event)">3- العوامل المؤثرة ونواتج ومخرجات التعلم</a></li>
+              <li><a href="#sub_6_4" class="toc-sub-link" onclick="highlightToc(event)">4- نظريات التعلم (السلوكية والمعرفية) والمبادئ</a></li>
+            </ul>
+          </li>
+
+          <li class="toc-item">
+            <a href="#unit7" class="toc-unit-link" onclick="highlightToc(event)">🎯 الوحدة 7: سيكولوجية تعلم المفاهيم في SVT</a>
+            <ul class="toc-sub-list">
+              <li><a href="#sub_7_1" class="toc-sub-link" onclick="highlightToc(event)">1- تعريف المفهوم، أنواعه، تشكيله ونموه</a></li>
+              <li><a href="#sub_7_2" class="toc-sub-link" onclick="highlightToc(event)">2- طبيعة وخصائص وشروط تعلم المفاهيم</a></li>
+              <li><a href="#sub_7_3" class="toc-sub-link" onclick="highlightToc(event)">3- المفاهيم والمدركات العلمية وسيرورة تدريسها</a></li>
+            </ul>
+          </li>
+
+          <li class="toc-item">
+            <a href="#unit8" class="toc-unit-link" onclick="highlightToc(event)">🔥 الوحدة 8: دافعية التعلم والإنجاز الدراسي</a>
+            <ul class="toc-sub-list">
+              <li><a href="#sub_8_1" class="toc-sub-link" onclick="highlightToc(event)">1- الدافعية: مدلولها، تصنيفها ونظرياتها</a></li>
+              <li><a href="#sub_8_2" class="toc-sub-link" onclick="highlightToc(event)">2- دافعية التعلم: مصادرها، شروطها وأهميتها</a></li>
+              <li><a href="#sub_8_3" class="toc-sub-link" onclick="highlightToc(event)">3- استثارة الدافعية وعوامل التنشيط والخفض</a></li>
+              <li><a href="#sub_8_4" class="toc-sub-link" onclick="highlightToc(event)">4- دافعية الإنجاز الدراسي والتدريس الفعال</a></li>
+            </ul>
+          </li>
+
+          <li class="toc-item">
+            <a href="#unit9" class="toc-unit-link" onclick="highlightToc(event)">⚡ الوحدة 9: العمليات العقلية المعرفية والفروق</a>
+            <ul class="toc-sub-list">
+              <li><a href="#sub_9_1" class="toc-sub-link" onclick="highlightToc(event)">1- مفهوم وتقسيمات ووظائف العمليات العقلية</a></li>
+              <li><a href="#sub_9_2" class="toc-sub-link" onclick="highlightToc(event)">2- النماذج العشرة للعمليات المعرفية (الذكاء، الانتباه...)</a></li>
+              <li><a href="#sub_9_3" class="toc-sub-link" onclick="highlightToc(event)">3- دور العمليات العقلية في العملية التعليمية-التعلمية</a></li>
+            </ul>
+          </li>
+
+          <li class="toc-item">
+            <a href="#unit10" class="toc-unit-link" onclick="highlightToc(event)">🏛️ الوحدة 10: الإدارة الصفية والاتصال التربوي</a>
+            <ul class="toc-sub-list">
+              <li><a href="#sub_10_1" class="toc-sub-link" onclick="highlightToc(event)">1- الإدارة الصفية: المفهوم، الأهداف والأنماط</a></li>
+              <li><a href="#sub_10_2" class="toc-sub-link" onclick="highlightToc(event)">2- استراتيجيات ومشكلات إدارة القسم وعناصر النجاح</a></li>
+              <li><a href="#sub_10_3" class="toc-sub-link" onclick="highlightToc(event)">3- الانضباط الصفي وأشكاله وأدوار المعلم</a></li>
+              <li><a href="#sub_10_4" class="toc-sub-link" onclick="highlightToc(event)">4- العلاقات الإنسانية والاتصال التربوي الفعال</a></li>
+            </ul>
+          </li>
 
         </ul>
       </aside>
@@ -225,6 +295,10 @@
       <!-- ========================================================================= -->
       <main class="main-content">
         
+        <div class="sec-divider">
+          <span>🌟 الجزء الأول: مدخل إلى علوم التربية وفلسفاتها والمنظومة الجزائريّة</span>
+        </div>
+
         <!-- الوحدة 1 -->
         <div class="unit-box" id="unit1">
           <div class="unit-title">
@@ -256,41 +330,26 @@
               <svg viewBox="0 0 740 280" xmlns="http://www.w3.org/2000/svg">
                 <rect x="10" y="10" width="720" height="260" rx="14" fill="#f8fafc" stroke="#0d9488" stroke-width="2"/>
                 <g transform="translate(30, 40)">
-                  <!-- Phase 1 -->
                   <rect x="0" y="0" width="210" height="60" rx="10" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
                   <text x="105" y="24" font-weight="bold" font-size="13" text-anchor="middle" fill="#0369a1">المرحلة 1: الفحص عند الولادة</text>
                   <text x="105" y="45" font-size="11" text-anchor="middle" fill="#0f172a">فحص الصلاحية وإلحاقهم بالأسبرطيين</text>
-                  
-                  <!-- Phase 2 -->
                   <rect x="235" y="0" width="210" height="60" rx="10" fill="#bae6fd" stroke="#0284c7" stroke-width="1.5"/>
                   <text x="340" y="24" font-weight="bold" font-size="13" text-anchor="middle" fill="#0369a1">المرحلة 2: تمرينات البيت (0-7)</text>
                   <text x="340" y="45" font-size="11" text-anchor="middle" fill="#0f172a">تمرينات شاقة تحت إشراف الأبوين</text>
-                  
-                  <!-- Phase 3 -->
                   <rect x="470" y="0" width="210" height="60" rx="10" fill="#7dd3fc" stroke="#0284c7" stroke-width="1.5"/>
                   <text x="575" y="24" font-weight="bold" font-size="13" text-anchor="middle" fill="#0369a1">المرحلة 3: المدارس والثكنات (7-18)</text>
                   <text x="575" y="45" font-size="11" text-anchor="middle" fill="#0f172a">تدريب عسكري وتقسيم إلى فرق</text>
-
-                  <!-- Arrows Row 1 -->
                   <path d="M 210 30 L 235 30" stroke="#0f172a" stroke-width="2" marker-end="url(#arrow)"/>
                   <path d="M 445 30 L 470 30" stroke="#0f172a" stroke-width="2" marker-end="url(#arrow)"/>
-
-                  <!-- Phase 4 -->
                   <rect x="470" y="110" width="210" height="60" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
                   <text x="575" y="134" font-weight="bold" font-size="13" text-anchor="middle" fill="#15803d">المرحلة 4: التدريب الميداني (18-20)</text>
                   <text x="575" y="155" font-size="11" text-anchor="middle" fill="#0f172a">تدريب عسكري خالص تحت إشراف الجيش</text>
-
-                  <!-- Phase 5 -->
                   <rect x="235" y="110" width="210" height="60" rx="10" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
                   <text x="340" y="134" font-weight="bold" font-size="13" text-anchor="middle" fill="#15803d">المرحلة 5: الخدمة في الجيش (20-30)</text>
                   <text x="340" y="155" font-size="11" text-anchor="middle" fill="#0f172a">أعضاء في الجيش (دفاع وهجوم)</text>
-
-                  <!-- Phase 6 -->
                   <rect x="0" y="110" width="210" height="60" rx="10" fill="#86efac" stroke="#16a34a" stroke-width="1.5"/>
                   <text x="105" y="134" font-weight="bold" font-size="13" text-anchor="middle" fill="#15803d">المرحلة 6: المواطنة الكاملة (30+)</text>
                   <text x="105" y="155" font-size="11" text-anchor="middle" fill="#0f172a">مواطنون عاملون والزامية الزواج للإنجاب</text>
-
-                  <!-- Arrows Row 2 -->
                   <path d="M 575 60 L 575 110" stroke="#0f172a" stroke-width="2" marker-end="url(#arrow)"/>
                   <path d="M 470 140 L 445 140" stroke="#0f172a" stroke-width="2" marker-end="url(#arrow)"/>
                   <path d="M 235 140 L 210 140" stroke="#0f172a" stroke-width="2" marker-end="url(#arrow)"/>
@@ -451,6 +510,328 @@
                 مدته 3 سنوات (جذوع مشتركة وشعب متخصصة مثل شعبة العلوم التجريبية)، ويعد التلاميذ لاجتياز البكالوريا ومواصلة الدراسات الجامعية العليا.
               </div>
             </div>
+          </div>
+        </div>
+
+        <div class="sec-divider">
+          <span>🧠 الجزء الثاني: علم النفس التربوي وسيكولوجية التعلّم والإدارة الصفية (محاضرات أ.د. إبتسام غانم)</span>
+        </div>
+
+        <!-- الوحدة 5 -->
+        <div class="unit-box" id="unit5">
+          <div class="unit-title">
+            <span class="num">الوحدة 05</span>
+            <span>مدخل ومناهج ومجالات علم النفس التربوي (Introduction, Methods & Scope of Educational Psychology)</span>
+          </div>
+
+          <div class="sub-unit" id="sub_5_1">
+            <h3>1. النشأة، التطور والتعريف الرسمي لعلم النفس التربوي (Definition & History)</h3>
+            <div class="lead-text">
+              يعتبر علم النفس التربوي (<b>Educational Psychology</b>) أحد أهم فروع علم النفس التطبيقية، وهو العلم الذي يهتم بـ <b>دراسة السلوك الإنساني في المواقف والوضعيات التربوية والتعليمية المختلفة</b>، وتطبيق مبادئ ونظريات علم النفس العام في ميدان التربية والتعليم بهدف رفع كفاءة التدريس وتحسين جودة التعلم.
+            </div>
+            <p class="body-text">نشأ هذا العلم في أواخر القرن التاسع عشر وبداية القرن العشرين بفضل إسهامات علماء بارزين مثل <b>إدوارد ثورندايك (Edward Thorndike)</b> الذي يُعد الأب الشرعي لعلم النفس التربوي وتجاربه على التعلم بالمحاولة والخطأ، بالإضافة لأعمال <b>جون ديوي</b>، و<b>ألفريد بينيه (Binet)</b> في قياس الذكاء، و<b>جان بياجيه (Piaget)</b> في النمو المعرفي للطفل.</p>
+          </div>
+
+          <div class="sub-unit" id="sub_5_2">
+            <h3>2. المجالات، المواضيع وأهداف علم النفس التربوي (Scope & Objectives)</h3>
+            <p class="body-text">يغطي علم النفس التربوي مساحة واسعة من الظواهر التي تحدث داخل المؤسسة المدرسية وقاعة القسم، وتنحصر مواضيعه الأساسية في 4 محاور كبرى:</p>
+            <div class="tech-grid">
+              <div class="tech-card"><b>1) خصائص المتعلم وسيكولوجية النمو:</b> دراسة خصائص النمو العقلي، الوجداني، والحركي للتلاميذ في المراحل المختلفة (مرحلة المراهقة في التعليم المتوسط).</div>
+              <div class="tech-card"><b>2) سيكولوجية التعلم ونظرياته:</b> دراسة القوانين والشروط التي تحكم عملية التعلم، واكتساب المهارات، وطرق التدريس الفعالة.</div>
+              <div class="tech-card"><b>3) الدافعية والفروق الفردية:</b> دراسة العوامل المحفزة للتلميذ نحو التحصيل، وكيفية التعامل مع التباين في الذكاء والقدرات بين التلاميذ في القسم.</div>
+              <div class="tech-card"><b>4) القياس والتقويم التربوي:</b> إعداد وتطوير أدوات القياس والاختبارات المدرسية لتقييم تحصيل المتعلم ومردود العملية التعليمية.</div>
+            </div>
+            <p class="body-text" style="margin-top:16px;"><b>أهداف علم النفس التربوي:</b><br>
+            يسعى علم النفس التربوي إلى تحقيق 3 أهداف علمية رئيسية:<br>
+            - **الفهم والتفسير (Understanding):** فهم أسباب حدوث السلوك التربوي وتفسير ظواهر القسم الصعبة.<br>
+            - **التنبؤ (Prediction):** التنبؤ المسبق بما سيكون عليه سلوك التلميذ أو تحصيله تحت شروط بيداغوجية معينة.<br>
+            - **الضبط والتحكم (Control):** توجيه السلوك والتحكم في المتغيرات (مثل البيئة الصفية والدافعية) لتحقيق أفضل تعلم ممكن.</p>
+          </div>
+
+          <div class="sub-unit" id="sub_5_3">
+            <h3>3. الأهمية والفوائد العملية للمربي داخل القسم (Importance for the Teacher)</h3>
+            <p class="body-text">إن دراسة علم النفس التربوي ليست ترفاً نظرياً لأستاذ علوم الطبيعة والحياة، بل هي زاد ميداني يومي يساعده على:</p>
+            <ul class="info-list">
+              <li><b>استبعاد الآراء الانطباعية العشوائية:</b> استبدال المحاولات والاجتهادات الشخصية الخاطئة بالأسس العلمية التجريبية الدقيقة في التعامل مع التلاميذ.</li>
+              <li><b>إعداد وتصريف المذكرات التربوية بفعالية:</b> صياغة الأهداف البيداغوجية (الكفاءات المستهدفة) واختيار الأنشطة والوسائل التي تتناسب دقيقاً مع القدرات العقلية لتلاميذ المتوسط.</li>
+              <li><b>حسن إدارة القسم وضبط السلوك:</b> فهم أسباب الشغب أو الشرود الذهني، واختيار الاستراتيجية المناسبة لفرض الانضباط الذاتي دون لجوء للعنف.</li>
+              <li><b>مراعاة الفروق الفردية وتقديم المعالجة:</b> التعرف على التلاميذ المتعثرين أو الموهوبين، وبناء أنشطة متمايزة ومعالجة بيداغوجية مخصصة لكل فئة.</li>
+            </ul>
+          </div>
+
+          <div class="sub-unit" id="sub_5_4">
+            <h3>4. مناهج البحث العلمية في علم النفس التربوي (Research Methods)</h3>
+            <p class="body-text">يعتمد علم النفس التربوي في الوصول إلى حقائقه وقوانينه على 4 مناهج علمية رصينة:</p>
+            <div class="tech-grid">
+              <div class="tech-card">
+                <b>المنهج الوصفي (Descriptive Method)</b>
+                يقوم على ملاحظة ووصف الظاهرة التربوية كما هي في الواقع الميداني دون تدخل، عبر أدوات مثل الملاحظة، الاستبيانات، والمقابلة (مثلاً: دراسة أسباب انتشار التنمر في المتوسطة).
+              </div>
+              <div class="tech-card">
+                <b>المنهج التجريبي (Experimental Method)</b>
+                أدق المناهج؛ يقوم على دراسة أثر متغير مستقل (مثلاً: استخدام برمجية محاكاة <b>ExAO</b> في تدريس مادة العلوم) على متغير تابع (تحصيل التلاميذ)، مع عزل باقي العوامل عبر مجموعتين: ضابطة وتجريبية.
+              </div>
+              <div class="tech-card">
+                <b>المنهج الإكلينيكي / العيادي (Clinical Method)</b>
+                دراسة متعمقة وشاملة لحالة فردية واحدة أو مجموعة صغيرة جداً تعاني من مشكلة خاصة (مثل الخجل المفرط، صعوبات التعلم، أو فرط الحركة) قصد تشخيصها ووضع خطة علاجية بيداغوجية.
+              </div>
+              <div class="tech-card">
+                <b>المنهج التاريخي (Historical Method)</b>
+                تتبع مسار وسيرة تطور ظاهرة تربوية أو مؤسسة تعليمية عبر الزمن لفهم جذورها واستشراف مسارها المستقبلي.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- الوحدة 6 -->
+        <div class="unit-box" id="unit6">
+          <div class="unit-title">
+            <span class="num">الوحدة 06</span>
+            <span>سيكولوجية التعلم ونظرياته ومبادئه الميدانية (Psychology of Learning & Theories)</span>
+          </div>
+
+          <div class="sub-unit" id="sub_6_1">
+            <h3>1. التعلم: معناه، عناصره وأطواره الثلاثة (Definition, Elements & Stages)</h3>
+            <div class="lead-text">
+              يُعرف التعلم (<b>Learning / Apprentissage</b>) سيكولوجياً بأنه: <b>"تغير شبه دائم في سلوك الفرد أو في قدرته على الأداء، ناتج عن الممارسة والخبرة والتدريب، ولا يُعزى إلى عوامل النضج الطبيعي المؤقت أو التعب أو تأثير الأدوية"</b>.
+            </div>
+            <p class="body-text"><b>عناصر التعلم الأساسية:</b> يتطلب حدوث التعلم وجود ثلاثة عناصر متفاعلة: **1) المتعلم (Learner):** بخصائصه ودوافعه ونضجه. **2) الموقف أو الوضعية التعليمية (Learning Situation):** السندات والأنشطة والمشكل العلمي. **3) الاستجابة والخبرة (Response):** التفاعل النشط للمتعلم للوصول إلى التغيير السلوكي والمعرفي.</p>
+            <p class="body-text"><b>أطوار ومراحل التعلم (Stages of Learning):</b> يمر اكتساب أي كفاءة أو مهارة بـ 3 أطوار رئيسية:</p>
+            <ul class="info-list">
+              <li><b>طور الاكتساب والاستقبال (Acquisition Phase):</b> المرحلة الأولى التي يستقبل فيها التلميذ المعلومات الجديدة ويفهم رموزها وسنداتها المباشرة.</li>
+              <li><b>طور الحفظ والتخزين (Retention Phase):</b> دمج وترميز المعلومات المستقبَلة في الذاكرة طويلة المدى وربطها بالخبرات السابقة.</li>
+              <li><b>طور الاسترجاع والتوظيف (Retrieval & Transfer Phase):</b> استدعاء المهارة أو المفهوم عند الحاجة إليه في وضعية إدماجية جديدة أو حل مشكل ميداني.</li>
+            </ul>
+          </div>
+
+          <div class="sub-unit" id="sub_6_2">
+            <h3>2. مميزات التعلم الإنساني، أنواعه، وشروطه العضوية (Characteristics & Types)</h3>
+            <p class="body-text">يتميز التعلم الإنساني بأنه عملية هادفة، نشطة، تراكمية، وشاملة لكل جوانب الشخصية. وينقسم إلى 4 أصناف كبرى:</p>
+            <div class="tech-grid">
+              <div class="tech-card"><b>1) التعلم المعرفي / العقلي:</b> اكتساب المفاهيم، القوانين العلمية، وحل المسائل (مثل فهم ظاهرة البناء الضوئي في SVT).</div>
+              <div class="tech-card"><b>2) التعلم الحركي / المهاري:</b> اكتساب المهارات اليدوية والحركية الدقيقة (مثل تشغيل المجهر الضوئي أو إنجاز تشريح مخبري).</div>
+              <div class="tech-card"><b>3) التعلم الوجداني / الانفعالي:</b> اكتساب الميول، الاتجاهات الإيجابية، تذوق الجمال العلمي، وحب احترام الطبيعة والبيئة.</div>
+              <div class="tech-card"><b>4) التعلم الاجتماعي / الأخلاقي:</b> اكتساب قيم التعاون، التواصل، واحترام قواعد وأخلاقيات العمل الجماعي داخل الفوج.</div>
+            </div>
+            <p class="body-text" style="margin-top:16px;"><b>الشروط العامة والعوامل المؤثرة في التعلم الإنساني:</b><br>
+            لا يحدث التعلم بكفاءة إلا بتوافر 3 شروط أساسية: **النضج العضوي والعقلي (Maturation)**، **الدافعية للتعلم (Motivation)**، و**الممارسة والتدريب الفعال (Practice)**. وتتأثر بعوامل ذاتية (سلامة الحواس، الذكاء، القلق) وعوامل موضوعية (طريقة التدريس، جاذبية الوسائل، وجو القسم).</p>
+          </div>
+
+          <div class="sub-unit" id="sub_6_3">
+            <h3>3. نواتج ومخرجات التعلم وقياسه (Learning Outcomes & Measurement)</h3>
+            <p class="body-text">تتمثل مخرجات ونواتج التعلم (<b>Learning Outcomes</b>) في التغيرات السلوكية والكفاءات الختامية التي يظهرها المتعلم بعد تعرضه للوضعية البيداغوجية، وتصنف حسب صنافة بلوم (Bloom's Taxonomy) إلى أهداف معرفية، مهارية، ووجدانية.</p>
+            <p class="body-text"><b>قياس التعلم (Measuring Learning):</b> يتم قياس مدى حدوث التعلم عن طريق أدوات واختبارات التقويم التكويني والختامي، ومن خلال مراقبة مؤشرات ملموسة: **السرعة في إنجاز المهمة**، **قلة الأخطاء المرتكبة**، **جودة ودقة الأداء**، و**القدرة على نقل أثر التعلم (Transfer of Learning)** لحل وضعية إدماجية غير مألوفة.</p>
+          </div>
+
+          <div class="sub-unit" id="sub_6_4">
+            <h3>4. نظريات التعلم الكبرى وتطبيقاتها التربوية الميدانية (Learning Theories)</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>المدرسة / النظرية (Theory)</th>
+                    <th>روادها الأوائل (Pioneers)</th>
+                    <th>جوهر تفسير عملية التعلم (How Learning Occurs)</th>
+                    <th>التطبيقات التربوية في مادة علوم الطبيعة والحياة</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><b>النظريات السلوكية<br>(Behaviorism)</b></td>
+                    <td>بافلوف، واطسون، سكينر</td>
+                    <td>التعلم هو ارتباط ميكانيكي بين **مثير (Stimulus)** و**استجابة (Response)** يتعزز بالتكرار والتعزيز (<b>Reinforcement</b>) أو المحاولة والخطأ.</td>
+                    <td>تجزئة النشاط المخبري إلى خطوات بسيطة متدرجة، مكافأة الإجابات الصحيحة فوراً (تعزيز إيجابي)، والتدريب الآلي المستمر.</td>
+                  </tr>
+                  <tr>
+                    <td><b>النظريات المعرفية والجشتالت<br>(Cognitivism & Gestalt)</b></td>
+                    <td>كوهلر، كوفكا، بياجيه، برونر</td>
+                    <td>التعلم ليس حفظاً ميكانيكياً، بل هو **سيرورة عقلية معرفية تتطلب الاستبصار (Insight)**، إدراك البنية الكلية للمشكل، وإعادة تنظيم المجال المعرفي للمتعلم.</td>
+                    <td>تقديم المقطع التربوي في صورة كلية شاملة قبل الغوص في الأجزاء، تحفيز التلميذ على الفهم وحل المشكلات والاستقصاء العلمي بدلاً من الحفظ الصم.</td>
+                  </tr>
+                  <tr>
+                    <td><b>النظرية البنائية والسوسيو-بنائية<br>(Constructivism)</b></td>
+                    <td>جان بياجيه، ليف فيغوتسكي</td>
+                    <td>المتعلم يبني معرفته **بنفسه ومن داخله** بالتفاعل مع السندات (التكيف، التمثل، الموائمة)، ويطورها بالصراع السوسيو-معرفي مع أقرانه في الفوج.</td>
+                    <td>جوهر منهاج الجيل الثاني في SVT؛ جعل التلميذ نشطاً يلاحظ، يفرض فرضيات، يجرب، ويناقش أقرانه في أفواج للوصول للاستنتاج والحصيلة.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="body-text" style="margin-top:16px;"><b>مبادئ التعلم الجيد والفعال (Principles of Good Learning):</b> الإيجابية والنشاط الذاتي للمتعلم، وضوح الهدف البيداغوجي، التنويع في طرائق وسندات التدريس، التغذية الراجعة الفورية (<b>Feedback</b>)، وتوفير مناخ صفي آمن ومحفز.</p>
+          </div>
+        </div>
+
+        <!-- الوحدة 7 -->
+        <div class="unit-box" id="unit7">
+          <div class="unit-title">
+            <span class="num">الوحدة 07</span>
+            <span>سيكولوجية تعلم المفاهيم والمدركات العلمية في SVT (Concept Learning & Scientific Concepts)</span>
+          </div>
+
+          <div class="sub-unit" id="sub_7_1">
+            <h3>1. تعريف المفهوم، تصنيفاته، تشكيله ونموه (Concept Definition & Formation)</h3>
+            <div class="lead-text">
+              المفهوم (<b>Concept</b>) هو: <b>"تجريد ذهني أو تمثيل عقلي لمجموعة من الأشياء أو الحوادث أو الظواهر التي تشترك في خصائص وصفات جوهرية موحدة، ويُعبر عنه بكلمة أو مصطلح علمي محدد"</b> (مثل مفهوم: الخلية، الإنزيم، الزلزال، أو المناعة).
+            </div>
+            <p class="body-text"><b>تصنيف المفاهيم:</b> تنقسم المفاهيم إلى **مفاهيم ملموسة / حسية (Concrete Concepts)** يُدرك مدلولها بالحواس المباشرة (مثل المجهر، النبتة، الكلية)، و**مفاهيم مجردة (Abstract Concepts)** تتطلب تفكيراً استدلالياً وتخيلاً ذهنياً (مثل الـ DNA، السيالة العصبية، والضغط الأسموزي).</p>
+            <p class="body-text"><b>تشكيل ونمو المفهوم (Concept Formation):</b> يمر بناء المفهوم عند الطفل بـ 3 مراحل نمائية: **المرحلة الحسية العيانية** (رؤية ولمس الأمثلة)، **المرحلة التمييزية والتجريدية** (عزل الصفات المشتركة وتجاهل الفروق الثانوية)، و**مرحلة التعميم والتسمية** (إطلاق اللفظ العلمي على جميع الحالات المماثلة).</p>
+          </div>
+
+          <div class="sub-unit" id="sub_7_2">
+            <h3>2. طبيعة وخصائص وشروط تعلم المفاهيم (Properties & Learning Conditions)</h3>
+            <p class="body-text">يتميز كل مفهوم علمي بـ 4 خصائص أساسية: **1) الاسم أو اللفظ (Name)**، **2) السمات أو الخصائص الجوهرية (Defining Attributes)**، **3) الأمثلة المنتمية وغير المنتمية (Positive & Negative Examples)**، و**4) القاعدة المنطقية الرابطة (Rule)**.</p>
+            <p class="body-text"><b>شروط تعلم المفهوم بنجاح داخل القسم:</b><br>
+            - تقديم أمثلة إيجابية شواهد متنوعة وأمثلة سلبية مقارنة دقيقة (مثلاً عند تدريس مفهوم "الخلية الحيوانية"، نعرض خلايا دم وخلايا عصبية كأمثلة إيجابية، ونعرض خلية نباتية وبكتيريا كأمثلة سلبية للمقارنة واستنتاج غياب الجدار السليلوزي).<br>
+            - التدرج من السهل والملموس إلى الصعب والمجرد.<br>
+            - التوظيف الفوري للمفهوم في حل تمارين ووضعيات إدماجية لترسيخه.</p>
+          </div>
+
+          <div class="sub-unit" id="sub_7_3">
+            <h3>3. المفاهيم والمدركات العلمية وسيرورة تدريسها في علوم الطبيعة والحياة (Teaching SVT Concepts)</h3>
+            <p class="body-text">تعتبر مادة علوم الطبيعة والحياة مادة مفاهيمية بامتياز؛ إذ يرتكز منهاج الجيل الثاني على بناء شبكة مفاهيمية متسلسلة تتطور سنوياً من السنة الأولى حتى الرابعة متوسط. ولضمان تدريس المفاهيم العلمية باحترافية وتجنب التصورات الخاطئة (<b>Misconceptions / Représentations initiales</b>)، يتبع الأستاذ استراتيجية المسعى العلمي والاستقصاء:</p>
+            <div class="tech-grid">
+              <div class="tech-card"><b>1) رصد التصورات القبلية:</b> طرح وضعية انطلاق تثير دهشة التلاميذ وتشخص أفكارهم البدائية السابقة حول الظاهرة البيولوجية قصد تصحيحها.</div>
+              <div class="tech-card"><b>2) الاستكشاف والتجريب (ExAO / TP):</b> توفير سندات وثائقية مجهرية وقياسات مخبرية حية تدفع التلميذ لعزل الخصائص الجوهرية للمفهوم المدروس.</div>
+              <div class="tech-card"><b>3) البناء اللفظي والتعميم:</b> صياغة الحصيلة المعرفية الختامية وتسمية المفهوم العلمي الدقيق بلغة عربية وسليمة ومصطلحات دولية واضحة.</div>
+              <div class="tech-card"><b>4) الإدماج والتقويم:</b> تكليف التلاميذ بوضع المفهوم الجديد داخل خريطة ذهنية (<b>Mind Map</b>) لربطه بالمفاهيم المكتسبة سابقاً وتدريبه على توظيفه.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- الوحدة 8 -->
+        <div class="unit-box" id="unit8">
+          <div class="unit-title">
+            <span class="num">الوحدة 08</span>
+            <span>دافعية التعلم واستثارة دافعية الإنجاز الدراسي في القسم (Learning Motivation & Achievement)</span>
+          </div>
+
+          <div class="sub-unit" id="sub_8_1">
+            <h3>1. الدافعية: مدلولها، تصنيفها، وظائفها ونظرياتها (Motivation Concept & Theories)</h3>
+            <div class="lead-text">
+              الدافعية (<b>Motivation</b>) هي: <b>"حالة داخلية جسمية أو نفسية تثير السلوك وتوجهه وتحافظ على استمراريته ونشاطه حتى يتحقق الهدف المشبع للدافع"</b>. فهي المولد الذي يمد التلميذ بالطاقة والنشاط الذهني للانتباه وبذل الجهد في المادة.
+            </div>
+            <p class="body-text"><b>تصنيف الدوافع:</b> تنقسم إلى **دوافع أولية / بيولوجية (Primary Motives)** فطرية ترتبط بالبقاء (الجوع، العطش، النوم)، و**دوافع ثانوية / مكتسبة اجتماعية (Secondary Motives)** تتشكل بالتعلم والتنشئة (الحاجة للتقدير، التفوق، الانتماء، وإثبات الذات).</p>
+            <p class="body-text"><b>وظائف الدافعية الثلاث:</b> 1) **الوظيفة الاستثارية:** إيقاظ النشاط السلوكي والعقلي. 2) **الوظيفة التوجيهية:** توجيه اهتمام التلميذ نحو النشاط التعليمي المستهدف دون تشرد. 3) **الوظيفة التعزيزية:** الحفاظ على ديمومة الجهد والشعور بالرضا عند إنجاز المهمة.</p>
+          </div>
+
+          <div class="sub-unit" id="sub_8_2">
+            <h3>2. دافعية التعلم: مصادرها، شروطها وأهميتها البيداغوجية (Motivation to Learn)</h3>
+            <p class="body-text">دافعية التعلم هي الرغبة الصادقة والميل النشط الذي يبديه التلميذ للمشاركة في أنشطة القسم واكتساب المعارف والمهارات العلمية. وتستمد طاقتها من مصدرين أساسيين:</p>
+            <div class="tech-grid">
+              <div class="tech-card"><b>الدافعية الداخلية (Intrinsic Motivation):</b> تنبع من داخل التلميذ نفسه؛ بسبب فضوله العلمي الشخصي، حبه للاستطلاع وحل الألغاز البيولوجية، وشعوره بمتعة التعلم والاكتشاف الميداني في المخبر. وهو النوع الأقوى والأبقى أثراً.</div>
+              <div class="tech-card"><b>الدافعية الخارجية (Extrinsic Motivation):</b> تنبع من عوامل خارج المتعلم؛ مثل رغبته في الحصول على علامات ممتازة، نيل التشجيع والجوائز والشهادات من الأستاذ والأولياء، أو تجنب العقاب والتوبيخ.</div>
+            </div>
+          </div>
+
+          <div class="sub-unit" id="sub_8_3">
+            <h3>3. استثارة الدافعية وعوامل التنشيط والخفض عند التلاميذ (Motivating Learners)</h3>
+            <p class="body-text"><b>طرق وتقنيات استثارة وتنشيط دافعية التعلم في حصة العلوم الطبيعية:</b></p>
+            <ul class="info-list">
+              <li><b>ربط الدرس بالواقع المعاش للتلميذ:</b> إبراز الأهمية الحياتية والبيئية والصحية للموضوع (مثلاً: ربط درس التغذية بأمراض العصر كالسمنة والسكري، أو درس الاتصال العصبي بمخاطر المخدرات وشاشات الهواتف).</li>
+              <li><b>إثارة الفضول عبر الوضعيات الإشكالية الدافعة:</b> طرح مشكل علمي محير أو ظاهرة متناقضة في بداية الحصة تجعل التلميذ متلهفاً للبحث والتقصي.</li>
+              <li><b>تنويع طرائق التدريس والوسائل (TICE):</b> الانتقال من العمل المجموعاتي، إلى التجارب المخبرية الحية، وصولاً للمحاكاة الرقمية وأفلام الفيديو لكسر الملل والرتابة.</li>
+              <li><b>توظيف التعزيز الإيجابي الفوري والمكافأة المعنوية:</b> تثمين إجابات التلاميذ ومحاولاتهم، إبراز تقدمهم، وتشجيعهم ببطاقات التقدير وعبارات الثناء البيداغوجية.</li>
+            </ul>
+            <p class="body-text" style="margin-top:16px;"><b>عوامل خفض وتثبيط الدافعية (احذر منها أستاذي):</b> رتابة صوت المعلم وجمود طريقته، صعوبة السندات والأسئلة وتعجيزها بما يفوق مستوى التلميذ، السخرية من الأخطاء أو التوبيخ القاسي، والغياب التام للعدالة في توزيع نقاط التقويم.</p>
+          </div>
+
+          <div class="sub-unit" id="sub_8_4">
+            <h3>4. دافعية الإنجاز الدراسي والتدريس الفعال (Achievement Motivation)</h3>
+            <p class="body-text">دافعية الإنجاز (<b>Achievement Motivation</b>) هي الرغبة الملحة والمثابرة الدؤوبة التي يبديها الفرد للتغلب على العقبات وتحقيق مستويات أداء فائقة والوصول إلى التميز والنجاح. يتميز التلميذ ذو دافعية الإنجاز المرتفعة بـ: **اختيار المهام متوسطة الصعوبة وتحدي الذات، تحمل المسؤولية الشخصية عن نتائجه، التخطيط المنظم لوقته، والرغبة المستمرة في معرفة نتيجته (Feedback)**. وتتحقق جودة التدريس الفعال بقدرة الأستاذ على إيقاظ دافعية الإنجاز لدى جميع أفراد قسمه.</p>
+          </div>
+        </div>
+
+        <!-- الوحدة 9 -->
+        <div class="unit-box" id="unit9">
+          <div class="unit-title">
+            <span class="num">الوحدة 09</span>
+            <span>العمليات العقلية المعرفية والفروق الفردية في سيرورة التعلم (Cognitive Processes & Individual Differences)</span>
+          </div>
+
+          <div class="sub-unit" id="sub_9_1">
+            <h3>1. مفهوم، تقسيمات ووظائف العمليات العقلية المعرفية (Cognitive Processes Concept)</h3>
+            <div class="lead-text">
+              العمليات العقلية المعرفية (<b>Cognitive Mental Processes</b>) هي: <b>"مجموعة الأنشطة والفعاليات والوظائف الذهنية التي يقوم بها المخ البشري لاستقبال المعلومات من البيئة الخارجية، ترميزها، معالجتها، تخزينها، واسترجاعها لتوظيفها في التفكير وحل المشكلات والتكيف مع الوضعيات"</b>.
+            </div>
+            <p class="body-text">تنقسم العمليات العقلية إلى 3 مستويات متدرجة التعقيد: **1) عمليات معرفية بسيطة / أولية:** (الإحساس، الانتباه، الإدراك). **2) عمليات معرفية وسيطة / متوسطة:** (الذاكرة والتخيل). **3) عمليات معرفية عليا / معقدة:** (الذكاء، التفكير، الاستدلال، اللغة، وحل المشكلات).</p>
+          </div>
+
+          <div class="sub-unit" id="sub_9_2">
+            <h3>2. النماذج العشرة الكبرى للعمليات المعرفية وتفصيلها البيداغوجي (The 10 Cognitive Models)</h3>
+            <div class="tech-grid">
+              <div class="tech-card"><b>1) الانتباه (Attention):</b> تركيز وتوجيه الوعي الذهني والإدراك نحو منبه بيداغوجي محدد (كلام الأستاذ أو السند) وتجاهل المشتتات المحيطة. وهو بوابة كل تعلم.</div>
+              <div class="tech-card"><b>2) الإدراك (Perception):</b> العملية التي يقوم بها العقل لتفسير وإعطاء معنى للمعلومات الحسية المستقبلة وربطها بالخبرات السابقة المفاهيمية.</div>
+              <div class="tech-card"><b>3) الذاكرة (Memory):</b> سيرورة ترميز وتخزين واسترجاع المعلومات، وتنقسم إلى ذاكرة حسية فورية، ذاكرة قصيرة المدى (عاملة)، وذاكرة طويلة المدى.</div>
+              <div class="tech-card"><b>4) التخيل (Imagination):</b> قدرة العقل على بناء صور وتمثيلات ذهنية لظواهر غير موجودة أمام الحواس مباشرة (مثل تخيل حركة الصفائح التكتونية).</div>
+              <div class="tech-card"><b>5) الذكاء (Intelligence):</b> القدرة العقلية العامة على التفكير المجرد، حل المشكلات، التعلم من الخبرة، والتكيف بنجاح مع الوضعيات الجديدة.</div>
+              <div class="tech-card"><b>6) التفكير (Thinking):</b> نشاط عقلي واعٍ وهادف لمعالجة الرموز والمفاهيم لإيجاد حلول للمسائل العلمية المطروحة.</div>
+              <div class="tech-card"><b>7) الاستدلال (Reasoning):</b> الانتقال الاستنتاجي أو الاستقرائي من مقدمات ومعطيات معلومة للوصول إلى نتائج وقوانين دقيقة.</div>
+              <div class="tech-card"><b>8) اللغة (Language):</b> نسق الرموز والأصوات والمصطلحات التعبيرية المسؤولة عن التفكير ونقل المعرفة البيداغوجية.</div>
+              <div class="tech-card"><b>9) التعلم (Learning):</b> سيرورة اكتساب المعارف وتعديل السلوك وبناء الكفاءات المستدامة عبر التدريب والممارسة.</div>
+              <div class="tech-card"><b>10) الفروق الفردية (Individual Differences):</b> التباين والاختلاف الكمي والنوعي بين تلاميذ القسم في سرعة الإدراك، الذكاء، الذاكرة والميول.</div>
+            </div>
+          </div>
+
+          <div class="sub-unit" id="sub_9_3">
+            <h3>3. دور العمليات العقلية ومراعاة الفروق الفردية في العملية التعليمية-التعلمية</h3>
+            <p class="body-text">إن نجاح الأستاذ في سيرورة التدريس يتوقف على مدى مراعاته لنشاط وتكامل هذه العمليات العقلية عند تلاميذه؛ فيعمل على إثارة **انتباههم** بالوسائل الجذابة، وتوضيح السندات ليسهل **إدراكها**، وتكرار وربط الموارد لترسيخها في **الذاكرة**، وطرح الأسئلة الاستقصائية لتنشيط **التفكير والاستدلال العلمي**.</p>
+            <p class="body-text"><b>البيداغوجيا الفارقية ومراعاة الفروق الفردية (Differentiated Pedagogy):</b><br>
+            بما أن التلاميذ يختلفون جوهرياً في سرعة التعلم، أنماط الاستيعاب (بصري، سمعي، حركي)، ومستويات الذكاء، فإنه من الخطأ الفادح تقديم درس موحد بوتيرة واحدة للجميع. على الأستاذ توظيف البيداغوجيا الفارقية عبر: **تنويع الأنشطة والسندات، تفريد المهمات داخل الأفواج، تخصيص معالجة بيداغوجية دقيقة للمتعثرين، وإعطاء أنشطة إثرائية إضافية للمتفوقين والموهوبين**.</p>
+          </div>
+        </div>
+
+        <!-- الوحدة 10 -->
+        <div class="unit-box" id="unit10">
+          <div class="unit-title">
+            <span class="num">الوحدة 10</span>
+            <span>الإدارة الصفية، الانضباط الصفي والاتصال التربوي الفعال في التعليم (Classroom Management & Communication)</span>
+          </div>
+
+          <div class="sub-unit" id="sub_10_1">
+            <h3>1. الإدارة الصفية: المفهوم، الأهداف، المقومات والأنماط (Classroom Management Concept)</h3>
+            <div class="lead-text">
+              الإدارة الصفية (<b>Classroom Management</b>) هي: <b>"مجموعة الأنشطة والإجراءات والاستراتيجيات المنظمة والتوجيهية التي يقوم بها الأستاذ داخل قاعة القسم لخلق مناخ بيداغوجي ونفسي واجتماعي ملائم، والحفاظ عليه، من أجل تحقيق الأهداف التعليمية بكفاءة عالية وهدوء وفاعلية"</b>.
+            </div>
+            <p class="body-text"><b>أهداف ومقومات الإدارة الصفية الناجحة:</b> تهدف إلى استثمار وقت الحصة كاملاً في التعلم الفعال دون ضياع، توفير جو آمن ومحفز للتلاميذ، تنظيم جلوس وحركة الأفواج المخبرية، وتعويد المتعلم على الانضباط وتحمل المسؤولية.</p>
+            <p class="body-text"><b>أنماط الإدارة الصفية الأربعة (Classroom Management Styles):</b></p>
+            <div class="tech-grid">
+              <div class="tech-card"><b>النمط الديمقراطي / الشوري (Democratic - الموصى به):</b> يعتمد على الاحترام المتبادل، إشراك التلاميذ في وضع ميثاق القسم، الحوار الهادئ، والتشجيع المستمر. يُنتج تلاميذ مبدعين منضبطين ذاتياً.</div>
+              <div class="tech-card"><b>النمط التسلطي / الأوتوقراطي (Authoritarian):</b> فرض الأوامر الصارمة، التخويف والعقاب الدائم دون حوار. يُنتج كبتاً، قلقاً، وانفجاراً للشغب بمجرد غياب المعلم.</div>
+              <div class="tech-card"><b>النمط الفوضوي / المتساهل (Laissez-faire):</b> غياب التوجيه والرقابة والتساهل المفرط للأستاذ. يؤدي إلى الفوضى العارمة وضياع وقت الحصة وفشل التحصيل.</div>
+              <div class="tech-card"><b>النمط المتقلب / المتذبذب:</b> يتأرجح الأستاذ فيه حسب مزاجه اليومي بين القسوة الشديدة والتساهل التام، مما يربك التلاميذ ويفقدهم الثقة بمعايير السلوك في القسم.</div>
+            </div>
+          </div>
+
+          <div class="sub-unit" id="sub_10_2">
+            <h3>2. استراتيجيات ومشكلات إدارة القسم وعناصر النجاح الميدانية (Classroom Strategies)</h3>
+            <p class="body-text"><b>أبعاد الإدارة الصفية:</b> تشمل البعد الفيزيائي (إضاءة وتهوية المخبر وتنظيم الطاولات)، البعد التنظيمي (توزيع الوقت وإنجاز الأنشطة)، البعد الاجتماعي (العلاقات بين الأستاذ والتلاميذ)، والبعد السلوكي (ضبط القواعد المدرسية).</p>
+            <p class="body-text"><b>استراتيجيات مواجهة مشكلات الشغب وإدارة الصف:</b><br>
+            - **التدخل الوقائي المسبق:** التحضير البيداغوجي الممتاز وإشغال كل التلميذ بنشاط ممتع لا يترك له وقتاً للشغب.<br>
+            - **التدخل العلاجي الهادئ:** استخدام الإشارات غير اللفظية (التواصل البصري الحازم، الاقتراب الجسدي من تلميذ شارد)، التنبيه الفردي الهادئ دون فضح أو إهانة أمام الأقران، وحل المشكلات الفردية بالتواصل بعد الحصة.</p>
+          </div>
+
+          <div class="sub-unit" id="sub_10_3">
+            <h3>3. الانضباط الصفي وأشكاله وأدوار المعلم (Classroom Discipline)</h3>
+            <p class="body-text">الانضباط الصفي (<b>Classroom Discipline</b>) هو التزام التلاميذ الذاتي والواعي بقواعد وميثاق العمل داخل القسم والمخبر، واحترام حقوق الآخرين وتوجيهات المربي. وينقسم إلى شكلين:</p>
+            <div class="tech-grid">
+              <div class="tech-card"><b>الانضباط الذاتي الداخلي (Self-Discipline - الهدف الأسمى):</b> ينبع من قناعة التلميذ وحبه للمادة واحترامه للأستاذ، فيحافظ على الهدوء والتركيز حتى في غياب الرقابة المباشرة.</div>
+              <div class="tech-card"><b>الانضباط الخارجي المفروض (External Discipline):</b> ينبع من خوف التلميذ من العقاب أو حرصه على مكافأة مؤقتة، ويزول بزوال المؤثر الخارجي.</div>
+            </div>
+            <p class="body-text" style="margin-top:16px;"><b>أدوار المعلم في الإدارة الصفية الحديثة:</b> الأستاذ لم يعد مجرد ملقن للمعلومة، بل هو **مخطط بيداغوجي، موجه وميسر للتعلم (Facilitator)، مدير وقائد لفريق العمل، مستشار وموجه نفسي، ومقوم عادل**.</p>
+          </div>
+
+          <div class="sub-unit" id="sub_10_4">
+            <h3>4. العلاقات الإنسانية والاتصال التربوي الفعال في القسم (Human Relations & Communication)</h3>
+            <p class="body-text"><b>العلاقات الإنسانية في الإدارة الصفية:</b> هي بناء روابط المودة والاحترام المتبادل والثقة والتقدير بين الأستاذ وتلاميذه، مما يخلق مناخاً نفسياً دافئاً يشجع على المشاركة والإبداع ويقلل من السلوكات العدوانية.</p>
+            <p class="body-text"><b>الاتصال التربوي الفعال وعناصره (Effective Pedagogical Communication):</b><br>
+            الاتصال التربوي هو عملية نقل وتبادل الأفكار والمشاعر والمعلومات البيداغوجية بين الأستاذ والتلاميذ بوضوح ودقة لتعديل السلوك وبناء الكفاءة. ويتكون من 5 عناصر حيوية:</p>
+            <ul class="info-list">
+              <li><b>المرسل (Sender):</b> الأستاذ الذي يصوغ الفكرة أو التلميذ الذي يطرح السؤال.</li>
+              <li><b>الرسالة (Message):</b> المحتوى العلمي أو التوجيه البيداغوجي المصوغ بلغة واضحة.</li>
+              <li><b>القناة أو الوسيط (Channel / Medium):</b> وسيلة النقل (الصوت الواضح، السبورة، جهاز العرض TICE، الإشارات الحركية).</li>
+              <li><b>المستقبل (Receiver):</b> التلميذ الذي يستقبل الرسالة ويدرك وينفذ المطلوب.</li>
+              <li><b>التغذية الراجعة (Feedback):</b> رد فعل المستقبل وإجابته التي تؤكد للمرسل أن الرسالة قد وُصلت وفُهمت بالشكل السليم، وهي عماد الاتصال ثنائي الاتجاه الناجح.</li>
+            </ul>
           </div>
         </div>
 
