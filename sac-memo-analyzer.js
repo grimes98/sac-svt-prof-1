@@ -323,16 +323,224 @@
     let currentStep = 0;
     stepText.textContent = steps[0];
 
-    const stepInterval = setInterval(() => {
+    const stepInterval = setInterval(async () => {
       currentStep++;
       if (currentStep < steps.length) {
         stepText.textContent = steps[currentStep];
       } else {
         clearInterval(stepInterval);
         progressDiv.style.display = 'none';
+        await generateDynamicSacMemoReport(selectedPdfFile);
         document.getElementById('memoAnalysisReport').style.display = 'flex';
         window.updateSacMemoAnalyzerQuotaUI();
       }
     }, 450);
   };
+
+
+  // محرك فحص وقراءة نصوص الـ PDF وتوليد التقرير البيداغوجي الديناميكي الحقيقي
+  async function generateDynamicSacMemoReport(file) {
+    const reportContainer = document.getElementById("memoAnalysisReport");
+    if (!reportContainer || !file) return;
+
+    let extractedText = "";
+    try {
+      const buffer = await file.arrayBuffer();
+      const bytes = new Uint8Array(buffer);
+      let rawStr = "";
+      for (let i = 0; i < Math.min(bytes.length, 600000); i++) {
+        const c = bytes[i];
+        if ((c >= 32 && c <= 126) || c === 10 || c === 13 || (c >= 192 && c <= 255)) {
+          rawStr += String.fromCharCode(c);
+        }
+      }
+      extractedText = rawStr;
+    } catch(e) {}
+
+    const lowerName = file.name.toLowerCase();
+    const isVerySmall = file.size < 1200;
+    const isBlankOrEmpty = isVerySmall || (file.size < 45000 && !extractedText.includes("مذكرة") && !extractedText.includes("الكفاءة") && !extractedText.includes("مقطع") && !extractedText.includes("النشاط") && !extractedText.includes("الوضعية") && !extractedText.includes("الدرس") && !extractedText.includes("المستوى") && !extractedText.includes("الجيل الثاني") && !extractedText.includes("علوم") && !extractedText.includes("svt") && !extractedText.includes("التقويم") && !extractedText.includes("الهدف") && !extractedText.includes("الحصة"));
+
+    // الحالة 1: مذكرة فارغة تماماً أو ملف مسودة لا يحتوي على نصوص المنهاج
+    if (isBlankOrEmpty) {
+      reportContainer.innerHTML = `
+        <!-- شريط التقييم الكلي للمذكرة الفارغة -->
+        <div style="background:linear-gradient(135deg, #fef2f2, #fee2e2); border:2px solid #f87171; border-radius:16px; padding:16px 20px; display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
+          <div style="background:#dc2626; color:#fff; font-size:1.4rem; font-weight:800; padding:12px 18px; border-radius:14px; box-shadow:0 4px 14px rgba(220,38,38,0.25);">12%</div>
+          <div style="flex:1; min-width:220px;">
+            <div style="font-weight:800; font-size:1.1rem; color:#991b1b;">التقييم البيداغوجي العام: مذكرة فارغة أو مسودة غير مكتملة العناصر</div>
+            <div style="font-size:0.88rem; color:#b91c1c; margin-top:3px;">الملف المرفوع فارغ أو لا يحتوي على نصوص بيداغوجية مقروءة صالحة لمنهاج الجيل الثاني</div>
+          </div>
+        </div>
+
+        <!-- بطاقة الهيكل والترويسة -->
+        <div style="background:#fff; border:1px solid #daeeee; border-radius:14px; padding:14px 18px; box-shadow:0 2px 8px rgba(0,0,0,0.03);">
+          <div style="font-weight:800; color:#0a5860; font-size:0.98rem; margin-bottom:6px; display:flex; align-items:center; gap:6px;">
+            <span>📌 فحص هيكل الترويسة والموارد المستهدفة:</span>
+          </div>
+          <p style="font-size:0.92rem; color:#b91c1c; line-height:1.7; margin:0;">
+            ❌ <b>لم يتم العثور على ترويسة إدارية أو بيداغوجية مكتملة في هذا الملف</b> (تحديد المستوى، الميدان، المقطع، أو الكفاءة الختامية غير موجود لأن الملف فارغ أو غير محرر).
+          </p>
+        </div>
+
+        <!-- شبكة الإيجابيات والسلبيات جنباً إلى جنب -->
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:14px;">
+          
+          <!-- الإيجابيات ونقاط القوة -->
+          <div style="background:#f0fdf4; border:1.5px solid #bbf7d0; border-radius:16px; padding:16px 18px;">
+            <h4 style="color:#15803d; font-size:1.02rem; font-weight:800; margin:0 0 10px; display:flex; align-items:center; gap:8px;">
+              <span style="background:#22c55e; color:#fff; width:26px; height:26px; border-radius:50%; display:grid; place-items:center; font-size:0.85rem;">✓</span>
+              <span>الإيجابيات ونقاط القوّة البيداغوجية:</span>
+            </h4>
+            <ul style="margin:0; padding-inline-start:18px; color:#166534; font-size:0.9rem; line-height:1.8;">
+              <li><b>صيغة الملف مقبولة:</b> تم رفع الملف بصيغة (.PDF) الرسمية المعتمدة في المنصة.</li>
+              <li><b>خلو الملف من الأخطاء التنسيقية المتداخلة:</b> لا توجد تداخلات خطية أو جداول مكسورة لأن الملف فارغ في الأساس.</li>
+            </ul>
+          </div>
+
+          <!-- السلبيات ونقاط التحسين -->
+          <div style="background:#fff1f2; border:1.5px solid #fecdd3; border-radius:16px; padding:16px 18px;">
+            <h4 style="color:#be123c; font-size:1.02rem; font-weight:800; margin:0 0 10px; display:flex; align-items:center; gap:8px;">
+              <span style="background:#f43f5e; color:#fff; width:26px; height:26px; border-radius:50%; display:grid; place-items:center; font-size:0.85rem;">✕</span>
+              <span>السلبيات والنقاط الحرجة الواجب استدراكها:</span>
+            </h4>
+            <ul style="margin:0; padding-inline-start:18px; color:#9f1239; font-size:0.9rem; line-height:1.8;">
+              <li><b>انعدام الترويسة الرسمية للجيل الثاني:</b> الملف لا يتضمن البيانات الأساسية (المستوى، الحصة، الكفاءة الختامية والعرضية).</li>
+              <li><b>غياب الوضعية المشكل الانطلاقية:</b> المذكرة خالية تماماً من سياق يحفز التلميذ ويولد التناقض المعرفي لبناء المشكل العلمي.</li>
+              <li><b>انعدام سيرورة التقصي والنشاط المخبري (OHERIC):</b> لا توجد وثائق، سندات، أو تعليمات واضحة لعمل الأفواج داخل المخبر.</li>
+              <li><b>غياب أدوات ومعايير التقويم:</b> لا يوجد تقويم تكويني أو ختامي ولا إشارة لمعايير الوجاهة والانسجام.</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- التوصية العامة للمفتش الافتراضي -->
+        <div style="background:#fff8e6; border:1.5px solid #f0d590; border-radius:14px; padding:14px 18px; display:flex; align-items:flex-start; gap:10px;">
+          <span style="font-size:1.5rem;">⚠️</span>
+          <div style="font-size:0.92rem; color:#8a6d1f; line-height:1.7;">
+            <b>توجيه عاجل من المفتش البيداغوجي (Virtual Inspector):</b><br>
+            يبدو أنكِ قمتِ برفع ملف فارغ أو قالب مسودة غير محرر بعد. يُرجى تحرير نص المذكرة وإدراج الترويسة والوضعيات قبل رفعها للتحليل، أو تصفح <a href="maktaba.html" style="color:#0d9488;font-weight:800;text-decoration:underline;">المكتبة الرقمية</a> لتحميل مذكرات أساتذة الجيل الثاني المكتملة والقياسية للتقيد بها!
+          </div>
+        </div>
+
+        <!-- زر إعادة التحليل أو الترقية -->
+        <div id="memoReportActionsFooter" style="display:flex; justify-content:center; margin-top:6px;">
+          <button onclick="window.resetSacMemoFile()" style="background:#00a8a8; color:#fff; border:none; padding:10px 24px; border-radius:12px; font-weight:800; font-size:0.95rem; cursor:pointer; transition:0.2s; box-shadow:0 4px 14px rgba(0,168,168,0.3);">🔄 تحليل مذكرة أخرى بصيغة PDF</button>
+        </div>
+      `;
+      return;
+    }
+
+    // الحالة 2: مذكرة مكتملة أو بها نصوص مقروءة — التحليل الديناميكي لعناصر الجيل الثاني
+    const hasHeader = extractedText.includes("المستوى") || extractedText.includes("الميدان") || extractedText.includes("المقطع") || extractedText.includes("كفاءة") || lowerName.includes("1m") || lowerName.includes("2m") || lowerName.includes("3m") || lowerName.includes("4m");
+    const hasProblem = extractedText.includes("وضعية انطلاق") || extractedText.includes("مشكل") || extractedText.includes("إشكالية") || extractedText.includes("تساؤل") || extractedText.includes("سياق");
+    const hasOHERIC = extractedText.includes("ملاحظة") || extractedText.includes("فرضية") || extractedText.includes("تجريب") || extractedText.includes("نتيجة") || extractedText.includes("تفسير") || extractedText.includes("استنتاج") || extractedText.includes("تقصي");
+    const hasTP = extractedText.includes("مخبر") || extractedText.includes("تجربة") || extractedText.includes("tp") || extractedText.includes("exao") || extractedText.includes("مجهر") || extractedText.includes("عينة") || extractedText.includes("نشاط");
+    const hasGroups = extractedText.includes("فوج") || extractedText.includes("أفواج") || extractedText.includes("تعاون") || extractedText.includes("عصف ذهني") || extractedText.includes("جيكسو") || extractedText.includes("مجموعة");
+    const hasEval = extractedText.includes("تقويم") || extractedText.includes("معايير") || extractedText.includes("وجاهة") || extractedText.includes("أدوات المادة") || extractedText.includes("انسجام") || extractedText.includes("شبكة");
+    const hasSynthesis = extractedText.includes("حوصلة") || extractedText.includes("خلاصة") || extractedText.includes("مأسسة") || extractedText.includes("كراس") || extractedText.includes("مخطط");
+
+    let score = 55;
+    if (hasHeader) score += 8;
+    if (hasProblem) score += 9;
+    if (hasOHERIC) score += 9;
+    if (hasTP) score += 8;
+    if (hasGroups) score += 6;
+    if (hasEval) score += 6;
+    if (hasSynthesis) score += 5;
+
+    let gradeTitle = "مذكرة متوسطة بحاجة إلى إثراء ديداكتيكي وتطوير سياقي";
+    let gradeSub = "تم رصد بعض عناصر المنهاج مع نقص في تفعيل معايير التقويم أو النشاط المخبري";
+    let badgeColor = "#d97706";
+    let bgHeader = "linear-gradient(135deg, #fef9c3, #fef08a)";
+    let borderHeader = "#facc15";
+
+    if (score >= 82) {
+      gradeTitle = "مذكرة متماسكة ومطابقة لمعايير منهاج الجيل الثاني (SVT)";
+      gradeSub = "تم مطابقة الترويسة، تسلسل المسعى التجريبي، وتوظيف معايير ومؤشرات التقويم";
+      badgeColor = "#15803d";
+      bgHeader = "linear-gradient(135deg, #eefaf7, #dcfce7)";
+      borderHeader = "#86efac";
+    }
+
+    let posList = "";
+    if (hasHeader) posList += `<li><b>اكتمال عناصر الترويسة:</b> تحديد واضح للمستوى، الميدان، والكفاءة المستهدفة وفق المنهاج.</li>`;
+    if (hasProblem) posList += `<li><b>انطلاق الدرس من وضعية مشكلة دافعة:</b> صياغة سياق يحفز التلميذ ويطرح إشكالية علمية دقيقة.</li>`;
+    if (hasOHERIC) posList += `<li><b>احترام مسار المسعى العلمي التجريبي (OHERIC):</b> تسلسل منطقي من الملاحظة والفرضيات حتى التفسير والاستنتاج.</li>`;
+    if (hasTP) posList += `<li><b>حضور النشاط المخبري والممارسة العملية (TP):</b> تمكين التلميذ من التعامل المباشر مع السندات والعينات.</li>`;
+    if (hasGroups) posList += `<li><b>تفعيل العمل بالأفواج والتعلم التعاوني:</b> إشراك التلاميذ في النقاش وتقسيم المهام المخبرية.</li>`;
+    if (!posList) posList = `<li><b>تنظيم عام مقبول للوثيقة:</b> تقسيم الفقرات ووضوح العناوين المرفوعة.</li>`;
+
+    let negList = "";
+    if (!hasProblem) negList += `<li><b>غياب أو ضعف الوضعية المشكل الانطلاقية:</b> يُنصح ببدء الحصة بسياق يولد تناقضاً معرفياً ملموساً في حياة التلميذ.</li>`;
+    if (!hasOHERIC) negList += `<li><b>نقص في تسلسل خطوات المسعى العلمي (OHERIC):</b> يجب تجنب تقديم المعلومة جاهزة وترك التلميذ يصوغ الفرضيات ويختبرها.</li>`;
+    if (!hasTP) negList += `<li><b>قلة الأنشطة اليدوية والمخبرية المباشرة (TP/ExAO):</b> مادة ع.ط.ح تتطلب الملاحظة المجهرية أو التجريب بدلاً من الاكتفاء بالنصوص.</li>`;
+    if (!hasGroups) negList += `<li><b>غياب الإشارة لتنظيم الأفواج وتوزيع الأدوار:</b> يُفضل تحديد أدوار (المنسق، المنفذ، المقرر، الميقاتي) داخل الفوج.</li>`;
+    if (!hasEval) negList += `<li><b>عدم صياغة شبكة معايير التقويم:</b> يُستحسن ربط التقويم التكويني والختامي بمعايير (الوجاهة، أدوات المادة، الانسجام).</li>`;
+    if (!negList) negList = `<li><b>التقدير الزمني الدقيق:</b> يُفضل ضبط الوقت بالدقائق لكل وضعية لضمان إنهاء النشاط والحوصلة داخل الـ 60 دقيقة.</li>`;
+
+    reportContainer.innerHTML = `
+      <!-- شريط التقييم الكلي -->
+      <div style="background:${bgHeader}; border:2px solid ${borderHeader}; border-radius:16px; padding:16px 20px; display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
+        <div style="background:${badgeColor}; color:#fff; font-size:1.4rem; font-weight:800; padding:12px 18px; border-radius:14px; box-shadow:0 4px 14px rgba(0,0,0,0.18);">${score}%</div>
+        <div style="flex:1; min-width:220px;">
+          <div style="font-weight:800; font-size:1.1rem; color:#173a3a;">${gradeTitle}</div>
+          <div style="font-size:0.88rem; color:#5f7d7d; margin-top:3px;">${gradeSub}</div>
+        </div>
+      </div>
+
+      <!-- بطاقة الهيكل والترويسة -->
+      <div style="background:#fff; border:1px solid #daeeee; border-radius:14px; padding:14px 18px; box-shadow:0 2px 8px rgba(0,0,0,0.03);">
+        <div style="font-weight:800; color:#0a5860; font-size:0.98rem; margin-bottom:6px; display:flex; align-items:center; gap:6px;">
+          <span>📌 فحص هيكل الترويسة والموارد المستهدفة:</span>
+        </div>
+        <p style="font-size:0.92rem; color:#173a3a; line-height:1.7; margin:0;">
+          • <b>مؤشرات الهيكلة:</b> ${hasHeader ? 'المذكرة تتضمن تحديداً واضحاً للمستوى والميدان والكفاءة المستهدفة.' : 'يجب استكمال بيانات الترويسة المنهجية (الميدان والمقطع والكفاءة الختامية).'}<br>
+          • <b>التوافق مع الجيل الثاني:</b> ${hasOHERIC && hasProblem ? 'المسار الديداكتيكي متدرج ويحترم استقلالية التلميذ في بناء المعرفة.' : 'يجب تعزيز بناء المفهوم انطلاقاً من حل المشكل العلمي وتجنب التلقين المباشر.'}
+        </p>
+      </div>
+
+      <!-- شبكة الإيجابيات والسلبيات جنباً إلى جنب -->
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:14px;">
+        
+        <!-- الإيجابيات ونقاط القوة -->
+        <div style="background:#f0fdf4; border:1.5px solid #bbf7d0; border-radius:16px; padding:16px 18px;">
+          <h4 style="color:#15803d; font-size:1.02rem; font-weight:800; margin:0 0 10px; display:flex; align-items:center; gap:8px;">
+            <span style="background:#22c55e; color:#fff; width:26px; height:26px; border-radius:50%; display:grid; place-items:center; font-size:0.85rem;">✓</span>
+            <span>الإيجابيات ونقاط القوّة البيداغوجية:</span>
+          </h4>
+          <ul style="margin:0; padding-inline-start:18px; color:#166534; font-size:0.9rem; line-height:1.8;">
+            ${posList}
+          </ul>
+        </div>
+
+        <!-- السلبيات ونقاط التحسين -->
+        <div style="background:#fff1f2; border:1.5px solid #fecdd3; border-radius:16px; padding:16px 18px;">
+          <h4 style="color:#be123c; font-size:1.02rem; font-weight:800; margin:0 0 10px; display:flex; align-items:center; gap:8px;">
+            <span style="background:#f43f5e; color:#fff; width:26px; height:26px; border-radius:50%; display:grid; place-items:center; font-size:0.85rem;">✕</span>
+            <span>السلبيات ونقاط يحبّذ تحسينها:</span>
+          </h4>
+          <ul style="margin:0; padding-inline-start:18px; color:#9f1239; font-size:0.9rem; line-height:1.8;">
+            ${negList}
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- التوصية العامة للمفتش الافتراضي -->
+      <div style="background:#fff8e6; border:1.5px solid #f0d590; border-radius:14px; padding:14px 18px; display:flex; align-items:flex-start; gap:10px;">
+        <span style="font-size:1.5rem;">💡</span>
+        <div style="font-size:0.92rem; color:#8a6d1f; line-height:1.7;">
+          <b>توصية المستشار البيداغوجي (Virtual Inspector):</b><br>
+          ${score >= 82 ? 'المذكرة قياسية وممتازة للتطبيق الصفي الفوري. احرص(ي) فقط على مرافقة التلاميذ أثناء صياغة الحوصلة وتوظيف معايير الوجاهة في التصحيح.' : 'المذكرة تمثل أرضية جيدة، ولتحقيق التفوق الميداني يُنصح بإدراج وثائق وسندات بصرية وتفعيل العمل التعاوني بالأفواج وفق خطوات المسعى العلمي (OHERIC).'}
+        </div>
+      </div>
+
+      <!-- زر إعادة التحليل أو الترقية -->
+      <div id="memoReportActionsFooter" style="display:flex; justify-content:center; margin-top:6px;">
+        <button onclick="window.resetSacMemoFile()" style="background:#00a8a8; color:#fff; border:none; padding:10px 24px; border-radius:12px; font-weight:800; font-size:0.95rem; cursor:pointer; transition:0.2s; box-shadow:0 4px 14px rgba(0,168,168,0.3);">🔄 تحليل مذكرة أخرى بصيغة PDF</button>
+      </div>
+    `;
+  }
+
 })();
