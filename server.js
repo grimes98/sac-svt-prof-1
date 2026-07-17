@@ -126,7 +126,17 @@ const server = http.createServer(async (req, res) => {
 
   fs.readFile(filePath, (error, content) => {
     if (error) {
-      // عند حدوث أي خطأ (مثل ENOENT أو EISDIR)، نعود بأمان لتحميل الصفحة الرئيسية index.html لمنع توقف الموقع في متصفحات فيسبوك وتيك توك
+      if (urlPath.includes("takwin-10") || urlPath.includes("i3lam-ali")) {
+        const altPath = path.join(__dirname, fs.existsSync(path.join(__dirname, "takwin-i3lam-ali.html")) ? "takwin-i3lam-ali.html" : "takwin-10.html");
+        if (fs.existsSync(altPath)) {
+          return fs.readFile(altPath, (err, altContent) => {
+            if (!err) {
+              res.writeHead(200, { ...SECURITY_HEADERS, "Content-Type": "text/html; charset=UTF-8" });
+              return res.end(altContent, "utf-8");
+            }
+          });
+        }
+      }
       fs.readFile(path.join(__dirname, 'index.html'), (err, indexContent) => {
         if (err) {
           res.writeHead(500, { ...SECURITY_HEADERS, 'Content-Type': 'text/plain; charset=UTF-8' });
