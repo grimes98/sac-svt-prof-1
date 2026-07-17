@@ -1158,7 +1158,7 @@
           <h3 style="font-size:1.8rem; font-weight:900; color:#2dd4bf !important; margin-bottom:16px;">🔒 محتوى بيداغوجي محمي حصري لمنصة SAC · SVT prof</h3>
           <p style="font-size:1.15rem; color:#cbd5e1 !important; max-width:650px; line-height:1.8;">يُمنع التقاط الشاشة أو فحص الشفرة برمجياً أو نسخ المحتوى دون إذن كتابي رسمي من الأستاذة قريمس أماني — جميع محاولات الاختراق تُسجل بالوقت والتاريخ وتفريغ الحافظة.</p>
           <div style="margin-top:28px; background:rgba(13,148,136,0.30); padding:14px 28px; border-radius:18px; border:2px dashed #2dd4bf; color:#facc15 !important; font-weight:900; font-size:1.1rem; cursor:pointer; box-shadow:0 8px 25px rgba(0,0,0,0.35); transition:all 0.25s;">
-            💡 لإغلاق شاشة الحماية ومتابعة التصفح: اضغط مرتين متتاليتين بالفأرة (Double-Click) في أي مكان على الشاشة ✕
+            💡 لإغلاق شاشة الحماية ومتابعة التصفح: اضغط مرتين متتاليتين بالفأرة أو بأصبعك (Double-Click / Double-Tap) في أي مكان على الشاشة ✕
           </div>
         `;
         overlay.style.cssText = "display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(15,23,42,0.96); backdrop-filter:blur(25px); -webkit-backdrop-filter:blur(25px); z-index:999999999; flex-direction:column; align-items:center; justify-content:center; color:#f8fafc; text-align:center; padding:30px; border:4px solid #0d9488;";
@@ -1166,7 +1166,7 @@
       } else if (overlay && !overlay.innerHTML.includes("Double-Click")) {
         const banner = document.createElement("div");
         banner.style.cssText = "margin-top:28px; background:rgba(13,148,136,0.30); padding:14px 28px; border-radius:18px; border:2px dashed #2dd4bf; color:#facc15 !important; font-weight:900; font-size:1.1rem; cursor:pointer; box-shadow:0 8px 25px rgba(0,0,0,0.35); transition:all 0.25s;";
-        banner.innerHTML = "💡 لإغلاق شاشة الحماية ومتابعة التصفح: اضغط مرتين متتاليتين بالفأرة (Double-Click) في أي مكان على الشاشة ✕";
+        banner.innerHTML = "💡 لإغلاق شاشة الحماية ومتابعة التصفح: اضغط مرتين متتاليتين بالفأرة أو بأصبعك (Double-Click / Double-Tap) في أي مكان على الشاشة ✕";
         overlay.appendChild(banner);
       }
       return overlay;
@@ -1382,6 +1382,57 @@
   } else {
     window.addEventListener("DOMContentLoaded", applyFreemiumTrainingAccess);
   }
+
+
+    // 7. درع حماية الهاتف الذكي ضد تصوير الشاشة وتسجيل الفيديو (Mobile Anti-Screenshot & Screen Recorder Shield)
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 960) {
+      
+      // أ) حارس تغيير أبعاد الشاشة وسحب شريط الإشعارات (Quick Settings / Screen Recorder Trigger Intercept)
+      if (window.visualViewport) {
+        window.visualViewport.addEventListener("resize", function() {
+          const heightDiff = window.innerHeight - window.visualViewport.height;
+          if (heightDiff > 80 && !["INPUT", "TEXTAREA"].includes(document.activeElement?.tagName)) {
+            triggerAntiScreenshotAlert();
+          }
+        }, true);
+      }
+
+      // ب) كاشف تسجيل الشاشة فيديو عبر خلل معدل الإطارات (Screen Recording Compositor / FPS Trap)
+      let lastFrameTime = performance.now();
+      let frameAnomalyCount = 0;
+      function checkMobileScreenRecording(now) {
+        const delta = now - lastFrameTime;
+        if (delta > 140 && !document.hidden && document.hasFocus() && !["INPUT", "TEXTAREA"].includes(document.activeElement?.tagName)) {
+          frameAnomalyCount++;
+          if (frameAnomalyCount >= 2) {
+            const overlay = ensureOverlayExists();
+            if (overlay && overlay.style.display !== "flex") {
+              triggerAntiScreenshotAlert();
+            }
+            frameAnomalyCount = 0;
+          }
+        } else if (delta < 50) {
+          frameAnomalyCount = 0;
+        }
+        lastFrameTime = now;
+        requestAnimationFrame(checkMobileScreenRecording);
+      }
+      requestAnimationFrame(checkMobileScreenRecording);
+
+      // ج) إغلاق شاشة التعتيم بالنقر المزدوج السريع على شاشة اللمس (Mobile Double-Tap Dismissal)
+      let lastMobileTap = 0;
+      window.addEventListener("touchend", function(e) {
+        const overlay = document.getElementById("antiScreenshotOverlay");
+        if (overlay && overlay.style.display === "flex") {
+          const now = Date.now();
+          if (now - lastMobileTap < 380) {
+            window.dismissSacSecurityShield();
+            e.preventDefault();
+          }
+          lastMobileTap = now;
+        }
+      }, true);
+    }
 
   if (document.readyState === "complete" || document.readyState === "interactive") {
     activateUniversalSecurityFortress();
