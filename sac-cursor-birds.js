@@ -1157,12 +1157,39 @@
         overlay.innerHTML = `
           <h3 style="font-size:1.8rem; font-weight:900; color:#2dd4bf !important; margin-bottom:16px;">🔒 محتوى بيداغوجي محمي حصري لمنصة SAC · SVT prof</h3>
           <p style="font-size:1.15rem; color:#cbd5e1 !important; max-width:650px; line-height:1.8;">يُمنع التقاط الشاشة أو فحص الشفرة برمجياً أو نسخ المحتوى دون إذن كتابي رسمي من الأستاذة قريمس أماني — جميع محاولات الاختراق تُسجل بالوقت والتاريخ وتفريغ الحافظة.</p>
+          <div style="margin-top:28px; background:rgba(13,148,136,0.30); padding:14px 28px; border-radius:18px; border:2px dashed #2dd4bf; color:#facc15 !important; font-weight:900; font-size:1.1rem; cursor:pointer; box-shadow:0 8px 25px rgba(0,0,0,0.35); transition:all 0.25s;">
+            💡 لإغلاق شاشة الحماية ومتابعة التصفح: اضغط مرتين متتاليتين بالفأرة (Double-Click) في أي مكان على الشاشة ✕
+          </div>
         `;
         overlay.style.cssText = "display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(15,23,42,0.96); backdrop-filter:blur(25px); -webkit-backdrop-filter:blur(25px); z-index:999999999; flex-direction:column; align-items:center; justify-content:center; color:#f8fafc; text-align:center; padding:30px; border:4px solid #0d9488;";
         document.body.appendChild(overlay);
+      } else if (overlay && !overlay.innerHTML.includes("Double-Click")) {
+        const banner = document.createElement("div");
+        banner.style.cssText = "margin-top:28px; background:rgba(13,148,136,0.30); padding:14px 28px; border-radius:18px; border:2px dashed #2dd4bf; color:#facc15 !important; font-weight:900; font-size:1.1rem; cursor:pointer; box-shadow:0 8px 25px rgba(0,0,0,0.35); transition:all 0.25s;";
+        banner.innerHTML = "💡 لإغلاق شاشة الحماية ومتابعة التصفح: اضغط مرتين متتاليتين بالفأرة (Double-Click) في أي مكان على الشاشة ✕";
+        overlay.appendChild(banner);
       }
       return overlay;
     }
+
+    window.dismissSacSecurityShield = function() {
+      window.sacManualOverlayTrigger = false;
+      const overlay = document.getElementById("antiScreenshotOverlay");
+      const wm = document.getElementById("sacAntiOcrWatermark");
+      if (overlay) overlay.style.display = "none";
+      if (wm) {
+        wm.style.setProperty("display", "none", "important");
+        wm.style.setProperty("opacity", "0", "important");
+        wm.style.setProperty("visibility", "hidden", "important");
+      }
+    };
+
+    window.addEventListener("dblclick", function(e) {
+      const overlay = document.getElementById("antiScreenshotOverlay");
+      if (overlay && overlay.style.display === "flex") {
+        window.dismissSacSecurityShield();
+      }
+    }, true);
 
     // 2. حقن العلامة المائية الرقمية التعاونية (Collaborative Identity Watermarking)
     function ensureWatermarkExists() {
@@ -1206,15 +1233,7 @@
           wm.style.setProperty("visibility", "visible", "important");
         }
         try { if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText("⚠️ محتوى محمي بحقوق الملكية الفكرية - منصة SAC SVT prof"); } catch(err) {}
-        setTimeout(function() {
-          window.sacManualOverlayTrigger = false;
-          overlay.style.display = "none";
-          if (wm) {
-            wm.style.setProperty("display", "none", "important");
-            wm.style.setProperty("opacity", "0", "important");
-            wm.style.setProperty("visibility", "hidden", "important");
-          }
-        }, 3500);
+        // لا يتم إغلاقه تلقائياً؛ يجب الضغط مرتين (Double-Click) لإغلاقه
       }
     }
 
@@ -1249,9 +1268,8 @@
         if (overlay.style.display !== "flex") {
           overlay.style.display = "flex";
         }
-      } else if (overlay.style.display === "flex" && !window.sacManualOverlayTrigger) {
-        overlay.style.display = "none";
       }
+      // لا يختفي تلقائياً عند عودة التركيز؛ يجب الضغط مرتين بالفأرة (Double-Click) لإغلاقه
     }
     window.addEventListener("blur", checkSnippingGuard, true);
     window.addEventListener("focus", checkSnippingGuard, true);
@@ -1280,6 +1298,89 @@
         if (overlay) overlay.style.display = "flex";
       }
     }, 1000);
+  }
+
+
+  // =========================================================================
+  // 🎁 نظام التكوين المجاني والمميّز: أول درسين مجانيين في كل وحدة تكوينية للجميع
+  // (2 Free Lessons per Training Unit & Freemium Unlock Gate)
+  // =========================================================================
+  function applyFreemiumTrainingAccess() {
+    const isTrainingPage = window.location.pathname.includes("takwin-") || 
+                           window.location.pathname.includes("anmat") || 
+                           window.location.pathname.includes("istratijiyat");
+    if (!isTrainingPage) return;
+
+    const isTrainingLogged = localStorage.getItem("sac_session") || 
+                             localStorage.getItem("sac_role") === "admin" || 
+                             localStorage.getItem("sac_user_session");
+
+    const subUnits = document.querySelectorAll(".sub-unit");
+    subUnits.forEach((unit, idx) => {
+      const h3 = unit.querySelector("h3");
+      if (idx === 0 || idx === 1) {
+        // الدرس الأول والثاني: مجانيان للجميع
+        if (h3 && !h3.querySelector(".freebadge")) {
+          const badge = document.createElement("span");
+          badge.className = "freebadge";
+          badge.style.cssText = "background:#dcfce7; color:#15803d !important; border:1px solid #22c55e; padding:3px 10px; border-radius:10px; font-size:0.82rem; font-weight:800; margin-inline-start:10px; display:inline-block;";
+          badge.innerHTML = "🎁 درس مجاني (متاح للجميع)";
+          h3.appendChild(badge);
+        }
+      } else {
+        // الدرس الثالث فما فوق: مميّز للأدمين والمشتركين
+        if (h3 && !h3.querySelector(".lock-badge")) {
+          const badge = document.createElement("span");
+          badge.className = "lock-badge";
+          badge.style.cssText = "background:#fef3c7; color:#b45309 !important; border:1px solid #f59e0b; padding:3px 10px; border-radius:10px; font-size:0.82rem; font-weight:800; margin-inline-start:10px; display:inline-block;";
+          badge.innerHTML = "👑 درس مميّز (مفتوح للأدمين والمشتركين)";
+          h3.appendChild(badge);
+        }
+
+        if (!isTrainingLogged) {
+          // تغبش المحتوى الداخلي للدرس المحمي وإضافة بطاقة الاشتراك
+          Array.from(unit.children).forEach(child => {
+            if (child.tagName !== "H3" && !child.classList.contains("sac-unlock-card")) {
+              child.style.setProperty("filter", "blur(6px)", "important");
+              child.style.setProperty("pointer-events", "none", "important");
+              child.style.setProperty("user-select", "none", "important");
+              child.style.setProperty("opacity", "0.55", "important");
+            }
+          });
+
+          if (!unit.querySelector(".sac-unlock-card")) {
+            const unlockCard = document.createElement("div");
+            unlockCard.className = "sac-unlock-card";
+            unlockCard.style.cssText = "margin-top:22px; background:linear-gradient(135deg, #042f2e, #0d9488); border:2px solid #facc15; border-radius:18px; padding:26px 20px; text-align:center; color:#fff !important; box-shadow:0 12px 30px rgba(13,148,136,0.3); pointer-events:auto !important; filter:none !important; opacity:1 !important;";
+            unlockCard.innerHTML = `
+              <div style="font-size:2.4rem; margin-bottom:8px;">🔒</div>
+              <h4 style="color:#facc15 !important; font-size:1.25rem; font-weight:900; margin-bottom:10px;">هذا الدرس مميّز (حصري للأساتذة المشتركين والأدمين)</h4>
+              <p style="color:#e2e8f0 !important; font-size:0.98rem; max-width:580px; margin:0 auto 18px; line-height:1.7;">لقد أتممتَ قراءة الدرسين المجانيين المتاحين للجميع في هذه الوحدة التكوينية. لمتابعة قراءة هذا الدرس وكامل المخططات التلخيصية والموسوعة البيداغوجية، يُرجى تسجيل الدخول لحسابك المميّز.</p>
+              <a href="login.html" style="display:inline-flex; align-items:center; gap:8px; background:linear-gradient(135deg, #f59e0b, #d97706); color:#fff !important; font-weight:900; font-size:1rem; padding:12px 28px; border-radius:14px; text-decoration:none; box-shadow:0 6px 18px rgba(245,158,11,0.4); transition:all 0.25s;">🔑 تسجيل الدخول أو الاشتراك الآن ←</a>
+            `;
+            unit.appendChild(unlockCard);
+          }
+        } else {
+          // إذا كان الأستاذ مسجلاً أو أدمين، فتح المحتوى بالكامل وإزالة بطاقة الإغلاق إن وجدت
+          Array.from(unit.children).forEach(child => {
+            if (child.tagName !== "H3") {
+              child.style.setProperty("filter", "none", "important");
+              child.style.setProperty("pointer-events", "auto", "important");
+              child.style.setProperty("user-select", "auto", "important");
+              child.style.setProperty("opacity", "1", "important");
+            }
+          });
+          const unlockCard = unit.querySelector(".sac-unlock-card");
+          if (unlockCard) unlockCard.remove();
+        }
+      }
+    });
+  }
+
+  if (document.readyState === "complete" || document.readyState === "interactive") {
+    applyFreemiumTrainingAccess();
+  } else {
+    window.addEventListener("DOMContentLoaded", applyFreemiumTrainingAccess);
   }
 
   if (document.readyState === "complete" || document.readyState === "interactive") {

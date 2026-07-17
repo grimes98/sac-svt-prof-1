@@ -53,7 +53,7 @@
           <label id="memoDropZone" style="border:2.5px dashed #00a8a8; background:#f2fafa; border-radius:18px; padding:32px 20px; text-align:center; cursor:pointer; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; transition:0.3s; user-select:none;">
             <div style="font-size:3rem; margin-bottom:4px;">📑</div>
             <div style="font-weight:800; font-size:1.1rem; color:#173a3a;">اختر أو اسحب ملف المذكرة بصيغة PDF هنا</div>
-            <div id="memoUploadSizeLimitText" style="font-size:0.86rem; color:#5f7d7d;">الصيغة المسموحة: .PDF (الحد الأقصى للحجم: 2 MB للزوار / 15 MB للمشتركين)</div>
+            <div id="memoUploadSizeLimitText" style="font-size:0.86rem; color:#5f7d7d;">الصيغة المسموحة: .PDF (الحد الأقصى للحجم: 4 MB للزوار / 15 MB للمشتركين)</div>
             <input type="file" id="memoPdfFileInput" accept=".pdf" style="display:none" onchange="window.handleSacMemoFileSelect(this)">
             <div style="margin-top:8px; background:#00a8a8; color:#fff; padding:8px 22px; border-radius:12px; font-weight:800; font-size:0.92rem; box-shadow:0 4px 12px rgba(0,168,168,0.25);">📂 تصفح ملفات جهازك</div>
           </label>
@@ -64,7 +64,7 @@
               <span style="font-size:1.8rem;">📑</span>
               <div>
                 <div id="memoSelectedFileName" style="font-weight:800; color:#2456a0; font-size:0.98rem; word-break:break-all;">mothakirat_svt.pdf</div>
-                <div id="memoSelectedFileSize" style="font-size:0.82rem; color:#5f7d7d;">1.2 MB</div>
+                <div id="memoSelectedFileSize" style="font-size:0.82rem; color:#5f7d7d;">1.4 MB</div>
               </div>
             </div>
             <div style="display:flex; gap:8px;">
@@ -192,17 +192,17 @@
         reportFooter.innerHTML = `<button onclick="window.resetSacMemoFile()" style="background:#00a8a8; color:#fff; border:none; padding:10px 24px; border-radius:12px; font-weight:800; font-size:0.95rem; cursor:pointer; transition:0.2s; box-shadow:0 4px 14px rgba(0,168,168,0.3);">🔄 تحليل مذكرة أخرى بصيغة PDF</button>`;
       }
     } else {
-      // زائر عادي: رصيد 1 مذكرة وحجم 2 MB
+      // زائر عادي: رصيد 1 مذكرة وحجم 4 MB
       const cnt = getGuestMemoCount();
-      const remaining = Math.max(0, 1 - cnt);
+      const remaining = Math.max(0, 5 - cnt);
 
       if (remaining > 0) {
         statusHeader.style.background = '#eefaf7';
         statusHeader.style.color = '#007878';
-        statusHeader.innerHTML = `<span>💡 لديك <b>(${remaining} من 1)</b> تحليل مجاني للمذكرات كزائر — الحد الأقصى للحجم: 2 MB</span><a href="login.html" style="color:#0a5860; text-decoration:underline;">تسجيل دخول للمزيد ←</a>`;
+        statusHeader.innerHTML = `<span>💡 لديك <b>(${remaining} من 5)</b> تحليل مجاني للمذكرات كزائر — الحد الأقصى للحجم: 4 MB</span><a href="login.html" style="color:#0a5860; text-decoration:underline;">تسجيل دخول للمزيد ←</a>`;
         uploadZone.style.pointerEvents = 'auto';
         uploadZone.style.opacity = '1';
-        if (sizeLimitText) sizeLimitText.textContent = 'الصيغة المسموحة: .PDF (الحد الأقصى للحجم: 2 ميغابايت للزوار)';
+        if (sizeLimitText) sizeLimitText.textContent = 'الصيغة المسموحة: .PDF (الحد الأقصى للحجم: 4 ميغابايت للزوار)';
         if (reportFooter) {
           reportFooter.innerHTML = `<button onclick="window.resetSacMemoFile()" style="background:#00a8a8; color:#fff; border:none; padding:10px 24px; border-radius:12px; font-weight:800; font-size:0.95rem; cursor:pointer;">🔄 تحليل مذكرة أخرى</button>`;
         }
@@ -210,13 +210,13 @@
         // استنفد التحليل المجاني للزائر
         statusHeader.style.background = '#fef3c7';
         statusHeader.style.color = '#b45309';
-        statusHeader.innerHTML = `<span>🔒 استنفدت التحليل المجاني للمذكرات كزائر (1 من 1)</span><a href="login.html" style="color:#92400e; font-weight:800; text-decoration:underline;">دخول للحصول على ∞ ←</a>`;
+        statusHeader.innerHTML = `<span>🔒 استنفدت التحليل المجاني للمذكرات كزائر (5 من 5)</span><a href="login.html" style="color:#92400e; font-weight:800; text-decoration:underline;">دخول للحصول على ∞ ←</a>`;
         uploadZone.style.pointerEvents = 'none';
         uploadZone.style.opacity = '0.55';
         if (reportFooter) {
           reportFooter.innerHTML = `
             <div style="text-align:center; padding:14px; background:#fef3c7; border:1.5px solid #fde68a; border-radius:14px; width:100%;">
-              <b style="color:#92400e; font-size:0.98rem;">🔒 لقد استنفدت رصيد التحليل المجاني للمذكرات للزوار (1 من 1)</b><br>
+              <b style="color:#92400e; font-size:0.98rem;">🔒 لقد استنفدت رصيد التحليل المجاني للمذكرات للزوار (5 من 5)</b><br>
               <p style="font-size:0.88rem; color:#b45309; margin:6px 0 12px;">للحصول على <b>عدد لا متناهي من التحليلات (∞)</b> ورفع مذكرات حتى 15 MB، يرجى تسجيل الدخول بحساب الأستاذ أو الأدمين.</p>
               <button onclick="sessionStorage.setItem('sac_redirect', window.location.href); window.location.href='login.html'" style="padding:10px 24px; font-size:0.92rem; font-weight:800; border:none; border-radius:12px; background:linear-gradient(135deg, #f59e0b, #d97706); color:#fff; cursor:pointer; box-shadow:0 4px 12px rgba(245,158,11,0.35);">🔑 سجّل الدخول الآن للمتابعة</button>
             </div>
@@ -229,7 +229,7 @@
   // فتح وإغلاق النافذة
   window.openSacMemoAnalyzer = function() {
     window.updateSacMemoAnalyzerQuotaUI();
-    if (!isAnalyzerLogged() && getGuestMemoCount() >= 1) {
+    if (!isAnalyzerLogged() && getGuestMemoCount() >= 5) {
       // إذا كان الزائر استنفد رصيده، نعرض له التقرير الأخير أو نفتح النافذة ليطلب التسجيل
       modal.style.display = 'flex';
       setTimeout(() => { modal.style.opacity = '1'; }, 10);
@@ -261,10 +261,10 @@
       return;
     }
 
-    // التحقق من الحجم: 2 MB للزائر، 15 MB للمشترك
-    const maxBytes = isAnalyzerLogged() ? (15 * 1024 * 1024) : (2 * 1024 * 1024);
+    // التحقق من الحجم: 4 MB للزائر، 15 MB للمشترك
+    const maxBytes = isAnalyzerLogged() ? (15 * 1024 * 1024) : (4 * 1024 * 1024);
     if (f.size > maxBytes) {
-      const limitStr = isAnalyzerLogged() ? '15 ميغابايت' : '2 ميغابايت (المسموحة للزوار)';
+      const limitStr = isAnalyzerLogged() ? '15 ميغابايت' : '4 ميغابايت (المسموحة للزوار)';
       alert(`⚠️ حجم الملف المختار (${(f.size/(1024*1024)).toFixed(1)} MB) يتجاوز الحد الأقصى المسموح وهو ${limitStr}!\n\n${isAnalyzerLogged() ? '' : 'يُرجى تسجيل الدخول بحساب المشترك لرفع مذكرات حتى 15 MB.'}`);
       input.value = '';
       return;
@@ -296,9 +296,9 @@
       return;
     }
 
-    if (!isAnalyzerLogged() && getGuestMemoCount() >= 1) {
+    if (!isAnalyzerLogged() && getGuestMemoCount() >= 5) {
       window.updateSacMemoAnalyzerQuotaUI();
-      alert('🔒 لقد استنفدت رصيد التحليل المجاني للمذكرات للزوار (1 من 1). يُرجى تسجيل الدخول للمتابعة!');
+      alert('🔒 لقد استنفدت رصيد التحليل المجاني للمذكرات للزوار (5 من 5). يُرجى تسجيل الدخول للمتابعة!');
       return;
     }
 
