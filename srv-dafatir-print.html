@@ -117,7 +117,6 @@
       </a>
       <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
         <div id="sacDateTimeWidget"></div>
-        <button id="sacThemeToggleBtn" title="تبديل وضع النهار/الليل" style="background:transparent; border:none; cursor:pointer; font-size:1.4rem; padding:4px;">☀️</button>
         <a href="index.html" class="btn-back">← العودة للرئيسية</a>
       </div>
     </div>
@@ -327,8 +326,39 @@
   </div>
 
   <footer>
-    <p>جميع الحقوق محفوظة © 2026 لمنصة <b>SAC · SVT prof</b> — الأستاذة قريمس أماني</p>
-  </footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <h4 style="display:flex;align-items:center;gap:10px">
+          <img src="assets/Sac-dark.png" alt="SAC Logo" style="width:38px;height:38px;object-fit:contain;">
+          منصة SAC · SVT prof
+        </h4>
+        <p style="color:#bcd9d3;font-size:.92rem;max-width:360px;line-height:1.8;">
+          فضاء رقمي تعليمي مرن، مبني بالاعتماد على أعمال ومجهودات نخبة من أساتذة علوم الطبيعة والحياة، مفتوح وداعم للأستاذ في مختلف مراحل حياته المهنية، من التكوين إلى الترقية، مرورًا بالتخطيط والتدريس.
+        </p>
+      </div>
+      <div>
+        <h4>روابط سريعة</h4>
+        <a href="index.html#contents">التكوين البيداغوجي</a>
+        <a href="index.html#library">المكتبة الرقمية</a>
+        <a href="index.html#svt">ركن SVT التخصصي</a>
+        <a href="index.html#services">الخدمات المخصصة</a>
+        <a href="index.html#ai">المستشار الذكي AI</a>
+      </div>
+      <div>
+        <h4>الأقسام والخدمات</h4>
+        <a href="index.html#library">مذكّرات الأساتذة</a>
+        <a href="index.html#library">وثائق الأستاذ المرافقة</a>
+        <a href="index.html#library">عروض باوربوينت TICE</a>
+        <a href="index.html#library">فروض واختبارات فصلية</a>
+        <a href="sac_download_center.html">مركز التحميل المباشر</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      © 2026 منصة <b>SAC · SVT prof</b> — جميع الحقوق محفوظة للأستاذة قريمس أماني · تم التحديث في جويلية 2026
+    </div>
+  </div>
+</footer>
 
   <script>
     function selectPrintOption(targetSize, pkgValue) {
@@ -566,6 +596,10 @@
   </script>
 
   <script src="sac-chatbot.js"></script>
-  <script src="sac-cursor-birds.js"></script>
+  <div id="antiScreenshotOverlay">
+  <h3>🔒 محتوى بيداغوجي محمي حصري لمنصة SAC · SVT prof</h3>
+  <p>يُمنع التقاط الشاشة أو فحص الشفرة برمجياً أو نسخ المحتوى دون إذن كتابي رسمي من الأستاذة قريمس أماني — جميع محاولات الاختراق تُسجل بالوقت والتاريخ وتفريغ الحافظة.</p>
+</div>
+<script src="sac-cursor-birds.js"></script>
 </body>
 </html>

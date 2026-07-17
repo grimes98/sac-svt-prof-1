@@ -962,7 +962,33 @@
   }
 
   function injectHeaderWidgets() {
-    if (!document.getElementById('sacThemeToggleBtn')) {
+    if (!document.getElementById('sacUniversalHeaderFooterStyle')) {
+      const st = document.createElement('style');
+      st.id = 'sacUniversalHeaderFooterStyle';
+      st.innerHTML = `
+        footer { background: #042f2e !important; color: #dfeeeb !important; padding: 50px 0 30px !important; margin-top: 70px !important; text-align: right !important; }
+        .foot-grid { display: grid !important; grid-template-columns: 2fr 1fr 1fr !important; gap: 40px !important; margin-bottom: 30px !important; max-width: 1380px !important; margin-inline: auto !important; padding: 0 20px !important; }
+        .foot-grid h4 { color: #ffffff !important; margin-bottom: 14px !important; font-size: 1.08rem !important; font-weight: 800 !important; }
+        .foot-grid a { display: block !important; color: #bcd9d3 !important; margin-bottom: 8px !important; font-size: 0.94rem !important; text-decoration: none !important; transition: all 0.2s !important; }
+        .foot-grid a:hover { color: #2dd4bf !important; transform: translateX(-3px) !important; }
+        .foot-bottom { border-top: 1px solid rgba(255, 255, 255, 0.14) !important; padding-top: 20px !important; text-align: center !important; font-size: 0.9rem !important; color: #bcd9d3 !important; max-width: 1380px !important; margin-inline: auto !important; }
+        header .nav { max-width: 1380px !important; margin: 0 auto !important; padding: 12px 20px !important; display: flex !important; align-items: center !important; justify-content: space-between !important; gap: 15px !important; flex-wrap: wrap !important; }
+        header .brand { display: flex !important; align-items: center !important; gap: 12px !important; text-decoration: none !important; font-weight: 900 !important; font-size: 1.4rem !important; color: #042f2e !important; }
+        header .brand img { width: 44px !important; height: 44px !important; border-radius: 50% !important; object-fit: cover !important; border: 2px solid #0d9488 !important; }
+        header .nav-links { display: flex !important; align-items: center !important; gap: 18px !important; flex-wrap: wrap !important; }
+        header .nav-links a { font-weight: 800 !important; font-size: 1rem !important; color: #042f2e !important; text-decoration: none !important; padding: 6px 14px !important; border-radius: 12px !important; transition: all 0.2s !important; }
+        header .nav-links a:hover { background: rgba(13, 148, 136, 0.15) !important; color: #0d9488 !important; }
+        @media (max-width: 900px) { .foot-grid { grid-template-columns: 1fr !important; gap: 24px !important; } header .nav-links { display: none !important; } }
+      `;
+      document.head.appendChild(st);
+    }
+
+    const isTrainingOrServicePage = window.location.pathname.includes('takwin') || 
+                                    window.location.pathname.includes('srv-') || 
+                                    window.location.pathname.includes('anmat') || 
+                                    window.location.pathname.includes('istratijiyat');
+
+    if (!isTrainingOrServicePage && !document.getElementById('sacThemeToggleBtn')) {
       const btn = document.createElement('button');
       btn.id = 'sacThemeToggleBtn';
       btn.onclick = window.sacToggleTheme;
@@ -1113,5 +1139,154 @@
     requestAnimationFrame(animate);
   }
 
+
+  // =========================================================================
+  // 🛡️ درع الحماية 7 طبقات الفخم لمنصة SAC · SVT prof (7-Layer Multi-Vector Security Fortress)
+  // (Anti-Screenshot, Anti-Snipping Tool, Active DevTools Trap, Right-click block, Watermark)
+  // =========================================================================
+  function activateUniversalSecurityFortress() {
+    if (window._sacUniversalSecurityFortressActive) return;
+    window._sacUniversalSecurityFortressActive = true;
+
+    // 1. حقن شاشة التعتيم والإشعار الفوري عند محاولة التقاط الشاشة أو فحص الكود
+    function ensureOverlayExists() {
+      let overlay = document.getElementById("antiScreenshotOverlay");
+      if (!overlay && document.body) {
+        overlay = document.createElement("div");
+        overlay.id = "antiScreenshotOverlay";
+        overlay.innerHTML = `
+          <h3 style="font-size:1.8rem; font-weight:900; color:#2dd4bf !important; margin-bottom:16px;">🔒 محتوى بيداغوجي محمي حصري لمنصة SAC · SVT prof</h3>
+          <p style="font-size:1.15rem; color:#cbd5e1 !important; max-width:650px; line-height:1.8;">يُمنع التقاط الشاشة أو فحص الشفرة برمجياً أو نسخ المحتوى دون إذن كتابي رسمي من الأستاذة قريمس أماني — جميع محاولات الاختراق تُسجل بالوقت والتاريخ وتفريغ الحافظة.</p>
+        `;
+        overlay.style.cssText = "display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(15,23,42,0.96); backdrop-filter:blur(25px); -webkit-backdrop-filter:blur(25px); z-index:999999999; flex-direction:column; align-items:center; justify-content:center; color:#f8fafc; text-align:center; padding:30px; border:4px solid #0d9488;";
+        document.body.appendChild(overlay);
+      }
+      return overlay;
+    }
+
+    // 2. حقن العلامة المائية الرقمية التعاونية (Collaborative Identity Watermarking)
+    function ensureWatermarkExists() {
+      if (document.getElementById("sacAntiOcrWatermark") || !document.body) return;
+      const wm = document.createElement("div");
+      wm.id = "sacAntiOcrWatermark";
+      wm.style.cssText = "position:fixed; inset:0; z-index:999998; pointer-events:none; display:none !important; opacity:0 !important; visibility:hidden !important; justify-content:space-around; align-items:center; flex-wrap:wrap; overflow:hidden; font-weight:900; font-size:1.8rem; color:#0d9488; transform:rotate(-25deg); user-select:none;";
+      let inner = "";
+      for (let i = 0; i < 18; i++) {
+        inner += `<span>SAC · SVT prof · قريمس أماني · 2026</span>`;
+      }
+      wm.innerHTML = inner;
+      document.body.appendChild(wm);
+    }
+
+    // 3. منع النقر بزر الفأرة الأيمن ومنع تحديد ونسخ النصوص برمجياً
+    document.addEventListener("contextmenu", function(e) {
+      if (e.target && ["INPUT", "TEXTAREA"].includes(e.target.tagName)) return true;
+      e.preventDefault();
+      return false;
+    }, true);
+
+    ["copy", "cut", "dragstart", "selectstart"].forEach(evt => {
+      document.addEventListener(evt, function(e) {
+        if (e.target && ["INPUT", "TEXTAREA"].includes(e.target.tagName)) return true;
+        e.preventDefault();
+        return false;
+      }, true);
+    });
+
+    // 4. منع اختصارات لوحة المفاتيح والتقاط الشاشة (PrintScreen, Win+Shift+S, Cmd+Shift+3/4/5, F12)
+    function triggerAntiScreenshotAlert() {
+      const overlay = ensureOverlayExists();
+      if (overlay) {
+        window.sacManualOverlayTrigger = true;
+        overlay.style.display = "flex";
+        const wm = document.getElementById("sacAntiOcrWatermark");
+        if (wm) {
+          wm.style.setProperty("display", "flex", "important");
+          wm.style.setProperty("opacity", "0.08", "important");
+          wm.style.setProperty("visibility", "visible", "important");
+        }
+        try { if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText("⚠️ محتوى محمي بحقوق الملكية الفكرية - منصة SAC SVT prof"); } catch(err) {}
+        setTimeout(function() {
+          window.sacManualOverlayTrigger = false;
+          overlay.style.display = "none";
+          if (wm) {
+            wm.style.setProperty("display", "none", "important");
+            wm.style.setProperty("opacity", "0", "important");
+            wm.style.setProperty("visibility", "hidden", "important");
+          }
+        }, 3500);
+      }
+    }
+
+    document.addEventListener("keydown", function(e) {
+      const k = e.key ? e.key.toLowerCase() : "";
+      const isMetaOrCtrl = e.metaKey || e.ctrlKey;
+      
+      if (e.key === "PrintScreen" || e.keyCode === 44 || (e.altKey && (e.key === "PrintScreen" || e.keyCode === 44))) {
+        e.preventDefault(); e.stopPropagation(); triggerAntiScreenshotAlert(); return false;
+      }
+      if ((isMetaOrCtrl && e.shiftKey && ["s", "3", "4", "5", "c", "i", "j"].includes(k)) || e.key === "F12" || e.keyCode === 123) {
+        e.preventDefault(); e.stopPropagation(); triggerAntiScreenshotAlert(); return false;
+      }
+      if (isMetaOrCtrl && ["c", "x", "s", "p", "u"].includes(k) && !["INPUT", "TEXTAREA"].includes(e.target.tagName)) {
+        e.preventDefault(); e.stopPropagation(); return false;
+      }
+    }, true);
+
+    document.addEventListener("keyup", function(e) {
+      if (e.key === "PrintScreen" || e.keyCode === 44 || (e.metaKey && e.shiftKey)) {
+        triggerAntiScreenshotAlert();
+      }
+    }, true);
+
+    // 5. حارس التعتيم الشامل عند تبديل التبويبات أو فتح أداة القص (Anti-Snipping Guard & Visibility Trap)
+    function checkSnippingGuard() {
+      const overlay = ensureOverlayExists();
+      ensureWatermarkExists();
+      if (!overlay) return;
+      if (document.hidden || !document.hasFocus()) {
+        if (document.activeElement && ["INPUT", "TEXTAREA"].includes(document.activeElement.tagName)) return;
+        if (overlay.style.display !== "flex") {
+          overlay.style.display = "flex";
+        }
+      } else if (overlay.style.display === "flex" && !window.sacManualOverlayTrigger) {
+        overlay.style.display = "none";
+      }
+    }
+    window.addEventListener("blur", checkSnippingGuard, true);
+    window.addEventListener("focus", checkSnippingGuard, true);
+    window.addEventListener("pagehide", checkSnippingGuard, true);
+    document.addEventListener("visibilitychange", checkSnippingGuard, true);
+    setInterval(checkSnippingGuard, 300);
+
+    // 6. كاشف أدوات المطورين ومصيدة التصحيح الدائمة (Active DevTools Trap & Debugger Loop)
+    setInterval(function() {
+      const widthThreshold = window.outerWidth - window.innerWidth > 170;
+      const heightThreshold = window.outerHeight - window.innerHeight > 170;
+      if (widthThreshold || heightThreshold) {
+        const overlay = ensureOverlayExists();
+        if (overlay && overlay.style.display !== "flex") {
+          overlay.style.display = "flex";
+        }
+      }
+    }, 800);
+
+    setInterval(function() {
+      const start = performance.now();
+      debugger;
+      const end = performance.now();
+      if (end - start > 100) {
+        const overlay = ensureOverlayExists();
+        if (overlay) overlay.style.display = "flex";
+      }
+    }, 1000);
+  }
+
+  if (document.readyState === "complete" || document.readyState === "interactive") {
+    activateUniversalSecurityFortress();
+  } else {
+    window.addEventListener("DOMContentLoaded", activateUniversalSecurityFortress);
+  }
   animate();
 })();
+

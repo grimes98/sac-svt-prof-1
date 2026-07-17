@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SAC · SVT prof | التكوين البيداغوجي والتشريعي للأساتذة المتعاقدين والمتربصين</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" href="assets/Sac-dark.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green: #0d9488;
+      --green-d: #042f2e;
+      --green-l: #14b8a6;
+      --gold: #f59e0b;
+      --bg: #f8fafc;
+      --card: rgba(255, 255, 255, 0.88);
+      --ink: #0f172a;
+      --muted: #475569;
+      --line: rgba(13, 148, 136, 0.28);
+      --shadow: 0 18px 40px rgba(13, 148, 136, 0.14), 0 6px 16px rgba(0, 0, 0, 0.04);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Tajawal', sans-serif; }
+    body, html { background: transparent !important; color: var(--ink); min-height: 100vh; direction: rtl; position: relative; z-index: 0; }
+    
+    header {
+      position: sticky !important; top: 0 !important; z-index: 99999 !important; width: 100% !important;
+      background: rgba(255, 255, 255, 0.94); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border-bottom: 2px solid var(--green); box-shadow: 0 4px 20px rgba(13, 148, 136, 0.14);
+    }
+    .nav { max-width: 1380px; margin: 0 auto; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; gap: 15px; flex-wrap: wrap; }
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 900; font-size: 1.45rem; color: var(--green-d); }
+    .brand img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2px solid var(--green); }
+    .btn-back { background: var(--green); color: #fff !important; font-weight: 800; padding: 8px 18px; border-radius: 12px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; box-shadow: 0 4px 12px rgba(13, 148, 136, 0.25); }
+    .btn-back:hover { background: var(--green-d); transform: translateY(-2px); }
+
+    .container { max-width: 1380px; margin: 35px auto 60px; padding: 0 20px; position: relative; z-index: 10; }
+    
+    .tice-hero {
+      background: rgba(13, 148, 136, 0.35) !important;
+      color: #fff !important; border-radius: 26px; padding: 38px 25px; text-align: center; margin-bottom: 35px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.18) !important; border: none !important; outline: none !important;
+      backdrop-filter: blur(14px) !important; -webkit-backdrop-filter: blur(14px) !important;
+      position: relative; overflow: hidden;
+    }
+    .tice-hero .ic { font-size: 4rem; display: inline-block; margin-bottom: 14px; background: rgba(255, 255, 255, 0.16); padding: 18px; border-radius: 24px; box-shadow: 0 8px 22px rgba(0,0,0,0.25); }
+    .tice-hero h1 { font-size: 2.3rem; font-weight: 900; margin-bottom: 4px; color: #fff !important; text-shadow: 0 2px 10px rgba(0,0,0,0.35); }
+
+    /* الهيكلة الرئيسية المزدوجة: الفهرس الجانبي على اليمين + المحتوى على اليسار */
+    .tice-layout {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    /* الفهرس الجانبي على يمين الصفحة */
+    .sidebar-toc {
+      background: var(--card);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border: 2px solid var(--green);
+      border-radius: 24px;
+      padding: 24px 18px;
+      position: sticky;
+      top: 85px;
+      max-height: calc(100vh - 105px);
+      overflow-y: auto;
+      box-shadow: var(--shadow);
+    }
+    .sidebar-toc::-webkit-scrollbar { width: 6px; }
+    .sidebar-toc::-webkit-scrollbar-thumb { background: var(--green); border-radius: 6px; }
+    .sidebar-toc h3 {
+      font-size: 1.3rem; font-weight: 900; color: var(--green-d); margin-bottom: 18px;
+      padding-bottom: 12px; border-bottom: 2px solid var(--line); display: flex; align-items: center; gap: 8px;
+    }
+    
+    .toc-section-title { font-weight: 900; font-size: 1rem; color: #f59e0b; margin: 16px 0 8px; padding-bottom: 4px; border-bottom: 1px dashed var(--line); display: block; }
+    
+    .toc-list { list-style: none; padding: 0; }
+    .toc-item { margin-bottom: 14px; }
+    .toc-unit-link {
+      display: block; font-weight: 900; font-size: 1.02rem; color: var(--green-d);
+      text-decoration: none; padding: 8px 12px; border-radius: 12px; transition: all 0.2s;
+      background: rgba(13, 148, 136, 0.08); border-inline-start: 4px solid var(--green);
+    }
+    .toc-unit-link:hover, .toc-unit-link.active { background: var(--green); color: #fff !important; transform: translateX(-3px); }
+    
+    .toc-sub-list { list-style: none; padding-inline-start: 14px; margin-top: 6px; display: flex; flex-direction: column; gap: 4px; }
+    .toc-sub-link {
+      display: block; font-weight: 700; font-size: 0.9rem; color: var(--ink);
+      text-decoration: none; padding: 5px 10px; border-radius: 8px; transition: all 0.2s; line-height: 1.5;
+    }
+    .toc-sub-link:hover, .toc-sub-link.active { background: rgba(13, 148, 136, 0.16); color: var(--green) !important; font-weight: 800; padding-inline-start: 14px; }
+
+    /* المحتوى الرئيسي على اليسار */
+    .main-content { min-width: 0; }
+
+    .unit-box {
+      background: var(--card); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border: 2px solid var(--line); border-radius: 26px; padding: 38px; margin-bottom: 40px;
+      box-shadow: var(--shadow); scroll-margin-top: 95px;
+    }
+    .unit-title { font-size: 1.65rem; font-weight: 900; color: var(--green-d); margin-bottom: 28px; display: flex; align-items: center; gap: 14px; border-bottom: 3px solid var(--line); padding-bottom: 16px; }
+    .unit-title span.num { background: linear-gradient(135deg, var(--gold), #d97706); color: #fff; padding: 5px 16px; border-radius: 14px; font-size: 1.15rem; flex-shrink: 0; }
+
+    .sub-unit {
+      background: #ffffff; border: 1.5px solid rgba(13, 148, 136, 0.35);
+      border-radius: 20px; padding: 30px; margin-bottom: 26px; transition: all 0.25s; scroll-margin-top: 100px;
+    }
+    .sub-unit:hover { border-color: var(--green); transform: translateX(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.07); }
+    .sub-unit h3 { font-size: 1.32rem; font-weight: 900; color: var(--green-d); margin-bottom: 18px; display: flex; align-items: center; gap: 10px; border-bottom: 1px dashed var(--line); padding-bottom: 12px; }
+    .sub-unit h3::before { content: "🔹"; color: var(--green); font-size: 1.4rem; }
+    
+    .lead-text { font-size: 1.08rem; line-height: 1.9; color: var(--ink); font-weight: 600; margin-bottom: 18px; background: rgba(13, 148, 136, 0.06); padding: 16px 20px; border-radius: 14px; border-inline-start: 4px solid var(--green); }
+    .body-text { font-size: 1.05rem; line-height: 1.95; color: var(--ink); font-weight: 500; margin-bottom: 16px; }
+
+    .info-list { list-style: none; padding: 0; margin: 18px 0; display: flex; flex-direction: column; gap: 12px; }
+    .info-list li { position: relative; padding-inline-start: 30px; font-size: 1.05rem; line-height: 1.85; color: var(--ink); font-weight: 500; }
+    .info-list li::before { content: "✔"; position: absolute; inset-inline-start: 4px; top: 2px; color: var(--green); font-weight: 900; font-size: 1.15rem; }
+    .info-list li b { color: var(--green-d); font-weight: 800; }
+
+    .tech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px; }
+    .tech-card { background: rgba(13, 148, 136, 0.05); border: 1.5px solid var(--line); border-radius: 16px; padding: 20px; font-size: 1rem; line-height: 1.8; }
+    .tech-card b { color: var(--green-d); font-weight: 900; display: block; margin-bottom: 8px; font-size: 1.1rem; border-bottom: 1px solid var(--line); padding-bottom: 6px; }
+
+    /* المخططات التلخيصية تحت كل درس / عنوان صغير */
+    .diagram-summary { background: #ffffff; border: 2px solid var(--green); border-radius: 20px; padding: 25px; margin: 25px 0 10px; text-align: center; box-shadow: 0 10px 28px rgba(13, 148, 136, 0.12); }
+    .diagram-summary h4 { color: var(--green-d); font-size: 1.15rem; font-weight: 900; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .diagram-summary svg { max-width: 100%; height: auto; margin: 0 auto; display: block; }
+    .diagram-caption { font-size: 0.94rem; color: var(--muted); font-weight: 700; margin-top: 15px; border-top: 1px dashed #cbd5e1; padding-top: 10px; line-height: 1.7; }
+
+    /* التجاوب مع شاشات الهواتف الصغرى */
+    @media (max-width: 960px) {
+      .tice-layout { grid-template-columns: 1fr; }
+      .sidebar-toc { position: relative; top: 0; max-height: none; margin-bottom: 20px; }
+    }
+
+    footer { background: var(--green-d); color: #dfeeeb; padding: 40px 0 24px; text-align: center; margin-top: 50px; font-weight: 600; font-size: 0.94rem; }
+  </style>
+</head>
+<body>
+
+  <!-- شريط الأدمين التلقائي -->
+  <div id="sacTopAdminToolbarContainer"></div>
+
+  <header>
+    <div class="nav">
+      <a class="brand" href="index.html">
+        <img src="assets/Sac-dark.png" alt="SAC Logo">
+        <span>SAC · SVT prof</span>
+      </a>
+      <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+        <div id="sacDateTimeWidget"></div>
+        <a href="takwin.html" class="btn-back">← العودة لفرع التكوين البيداغوجي</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- البانر الرئيسي الشامل والمنظم -->
+    <div class="tice-hero" style="padding: 38px 25px;">
+      <div class="ic">🎓</div>
+      <h1>التكوين البيداغوجي والتشريعي للأساتذة المتعاقدين والمتربصين</h1>
+    </div>
+
+    <!-- الهيكلة المزدوجة: الفهرس الجانبي على اليمين + المحتوى العلمي على اليسار -->
+    <div class="tice-layout">
+      
+      <!-- الفهرس الجانبي التفاعلي على يمين الصفحة -->
+      <aside class="sidebar-toc">
+        <h3>📑 فهرس المقرّر</h3>
+        
+        <ul class="toc-list">
+          <li class="toc-item">
+            <a href="#unit1" class="toc-unit-link active" onclick="highlightToc(event)">📘 الوحدة 1: المناهج التعليمية والجيل الثاني</a>
+            <ul class="toc-sub-list">
+              <li><a href="#sub_1_1" class="toc-sub-link" onclick="highlightToc(event)">1- مفهوم المنهاج التعليمي ومكوناته الرسمية</a></li>
+              <li><a href="#sub_1_2" class="toc-sub-link" onclick="highlightToc(event)">2- مصطلحات الجيل الثاني (ملمح التخرج والكفاءات)</a></li>
+            </ul>
+          </li>
+
+          <li class="toc-item">
+            <a href="#unit2" class="toc-unit-link" onclick="highlightToc(event)">🔺 الوحدة 2: الأقطاب الثلاثة للمثلث الديداكتيكي</a>
+            <ul class="toc-sub-list">
+              <li><a href="#sub_2_1" class="toc-sub-link" onclick="highlightToc(event)">1- أقطاب العملية التعلمية (المعلم، المتعلم، المعرفة)</a></li>
+              <li><a href="#sub_2_2" class="toc-sub-link" onclick="highlightToc(event)">2- العلاقات والأبعاد (التعليم، التعلم، النقل الديداكتيكي)</a></li>
+            </ul>
+          </li>
+
+          <li class="toc-item">
+            <a href="#unit3" class="toc-unit-link" onclick="highlightToc(event)">⚡ الوحدة 3: طرائق وأساليب التدريس النشط</a>
+            <ul class="toc-sub-list">
+              <li><a href="#sub_3_1" class="toc-sub-link" onclick="highlightToc(event)">1- التمييز بين التدريس، الطريقة، الأسلوب والاستراتيجية</a></li>
+              <li><a href="#sub_3_2" class="toc-sub-link" onclick="highlightToc(event)">2- مقارنة التعليم التقليدي بالتعليم النشط الميداني</a></li>
+              <li><a href="#sub_3_3" class="toc-sub-link" onclick="highlightToc(event)">3- الطريقة القياسية (خطوات هربارت الـ 5) والمعدلة</a></li>
+            </ul>
+          </li>
+
+          <li class="toc-item">
+            <a href="#unit4" class="toc-unit-link" onclick="highlightToc(event)">🧠 الوحدة 4: استراتيجيات التنشيط والتعلم التعاوني</a>
+            <ul class="toc-sub-list">
+              <li><a href="#sub_4_1" class="toc-sub-link" onclick="highlightToc(event)">1- العصف الذهني والخرائط المفاهيمية والذهنية</a></li>
+              <li><a href="#sub_4_2" class="toc-sub-link" onclick="highlightToc(event)">2- طريقة حل المشكلات والتعلم بالمشروع في SVT</a></li>
+            </ul>
+          </li>
+
+          <li class="toc-item">
+            <a href="#unit5" class="toc-unit-link" onclick="highlightToc(event)">💬 الوحدة 5: الاتصال التربوي الفعال الميداني</a>
+            <ul class="toc-sub-list">
+              <li><a href="#sub_5_1" class="toc-sub-link" onclick="highlightToc(event)">1- عناصر التواصل التقليدي مقابل التواصل الحديث</a></li>
+              <li><a href="#sub_5_2" class="toc-sub-link" onclick="highlightToc(event)">2- التغذية الراجعة (Feedback) والإصغاء الفعال في القسم</a></li>
+            </ul>
+          </li>
+        </ul>
+      </aside>
+
+      <!-- المحتوى الرئيسي للمقرر العلمي على يسار الفهرس -->
+      <main class="main-content">
+        
+        <!-- الوحدة 1 -->
+        <div class="unit-box" id="unit1">
+          <div class="unit-title">
+            <span class="num">الوحدة 01</span>
+            <span>المناهج التعليمية ومصطلحات الجيل الثاني (Curricula & Competency Approach)</span>
+          </div>
+
+          <div class="sub-unit" id="sub_1_1">
+            <h3>1. مفهوم المنهاج التعليمي ومكوناته الرسمية (Curriculum Concept & Elements)</h3>
+            <div class="lead-text">
+              المنهاج التعليمي (<b>Curriculum</b>) هو: <b>"خطة شاملة لمجموعة من الخبرات والأنشطة التعليمية التعلمية التي يتم إكسابها للمتعلم في صف دراسي أو مرحلة دراسية محددة داخل المدرسة وخارجها تحت إشراف المربي لبناء كفاءاته"</b>.
+            </div>
+            <p class="body-text"><b>عناصر المنهاج الخمسة المتكاملة:</b><br>
+            لا يقتصر المنهاج على قائمة الدروس كما يعتقد البعض، بل يتكون من 5 عناصر حيوية تتفاعل ميدانياً: **1) الأهداف والكفاءات المستهدفة**، **2) المحتوى والموارد العلمية**، **3) طرائق التدريس وأساليب التنشيط**، **4) الوسائل التعليمية والسندات البيداغوجية**، و**5) أدوات وشبكات التقويم**. وأي خلل في عنصر واحد يربك سيرورة المنهاج كاملاً.</p>
+
+            <!-- مخطط تلخيصي 1-1 -->
+            <div class="diagram-summary">
+              <h4>📊 مخطط تلخيصي: عناصر المنهاج التعليمي الخمسة المتكاملة</h4>
+              <svg viewBox="0 0 740 140" xmlns="http://www.w3.org/2000/svg">
+                <rect x="10" y="10" width="720" height="120" rx="14" fill="#f8fafc" stroke="#0d9488" stroke-width="2"/>
+                <circle cx="370" cy="70" r="38" fill="#0d9488"/>
+                <text x="370" y="66" font-weight="900" font-size="13" text-anchor="middle" fill="#fff">عناصر</text>
+                <text x="370" y="82" font-weight="bold" font-size="11" text-anchor="middle" fill="#facc15">المنهاج 5</text>
+
+                <rect x="530" y="25" width="180" height="40" rx="8" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
+                <text x="620" y="50" font-weight="bold" font-size="12" text-anchor="middle" fill="#0369a1">1. الأهداف والكفاءات</text>
+
+                <rect x="530" y="78" width="180" height="40" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+                <text x="620" y="103" font-weight="bold" font-size="12" text-anchor="middle" fill="#15803d">2. المحتوى والموارد العلمية</text>
+
+                <rect x="30" y="25" width="180" height="40" rx="8" fill="#fef08a" stroke="#ca8a04" stroke-width="1.5"/>
+                <text x="120" y="50" font-weight="bold" font-size="12" text-anchor="middle" fill="#a16207">3. طرائق التدريس والتنشيط</text>
+
+                <rect x="30" y="78" width="180" height="40" rx="8" fill="#f3e8ff" stroke="#9333ea" stroke-width="1.5"/>
+                <text x="120" y="103" font-weight="bold" font-size="12" text-anchor="middle" fill="#7e22ce">4. الوسائل + 5. التقويم</text>
+
+                <line x1="408" y1="58" x2="530" y2="45" stroke="#0f172a" stroke-width="1.5"/>
+                <line x1="408" y1="82" x2="530" y2="98" stroke="#0f172a" stroke-width="1.5"/>
+                <line x1="332" y1="58" x2="210" y2="45" stroke="#0f172a" stroke-width="1.5"/>
+                <line x1="332" y1="82" x2="210" y2="98" stroke="#0f172a" stroke-width="1.5"/>
+              </svg>
+              <div class="diagram-caption">تلخيص: المنهاج هو منظومة متكاملة تضمن بناء الكفاءة عبر المحتوى، الطريقة، الوسيلة، والتقويم.</div>
+            </div>
+          </div>
+
+          <div class="sub-unit" id="sub_1_2">
+            <h3>2. مصطلحات مناهج الجيل الثاني (ملمح التخرج، الكفاءات، والموارد) (2nd Gen Terminology)</h3>
+            <p class="body-text">يجب على الأستاذ المتربص والمتعاقد إتقان المصطلحات الدقيقة التي تُبنى عليها مذكرات وتدرجات الجيل الثاني:</p>
+            <div class="tech-grid">
+              <div class="tech-card"><b>ملمح التخرج (Profil de sortie):</b> هو ترجمة للغايات الكبرى التي رسمها القانون التوجيهي للتربية؛ ويحدد المواصفات والكفاءات الشاملة التي يجب أن يمتلكها التلميذ عند تخرجه من طور أو مرحلة دراسية (مثلاً التخرج من التعليم المتوسط BEM).</div>
+              <div class="tech-card"><b>الكفاءة الشاملة (Compétence Globale):</b> هدف ختامي عام نسعى إلى تحقيقه وإرسائه في نهاية سنة دراسية كاملة أو مرحلة تعليمية.</div>
+              <div class="tech-card"><b>الكفاءة الختامية للمقطع (Compétence Terminale):</b> هدف بيداغوجي نسعى لتحقيقه في نهاية مقطع تعلمي (ميدان) بالاعتماد على إدماج عدة موارد.</div>
+              <div class="tech-card"><b>الكفاءة العرضية (Compétence Transversale):</b> كفاءات وقدرات منهجية، تواصلية، وشخصية يشترك في بنائها جميع الأساتذة في كل المواد (مثل منهجية البحث، التفكير النقدي، واستخدام TICE).</div>
+              <div class="tech-card" style="grid-column: 1 / -1;"><b>الموارد التعلمية (Ressources):</b> هي المعارف والمكتسبات التي يجندها التلميذ لحل المشكل، وتنقسم إلى: **موارد معرفية** (حقائق ومفاهيم SVT)، **موارد منهجية** (تحليل وثائق وإنجاز رسومات)، و**موارد قيمية وجدانية** (احترام البيئة والمواطنة).</div>
+            </div>
+
+            <!-- مخطط تلخيصي 1-2 -->
+            <div class="diagram-summary">
+              <h4>📊 مخطط تلخيصي: الهرم التشريعي والبيداغوجي لمصطلحات الجيل الثاني</h4>
+              <svg viewBox="0 0 740 150" xmlns="http://www.w3.org/2000/svg">
+                <rect x="10" y="10" width="720" height="130" rx="14" fill="#f8fafc" stroke="#0d9488" stroke-width="2"/>
+                <!-- Pyramid -->
+                <polygon points="370,25 480,115 260,115" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+                <line x1="305" y1="80" x2="435" y2="80" stroke="#0284c7" stroke-width="1.5"/>
+                <text x="370" y="60" font-weight="900" font-size="14" text-anchor="middle" fill="#0369a1">ملمح التخرج والكفاءة الشاملة</text>
+                <text x="370" y="102" font-weight="bold" font-size="13" text-anchor="middle" fill="#0f172a">الكفاءات الختامية للمقاطع التعلمية</text>
+                
+                <rect x="520" y="45" width="190" height="60" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+                <text x="615" y="68" font-weight="bold" font-size="12" text-anchor="middle" fill="#15803d">الموارد المعرفية والمنهجية</text>
+                <text x="615" y="88" font-size="11" text-anchor="middle" fill="#0f172a">لبنات البناء اليومي في الحصص</text>
+
+                <rect x="30" y="45" width="190" height="60" rx="8" fill="#fef08a" stroke="#ca8a04" stroke-width="1.5"/>
+                <text x="125" y="68" font-weight="bold" font-size="12" text-anchor="middle" fill="#a16207">الكفاءات العرضية</text>
+                <text x="125" y="88" font-size="11" text-anchor="middle" fill="#0f172a">قدرات منهجية مشتركة لكل المواد</text>
+              </svg>
+              <div class="diagram-caption">تلخيص: تتكاتف الموارد اليومية لتبني الكفاءات الختامية وصولاً لتحقيق ملمح التخرج الرسمي.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- الوحدة 2 -->
+        <div class="unit-box" id="unit2">
+          <div class="unit-title">
+            <span class="num">الوحدة 02</span>
+            <span>الأقطاب الثلاثة للمثلث الديداكتيكي والعلاقات البيداغوجية (The Didactic Triangle)</span>
+          </div>
+
+          <div class="sub-unit" id="sub_2_1">
+            <h3>1. أقطاب العملية التعلمية التفاعلية (المعلم، المتعلم، المعرفة) (The 3 Poles)</h3>
+            <p class="body-text">تؤكد علوم التربية والديداكتيك أن العملية التعليمية التعلمية تتكون من 3 أقطاب محورية تشكل ما يُعرف بـ **المثلث الديداكتيكي (Triangle Didactique)**:</p>
+            <ul>
+              <li><b>قطب المعلم / الأستاذ (Pôle Enseignant):</b> الميسر والموجه والمخطط للوضعية البيداغوجية.</li>
+              <li><b>قطب المتعلم / التلميذ (Pôle Apprenant):</b> المحور النشط والفاعل الذي يبني معرفته بنفسه.</li>
+              <li><b>قطب المعرفة / المادة (Pôle Savoir):</b> المفاهيم البيولوجية والجيولوجية المستهدفة من المنهاج.</li>
+            </ul>
+
+            <!-- مخطط تلخيصي 2-1 -->
+            <div class="diagram-summary">
+              <h4>📊 مخطط تلخيصي: المثلث الديداكتيكي التفاعلي وأبعاده الثلاثة</h4>
+              <svg viewBox="0 0 740 220" xmlns="http://www.w3.org/2000/svg">
+                <rect x="10" y="10" width="720" height="200" rx="14" fill="#f8fafc" stroke="#0d9488" stroke-width="2"/>
+                <!-- Top Node: Savoir -->
+                <rect x="290" y="25" width="160" height="45" rx="10" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+                <text x="370" y="53" font-weight="900" font-size="15" text-anchor="middle" fill="#0369a1">المعرفة (Savoir)</text>
+                
+                <!-- Bottom Left Node: Enseignant -->
+                <rect x="80" y="145" width="160" height="45" rx="10" fill="#fef08a" stroke="#ca8a04" stroke-width="2"/>
+                <text x="160" y="173" font-weight="900" font-size="15" text-anchor="middle" fill="#a16207">المعلم (Enseignant)</text>
+
+                <!-- Bottom Right Node: Apprenant -->
+                <rect x="500" y="145" width="160" height="45" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+                <text x="580" y="173" font-weight="900" font-size="15" text-anchor="middle" fill="#15803d">المتعلم (Apprenant)</text>
+
+                <!-- Sides / Relations -->
+                <line x1="330" y1="70" x2="190" y2="145" stroke="#0f172a" stroke-width="2.5" stroke-dasharray="5,3"/>
+                <text x="210" y="105" font-weight="bold" font-size="12" fill="#0f172a">النقل الديداكتيكي</text>
+
+                <line x1="410" y1="70" x2="550" y2="145" stroke="#0f172a" stroke-width="2.5" stroke-dasharray="5,3"/>
+                <text x="510" y="105" font-weight="bold" font-size="12" fill="#0f172a">التمثل والتعلم</text>
+
+                <line x1="240" y1="167" x2="500" y2="167" stroke="#0f172a" stroke-width="2.5"/>
+                <text x="370" y="160" font-weight="bold" font-size="13" text-anchor="middle" fill="#0d9488">العقد الديداكتيكي والتوجيه</text>
+              </svg>
+              <div class="diagram-caption">تلخيص: أي توازن في الحصة يعتمد على التناغم التام بين أقطاب المثلث الثلاثة وعلاقاتهم.</div>
+            </div>
+          </div>
+
+          <div class="sub-unit" id="sub_2_2">
+            <h3>2. الأبعاد والعلاقات بين الأقطاب الثلاثة (العقد الديداكتيكي والنقل) (Dimensions & Relations)</h3>
+            <div class="tech-grid">
+              <div class="tech-card"><b>علاقة المعلم بالمعرفة (بعد النقل الديداكتيكي):</b> كيف يقوم الأستاذ بتحويل وتبسيط المعرفة العالمة الأكاديمية إلى معرفة مدرسية تناسب مدارك تلاميذ التعليم المتوسط.</div>
+              <div class="tech-card"><b>علاقة المتعلم بالمعرفة (بعد التعلم والتمثل):</b> سيرورة استيعاب التلميذ للسندات وبناء المفهوم الميداني وتجاوز تصوراته الخاطئة القديمة.</div>
+              <div class="tech-card"><b>علاقة المعلم بالمتعلم (بعد العقد الديداكتيكي والإدارة الصفية):</b> مجموع الحقوق والواجبات والقواعد الضمنية والصريحة التي تنظم التفاعل الاجتماعي والبيداغوجي داخل القسم.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- الوحدة 3 -->
+        <div class="unit-box" id="unit3">
+          <div class="unit-title">
+            <span class="num">الوحدة 03</span>
+            <span>طرائق وأساليب التدريس النشط ومقارنتها بالتعليم التقليدي (Active Teaching Methods)</span>
+          </div>
+
+          <div class="sub-unit" id="sub_3_1">
+            <h3>1. التمييز الدقيق بين التدريس، الطريقة، الأسلوب، والاستراتيجية (Method vs Style vs Strategy)</h3>
+            <p class="body-text">كثيراً ما يخلط الأساتذة الجدد بين هذه المفاهيم الأربعة، وإليكِ الفرق الميداني الواضح:</p>
+            <ul class="info-list">
+              <li><b>التدريس (Teaching):</b> نشاط مهني مخطط ومقصود يهدف إلى مساعدة المتعلمين على التعلم واكتساب الكفاءات.</li>
+              <li><b>طريقة التدريس (Method):</b> مجموعة الخطوات المنهجية المتسلسلة المتبعة لتحقيق أدف الدرس (مثل طريقة حل المشكلات أو الاستقرائية).</li>
+              <li><b>أسلوب التدريس (Style):</b> الأداء الخاص واللمسة الشخصية الفردية التي يتميز بها أستاذ عن آخر أثناء تنفيذ الطريقة (نبرة الصوت، الفكاهة، التواصل البصري).</li>
+              <li><b>استراتيجية التدريس (Strategy):</b> الخطة الشاملة طويلة المدى التي تضم الطرائق، الأساليب، الوسائل والتوجيهات المعتمدة لمواجهة وضعيات القسم المتغيرة.</li>
+            </ul>
+
+            <!-- مخطط تلخيصي 3-1 -->
+            <div class="diagram-summary">
+              <h4>📊 مخطط تلخيصي: شجرة المفاهيم البيداغوجية الأربعة للتدريس</h4>
+              <svg viewBox="0 0 740 140" xmlns="http://www.w3.org/2000/svg">
+                <rect x="10" y="10" width="720" height="120" rx="14" fill="#f8fafc" stroke="#0d9488" stroke-width="2"/>
+                <rect x="520" y="35" width="180" height="70" rx="10" fill="#f3e8ff" stroke="#9333ea" stroke-width="2"/>
+                <text x="610" y="65" font-weight="900" font-size="15" text-anchor="middle" fill="#7e22ce">الاستراتيجية (الخطة الكبرى)</text>
+                <text x="610" y="88" font-weight="bold" font-size="12" text-anchor="middle" fill="#0f172a">الخطة الشاملة للموقف الكامل</text>
+                
+                <rect x="280" y="35" width="180" height="70" rx="10" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+                <text x="370" y="65" font-weight="900" font-size="15" text-anchor="middle" fill="#0369a1">الطريقة (الخطوات)</text>
+                <text x="370" y="88" font-weight="bold" font-size="12" text-anchor="middle" fill="#0f172a">المسار المنهجي المتسلسل للدرس</text>
+
+                <rect x="40" y="35" width="180" height="70" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+                <text x="130" y="65" font-weight="900" font-size="15" text-anchor="middle" fill="#15803d">الأسلوب (اللمسة الشخصية)</text>
+                <text x="130" y="88" font-weight="bold" font-size="12" text-anchor="middle" fill="#0f172a">أداء الأستاذ ونبرته وحضوره</text>
+
+                <path d="M 520 70 L 460 70" stroke="#0f172a" stroke-width="2" marker-end="url(#arrow)"/>
+                <path d="M 280 70 L 220 70" stroke="#0f172a" stroke-width="2" marker-end="url(#arrow)"/>
+              </svg>
+              <div class="diagram-caption">تلخيص: الاستراتيجية هي المظلة التي تحتوي الطريقة، والطريقة ينفذها الأستاذ بأسلوبه وشخصيته المتميزة.</div>
+            </div>
+          </div>
+
+          <div class="sub-unit" id="sub_3_2">
+            <h3>2. مقارنة التعليم التقليدي بالتعليم النشط الميداني (Traditional vs Active Learning)</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>وجه المقارنة (Criteria)</th>
+                    <th>التعليم التقليدي التلقيني (Traditional)</th>
+                    <th>التعلم النشط الميداني (Active Learning - الموصى به)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><b>الأهداف البيداغوجية</b></td>
+                    <td>غير معلنة للتلميذ، تركز على الحفظ والاستظهار.</td>
+                    <td>معلنة وواضحة، يشارك التلاميذ في فهمها، وتركز على بناء الكفاءة.</td>
+                  </tr>
+                  <tr>
+                    <td><b>دور المعلم في القسم</b></td>
+                    <td>ملقن ومصدر وحيد للمعلومة، يسيطر على كل الكلام.</td>
+                    <td>ميسر، موجه، منشط، ومصمم للوضعيات الاستقصائية المخبرية.</td>
+                  </tr>
+                  <tr>
+                    <td><b>دور التلميذ في الحصة</b></td>
+                    <td>سلبي، متلقٍّ وحافظ للمعلومة فقط دون مبادرة.</td>
+                    <td>إيجابي نشط، يلاحظ، يجرب، يناقش، ويبني معرفته بنفسه.</td>
+                  </tr>
+                  <tr>
+                    <td><b>نظام العمل وقواعد الصف</b></td>
+                    <td>يفرضه المعلم بصرامة وشدة وعقاب وتخويف.</td>
+                    <td>يشترك المتعلمون في وضعه عبر ميثاق القسم في جو ديمقراطي محفز.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="sub-unit" id="sub_3_3">
+            <h3>3. الطريقة القياسية (خطوات هربارت الـ 5) والطريقة المعدلة لعلوم الطبيعة والحياة</h3>
+            <p class="body-text"><b>الطريقة القياسية الاستقرائية (خطوات هربارت الخمس):</b> حدد المربي هربارت 5 خطوات ثابتة للتدريس الاستقرائي: **1) التمهيد، 2) العرض، 3) الربط والموازنة والمقارنة، 4) استنتاج القاعدة، و5) التطبيق**.</p>
+            <p class="body-text"><b>الطريقة الاستنباطية (القياسية العكسية):</b> تنطلق عكس الاستقرائية؛ من القاعدة والمبدأ العام، ثم تنتقل إلى تفصيل الجزئيات وتطبيق الأمثلة الشواهد عليها.</p>
+            <p class="body-text"><b>الطريقة المعدلة الخاصة بتدريس العلوم الطبيعية (Modified Method):</b><br>
+            لتلائم المقاربة بالكفاءات في مادة SVT، تم تعديل الخطوات لتصبح: **توجيه التلاميذ نحو المشكلة ← عرض السندات والملاحظة ← استخراج الأمثلة والتجريب ← استنتاج المفهوم أو القاعدة ← التطبيق والإدماج**.</p>
+
+            <!-- مخطط تلخيصي 3-3 -->
+            <div class="diagram-summary">
+              <h4>📊 مخطط تلخيصي: مقارنة الطريقة الاستقرائية بالطريقة الاستنباطية</h4>
+              <svg viewBox="0 0 740 140" xmlns="http://www.w3.org/2000/svg">
+                <rect x="10" y="10" width="720" height="120" rx="14" fill="#f8fafc" stroke="#0d9488" stroke-width="2"/>
+                <rect x="420" y="35" width="280" height="70" rx="10" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+                <text x="560" y="65" font-weight="900" font-size="15" text-anchor="middle" fill="#0369a1">الطريقة الاستقرائية (Inductive)</text>
+                <text x="560" y="88" font-weight="bold" font-size="12" text-anchor="middle" fill="#0f172a">الانطلاق من الأمثلة والتجارب للوصول للقاعدة</text>
+                
+                <rect x="40" y="35" width="280" height="70" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+                <text x="180" y="65" font-weight="900" font-size="15" text-anchor="middle" fill="#15803d">الطريقة الاستنباطية (Deductive)</text>
+                <text x="180" y="88" font-weight="bold" font-size="12" text-anchor="middle" fill="#0f172a">الانطلاق من القاعدة العامة لتطبيقها على الجزئيات</text>
+              </svg>
+              <div class="diagram-caption">تلخيص: يراوح أستاذ العلوم بين الاستقرائي لبناء المفهوم، والاستنباطي لتوظيفه في التمارين.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- الوحدة 4 -->
+        <div class="unit-box" id="unit4">
+          <div class="unit-title">
+            <span class="num">الوحدة 04</span>
+            <span>استراتيجيات التنشيط الذهني والتعلم التعاوني والمشروع (Active & Cooperative Strategies)</span>
+          </div>
+
+          <div class="sub-unit" id="sub_4_1">
+            <h3>1. العصف الذهني والخرائط المفاهيمية والذهنية (Brainstorming & Mind Maps)</h3>
+            <div class="tech-grid">
+              <div class="tech-card">
+                <b>العصف الذهني (Brainstorming):</b> وضع ذهن التلميذ في حالة من الإثارة والتفكير الحر في كل الاتجاهات لحل مشكلة بيولوجية معينة، بهدف توليد أكبر عدد ممكن من الأفكار دون أي نقد أو تقييم أولي، ثم فرزها في النهاية.
+              </div>
+              <div class="tech-card">
+                <b>الخرائط الذهنية والمفاهيمية (Mind Maps):</b> أداة ديداكتيكية لتمثيل المادة العلمية بصرياً؛ حيث يوضع المفهوم المركزي في الوسط، وتتفرع منه الموارد والمفاهيم الفرعية بأسهم وكلمات رابطة لإبراز التسلسل المنطقي.
+              </div>
+            </div>
+
+            <!-- مخطط تلخيصي 4-1 -->
+            <div class="diagram-summary">
+              <h4>📊 مخطط تلخيصي: قاعدتا العصف الذهني الناجح في المخبر</h4>
+              <svg viewBox="0 0 740 140" xmlns="http://www.w3.org/2000/svg">
+                <rect x="10" y="10" width="720" height="120" rx="14" fill="#f8fafc" stroke="#0d9488" stroke-width="2"/>
+                <rect x="420" y="35" width="280" height="70" rx="10" fill="#fef08a" stroke="#ca8a04" stroke-width="2"/>
+                <text x="560" y="65" font-weight="900" font-size="15" text-anchor="middle" fill="#a16207">1. الكم قبل الكيف في البداية</text>
+                <text x="560" y="88" font-weight="bold" font-size="12" text-anchor="middle" fill="#0f172a">تشجيع توليد أكبر عدد ممكن من الفرضيات</text>
+                
+                <rect x="40" y="35" width="280" height="70" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+                <text x="180" y="65" font-weight="900" font-size="15" text-anchor="middle" fill="#15803d">2. تأجيل النقد والتقييم نهائياً</text>
+                <text x="180" y="88" font-weight="bold" font-size="12" text-anchor="middle" fill="#0f172a">منع أي سخرية من الأفكار لتشجيع الإبداع</text>
+              </svg>
+              <div class="diagram-caption">تلخيص: العصف الذهني يحرر خيال التلميذ العلمي ويدربه على طرح الفرضيات بجرأة وثقة.</div>
+            </div>
+          </div>
+
+          <div class="sub-unit" id="sub_4_2">
+            <h3>2. طريقة حل المشكلات والتعلم بالمشروع في مادة علوم الطبيعة والحياة (Problem Solving & Projects)</h3>
+            <p class="body-text"><b>طريقة حل المشكلات (Problem Solving Approach):</b> وضع التلميذ أمام موقف مقلق ومحير يثير فضوله ويدفعه للبحث عن حل عبر خطوات المسعى العلمي (OHERIC).</p>
+            <p class="body-text"><b>طريقة المشروع (Project-Based Learning):</b> إسناد نشاط عملي ميداني مستديم لفوج من التلاميذ (مثل إنجاز معشبة نباتية، مجسم للقلب، أو خريطة جيولوجية للبلدية)، مما ينمي كفاءاتهم العرضية وروح التعاون والمسؤولية.</p>
+          </div>
+        </div>
+
+        <!-- الوحدة 5 -->
+        <div class="unit-box" id="unit5">
+          <div class="unit-title">
+            <span class="num">الوحدة 05</span>
+            <span>الاتصال التربوي الفعال الميداني وعناصره وأدوار التغذية الراجعة (Effective Pedagogical Communication)</span>
+          </div>
+
+          <div class="sub-unit" id="sub_5_1">
+            <h3>1. عناصر التواصل التقليدي مقابل التواصل الحديث ثنائي الاتجاه (Traditional vs Modern Communication)</h3>
+            <p class="body-text">أكد المفتش حمادي سليمان في سنده التكويني على الفرق الهائل بين نمطي التواصل في القسم:</p>
+            <div class="tech-grid">
+              <div class="tech-card"><b>التواصل التقليدي (أحادي الاتجاه - خطي):</b> الأستاذ هو المرسل الدائم والمسيطر، والتلميذ هو المستقبل السلبي الذي لا يحق له النقاش. يسبب مللاً وضعفاً في الاستيعاب.</div>
+              <div class="tech-card"><b>التواصل الحديث (ثنائي الاتجاه - تفاعلي):</b> يتبادل فيه المعلم والتلميذ أدوار المرسل والمستقبل باستمرار عبر النقاش الأفقي والعمودي في الأفواج.</div>
+            </div>
+
+            <!-- مخطط تلخيصي 5-1 -->
+            <div class="diagram-summary">
+              <h4>📊 مخطط تلخيصي: التواصل أحادي الاتجاه مقابل التواصل التفاعلي الحديث</h4>
+              <svg viewBox="0 0 740 140" xmlns="http://www.w3.org/2000/svg">
+                <rect x="10" y="10" width="720" height="120" rx="14" fill="#f8fafc" stroke="#0d9488" stroke-width="2"/>
+                <rect x="420" y="35" width="280" height="70" rx="10" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+                <text x="560" y="65" font-weight="900" font-size="15" text-anchor="middle" fill="#b91c1c">التواصل التقليدي (خطي أحادي)</text>
+                <text x="560" y="88" font-weight="bold" font-size="12" text-anchor="middle" fill="#0f172a">الأستاذ يُلقن والتلميذ يستقبل بسلبية</text>
+                
+                <rect x="40" y="35" width="280" height="70" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+                <text x="180" y="65" font-weight="900" font-size="15" text-anchor="middle" fill="#15803d">التواصل الحديث (تفاعلي دائري)</text>
+                <text x="180" y="88" font-weight="bold" font-size="12" text-anchor="middle" fill="#0f172a">تبادل مستمر للأدوار ونقاش أفقي في الأفواج</text>
+              </svg>
+              <div class="diagram-caption">تلخيص: التواصل التفاعلي يصنع قسماً حيوياً يشعر فيه التلميذ بكيانه وقيمته العلمية.</div>
+            </div>
+          </div>
+
+          <div class="sub-unit" id="sub_5_2">
+            <h3>2. التغذية الراجعة الفورية (Feedback) والإصغاء الفعال في القسم (Feedback & Active Listening)</h3>
+            <p class="body-text"><b>التغذية الراجعة الفورية (Feedback):</b> هي رد الفعل والإجابة التي تؤكد للأستاذ أو التلميذ مدى فهم الرسالة وتصحيح الخطأ فور وقوعه، وهي الركن الذي لا يكتمل بدونه أي تواصل بيداغوجي ناجح.</p>
+            <p class="body-text"><b>الإصغاء التربوي الفعال (Active Listening):</b> قدرة الأستاذ المتربص على الاستماع بإنصات واهتمام وتفهم لأسئلة التلاميذ ومشكلاتهم دون مقاطعة أو استهزاء، مما يوطد العلاقات الإنسانية ويعزز انضباط الصف.</p>
+          </div>
+        </div>
+
+      </main>
+    </div>
+
+  </div>
+
+  <footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <h4 style="display:flex;align-items:center;gap:10px">
+          <img src="assets/Sac-dark.png" alt="SAC Logo" style="width:38px;height:38px;object-fit:contain;">
+          منصة SAC · SVT prof
+        </h4>
+        <p style="color:#bcd9d3;font-size:.92rem;max-width:360px;line-height:1.8;">
+          فضاء رقمي تعليمي مرن، مبني بالاعتماد على أعمال ومجهودات نخبة من أساتذة علوم الطبيعة والحياة، مفتوح وداعم للأستاذ في مختلف مراحل حياته المهنية، من التكوين إلى الترقية، مرورًا بالتخطيط والتدريس.
+        </p>
+      </div>
+      <div>
+        <h4>روابط سريعة</h4>
+        <a href="index.html#contents">التكوين البيداغوجي</a>
+        <a href="index.html#library">المكتبة الرقمية</a>
+        <a href="index.html#svt">ركن SVT التخصصي</a>
+        <a href="index.html#services">الخدمات المخصصة</a>
+        <a href="index.html#ai">المستشار الذكي AI</a>
+      </div>
+      <div>
+        <h4>الأقسام والخدمات</h4>
+        <a href="index.html#library">مذكّرات الأساتذة</a>
+        <a href="index.html#library">وثائق الأستاذ المرافقة</a>
+        <a href="index.html#library">عروض باوربوينت TICE</a>
+        <a href="index.html#library">فروض واختبارات فصلية</a>
+        <a href="sac_download_center.html">مركز التحميل المباشر</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      © 2026 منصة <b>SAC · SVT prof</b> — جميع الحقوق محفوظة للأستاذة قريمس أماني · تم التحديث في جويلية 2026
+    </div>
+  </div>
+</footer>
+
+  <script>
+    function scrollToUnit(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        if (event && event.currentTarget) event.currentTarget.classList.add('active');
+      }
+    }
+
+    function highlightToc(event) {
+      if (event && event.currentTarget) {
+        document.querySelectorAll('.toc-unit-link, .toc-sub-link').forEach(l => l.classList.remove('active'));
+        event.currentTarget.classList.add('active');
+      }
+    }
+  </script>
+
+  <script src="sac-chatbot.js"></script>
+  <div id="antiScreenshotOverlay">
+  <h3>🔒 محتوى بيداغوجي محمي حصري لمنصة SAC · SVT prof</h3>
+  <p>يُمنع التقاط الشاشة أو فحص الشفرة برمجياً أو نسخ المحتوى دون إذن كتابي رسمي من الأستاذة قريمس أماني — جميع محاولات الاختراق تُسجل بالوقت والتاريخ وتفريغ الحافظة.</p>
+</div>
+<script src="sac-cursor-birds.js"></script>
+</body>
+</html>
