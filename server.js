@@ -159,6 +159,17 @@ const server = http.createServer(async (req, res) => {
           });
         }
       }
+      if (urlPath.includes("takwin-03") || urlPath.includes("namaw")) {
+        const altPath = path.join(__dirname, fs.existsSync(path.join(__dirname, "takwin-namaw.html")) ? "takwin-namaw.html" : "takwin-03.html");
+        if (fs.existsSync(altPath)) {
+          return fs.readFile(altPath, (err, altContent) => {
+            if (!err) {
+              res.writeHead(200, { ...SECURITY_HEADERS, "Content-Type": "text/html; charset=UTF-8" });
+              return res.end(altContent, "utf-8");
+            }
+          });
+        }
+      }
       fs.readFile(path.join(__dirname, 'index.html'), (err, indexContent) => {
         if (err) {
           res.writeHead(500, { ...SECURITY_HEADERS, 'Content-Type': 'text/plain; charset=UTF-8' });
