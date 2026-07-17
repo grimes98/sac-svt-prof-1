@@ -599,23 +599,42 @@
           }
 
           
-          /* حماية الإطارات في وضع الظلام: أي إطار أبيض يظل نصه أسود والعناوين زمردية/سماوية */
-          .diagram-box, table, tbody, tr, td, .tech-card span.eng, #baridimobBox {
+          /* حماية وتناغم كافة الإطارات في وضع الظلام: جعل الصناديق داكنة ونصوصها ناصعة لمنع البياض على البياض نهائياً */
+          .unit-box, .sub-unit, .sidebar-toc, .tech-card, .lead-text, .unit-tabs, .tab-btn, .toc-unit-link {
+            background: rgba(15, 23, 42, 0.88) !important;
+            border-color: rgba(45, 212, 191, 0.38) !important;
+            color: #f8fafc !important;
+            box-shadow: 0 14px 35px rgba(0, 0, 0, 0.65) !important;
+          }
+          .sub-unit p, .sub-unit div, .sub-unit li, .lead-text, .tech-card {
+            color: #f8fafc !important;
+          }
+          .unit-title, .sub-unit h3, .sidebar-toc h3, .tech-card b, .diagram-box h4 {
+            color: #38bdf8 !important;
+          }
+          code.term, code.syntax, span.eng {
+            color: #2dd4bf !important;
+            background: rgba(13, 148, 136, 0.2) !important;
+            border: 1px solid #2dd4bf !important;
+            font-weight: 900 !important;
+          }
+          
+          /* الصناديق التي تظل بيضاء (مثل الرسومات البيانية والجداول وصندوق الدفع) يكون نصها أسود ملكي دائماً */
+          .diagram-box, table, tbody, tr, td, #baridimobBox {
             background: #ffffff !important;
             color: #0f172a !important;
           }
-          .diagram-box p, .diagram-box div, .diagram-box span, table td, table td span, table td div {
+          .diagram-box p, .diagram-box div, .diagram-box span, table td, table td span, table td div, #baridimobBox * {
             color: #0f172a !important;
           }
-          .diagram-box h4, table th, table td b, .tech-card b, .sub-unit h3, .unit-title {
+          .diagram-box h4, table th, table td b, #baridimobBox .title-pay {
             color: #0d9488 !important;
             font-weight: 900 !important;
           }
-          code.term, code.syntax, span.eng {
-            color: #0d9488 !important;
+          .diagram-box code.term, .diagram-box code.syntax, table code.term, table code.syntax {
+            color: #042f2e !important;
             background: #f1f5f9 !important;
-            border-color: #cbd5e1 !important;
-            font-weight: 900 !important;
+            border: 1px solid #cbd5e1 !important;
           }
           .tice-hero {
             background: rgba(13, 148, 136, 0.35) !important;
