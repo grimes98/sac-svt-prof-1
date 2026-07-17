@@ -9,6 +9,6 @@
   },
   "scripts": {
     "start": "node server.js",
-    "build": "echo \"No build required. Standalone Node.js server ready.\""
+    "build": "mkdir -p dist && cp -a *.html *.js *.json *.sql assets talkhisat dist/ 2>/dev/null || true && echo \"Build complete for both Node.js server and static dist directory\""
   }
 }

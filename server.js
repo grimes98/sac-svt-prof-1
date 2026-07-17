@@ -35,6 +35,12 @@ const SECURITY_HEADERS = {
 };
 
 const server = http.createServer(async (req, res) => {
+  // معالج نبض الحياة السريع (Keep-Alive Heartbeat / Ping Endpoint) للحفاظ على نشاط الخادم على Render ومنع وضع السكون
+  if (req.method === "GET" && (req.url === "/api/ping" || req.url === "/ping")) {
+    res.writeHead(200, { ...SECURITY_HEADERS, "Content-Type": "text/plain; charset=UTF-8" });
+    return res.end("PONG 🟢 — SAC server is awake and active!");
+  }
+
   // 1. معالج واجهة برمجة التطبيقات الذكية (/api/chat) لربط المساعد الذكي بنماذج الذكاء الاصطناعي العالمية (Arena / OpenRouter / OpenAI)
   if (req.method === 'POST' && req.url.startsWith('/api/chat')) {
     let body = '';
