@@ -529,13 +529,13 @@
             z-index: 10 !important;
           }
           /* حماية وضمان ظهور جميع عناصر الصفحة وتأثير الزجاج الضبابي الفاخر لإظهار زخات الشهب والمشهد الطبيعي خلف الإطارات الشفافة */
-          .card, .card-box, .intro, .intro-box, .qa-box, .panel-in, .svc, .stat, .def, .struct, .hubcard, .user-card, .doc-card, table, th, td, .comment-card, .reply-card, .dlbox, .example, .newbie, .setup-banner, .strat, .tip, .tips, #boardUsers, #boardContent, #boardFiles, #boardComments, #boardOrders, .svc-page-box, .svc-price-card, .srv-form, .srv-package, .spec-box, .price-card, .pkg-card {
-            background: rgba(21, 31, 50, 0.60) !important;
-            backdrop-filter: blur(10px) !important;
-            -webkit-backdrop-filter: blur(10px) !important;
+          .card, .card-box, .intro, .intro-box, .qa-box, .panel-in, .svc, .stat, .def, .struct, .hubcard, .user-card, .doc-card, .comment-card, .reply-card, .dlbox, .example, .newbie, .setup-banner, .strat, .tip, .tips, #boardUsers, #boardContent, #boardFiles, #boardComments, #boardOrders, .svc-page-box, .svc-price-card, .srv-form, .srv-package, .spec-box, .price-card, .pkg-card, .unit-box, .sub-unit, .sidebar-toc, .tech-card, .lead-text, .unit-tabs, .tab-btn, .toc-unit-link, .theory-card, .theory-body, .theory-body div.sec, .algo-box, .info-box, .memo, .memo-row, .dish, .dgroup, .docgroup, .qcard, .table-card, .tbl-card, .content-card, .pay-section, .steps, .state, .panel, .sec-divider {
+            background: rgba(15, 23, 42, 0.90) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
             color: #f8fafc !important;
-            border-color: rgba(45, 212, 191, 0.35) !important;
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.55) !important;
+            border-color: rgba(45, 212, 191, 0.38) !important;
+            box-shadow: 0 14px 35px rgba(0, 0, 0, 0.65) !important;
             position: relative !important;
             z-index: 10 !important;
           }
@@ -557,64 +557,26 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.8) !important;
           }
           
-          /* إجبار كتابة معلومات التحويل البريدي وبريدي موب على اللون الأسود دائماً سواء في الليل أو النهار */
-          #baridimobBox, #baridimobBox div, #baridimobBox span, #baridimobBox b, #baridimobBox p {
-            color: #0f172a !important;
-            background-color: #ffffff !important;
-          }
-          #baridimobBox span.ccp-num, #baridimobBox span.rip-num {
-            font-family: monospace !important;
-            font-weight: 900 !important;
-            color: #0f172a !important;
-            background: #f1f5f9 !important;
-            border: 1px solid #cbd5e1 !important;
-            padding: 2px 8px !important;
-            border-radius: 6px !important;
-          }
-          #baridimobBox .title-pay {
-            color: #0d9488 !important;
-            font-weight: 900 !important;
-            font-size: 1rem !important;
-          }
-
-          
-          /* إجبار كتابة معلومات التحويل البريدي وبريدي موب على اللون الأسود دائماً سواء في الليل أو النهار */
-          #baridimobBox, #baridimobBox div, #baridimobBox span, #baridimobBox b, #baridimobBox p {
-            color: #0f172a !important;
-            background-color: #ffffff !important;
-          }
-          #baridimobBox span.ccp-num, #baridimobBox span.rip-num {
-            font-family: monospace !important;
-            font-weight: 900 !important;
-            color: #0f172a !important;
-            background: #f1f5f9 !important;
-            border: 1px solid #cbd5e1 !important;
-            padding: 2px 8px !important;
-            border-radius: 6px !important;
-          }
-          #baridimobBox .title-pay {
-            color: #0d9488 !important;
-            font-weight: 900 !important;
-            font-size: 1rem !important;
-          }
-
-          
-          /* حماية وتناغم كافة الإطارات في وضع الظلام: جعل الصناديق داكنة ونصوصها ناصعة لمنع البياض على البياض نهائياً */
-          .unit-box, .sub-unit, .sidebar-toc, .tech-card, .lead-text, .unit-tabs, .tab-btn, .toc-unit-link {
-            background: rgba(15, 23, 42, 0.88) !important;
-            border-color: rgba(45, 212, 191, 0.38) !important;
-            color: #f8fafc !important;
-            box-shadow: 0 14px 35px rgba(0, 0, 0, 0.65) !important;
-          }
-          .sub-unit p, .sub-unit div, .sub-unit li, .lead-text, .tech-card {
+          .sub-unit p, .sub-unit div, .sub-unit li, .lead-text, .tech-card, .theory-body, .theory-body div.sec, .sec {
             color: #f8fafc !important;
           }
-          .unit-title, .sub-unit h3, .sidebar-toc h3, .tech-card b, .diagram-box h4 {
+          .unit-title, .sub-unit h3, .sidebar-toc h3, .tech-card b, .diagram-box h4, .diagram-summary h4, .theory-body b, .sec b, .theory-card b, .theory-head span {
             color: #38bdf8 !important;
+          }
+          .theory-head {
+            background: linear-gradient(135deg, #042f2e, #0d9488) !important;
+            color: #ffffff !important;
+            border-bottom: 3px solid #facc15 !important;
+          }
+          .kw-tag, .kw, .tag, .chip, .pill, .badge, .freebadge, .lock-badge, .lockbadge, .prof-badge, .teacherbadge {
+            background: rgba(250, 204, 21, 0.18) !important;
+            color: #facc15 !important;
+            border: 1px solid #facc15 !important;
+            font-weight: 900 !important;
           }
           code.term, code.syntax, span.eng {
             color: #2dd4bf !important;
-            background: rgba(13, 148, 136, 0.2) !important;
+            background: rgba(13, 148, 136, 0.22) !important;
             border: 1px solid #2dd4bf !important;
             font-weight: 900 !important;
           }
@@ -624,14 +586,14 @@
             background: #ffffff !important;
             color: #0f172a !important;
           }
-          .diagram-box p, .diagram-box div, .diagram-box span, .diagram-summary p, .diagram-summary div, .diagram-summary span, table td, table td span, table td div, #baridimobBox * {
+          .diagram-box *, .diagram-summary *, table td, table td *, #baridimobBox *, #baridimobBox div, #baridimobBox span, #baridimobBox b, #baridimobBox p {
             color: #0f172a !important;
           }
           .diagram-box h4, .diagram-summary h4, table th, table td b, #baridimobBox .title-pay {
             color: #0d9488 !important;
             font-weight: 900 !important;
           }
-          .diagram-box code.term, .diagram-box code.syntax, .diagram-summary code.term, .diagram-summary code.syntax, table code.term, table code.syntax {
+          .diagram-box code.term, .diagram-box code.syntax, .diagram-summary code.term, .diagram-summary code.syntax, table code.term, table code.syntax, #baridimobBox span.ccp-num, #baridimobBox span.rip-num {
             color: #042f2e !important;
             background: #f1f5f9 !important;
             border: 1px solid #cbd5e1 !important;
@@ -856,6 +818,23 @@
           p, .card p, .intro p, .intro-box p, .qa-a-body, .panel-in p, .struct .el .d, .def .body, .hubcard .htx span, .c-text {
             color: #1e293b !important;
             font-weight: 500 !important;
+          }
+          .theory-card, .unit-box, .sub-unit, .sidebar-toc, .tech-card, .lead-text {
+            background: rgba(255, 255, 255, 0.88) !important;
+            border-color: rgba(13, 148, 136, 0.28) !important;
+            color: #0f172a !important;
+          }
+          .sub-unit p, .sub-unit div, .sub-unit li, .lead-text, .tech-card, .theory-body, .theory-body div.sec, .sec {
+            color: #0f172a !important;
+          }
+          .unit-title, .sub-unit h3, .sidebar-toc h3, .tech-card b, .diagram-box h4, .diagram-summary h4, .theory-body b, .sec b, .theory-card b {
+            color: #042f2e !important;
+          }
+          .kw-tag, .kw, .tag, .chip, .pill, .badge, .freebadge, .lock-badge, .lockbadge, .prof-badge, .teacherbadge {
+            background: rgba(250, 204, 21, 0.22) !important;
+            color: #b45309 !important;
+            border: 1px solid #f59e0b !important;
+            font-weight: 900 !important;
           }
           .hint, .sub, .sec-sub, .dltx span, .card-meta, .c-date, .n, .lbl {
             color: #475569 !important;
