@@ -598,6 +598,32 @@
             font-size: 1rem !important;
           }
 
+          
+          /* حماية الإطارات في وضع الظلام: أي إطار أبيض يظل نصه أسود والعناوين زمردية/سماوية */
+          .diagram-box, table, tbody, tr, td, .tech-card span.eng, #baridimobBox {
+            background: #ffffff !important;
+            color: #0f172a !important;
+          }
+          .diagram-box p, .diagram-box div, .diagram-box span, table td, table td span, table td div {
+            color: #0f172a !important;
+          }
+          .diagram-box h4, table th, table td b, .tech-card b, .sub-unit h3, .unit-title {
+            color: #0d9488 !important;
+            font-weight: 900 !important;
+          }
+          code.term, code.syntax, span.eng {
+            color: #0d9488 !important;
+            background: #f1f5f9 !important;
+            border-color: #cbd5e1 !important;
+            font-weight: 900 !important;
+          }
+          .tice-hero {
+            background: rgba(13, 148, 136, 0.35) !important;
+            border: none !important;
+            outline: none !important;
+            backdrop-filter: blur(14px) !important;
+          }
+
           #adminGateModal, .modal-bg, .modal, #adminModal, #upgradeModal, #viewerModal {
             z-index: 999999 !important;
           }

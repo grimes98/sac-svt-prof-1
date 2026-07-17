@@ -39,10 +39,11 @@
     .container { max-width: 1360px; margin: 35px auto 60px; padding: 0 20px; position: relative; z-index: 10; }
     
     .tice-hero {
-      background: linear-gradient(135deg, rgba(4, 47, 46, 0.94), rgba(13, 148, 136, 0.90));
-      color: #fff; border-radius: 26px; padding: 45px 35px; text-align: center; margin-bottom: 35px;
-      box-shadow: 0 22px 48px rgba(13, 148, 136, 0.28); border: 2px solid rgba(250, 204, 21, 0.45);
-      backdrop-filter: blur(10px); position: relative; overflow: hidden;
+      background: rgba(13, 148, 136, 0.35) !important;
+      color: #fff !important; border-radius: 26px; padding: 45px 35px; text-align: center; margin-bottom: 35px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.18) !important; border: none !important; outline: none !important;
+      backdrop-filter: blur(14px) !important; -webkit-backdrop-filter: blur(14px) !important;
+      position: relative; overflow: hidden;
     }
     .tice-hero .ic { font-size: 3.8rem; display: inline-block; margin-bottom: 14px; background: rgba(255, 255, 255, 0.16); padding: 16px; border-radius: 22px; box-shadow: 0 8px 22px rgba(0,0,0,0.25); }
     .tice-hero h1 { font-size: 2.2rem; font-weight: 900; margin-bottom: 12px; color: #fff !important; text-shadow: 0 2px 10px rgba(0,0,0,0.35); }
@@ -152,6 +153,26 @@
     }
 
     footer { background: var(--green-d); color: #dfeeeb; padding: 40px 0 24px; text-align: center; margin-top: 50px; font-weight: 600; font-size: 0.94rem; }
+  
+    /* حماية ألوان الإطارات في وضع الليل: الإطارات البيضاء يكون نصها أسود ماعدا العناوين والكلمات المفتاحية */
+    .diagram-box, table, tbody, tr, td, .tech-card span.eng, #baridimobBox {
+      background: #ffffff !important;
+      color: #0f172a !important;
+    }
+    .diagram-box p, .diagram-box div, .diagram-box span, table td, table td span, table td div {
+      color: #0f172a !important;
+    }
+    .diagram-box h4, table th, table td b, .tech-card b, .sub-unit h3, .unit-title {
+      color: #0d9488 !important;
+      font-weight: 900 !important;
+    }
+    code.term, code.syntax, span.eng {
+      color: #0d9488 !important;
+      background: #f1f5f9 !important;
+      border-color: #cbd5e1 !important;
+      font-weight: 900 !important;
+    }
+
   </style>
 </head>
 <body>
@@ -167,7 +188,7 @@
       </a>
       <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
         <div id="sacDateTimeWidget"></div>
-        <button id="sacThemeToggleBtn" title="تبديل وضع النهار/الليل" style="background:transparent; border:none; cursor:pointer; font-size:1.4rem; padding:4px;">☀️</button>
+        
         <a href="takwin.html" class="btn-back">← العودة لفرع التكوين البيداغوجي</a>
       </div>
     </div>
@@ -189,7 +210,7 @@
       <!-- الفهرس الجانبي التفاعلي على يمين الصفحة (Table of Contents Sidebar) -->
       <!-- ========================================================================= -->
       <aside class="sidebar-toc">
-        <h3>📑 فهرس المقرّر (ENSET Skikda)</h3>
+        <h3>📑 فهرس المقرّر</h3>
         <ul class="toc-list">
           
           <li class="toc-item">
