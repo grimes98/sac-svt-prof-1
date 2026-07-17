@@ -620,18 +620,18 @@
           }
           
           /* الصناديق التي تظل بيضاء (مثل الرسومات البيانية والجداول وصندوق الدفع) يكون نصها أسود ملكي دائماً */
-          .diagram-box, table, tbody, tr, td, #baridimobBox {
+          .diagram-box, .diagram-summary, table, tbody, tr, td, #baridimobBox {
             background: #ffffff !important;
             color: #0f172a !important;
           }
-          .diagram-box p, .diagram-box div, .diagram-box span, table td, table td span, table td div, #baridimobBox * {
+          .diagram-box p, .diagram-box div, .diagram-box span, .diagram-summary p, .diagram-summary div, .diagram-summary span, table td, table td span, table td div, #baridimobBox * {
             color: #0f172a !important;
           }
-          .diagram-box h4, table th, table td b, #baridimobBox .title-pay {
+          .diagram-box h4, .diagram-summary h4, table th, table td b, #baridimobBox .title-pay {
             color: #0d9488 !important;
             font-weight: 900 !important;
           }
-          .diagram-box code.term, .diagram-box code.syntax, table code.term, table code.syntax {
+          .diagram-box code.term, .diagram-box code.syntax, .diagram-summary code.term, .diagram-summary code.syntax, table code.term, table code.syntax {
             color: #042f2e !important;
             background: #f1f5f9 !important;
             border: 1px solid #cbd5e1 !important;

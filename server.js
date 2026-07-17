@@ -181,6 +181,39 @@ const server = http.createServer(async (req, res) => {
           });
         }
       }
+      if (urlPath.includes("takwin-05") || urlPath.includes("mota3aqidin")) {
+        const altPath = path.join(__dirname, fs.existsSync(path.join(__dirname, "takwin-mota3aqidin.html")) ? "takwin-mota3aqidin.html" : "takwin-05.html");
+        if (fs.existsSync(altPath)) {
+          return fs.readFile(altPath, (err, altContent) => {
+            if (!err) {
+              res.writeHead(200, { ...SECURITY_HEADERS, "Content-Type": "text/html; charset=UTF-8" });
+              return res.end(altContent, "utf-8");
+            }
+          });
+        }
+      }
+      if (urlPath.includes("takwin-11") || urlPath.includes("anmat")) {
+        const altPath = path.join(__dirname, fs.existsSync(path.join(__dirname, "takwin-11.html")) ? "takwin-11.html" : "anmat.html");
+        if (fs.existsSync(altPath)) {
+          return fs.readFile(altPath, (err, altContent) => {
+            if (!err) {
+              res.writeHead(200, { ...SECURITY_HEADERS, "Content-Type": "text/html; charset=UTF-8" });
+              return res.end(altContent, "utf-8");
+            }
+          });
+        }
+      }
+      if (urlPath.includes("takwin-12") || urlPath.includes("istratijiyat")) {
+        const altPath = path.join(__dirname, fs.existsSync(path.join(__dirname, "takwin-12.html")) ? "takwin-12.html" : "istratijiyat.html");
+        if (fs.existsSync(altPath)) {
+          return fs.readFile(altPath, (err, altContent) => {
+            if (!err) {
+              res.writeHead(200, { ...SECURITY_HEADERS, "Content-Type": "text/html; charset=UTF-8" });
+              return res.end(altContent, "utf-8");
+            }
+          });
+        }
+      }
       fs.readFile(path.join(__dirname, 'index.html'), (err, indexContent) => {
         if (err) {
           res.writeHead(500, { ...SECURITY_HEADERS, 'Content-Type': 'text/plain; charset=UTF-8' });
