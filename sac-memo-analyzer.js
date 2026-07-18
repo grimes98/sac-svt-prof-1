@@ -33,9 +33,80 @@
       .replace(/"/g, '&quot;');
   }
 
+  /* -----------------------------------------------------------
+     🧩 مطوي الأشكال العرضية العربية (Presentation Forms)
+     بعض التطبيقات (Canva وشركاه) تخزّن الحروف العربية كأشكال
+     U+FB50–FEFF بدل الحروف القياسية — نحوّلها لحروف قياسية
+     ----------------------------------------------------------- */
+  const _pfTable = (function buildPF(){
+    const out = {};
+    const seq = [
+      ['ء',1],['آ',2],['أ',2],['ؤ',2],['إ',2],['ئ',4],['ا',2],['ب',4],['ة',2],
+      ['ت',4],['ث',4],['ج',4],['ح',4],['خ',4],['د',2],['ذ',2],['ر',2],['ز',2],
+      ['س',4],['ش',4],['ص',4],['ض',4],['ط',4],['ظ',4],['ع',4],['غ',4],
+      ['ف',4],['ق',4],['ك',4],['ل',4],['م',4],['ن',4],['ه',4],['و',2],['ى',2],['ي',4]
+    ];
+    let cp = 0xFE80;
+    for (const [letter, n] of seq) {
+      for (let i = 0; i < n; i++) out[cp++] = letter;
+    }
+    // روابط لام-ألف (FEF5–FEFC) → «لا» (تطبيع الهمزات لاحقاً يوحّدها)
+    for (let c = 0xFEF5; c <= 0xFEFC; c++) out[c] = 'لا';
+    // بعض أشكال المجموعة A الشائعة في المصدّرات القديمة
+    out[0xFB50] = 'ا'; out[0xFB51] = 'ا'; out[0xFB52] = 'ب'; out[0xFB53] = 'ب';
+    out[0xFB54] = 'ب'; out[0xFB55] = 'ب'; out[0xFB56] = 'ب'; out[0xFB57] = 'ب';
+    out[0xFB58] = 'ب'; out[0xFB59] = 'ب'; out[0xFB5A] = 'ب'; out[0xFB5B] = 'ب';
+    out[0xFB66] = 'ت'; out[0xFB67] = 'ت'; out[0xFB68] = 'ت'; out[0xFB69] = 'ت';
+    out[0xFB78] = 'ن'; out[0xFB79] = 'ن'; out[0xFB7A] = 'ن'; out[0xFB7B] = 'ن';
+    out[0xFB8A] = 'ف'; out[0xFB8B] = 'ف'; out[0xFB8F] = 'ك'; out[0xFB90] = 'ك';
+    out[0xFB91] = 'ك'; out[0xFB92] = 'ك';
+    out[0xFBFD] = 'ي'; out[0xFBFE] = 'ي'; out[0xFBFF] = 'ي';
+    return out;
+  })();
+  function foldPresentationForms(s) {
+    const str = String(s || '');
+    if (!str) return str;
+    // تحقق سريع قبل المعالجة
+    if (!/[\uFB50-\uFEFF]/.test(str)) return str;
+    let out = '';
+    for (const ch of str) {
+      const cp = ch.codePointAt(0);
+      out += (cp >= 0xFB50 && cp <= 0xFEFF && _pfTable[cp]) ? _pfTable[cp] : ch;
+    }
+    return out;
+  }
+
+  // كلمات مفتاحية بيداغوجية لقياس جودة النص العربي المستخرج
+  const AR_KEYWORDS = ['المستوى', 'المقطع', 'الوضعية', 'النشاط', 'التعليمات', 'الكفاءة',
+    'مذكرة', 'درس', 'علوم', 'التقويم', 'الموارد', 'السنة', 'متوسط', 'التلاميذ', 'الميدان'];
+  function scoreArabicText(t) {
+    const n = normalizeAr(t);
+    let c = 0;
+    for (const k of AR_KEYWORDS) if (n.indexOf(normalizeAr(k)) !== -1) c++;
+    return c;
+  }
+
+  /* -----------------------------------------------------------
+     🔄 إنقاذ النص العربي المستخرج:
+       1) طي الأشكال العرضية
+       2) تصحيح السطور المخزنة بالاتجاه البصري (معكوسة) — شائع في مذكرات Canva
+     ----------------------------------------------------------- */
+  function repairArabicText(t) {
+    let s = foldPresentationForms(String(t || ''));
+    if (!s.trim()) return s;
+    const scoreDirect = scoreArabicText(s);
+    // عكس كل سطر (الاتجاه البصري → المنطقي)
+    const flipped = s.split('\n').map(l => Array.from(l).reverse().join('')).join('\n');
+    const scoreFlip = scoreArabicText(flipped);
+      if (scoreFlip > scoreDirect) return { text: flipped, flipped: true };
+    return { text: s, flipped: false };
+  }
+  window.__sacRepairArabic = repairArabicText;
+  window.__sacFoldPF = foldPresentationForms;
+
   // تطبيع النص العربي لتسهيل البحث عن الكلمات المفتاحية (موحَّد الهمزات والتاء المربوطة...)
   function normalizeAr(s) {
-    return String(s || '')
+    return String(foldPresentationForms(String(s || '')))
       .replace(/[ً-ْٰ]/g, '')   // حذف التشكيل
       .replace(/[أإآٱ]/g, 'ا')
       .replace(/ة/g, 'ه')
@@ -352,7 +423,10 @@
           const textContent = await page.getTextContent();
           textArr.push(textContent.items.map(it => it.str).join(' '));
         }
-        extractedText = textArr.join('\n');
+        // ترميم فوري: طيّ أشكال العرض (كانفا/خطوط خاصة) + إصلاح الاتجاه البصري المعكوس
+        const rep = repairArabicText(textArr.join('\n'));
+        extractedText = rep.text;
+        if (rep.flipped) diag.push('⚠️ كشف اتجاه نص معكوس (مصدّر من تطبيق تصميم) — تم تصحيحه آلياً');
         stage = 'طبقة نصية مباشرة (pdf.js)';
       } else {
         diag.push('تعذر تحميل pdf.js من كل المرايا');
@@ -361,16 +435,27 @@
       diag.push('pdf.js: ' + (e && e.message ? e.message : 'خطأ في فتح الوثيقة'));
     }
 
-    // المرحلة 2 (OCR): إذا النص ضعيف/معدوم → المذكرة صور ممسوحة، نتعرف عليها آلياً
+    /* المرحلة 2 (OCR): شرط عربي ذكي —
+       نشتغل OCR حتى مع وجود نص إذا كان النص لا يحمل كلمات عربية ذات معنى
+       (خطوط كانفا المخصصة تعطي حروفًا مكسورة/رمزية لا تفيد التحليل) */
     const rawLen = (extractedText || '').replace(/\s/g, '').length;
-    if (rawLen < 40 && pdfDoc) {
+    const arabicScore = scoreArabicText(extractedText);
+    const arabicChars = (foldPresentationForms(extractedText).match(/[\u0600-\u06FF]/g) || []).length;
+    const weakArabic = rawLen < 40 || arabicScore < 2 || arabicChars < 60;
+    if (weakArabic) diag.push('جودة الطبقة النصية العربية: نقاط=' + arabicScore + ' حروف=' + arabicChars + ' → ' + (pdfDoc ? 'تشغيل OCR' : 'OCR مستحيل (لا وثيقة)'));
+
+    if (weakArabic && pdfDoc) {
       try {
         const ocrText = await ocrPdfPages(pdfDoc, onProgress, diag);
-        if (ocrText && ocrText.replace(/\s/g, '').length > rawLen) {
+        const ocrScore = scoreArabicText(ocrText);
+        const ocrLen = (ocrText || '').replace(/\s/g, '').length;
+        // نختار الأفضل: نص OCR إن كان أدلّ عربيًا، وإلا نبقي ما كان أطول
+        if (ocrText && (ocrScore > arabicScore || (arabicChars < 60 && ocrLen > rawLen))) {
           extractedText = ocrText;
           usedOcr = true;
           stage = 'تعرف ضوئي OCR بالعربية';
-        } else if (ocrText === null || ocrText === '') {
+          diag.push('اختير نص OCR (نقاط=' + ocrScore + '، طول=' + ocrLen + ')');
+        } else if (!ocrText) {
           diag.push('OCR أعاد نصاً فارغاً');
         }
       } catch (e) {
@@ -415,7 +500,7 @@
     'https://unpkg.com/@tesseract.js-data/ara'
   ];
 
-  // تحسين صورة الفحص قبل OCR: تدرج رمادي + تمديد التباين (يرفع دقة العربية في السكانير)
+  // تحسين صورة الفحص قبل OCR: عكس الخلفيات الداكنة + رمادي + تباين (قوالب كانفا الملوّنة)
   function preprocessCanvasForOcr(canvas) {
     try {
       const ctx = canvas.getContext('2d');
@@ -423,18 +508,24 @@
       const d = img.data;
       const n = d.length / 4;
       const g = new Uint8Array(n);
-      let min = 255, max = 0;
+      let sum = 0;
       for (let i = 0, j = 0; i < d.length; i += 4, j++) {
         const v = (77 * d[i] + 150 * d[i + 1] + 29 * d[i + 2]) >> 8;
         g[j] = v;
-        if (v < min) min = v;
-        if (v > max) max = v;
+        sum += v;
       }
+      // إذا كانت الصفحة غالبة عليها خلفية داكنة (كتابة فاتحة) → نعكس الألوان ليفهمها OCR
+      let inverted = false;
+      if (sum / n < 119) {
+        inverted = true;
+        for (let j = 0; j < n; j++) g[j] = 255 - g[j];
+      }
+      let min = 255, max = 0;
+      for (let j = 0; j < n; j++) { const v = g[j]; if (v < min) min = v; if (v > max) max = v; }
       const range = Math.max(1, max - min);
       for (let i = 0, j = 0; i < d.length; i += 4, j++) {
         let v = Math.round((g[j] - min) * 255 / range);
-        // تبييض خفيف للخلفية الضبابية
-        if (v > 175) v = 255;
+        if (v > 175) v = 255;  // تبييض الخلفية الضبابية
         d[i] = d[i + 1] = d[i + 2] = v;
       }
       ctx.putImageData(img, 0, 0);
@@ -442,17 +533,19 @@
   }
 
   async function createArabicWorker(onProgress, diag) {
-    const mirror = await loadScriptAnyMirror(
-      TESS_MIRRORS.map(m => ({ js: m.js })), 'Tesseract', diag, 'Tesseract.js'
-    );
-    if (!mirror || !window.Tesseract || !window.Tesseract.createWorker) return null;
+    let mirrorInfo;
+    if (window.Tesseract) {
+      mirrorInfo = TESS_MIRRORS[0]; // مكتبة محمّلة مسبقاً — المرايا مجرد معلومات مسارات
+    } else {
+      mirrorInfo = await loadScriptAnyMirror(TESS_MIRRORS.map(m => ({ js: m.js })), 'Tesseract', diag, 'Tesseract.js');
+    }
+    if (!mirrorInfo || !window.Tesseract || !window.Tesseract.createWorker) return null;
+    const wkPath = mirrorInfo.worker || TESS_MIRRORS[0].worker;
+    const host = mirrorInfo.js.includes('://') ? new URL(mirrorInfo.js).host : 'preloaded';
 
     let lastErr = null;
     for (const lp of TESS_LANG_PATHS) {
       try {
-        const host = new URL(mirror.js).host;
-        const wkPath = TESS_MIRRORS.find(m => m.js === mirror.js ? true : new URL(m.js).host === host)?.worker
-                       || TESS_MIRRORS[0].worker;
         diag.push('محاولة محرك عربي: ' + host + ' + بيانات ' + new URL(lp).host);
         const worker = await Promise.race([
           window.Tesseract.createWorker('ara', 1, {
