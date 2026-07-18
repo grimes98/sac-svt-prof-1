@@ -928,4 +928,9 @@
 
     return null;
   }
+  if (document.readyState === "complete" || document.readyState === "interactive") {
+    injectChatbotUI();
+  } else {
+    window.addEventListener("DOMContentLoaded", injectChatbotUI);
+  }
 })();

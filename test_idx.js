@@ -586,6 +586,7 @@ const svt = [
 ];
 
 const services = [
+  {e:"⬆️", t:"رفع ومشاركة الملفات والموارد", d:"ارفع وشارك مذكراتك، عروضك، أو اختباراتك الخاصة مع بقية الأساتذة لإثراء المكتبة الجماعية الرقمية.", tag:"أداة ومشاركة", link:"#upload", free:true},
   {e:"📝",t:"إنجاز الفروض والاختبارات",d:"طلب إنجاز فروض واختبارات مخصّصة.",url:"https://forms.gle/r79ytG9zmXdFGeK2A"},
   {e:"🗂️",t:"إنجاز مذكرات الأستاذ",d:"لجميع المستويات: 1م · 2م · 3م · 4م.",url:"https://forms.gle/iVxFVQbYEH8P9zZE8"},
   {e:"📒",t:"دفاتر الأستاذ (PDF)",d:"لجميع الموادّ بصيغة PDF — نماذج جاهزة.",url:"https://forms.gle/ZLn5GBRTz1q72aHz8"},
@@ -891,7 +892,7 @@ async function doAdminLogin(){
     }catch(err){}
   }
 
-  msg.textContent = '❌ بيانات دخول المسؤول غير صحيحة (تأكد أن البريد admin@sac-svt.dz وكلمة المرور admin123)'; msg.classList.add('err');
+  msg.textContent = '❌ بيانات الدخول غير صحيحة. يُرجى التحقق من البريد الإلكتروني أو كلمة المرور.'; msg.classList.add('err');
 }
 
 function logout(){

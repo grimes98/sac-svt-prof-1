@@ -581,6 +581,41 @@
             font-weight: 900 !important;
           }
           
+          
+          /* 👥 لوحة إدارة المستخدمين والأدمين في وضع الظلام (Admin Users Board Dark Mode Protection) */
+          #boardUsers, #boardUsers *, #adminUsers, #adminUsers *, .users-form-card, .tbl-card, .form-grid {
+            color: #f8fafc !important;
+          }
+          .users-form-card, .tbl-card {
+            background: rgba(15, 23, 42, 0.92) !important;
+            border: 2px solid #0d9488 !important;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.75) !important;
+          }
+          .form-title, .tbl-header, #boardUsers h3, #adminUsers h3 {
+            color: #38bdf8 !important;
+            font-weight: 900 !important;
+          }
+          .col-label, .col-type, .col-extra, .col-input span, .col-input div {
+            color: #f8fafc !important;
+            font-weight: 700 !important;
+          }
+          #boardUsers input, #boardUsers select, #adminUsers input, #adminUsers select, .users-form-card input, .users-form-card select {
+            background: #1e293b !important;
+            color: #ffffff !important;
+            border: 1.5px solid #2dd4bf !important;
+          }
+          /* جدول المستخدمين والأدمين: خلفية داكنة متناغمة وكتابة ناصعة الوضوح */
+          #boardUsers table, #boardUsers tbody, #boardUsers tr, #boardUsers td, #boardUsers th, #adminUsers table, #adminUsers tbody, #adminUsers tr, #adminUsers td, #adminUsers th, .data-table, .data-table tbody, .data-table tr, .data-table td, .data-table th {
+            background: #151f32 !important;
+            color: #f8fafc !important;
+            border-color: rgba(45, 212, 191, 0.3) !important;
+          }
+          #boardUsers table th, #adminUsers table th, .data-table th {
+            background: #042f2e !important;
+            color: #38bdf8 !important;
+            font-weight: 900 !important;
+          }
+
           /* الصناديق التي تظل بيضاء (مثل الرسومات البيانية والجداول وصندوق الدفع) يكون نصها أسود ملكي دائماً */
           .diagram-box, .diagram-summary, table, tbody, tr, td, #baridimobBox {
             background: #ffffff !important;

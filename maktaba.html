@@ -460,7 +460,10 @@ function isPremium(){
   if(currentUser.type === 'admin') return true;
   return currentUser.expires_at ? (new Date(currentUser.expires_at) > new Date()) : true;
 }
-function canAccess(f){ return f.is_free || isPremium(); }
+function canAccess(f){
+  if(f.category === 'مذكرات' || f.category === 'عروض' || f.file_ext === 'ppt' || f.file_ext === 'pptx') return true;
+  return f.is_free || isPremium();
+}
 const ICONS = {pdf:'📄',ppt:'📊',pptx:'📊',doc:'📝',docx:'📝',mp4:'🎬',mov:'🎬',webm:'🎬',jpg:'🖼️',jpeg:'🖼️',png:'🖼️',gif:'🖼️',svg:'🖼️',webp:'🖼️',html:'🌐',htm:'🌐',default:'📁'};
 const CAT_ICON = {'مذكرات':'🗂️','وثائق':'📂','عروض':'🖥️','فروض':'📝','كتب':'📚'};
 const IMAGE_EXTS=['jpg','jpeg','png','gif','svg','webp','bmp'];
@@ -499,7 +502,12 @@ async function loadFiles(){
   try{
     const {data, error} = await sb.from('files').select('*').order('created_at',{ascending:false});
     if(error) throw error;
-    allFiles = data||[];
+    allFiles = (data||[]).map(f => {
+      if(f.category === 'مذكرات' || f.category === 'عروض' || f.file_ext === 'ppt' || f.file_ext === 'pptx') {
+        f.is_free = true;
+      }
+      return f;
+    });
     render();
   }catch(e){
     content.innerHTML = `<div class="state"><div class="big">⚠️</div><p>تعذّر تحميل الملفات.<br><small>${e.message||e}</small></p></div>`;
@@ -543,7 +551,7 @@ function render(){
       </div>`;
     }
     return `<div class="file">
-      ${f.is_free?'<div class="freebadge">مجاني</div>':''}
+      ${(f.is_free || f.category === 'مذكرات' || f.category === 'عروض' || f.file_ext === 'ppt' || f.file_ext === 'pptx') ? '<div class="freebadge">مجاني للجميع</div>' : ''}
       ${f.uploaded_by?'<div class="teacherbadge" title="رفعه: '+esc(f.uploaded_by)+'">👨‍🏫 إسهام أستاذ</div>':''}
       ${isImg?`<div class="thumb" style="background-image:url('${f.url}')"></div>`:`<div class="ic">${ic}</div>`}
       <h3>${esc(f.title)}</h3>
