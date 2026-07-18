@@ -300,27 +300,51 @@
     });
   }
 
+  // تحميل بمرايا متعددة: يجرّب الروابط بالتتابع حتى ينجح أحدها
+  async function loadScriptAnyMirror(mirrors, globalFlag, diag, label) {
+    if (window[globalFlag]) return true;
+    for (const m of mirrors) {
+      const ok = await loadScriptOnce(m.js, globalFlag);
+      if (ok) {
+        if (diag) diag.push(label + ' ← ' + new URL(m.js).host);
+        if (m.worker && window[globalFlag] && globalFlag === 'pdfjsLib') {
+          try { window.pdfjsLib.GlobalWorkerOptions.workerSrc = m.worker; } catch (e) {}
+        }
+        return m;
+      }
+      if (diag) diag.push('فشل ' + label + ' من ' + new URL(m.js).host);
+    }
+    return null;
+  }
+
   /* ------------------------- استخراج نص الـ PDF ------------------------- */
-  /* يعيد { text, ocr } — ويستعمل OCR تلقائياً للمذكرات الممسوحة ضوئياً (صور) */
+  /* يعيد { text, ocr, stage, diag } — ويستعمل OCR تلقائياً للمذكرات الممسوحة ضوئياً (صور) */
+  const PDFJS_MIRRORS = [
+    { js: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js',
+      worker: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js' },
+    { js: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/legacy/build/pdf.min.js',
+      worker: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/legacy/build/pdf.worker.min.js' },
+    { js: 'https://unpkg.com/pdfjs-dist@3.11.174/legacy/build/pdf.min.js',
+      worker: 'https://unpkg.com/pdfjs-dist@3.11.174/legacy/build/pdf.worker.min.js' }
+  ];
+
   async function extractPdfText(file, onProgress) {
+    const diag = [];
     let extractedText = '';
     let usedOcr = false;
+    let stage = 'فشل القراءة';
     let buffer = null;
 
-    try { buffer = await file.arrayBuffer(); } catch (e) { return { text: '', ocr: false }; }
-    if (!buffer) return { text: '', ocr: false };
+    try { buffer = await file.arrayBuffer(); } catch (e) { return { text: '', ocr: false, stage: 'تعذر قراءة الملف', diag: ['arrayBuffer error'] }; }
+    if (!buffer) return { text: '', ocr: false, stage: 'ملف فارغ', diag: ['empty buffer'] };
 
     let pdfDoc = null;
 
-    // المرحلة 1: استخلاص الطبقة النصية عبر pdf.js (الأدق)
+    // المرحلة 1: استخلاص الطبقة النصية عبر pdf.js (الأدق) — بثلاثة مرايا
     try {
-      const loaded = window.pdfjsLib
-        ? true
-        : await loadScriptOnce('https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js', 'pdfjsLib');
+      const mirror = window.pdfjsLib ? { js: '(محمّل مسبقاً)' } : await loadScriptAnyMirror(PDFJS_MIRRORS, 'pdfjsLib', diag, 'pdf.js');
 
-      if (loaded && window.pdfjsLib && window.pdfjsLib.getDocument) {
-        window.pdfjsLib.GlobalWorkerOptions.workerSrc =
-          'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+      if (mirror && window.pdfjsLib && window.pdfjsLib.getDocument) {
         pdfDoc = await window.pdfjsLib.getDocument({ data: buffer }).promise;
         const textArr = [];
         for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
@@ -329,19 +353,29 @@
           textArr.push(textContent.items.map(it => it.str).join(' '));
         }
         extractedText = textArr.join('\n');
+        stage = 'طبقة نصية مباشرة (pdf.js)';
+      } else {
+        diag.push('تعذر تحميل pdf.js من كل المرايا');
       }
-    } catch (e) { /* نتابع للمراحل الاحتياطية */ }
+    } catch (e) {
+      diag.push('pdf.js: ' + (e && e.message ? e.message : 'خطأ في فتح الوثيقة'));
+    }
 
     // المرحلة 2 (OCR): إذا النص ضعيف/معدوم → المذكرة صور ممسوحة، نتعرف عليها آلياً
     const rawLen = (extractedText || '').replace(/\s/g, '').length;
     if (rawLen < 40 && pdfDoc) {
       try {
-        const ocrText = await ocrPdfPages(pdfDoc, onProgress);
+        const ocrText = await ocrPdfPages(pdfDoc, onProgress, diag);
         if (ocrText && ocrText.replace(/\s/g, '').length > rawLen) {
           extractedText = ocrText;
           usedOcr = true;
+          stage = 'تعرف ضوئي OCR بالعربية';
+        } else if (ocrText === null || ocrText === '') {
+          diag.push('OCR أعاد نصاً فارغاً');
         }
-      } catch (e) {}
+      } catch (e) {
+        diag.push('OCR: ' + (e && e.message ? e.message.substring(0, 90) : 'خطأ غير معروف'));
+      }
     }
 
     // المرحلة 3 (احتياطية أخيرة): فك ترميز UTF-8 خام وانتقاء المقاطع النصية الحقيقية
@@ -352,55 +386,133 @@
         // انتقاء أسطر/مقاطع فيها حروف عربية أو نصوص مقروءة، وتجاهل الطوبولوجيا الثنائية للـ PDF
         const runs = decoded.match(/[\u0600-\u06FF][\u0600-\u06FF\p{L}\p{N}\s.,:؛()«»\-–/＋+×%]{4,}|(?:[A-Za-z][\p{L}\p{N}\s.,:;()\-–]{5,})/gu) || [];
         const tempStr = runs.filter(r => r.trim().length >= 5).join('\n');
-        if (tempStr.length > extractedText.length) extractedText = tempStr;
+        if (tempStr.length > extractedText.length) {
+          extractedText = tempStr;
+          stage = 'استخلاص خام UTF-8';
+        }
       } catch (e) {}
     }
 
     if (pdfDoc) { try { pdfDoc.destroy(); } catch (e) {} }
-    return { text: extractedText || '', ocr: usedOcr };
+    diag.push((extractedText.replace(/\s/g, '').length) + ' حرفاً مستخرجاً — ' + stage);
+    return { text: extractedText || '', ocr: usedOcr, stage: stage, diag: diag };
   }
   window.__sacExtractPdfText = extractPdfText;
 
-  /* ------------------------- OCR بالعربية (Tesseract.js) ------------------------- */
-  async function ocrPdfPages(pdfDoc, onProgress) {
-    const loaded = window.Tesseract
-      ? true
-      : await loadScriptOnce('https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js', 'Tesseract');
-    if (!loaded || !window.Tesseract || !window.Tesseract.createWorker) return '';
+  /* ------------------------- OCR بالعربية (Tesseract.js) بمرايا متعددة ------------------------- */
+  const TESS_MIRRORS = [
+    { js: 'https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js',
+      worker: 'https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/worker.min.js' },
+    { js: 'https://unpkg.com/tesseract.js@5.1.1/dist/tesseract.min.js',
+      worker: 'https://unpkg.com/tesseract.js@5.1.1/dist/worker.min.js' },
+    { js: 'https://cdnjs.cloudflare.com/ajax/libs/tesseract.js/5.1.1/tesseract.min.js',
+      worker: 'https://cdnjs.cloudflare.com/ajax/libs/tesseract.js/5.1.1/worker.min.js' }
+  ];
+  const TESS_CORE = 'https://cdn.jsdelivr.net/npm/tesseract.js-core@5.1.1/tesseract-core-lstm.wasm.js';
+  const TESS_LANG_PATHS = [
+    'https://tessdata.projectnaptha.com/4.0.0',
+    'https://cdn.jsdelivr.net/npm/@tesseract.js-data/ara',
+    'https://unpkg.com/@tesseract.js-data/ara'
+  ];
 
+  // تحسين صورة الفحص قبل OCR: تدرج رمادي + تمديد التباين (يرفع دقة العربية في السكانير)
+  function preprocessCanvasForOcr(canvas) {
+    try {
+      const ctx = canvas.getContext('2d');
+      const img = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const d = img.data;
+      const n = d.length / 4;
+      const g = new Uint8Array(n);
+      let min = 255, max = 0;
+      for (let i = 0, j = 0; i < d.length; i += 4, j++) {
+        const v = (77 * d[i] + 150 * d[i + 1] + 29 * d[i + 2]) >> 8;
+        g[j] = v;
+        if (v < min) min = v;
+        if (v > max) max = v;
+      }
+      const range = Math.max(1, max - min);
+      for (let i = 0, j = 0; i < d.length; i += 4, j++) {
+        let v = Math.round((g[j] - min) * 255 / range);
+        // تبييض خفيف للخلفية الضبابية
+        if (v > 175) v = 255;
+        d[i] = d[i + 1] = d[i + 2] = v;
+      }
+      ctx.putImageData(img, 0, 0);
+    } catch (e) {}
+  }
+
+  async function createArabicWorker(onProgress, diag) {
+    const mirror = await loadScriptAnyMirror(
+      TESS_MIRRORS.map(m => ({ js: m.js })), 'Tesseract', diag, 'Tesseract.js'
+    );
+    if (!mirror || !window.Tesseract || !window.Tesseract.createWorker) return null;
+
+    let lastErr = null;
+    for (const lp of TESS_LANG_PATHS) {
+      try {
+        const host = new URL(mirror.js).host;
+        const wkPath = TESS_MIRRORS.find(m => m.js === mirror.js ? true : new URL(m.js).host === host)?.worker
+                       || TESS_MIRRORS[0].worker;
+        diag.push('محاولة محرك عربي: ' + host + ' + بيانات ' + new URL(lp).host);
+        const worker = await Promise.race([
+          window.Tesseract.createWorker('ara', 1, {
+            workerPath: wkPath,
+            corePath: TESS_CORE,
+            langPath: lp,
+            logger: (m) => {
+              if (onProgress && m.status === 'recognizing text' && typeof m.progress === 'number') {
+                onProgress('🔍 OCR — التعرف على النص: ' + Math.round(m.progress * 100) + '%');
+              }
+            }
+          }),
+          new Promise((_, rej) => setTimeout(() => rej(new Error('مهلة إنشاء المحرك (60ث)')), 60000))
+        ]);
+        diag.push('✔ المحرك العربي جاهز');
+        return worker;
+      } catch (e) {
+        lastErr = e;
+        diag.push('✖ فشل: ' + (e && e.message ? e.message.substring(0, 80) : 'بدون رسالة'));
+      }
+    }
+    if (lastErr) throw lastErr;
+    return null;
+  }
+
+  async function ocrPdfPages(pdfDoc, onProgress, diag) {
     const maxPages = Math.min(pdfDoc.numPages, 8); // حماية من الملفات الكبيرة
     let worker = null;
     const parts = [];
-    try {
-      if (onProgress) onProgress('🔍 المذكرة عبارة عن صور ممسوحة — جاري تحميل محرك القراءة الضوئية العربي (OCR)...');
-      worker = await window.Tesseract.createWorker('ara', 1, {
-        logger: (m) => {
-          if (onProgress && m.status === 'recognizing text' && typeof m.progress === 'number') {
-            onProgress('🔍 OCR — التعرف على النص: ' + Math.round(m.progress * 100) + '%');
-          }
-        }
-      });
 
+    if (onProgress) onProgress('🔍 المذكرة عبارة عن صور ممسوحة — جاري تشغيل محرك القراءة الضوئية العربي (OCR)...');
+    worker = await createArabicWorker(onProgress, diag);
+    if (!worker) { diag.push('تعذر إنشاء محرك OCR'); return ''; }
+
+    try {
       for (let p = 1; p <= maxPages; p++) {
         try {
           const page = await pdfDoc.getPage(p);
-          const viewport = page.getViewport({ scale: 2.2 }); // تكبير لتحسين دقة التعرف
+          const viewport = page.getViewport({ scale: 2.5 }); // تكبير لتحسين دقة التعرف
           const canvas = document.createElement('canvas');
           canvas.width = Math.ceil(viewport.width);
           canvas.height = Math.ceil(viewport.height);
-          const ctx = canvas.getContext('2d');
-          if (!ctx) break;
+          const ctx = canvas.getContext('2d', { willReadFrequently: true });
+          if (!ctx) { diag.push('Canvas 2D غير متاح'); break; }
+          // خلفية بيضاء صريحة (العربية تتطلب تبايناً واضحاً)
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
           await page.render({ canvasContext: ctx, viewport }).promise;
+          preprocessCanvasForOcr(canvas);
           if (onProgress) onProgress('🔍 OCR: قراءة نص الصفحة ' + p + ' من ' + maxPages + ' ...');
           const res = await Promise.race([
             worker.recognize(canvas),
             new Promise((_, rej) => setTimeout(() => rej(new Error('ocr-timeout')), 90000))
           ]);
           if (res && res.data && res.data.text) parts.push(res.data.text);
-        } catch (e) { /* صفحة واحدة فاشلة لا توقف العملية */ }
+        } catch (e) {
+          diag.push('صفحة ' + p + ': ' + (e && e.message ? e.message.substring(0, 60) : 'خطأ'));
+        }
       }
-    } catch (e) { return ''; }
-    finally {
+    } finally {
       if (worker) { try { await worker.terminate(); } catch (e) {} }
     }
     return parts.join('\n');
@@ -948,9 +1060,16 @@
         const el = document.getElementById('memoProgressStepText');
         if (el) el.textContent = msg;
       };
-      const { text, ocr } = await extractPdfText(file, onProgress);
+      const { text, ocr, stage, diag } = await extractPdfText(file, onProgress);
       const result = window.__sacMemoTextAnalysis(text, file.name, file.size, { ocr: ocr });
       reportContainer.innerHTML = result.html;
+      // سطر تقني صغير فوق التقرير: يوضح قناة القراءة وأي أعطال إن وجدت
+      if (stage) {
+        const tech = document.createElement('div');
+        tech.style.cssText = 'font-size:0.78rem; color:#64748b; background:#f1f5f9; border:1px dashed #94a3b8; border-radius:10px; padding:6px 12px; direction:ltr; text-align:left; font-family:monospace;';
+        tech.textContent = '⚙️ ' + stage + (diag && diag.length ? ' — ' + diag.join(' | ') : '');
+        reportContainer.prepend(tech);
+      }
     } catch (err) {
       reportContainer.innerHTML = `
         <div style="background:#fef2f2; border:2px solid #f87171; border-radius:16px; padding:18px 20px; text-align:center;">
