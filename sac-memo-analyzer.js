@@ -38,42 +38,34 @@
      بعض التطبيقات (Canva وشركاه) تخزّن الحروف العربية كأشكال
      U+FB50–FEFF بدل الحروف القياسية — نحوّلها لحروف قياسية
      ----------------------------------------------------------- */
-  const _pfTable = (function buildPF(){
-    const out = {};
-    const seq = [
-      ['ء',1],['آ',2],['أ',2],['ؤ',2],['إ',2],['ئ',4],['ا',2],['ب',4],['ة',2],
-      ['ت',4],['ث',4],['ج',4],['ح',4],['خ',4],['د',2],['ذ',2],['ر',2],['ز',2],
-      ['س',4],['ش',4],['ص',4],['ض',4],['ط',4],['ظ',4],['ع',4],['غ',4],
-      ['ف',4],['ق',4],['ك',4],['ل',4],['م',4],['ن',4],['ه',4],['و',2],['ى',2],['ي',4]
-    ];
-    let cp = 0xFE80;
-    for (const [letter, n] of seq) {
-      for (let i = 0; i < n; i++) out[cp++] = letter;
-    }
-    // روابط لام-ألف (FEF5–FEFC) → «لا» (تطبيع الهمزات لاحقاً يوحّدها)
-    for (let c = 0xFEF5; c <= 0xFEFC; c++) out[c] = 'لا';
-    // بعض أشكال المجموعة A الشائعة في المصدّرات القديمة
-    out[0xFB50] = 'ا'; out[0xFB51] = 'ا'; out[0xFB52] = 'ب'; out[0xFB53] = 'ب';
-    out[0xFB54] = 'ب'; out[0xFB55] = 'ب'; out[0xFB56] = 'ب'; out[0xFB57] = 'ب';
-    out[0xFB58] = 'ب'; out[0xFB59] = 'ب'; out[0xFB5A] = 'ب'; out[0xFB5B] = 'ب';
-    out[0xFB66] = 'ت'; out[0xFB67] = 'ت'; out[0xFB68] = 'ت'; out[0xFB69] = 'ت';
-    out[0xFB78] = 'ن'; out[0xFB79] = 'ن'; out[0xFB7A] = 'ن'; out[0xFB7B] = 'ن';
-    out[0xFB8A] = 'ف'; out[0xFB8B] = 'ف'; out[0xFB8F] = 'ك'; out[0xFB90] = 'ك';
-    out[0xFB91] = 'ك'; out[0xFB92] = 'ك';
-    out[0xFBFD] = 'ي'; out[0xFBFE] = 'ي'; out[0xFBFF] = 'ي';
-    return out;
-  })();
+  // مطوي الأشكال العرضية العربية (Presentation Forms A/B + الروابط)
+  // يستخدم تطبيع Unicode NFKC (يشمل كل اللغات والروابط والأشكال الزخرفية للخطوط المخصصة)
+  const FARSI_TO_ARABIC = { 'ی': 'ي', 'ک': 'ك', 'ھ': 'ه', 'ہ': 'ه', 'ە': 'ه',
+                             'ە': 'ه', 'ې': 'ي', 'ے': 'ي', 'ۍ': 'ي', 'پ': 'ب',
+                             'چ': 'ج', 'ژ': 'ز', 'ڤ': 'ف', 'گ': 'ك', 'ݣ': 'ك',
+                             'أ': 'أ', 'إ': 'إ' };
   function foldPresentationForms(s) {
-    const str = String(s || '');
+    let str = String(s || '');
     if (!str) return str;
-    // تحقق سريع قبل المعالجة
-    if (!/[\uFB50-\uFEFF]/.test(str)) return str;
-    let out = '';
-    for (const ch of str) {
-      const cp = ch.codePointAt(0);
-      out += (cp >= 0xFB50 && cp <= 0xFEFF && _pfTable[cp]) ? _pfTable[cp] : ch;
+    // تنظيف بايتات NUL ومحارف التحكم (كانفا يزرع \u0000 داخل الكلمات!)
+    str = str.replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, ' ');
+    if (!/[\uFB50-\uFEFF\u06A9\u06AA\u06AF\u06BA\u06BE\u06C1\u06CC\u06CD\u06CE\u06D2\u06D3]/.test(str)) return str;
+    str = str.normalize('NFKC');
+    return str.replace(/[\u06CC\u06A9\u06BE\u06C1\u06D2\u06D3\u06CD\u06CE\u06AA\u0686\u0698\u06A4\u06AF\u06BA]/g,
+                       ch => FARSI_TO_ARABIC[ch] || ch);
+  }
+
+  // قصّ قيمة ترويسة ملتصقة بكلمات مفتاحية لاحقة (كانفا يدمج العناصر بلا فواصل)
+  function cleanHeaderValue(v, maxLen) {
+    if (!v) return v;
+    let s = String(v).trim().replace(/\s+/g, ' ');
+    const STOP = ['الكفاءة', 'المستوى', 'المادة', 'المقطع', 'الميدان', 'الأستاذة', 'الأستاذ', 'المؤسسة',
+                  'السياق', 'الحصة', 'الوضعية', 'النشاط', 'مركبات', 'يستخدم', 'يساهم'];
+    for (const kw of STOP) {
+      const ix = s.indexOf(kw, 4);
+      if (ix > 0) { s = s.slice(0, ix).trim(); break; }
     }
-    return out;
+    return s.slice(0, maxLen || 60).replace(/\s*[:؛،\-ـ]+$/g, '').trim();
   }
 
   // كلمات مفتاحية بيداغوجية لقياس جودة النص العربي المستخرج
@@ -108,6 +100,7 @@
   function normalizeAr(s) {
     return String(foldPresentationForms(String(s || '')))
       .replace(/[ً-ْٰ]/g, '')   // حذف التشكيل
+      .replace(/[یکھہەېےۍپچژڤگݣ]/g, ch => FARSI_TO_ARABIC[ch] || ch)
       .replace(/[أإآٱ]/g, 'ا')
       .replace(/ة/g, 'ه')
       .replace(/ى/g, 'ي')
@@ -128,6 +121,104 @@
 
   function hasAny(norm, keywords) {
     return keywords.some(k => norm.indexOf(normalizeAr(k)) !== -1);
+  }
+
+  /* ────────── v007: محرك رصد هيكل المذكرة بدون افتراض أسطر ──────────
+     الملفات النصية و OCR كثيراً ما تُجمّع كل صفحة في سطر واحد، لذلك نرصد
+     عناوين الأقسام بالمواضع (indices) ثم نقصّ نص كل قسم حتى العنوان التالي */
+
+  // أفعال إنجاز التعليمات الشائعة في مذكرات الجيل الثاني (بصيغ مطبّعة مثل normalizeAr)
+  const INSTR_VERB_LIST = ['حدد','استخرج','استخلص','استنتج','اكتب','قارن','صنف','فسر','علل','لايم','لائم','اربط',
+    'عرف','ميز','لاحظ','ناقش','اثبت','اشرح','انقل','حلل','رتب','اقترح','عبر','قدم','اعط','اذكر','سجل','مثل','بين',
+    'كون','اكمل','امل','عين','اختار','ضع','ارسم','صف','اكتشف','استعمل','ابحث','عدد','وظف','توقع','استدل','انشي',
+    'وضح','جاوب','اوجد','حول','كوون'];
+  const INSTR_VERB_RE = new RegExp(
+    '^(?:(?:ثم|انطلاقا\\s*من|اعتمادا\\s*علي|بالاعتماد\\s*علي|بالاستغلال|بالتعاون\\s*مع|بالملاحظه|من\\s*خلال|حاول|علي\\s*ضوء|في\\s*ضوء|بالاستعانه\\s*بال|بالتسجيل\\s*في)\\s+)*' +
+    '(?:' + INSTR_VERB_LIST.join('|') + ')(?:وا|[ييوا])?(?=[\\s،.؟:：؛]|$)');
+
+  // رصد أسطر التعليمة/السؤال عبر كامل النص (ينقذ المذكرات التي لا تكتب عنوان «تعليمات:»)
+  function findInstructionLines(src) {
+    const out = []; const seenKeys = {};
+    const lines = String(src || '').split(/\n+/);
+    for (const raw of lines) {
+      // تقسيم إضافي عند الأرقام الدائرية ①②③ الشائعة في المطبوعات
+      const parts = String(raw).split(/(?=[①②③④⑤⑥⑦⑧⑨⑩])/);
+      for (const p0 of parts) {
+        let p = String(p0).replace(/^[\s\-*•◄►▪◦–—−٠-٩0-9]+[.)、،:\-]?\s*/u, '').trim();
+        if (p.length < 10 || p.length > 380) continue;
+        const np = normalizeAr(p);
+        let kind = null;
+        if (/[؟?]/.test(p) && p.replace(/\s/g, '').length >= 12) kind = 'سؤال';
+        else if (INSTR_VERB_RE.test(np)) kind = 'تعليمة';
+        if (!kind) continue;
+        const key = np.slice(0, 26);
+        if (seenKeys[key]) continue;
+        seenKeys[key] = 1;
+        out.push({ text: p, kind: kind });
+        if (out.length >= 14) return out;
+      }
+    }
+    return out;
+  }
+
+  // تصنيف العنوان المرصود — مع بوابة "نقطتان/بداية سطر" للعناوين العامة لتجنب الإيجابيات الكاذبة
+  function classifySecLabel(lbl, src, idx) {
+    const n = normalizeAr(lbl);
+    const after = src.slice(idx + lbl.length, idx + lbl.length + 3);
+    const colon = /^\s*[:：؛،.\-–—]/.test(after);
+    const prev = idx > 0 ? src.charAt(idx - 1) : '\n';
+    const lineStart = /[\n\r]/.test(prev) || idx === 0 || /[•◄►\-*]/.test(prev);
+    if (/وضعي/.test(n)) {
+      if (/اندماج|ادماج|اختبار|تقويم/.test(n)) return 'integration';
+      if (/انطلاق|مشكل|اشكال|تعلم/.test(n) || (colon && lineStart)) return 'problem';
+      return 'sep';
+    }
+    if (/كفاء/.test(n)) return 'comp';
+    if (/تعليم/.test(n)) {
+      const afterN = normalizeAr(src.slice(idx + lbl.length, idx + lbl.length + 16)).replace(/^\s+/, '');
+      const ordinalAfter = /^(ال)?اول|^(ال)?ثاني|^(ال)?ثالث|^[0-9٠-٩]/.test(afterN);
+      return (colon || lineStart || ordinalAfter) ? 'instr' : 'sep';
+    }
+    if (/نشاط|مرحل|محط|خطو|ورش/.test(n)) return 'activity'; // الترتيب/الرقم/النقطتان مضمونة من النمط
+    if (/حوصل|خلاص|تلخيص|استنتاج/.test(n)) return 'synth';
+    if (/شبك/.test(n)) return 'grid';
+    if (/فرضي|تصور|اشكال|مشكل|تساول|اسيل|سؤال/.test(n)) return 'hypo';
+    if (/استرجاع|مكتسبات|تنشيط/.test(n)) return 'recall';
+    if (/سير|مراحل|خطوات/.test(n)) return 'seq';
+    if (/تقويم|اختبار/.test(n)) return 'eval';
+    if (/موارد|مورد|وسائل/.test(n)) return 'resources';
+    return 'sep';
+  }
+
+  function findSectionHits(src) {
+    const SRC = String(src || '');
+    const H = '[هة]', A = '[اأإآٱ]', W = '[ؤو]?';
+    const parts = [];
+    // الوضعيات بكل مشتقاتها
+    parts.push(W + '(?:ال)?وضعي' + H + '(?:\\s+(?:ال)?(?:انطلاقي' + H + '|ال' + A + 'نطلاقي' + H + '|انطلاق\\s+مشكل' + H + '|مشكل|مشكل' + H + '|' + A + 'شكالي' + H + '|تعلمي' + H + '|تعليمي' + H + '|اندماجي' + H + '|' + A + 'دماجي' + H + '|تقويمي' + H + '|اختباري' + H + '))?');
+    // مركبات/كفاءات
+    parts.push('مركب(?:ات|' + H + ')?\\s+الكفاء' + H);
+    parts.push('كفاءات?\\s+(?:الفرعي' + H + '|الخاص' + H + ')');
+    // التعليمات (بأشكالها)
+    parts.push(W + '(?:ال)?تعليم(?:ات|' + H + ')');
+    // الأنشطة: مرتّبة (الأول/الثاني/1/١) عبر أرقام لاتينية أو عربية-هندية، أو متبوعة بنقطتين مباشرة
+    parts.push(W + '(?:ال)?(?:نشاط|مرحل' + H + '|محط' + H + '|خطو' + H + '|ورش' + H + ')(?:\\s*رقم)?(?:\\s+(?:الاول[يى]?|الثاني' + H + '?|الثالث' + H + '?|الرابع' + H + '?|الخامس' + H + '?|السادس' + H + '?|التقويمي|النهائي|العلاجي[هة]?|[0-9٠-٩]{1,2})|(?=\\s*[:：]))');
+    // الحوصلة/الاستنتاج
+    parts.push('(?:الحوصل' + H + '|الخلاص' + H + '|تلخيص|الاستنتاج\\s+النهائي)');
+    parts.push('شبك' + H + '\\s*(?:التصحيح|التقويم|المعايير|التنقيط)');
+    parts.push('(?:سير|مراحل|خطوات)\\s+(?:التعلمات|التعلم|الدرس|الحص' + H + ')');
+    parts.push('(?:الفرضيات?|التصورات?|ال' + A + 'شكالي' + H + '|المشكل\\s+العلمي|تساؤلات?|ال' + A + 'سئل' + H + '|السؤال\\s+المطروح)');
+    parts.push('(?:استرجاع|تنشيط)\\s+(?:المكتسبات|المعارف|السابق' + H + ')');
+    parts.push('المكتسبات\\s+القبلي' + H);
+    parts.push('(?:التقويم|الاختبار)\\s+(?:التكويني|التحصيلي|الختامي|الكتابي|التشخيصي)');
+    parts.push('(?:الموارد?|الوسائل)\\s+(?:المعرفي' + H + '|المنهجي' + H + '|الديداكتيكي' + H + '|المادي' + H + ')');
+    const RE = new RegExp(parts.join('|'), 'g');
+    const hits = []; let m;
+    while ((m = RE.exec(SRC)) !== null && hits.length < 150) {
+      hits.push({ idx: m.index, end: m.index + m[0].length, label: m[0], type: classifySecLabel(m[0], SRC, m.index) });
+      if (m[0].length === 0) RE.lastIndex++;
+    }
+    return hits;
   }
 
   /* ------------------------- بناء نافذة الأداة (Modal) ------------------------- */
@@ -447,7 +538,26 @@
         for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
           const page = await pdfDoc.getPage(pageNum);
           const textContent = await page.getTextContent();
-          textArr.push(textContent.items.map(it => it.str).join(' '));
+          // v007: بناء الأسطر الحقيقية عبر إحداثيات Y — سابقاً كانت كل صفحة تُجمّع في سطر واحد
+          // فتنهار كل المطابقات المعتمدة على بدايات الأسطر ويقول التقرير "لا أنشطة/لا تعليمات" خطأً
+          const pageItems = textContent.items || [];
+          const pageLines = [];
+          let curY = null, lineBuf = '';
+          for (const it of pageItems) {
+            const tr = it.transform || null;
+            const y = tr ? tr[5] : 0;
+            const str = String(it.str || '');
+            if (!str) continue;
+            if (curY !== null && Math.abs(y - curY) > 2.4) {
+              if (lineBuf.trim()) pageLines.push(lineBuf.trim());
+              lineBuf = str;
+            } else {
+              lineBuf += (lineBuf && !lineBuf.endsWith(' ') && !/^\s/.test(str) ? ' ' : '') + str;
+            }
+            curY = y;
+          }
+          if (lineBuf.trim()) pageLines.push(lineBuf.trim());
+          textArr.push(pageLines.join('\n'));
         }
         // ترميم فوري: طيّ أشكال العرض (كانفا/خطوط خاصة) + إصلاح الاتجاه البصري المعكوس
         const rep = repairArabicText(textArr.join('\n'));
@@ -605,10 +715,11 @@
   }
 
   async function ocrPdfPages(pdfDoc, onProgress, diag) {
-    const maxPages = Math.min(pdfDoc.numPages, 8); // قراءة أول 8 صفحات (الترويسة والأنشطة)
-    if (pdfDoc.numPages > maxPages) diag.push('مذكرة طويلة (' + pdfDoc.numPages + ' صفحة) — قراءة أول ' + maxPages + ' صفحات');
+    const maxPages = Math.min(pdfDoc.numPages, 12); // v007: حتى 12 صفحة (ملفات "مقطع كامل" تدفن الأنشطة في صفحات متأخرة)
+    if (pdfDoc.numPages > maxPages) diag.push('مذكرة طويلة (' + pdfDoc.numPages + ' صفحة) — قراءة أول ' + maxPages + ' صفحة');
     let worker = null;
     const parts = [];
+    let cumArabicPages = 0; // v007: عداد جودة تراكمي للإيقاف المبكر
 
     if (onProgress) onProgress('🔍 المذكرة ممسوحة أو بنصوص مزخرفة — تشغيل القارئ الضوئي العربي (OCR)...');
     worker = await createArabicWorker(onProgress, diag);
@@ -661,7 +772,9 @@
             } catch (e) { if (e && e.sacCancelled) throw e; }
           }
           if (bestText) { parts.push(bestText); }
+          cumArabicPages += (foldPresentationForms(bestText).match(/[؀-ۿ]/g) || []).length;
           diag.push('ص' + p + ': نقاط=' + Math.max(0, bestScore) + ' حروف=' + bestText.replace(/\s/g, '').length);
+          if (p >= 8 && cumArabicPages < 250) { diag.push('جودة المسح ضعيفة جداً — إيقاف OCR مبكراً بدل إضاعة الوقت'); break; }
         } catch (e) {
           if (e && e.sacCancelled) throw e;
           diag.push('صفحة ' + p + ': ' + (e && e.message ? e.message.substring(0, 60) : 'خطأ'));
@@ -680,7 +793,10 @@
      ========================================================================= */
   window.__sacMemoTextAnalysis = function(cleanText, fileName, fileSize, opts) {
     opts = opts || {};
-    cleanText = String(cleanText || '').replace(/\r/g, '');
+    // نزيل التشكيل مبكراً ونطوي أشكال العرض (كانفا/الخطوط الخاصة): المحرك الجديد كله يشتغل على نص مطيّح
+    cleanText = foldPresentationForms(String(cleanText || '')).replace(/\r/g, '').replace(/[ً-ْٰ]/g, '');
+    // مصدّرو كانفا يدمجون العناصر بلا أسطر: المسافات المضاعفة = حدود عناصر → نحوّلها أسطراً افتراضية
+    cleanText = cleanText.replace(/[ \t]{2,}/g, '\n').replace(/\n{3,}/g, '\n\n');
     const lowerName = String(fileName || '').toLowerCase();
     const norm = normalizeAr(cleanText);
     const normName = normalizeAr(lowerName);
@@ -761,21 +877,33 @@
     let extCompTerm = null;
 
     const lvlMatch = cleanText.match(/المستوى\s*[:：\-]?\s*([^\n\r]{3,50})/);
-    if (lvlMatch && lvlMatch[1].trim().length > 2) extLevel = clip(lvlMatch[1].trim(), 50);
-    else if (norm.includes('الرابعه متوسط') || norm.includes('4م') || normName.includes('4m')) extLevel = 'السنة الرابعة متوسط (شهادة BEM)';
-    else if (norm.includes('الثالثه متوسط') || norm.includes('3م') || normName.includes('3m')) extLevel = 'السنة الثالثة متوسط';
-    else if (norm.includes('الثانيه متوسط') || norm.includes('2م') || normName.includes('2m')) extLevel = 'السنة الثانية متوسط';
-    else if (norm.includes('الاولي متوسط') || norm.includes('1م') || normName.includes('1am') || normName.includes('1m')) extLevel = 'السنة الأولى متوسط';
+    // v007: حزم المذكرات (مذكرة + مذكرة تصحيح أستاذ آخر) — الغلاف «2 م» في أولى الصفحات أصدق من «المستوى:» المتأخر
+    const coverZone = cleanText.slice(0, 1400);
+    const coverDigit = coverZone.match(/(?:^|[\s\n])([1234])\s*م(?=\s|$|\n)/);
+    const LEVEL_WORDS = ['السنة الأولى متوسط', 'السنة الثانية متوسط', 'السنة الثالثة متوسط', 'السنة الرابعة متوسط (شهادة BEM)'];
+    if (coverDigit) extLevel = LEVEL_WORDS[parseInt(coverDigit[1], 10) - 1];
+    if (!extLevel && lvlMatch && lvlMatch[1].trim().length > 2) extLevel = cleanHeaderValue(lvlMatch[1], 45);
+    else if (!extLevel && (norm.includes('الرابعه متوسط') || norm.includes('4م') || normName.includes('4m'))) extLevel = 'السنة الرابعة متوسط (شهادة BEM)';
+    else if (!extLevel && (norm.includes('الثالثه متوسط') || norm.includes('3م') || normName.includes('3m'))) extLevel = 'السنة الثالثة متوسط';
+    else if (!extLevel && (norm.includes('الثانيه متوسط') || norm.includes('2م') || normName.includes('2m'))) extLevel = 'السنة الثانية متوسط';
+    else if (!extLevel && (norm.includes('الاولي متوسط') || norm.includes('1م') || normName.includes('1am') || normName.includes('1m'))) extLevel = 'السنة الأولى متوسط';
 
     const fldMatch = cleanText.match(/(?:الميدان|المحور)(?:\s*التعلمي)?\s*[:：\-]?\s*([^\n\r]{4,60})/);
-    if (fldMatch && fldMatch[1].trim().length > 3) extField = clip(fldMatch[1].trim(), 60);
+    if (fldMatch && fldMatch[1].trim().length > 3) extField = cleanHeaderValue(fldMatch[1], 55);
     else if (hasAny(norm, ['الانسان والصحه'])) extField = 'الإنسان والصحة';
     else if (hasAny(norm, ['الانسان والمحيط'])) extField = 'الإنسان والمحيط الطبيعي';
     else if (hasAny(norm, ['الكرة الارضيه'])) extField = 'الكرة الأرضية والديناميكية الداخلية';
     else if (hasAny(norm, ['تنظيم العالم الحي'])) extField = 'تنظيم العالم الحي وتنوعه';
 
     const secMatch = cleanText.match(/(?:المقطع|الوحدة|موضوع الحصة|الدرس)(?:\s*التعلمي)?(?:\s*\d+)?\s*[:：\-]\s*([^\n\r]{4,70})/);
-    if (secMatch && secMatch[1].trim().length > 3) extSection = clip(secMatch[1].trim(), 70);
+    // كانفا قد يكتب «المقطع التعليمي الرابع تصنيف الكائنات الحيّة» بلا نقطتين
+    const secMatch2 = !secMatch && cleanText.match(/المقطع(?:\s+التعليمي)?\s+(?:الأول|الثاني|الثالث|الرابع|الخامس|السادس|السابع|الثامن|التاسع|العاشر|[0-9]+)\s+([^\n\r]{4,70})/);
+    if (secMatch && secMatch[1].trim().length > 3) extSection = cleanHeaderValue(secMatch[1], 65);
+    else if (secMatch2 && secMatch2[1].trim().length > 3) extSection = cleanHeaderValue(secMatch2[1], 65);
+    else if (hasAny(norm, ['تصنيف', 'التصنيف'])) extSection = 'تصنيف الكائنات الحية (الحيوانية والنباتية)';
+    else if (hasAny(norm, ['الوسط الحي', 'الانظمة البيئية', 'التنوع البيولوجي', 'السلاسل الغذائية'])) extSection = 'الوسط الطبيعي والأنظمة البيئية';
+    else if (hasAny(norm, ['بروتين', 'الدنا', 'الشفرة الوراثية'])) extSection = 'النشاط التكويني وبنية البروتين';
+    else if (hasAny(norm, ['جودة المياه', 'ماء الشرب', 'مياه الشرب'])) extSection = 'جودة مياه الشرب';
     else if (hasAny(norm, ['مستحاث', 'الاستحاثه', 'استحاثه'])) extSection = 'المستحاثات وشروط الاستحاثة والأوساط القديمة';
     else if (hasAny(norm, ['مناعة', 'المناعة', 'بلعمه', 'اجسام مضاده'])) extSection = 'الاستجابة المناعية والخطوط الدفاعية للعضوية';
     else if (hasAny(norm, ['هضم', 'انزيم'])) extSection = 'التحولات الغذائية والهضم الإنزيمي';
@@ -787,13 +915,13 @@
     else if (hasAny(norm, ['نشاط تكوني', 'تكوين البروتين'])) extSection = 'النشاط التكويني وتكوين البروتين';
 
     const cGlobMatch = cleanText.match(/(?:الكفاءة\s*الشاملة|الكفاءة\s*القاعدية|الهدف\s*الشامل)\s*[:：\-]?\s*([^\n\r]{8,140})/);
-    if (cGlobMatch && cGlobMatch[1].trim().length > 7) extCompGlobal = clip(cGlobMatch[1].trim(), 140);
+    if (cGlobMatch && cGlobMatch[1].trim().length > 7) extCompGlobal = cleanHeaderValue(cGlobMatch[1], 120);
     else if (extLevel && extLevel.includes('الثانية')) extCompGlobal = 'تنمية تعلمات لدى المتعلم تسمح له بفهم الوسط الطبيعي والمساهمة في المحافظة على التوازنات الطبيعية';
     else if (extLevel && (extLevel.includes('الرابعة') || extLevel.includes('الأولى'))) extCompGlobal = 'تنمية تعلمات تسمح للمتعلم بفهم آليات المحافظة على صحة العضوية وسلامتها الوظيفية';
     else if (extLevel && extLevel.includes('الثالثة')) extCompGlobal = 'تنمية تعلمات تسمح للمتعلم بفهم الظواهر الجيولوجية وحماية البيئة من مخاطرها';
 
     const cTermMatch = cleanText.match(/(?:الكفاءة\s*الختامية|الكفاءة\s*المستهدفة|الكفاءة\s*المقصودة)\s*[:：\-]?\s*([^\n\r]{8,160})/);
-    if (cTermMatch && cTermMatch[1].trim().length > 7) extCompTerm = clip(cTermMatch[1].trim(), 160);
+    if (cTermMatch && cTermMatch[1].trim().length > 7) extCompTerm = cleanHeaderValue(cTermMatch[1], 140);
     else if (extSection) extCompTerm = 'يوظف موارده المعرفية والمنهجية المكتسبة' + (extField ? ' في ميدان ' + extField : '') + ' لحل وضعيات مشكلة تتعلق بـ (' + extSection + ')';
 
     /* --- ب) مركبات الكفاءة --- */
@@ -814,23 +942,51 @@
         '<div>◄ توظيف الموارد المكتسبة في حل وضعيات مشكلة مماثلة من المحيط</div>';
     }
 
-    /* --- ج) الوضعية الانطلاقية والتعليمات --- */
-    const probMatch = cleanText.match(/(?:الوضعية\s*(?:الانطلاقية|المشكلة?|الإشكالية|التعلمية|الاندماجية)?|نص\s*الوضعية|السياق)\s*[:：\-]?\s*([\s\S]{25,750}?)(?=\n\s*(?:التعليم|المطلوب|الأسئلة|النشاط|سير\s|المرحل|الموارد|الاسترجاع|مكتسبات|الفرضيات|$))/);
-    const probFound = !!(probMatch && probMatch[1].trim().length > 20);
+    /* --- ج) الوضعية الانطلاقية والتعليمات — v007 رصد بالمواضع (يعمل حتى بلا أسطر) --- */
+    const secHits = findSectionHits(cleanText);
+    const secs = [];
+    for (let hi = 0; hi < secHits.length; hi++) {
+      const h = secHits[hi];
+      if (h.type === 'sep') continue;
+      // الحدود الذكية: داخل الأنشطة، عناوين التعليمة/الفرضيات تابعة لجسم النشاط وليست فاصلة
+      let nxtIdx = -1;
+      for (let hj = hi + 1; hj < secHits.length; hj++) {
+        const tj = secHits[hj].type;
+        if (tj === 'sep') continue;
+        if (h.type === 'activity' && (tj === 'instr' || tj === 'hypo')) continue;
+        nxtIdx = secHits[hj].idx; break;
+      }
+      const maxLen = h.type === 'problem' ? 900 : h.type === 'instr' ? 800 : h.type === 'activity' ? 700 : 520;
+      let body = cleanText.slice(h.end, Math.min(nxtIdx >= 0 ? nxtIdx : cleanText.length, h.end + maxLen)).trim();
+      body = body.replace(/^[\s:：؛،.\-–—]+/, ''); // تنظيف النقطتين بعد العنوان عند الاقتباس
+      secs.push({ type: h.type, label: h.label.trim(), idx: h.idx, body: body });
+    }
+
+    // 1) الوضعية الانطلاقية: أطول قسم حقيقي من نوع problem
+    const problemSecs = secs.filter(q => q.type === 'problem' && q.body.replace(/\s/g, '').length > 20);
+    const probFound = problemSecs.length > 0;
+    let bestProb = null;
+    problemSecs.forEach(q => { if (!bestProb || q.body.length > bestProb.body.length) bestProb = q; });
     const extProblemText = probFound
-      ? esc(clip(probMatch[1].trim(), 650)).replace(/\n/g, '<br>')
+      ? esc(clip(bestProb.body, 650)).replace(/\n/g, '<br>')
       : null;
 
-    const instrMatch = cleanText.match(/(?:التعليمات?|التعليمة\s*[:：\-]?|المطلوب)\s*[:：\-]?\s*([\s\S]{15,600}?)(?=\n\s*(?:النشاط|سير\s|المرحل|الحوصلة|الموارد|وضعية|$))/);
-    const instrFound = !!(instrMatch && instrMatch[1].trim().length > 10);
-    let extInstructionsHtml = '';
-    if (instrFound) {
-      let num = 0;
-      instrMatch[1].split(/\n+/).forEach(il => {
-        const t = il.trim().replace(/^[-*•◄►\d).\-]+\s*/, '');
-        if (t.length > 5 && t.length < 220 && num < 8) { num++; extInstructionsHtml += '<div>' + num + '. ' + esc(t) + '</div>'; }
+    // 2) التعليمات: من الأقسام المعنونة أولاً، ثم كشف شامل بأفعال الإنجاز/علامات الاستفهام
+    const instrSecs = secs.filter(q => q.type === 'instr' && q.body.replace(/\s/g, '').length > 10);
+    const labeledInstrLines = [];
+    instrSecs.forEach(q => {
+      q.body.split(/\n+|(?=[①②③④⑤⑥⑦⑧⑨⑩])/).forEach(il => {
+        const t = il.trim().replace(/^[-*•◄►▪◦–—−\d)٠-٩.\-]+\s*/, '');
+        if (t.length > 5 && t.length < 260 && labeledInstrLines.length < 12) labeledInstrLines.push(t);
       });
-    }
+    });
+
+    const instrLines = findInstructionLines(cleanText);
+    const instrFound = labeledInstrLines.length > 0 || instrLines.length >= 2;
+
+    let extInstructionsHtml = '';
+    const showLines = (labeledInstrLines.length > 0 ? labeledInstrLines : instrLines.map(o => o.text)).slice(0, 8);
+    showLines.forEach((t, i2) => { extInstructionsHtml += '<div>' + (i2 + 1) + '. ' + esc(clip(t, 185)) + '</div>'; });
     if (!extInstructionsHtml) {
       const secTxt = extSection ? esc(extSection) : 'موضوع الدرس';
       extInstructionsHtml =
@@ -850,19 +1006,42 @@
       '<div>◄ <b>المصطلحات المستهدفة:</b> ضبط المصطلحات العلمية المركزية وكتابتها بوضوح للتلميذ.</div>' +
       '<div>◄ <b>الوسائل الديداكتيكية:</b> جهاز العرض، مطبوعات الأفواج، الكتاب المدرسي، وسائل الإيضاح.</div>';
 
-    /* --- هـ) الأنشطة --- */
+    /* --- هـ) الأنشطة — v007: عناوين مرصودة بالمواضع أو تقدير من تجمعات التعليمات --- */
     let extActivitiesHtml = '';
-    let actCount = 0;
-    const actRegex = /النشاط\s*(?:الأول|الثاني|الثالث|الرابع|[0-9]+)[^\n:：]{0,40}[:：\-]?\s*([\s\S]{25,600}?)(?=\n\s*(?:النشاط|الحوصلة|الخلاصة|التقويم|الشبكة|وضعية|سير\s|$))/gi;
-    let actMatch;
-    while ((actMatch = actRegex.exec(cleanText)) !== null && actCount < 3) {
-      const body = clip(actMatch[1].trim(), 480);
-      if (body.length < 20) continue;
-      actCount++;
+    const actSecs = (() => {
+      const byKey = {};
+      secs.filter(q => q.type === 'activity' && q.body.replace(/\s/g, '').length >= 18).forEach(q => {
+        const nl = normalizeAr(q.label);
+        const om = nl.match(/الاول|الثاني|الثالث|الرابع|الخامس|السادس|التقويمي|النهائي|العلاجي|[0-9٠-٩]{1,2}/);
+        const key = om ? om[0] : (nl.slice(0, 14) + '|' + normalizeAr(q.body).slice(0, 25));
+        if (!byKey[key] || q.body.length > byKey[key].body.length) byKey[key] = q;
+      });
+      return Object.keys(byKey).map(k => byKey[k]).sort((a, b) => a.idx - b.idx);
+    })();
+    let actCount = actSecs.length;
+    actSecs.slice(0, 4).forEach(q => {
+      const body = clip(q.body, 480);
       extActivitiesHtml +=
         '<div style="margin-bottom:14px; padding:12px; background:#f8fafc; border:1px solid #cbd5e1; border-radius:12px;">' +
-        '<b style="color:#0a5860;">النشاط المرصود رقم ' + actCount + ':</b><br>' +
+        '<b style="color:#0a5860;">' + esc(q.label) + ' <span style="font-size:0.75rem; color:#047857;">(مرصود حرفياً في ملفك)</span>:</b><br>' +
         '<div style="font-size:0.92rem; margin-top:4px; line-height:1.7;">' + esc(body).replace(/\n/g, '<br>') + '</div></div>';
+    });
+
+    // إن لم تُعنون الأنشطة، نقدّرها من حجم التعليمات/الأسئلة المرصودة (لا نقول "ماكاش" ظلماً)
+    const effActCount = actCount > 0 ? actCount
+      : (instrLines.length >= 4 ? Math.min(3, Math.max(1, Math.floor(instrLines.length / 3)))
+      : (instrLines.length >= 2 ? 1 : 0));
+
+    if (!extActivitiesHtml && instrLines.length >= 2) {
+      extActivitiesHtml =
+        '<div style="margin-bottom:10px; padding:12px; background:#ecfdf5; border:1.5px solid #34d399; border-radius:12px;">' +
+        '<b>✅ تم رصد ' + instrLines.length + ' تعليمة/سؤالاً موجهاً حرفياً في ملفك.</b> ' +
+        'ليست معنونة بكلمة «النشاط» لذلك لم تُحتسب أنشطة موسومة؛ يُفضّل تجميعها داخل أنشطة مرقمة ' +
+        '(النشاط 1، النشاط 2...) ليظهر سير الحصة أوضح في المذكرة المطبوعة.</div>' +
+        instrLines.slice(0, 8).map((o, li) =>
+          '<div style="padding:8px 12px; margin-bottom:6px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px;">' +
+          '<b style="color:#047857;">' + (o.kind === 'سؤال' ? '❓ سؤال' : '📌 تعليمة') + ' ' + (li + 1) + ':</b> ' +
+          esc(clip(o.text, 190)) + '</div>').join('');
     }
     if (!extActivitiesHtml) {
       const secTxtA = extSection ? esc(extSection) : 'موضوع الدرس';
@@ -879,7 +1058,7 @@
 
     /* --- و) رصد عناصر الديداكتيك (تعتمد على النص الفعلي للملف) --- */
     const hasRecall      = hasAny(norm, ['استرجاع', 'مكتسبات', 'المعرفات السابقه']);
-    const hasProblem     = probFound || hasAny(norm, ['اشكاليه', 'الإشكالية', 'المشكل العلمي', 'تساؤلات', 'التساؤل']);
+    const hasProblem     = probFound || hasAny(norm, ['اشكاليه', 'الإشكالية', 'المشكل العلمي', 'تساؤلات', 'التساؤل', 'الأسئلة المطروحة', 'السؤال المطروح']);
     const hasHypo        = hasAny(norm, ['فرضية', 'فرضيات', 'تصورات', 'تخمين']);
     const hasSynthesis   = hasAny(norm, ['حوصلة', 'خلاصة', 'تلخيص', 'تدوين']);
     const foundOHERIC    = hasAny(norm, ['ملاحظة', 'فرضية', 'تجريب', 'تجربة', 'نتيجة', 'تفسير', 'استنتاج']);
@@ -900,6 +1079,7 @@
     if (probFound) score += 7;
     if (instrFound) score += 3;
     if (actCount > 0) score += 6;
+    else if (effActCount > 0) score += 4;
     if (actCount > 1) score += 2;
     if (foundOHERIC) score += 6;
     if (foundTP) score += 5;
@@ -921,6 +1101,7 @@
     if (probFound)     posListHtml += '<li><b>حضور نص وضعية انطلاقية مشكلة:</b> تم رصد سياق انطلاقي مكتوب في المذكرة يولد التناقض المعرفي لبناء الإشكالية.</li>';
     if (instrFound)    posListHtml += '<li><b>صياغة تعليمات واضحة مرفقة بالوضعية:</b> التعليمات المرصودة توجه التلميذ نحو بناء المفهوم خطوة بخطوة.</li>';
     if (actCount > 0)  posListHtml += '<li><b>تفكيك الحصة إلى أنشطة ميدانية (' + actCount + ' أنشطة مرصودة):</b> تقسيم المحتوى العلمي إلى خطوات عمل تعتمد على استغلال الوثائق.</li>';
+    else if (instrLines.length >= 2) posListHtml += '<li><b>رصد ' + instrLines.length + ' تعليمة/سؤالاً موجهاً فعلياً داخل النص:</b> التعليمة توجه التلميذ لبناء المفهوم؛ يُنصح فقط بعنونتها داخل أنشطة مرقمة لظهور أوضح.</li>';
     if (foundOHERIC)   posListHtml += '<li><b>احترام مسار المسعى التجريبي (OHERIC):</b> رصد مصطلحات الملاحظة، الفرضيات، التجريب والاستنتاج في ثنايا المذكرة.</li>';
     if (foundTP)       posListHtml += '<li><b>إرفاق أنشطة مخبرية وتطبيقية (TP):</b> تمكين التلميذ من التعامل مع الوسائل والعينات بشكل ملموس.</li>';
     if (foundGroups)   posListHtml += '<li><b>تنظيم العمل البيداغوجي في أفواج:</b> الإشارة إلى التعلم التعاوني وتقسيم التلاميذ في مجموعات للبحث والمناقشة.</li>';
@@ -942,7 +1123,7 @@
     if (!hasRecall)      negListHtml += '<li><b>الانطلاق مباشرة دون تنشيط المكتسبات:</b> يُنصح بتخصيص دقائق لاسترجاع المكتسبات القبلية لربط الدرس بسابقه.</li>';
     if (!hasSynthesis)   negListHtml += '<li><b>غياب مرحلة الحوصلة المكتوبة:</b> يجب تدوين خلاصة علمية دقيقة يكتبها التلاميذ في نهاية الحصة.</li>';
     if (!hasTimeShares)  negListHtml += '<li><b>غياب التقدير الزمني للمراحل:</b> يستحسن تحديد المدة بالدقائق لكل مرحلة (الوضعية، الأنشطة، الحوصلة).</li>';
-    if (actCount === 0)  negListHtml += '<li><b>عدم تفكيك الأنشطة داخل نص المذكرة:</b> لم يُرصد تقسيم صريح للأنشطة؛ يُنصح بعنونة كل نشاط (النشاط الأول، الثاني...) لتسهيل التنفيذ والمتابعة.</li>';
+    if (actCount === 0 && effActCount === 0)  negListHtml += '<li><b>عدم تفكيك الأنشطة داخل نص المذكرة:</b> لم يُرصد تقسيم صريح للأنشطة؛ يُنصح بعنونة كل نشاط (النشاط الأول، الثاني...) لتسهيل التنفيذ والمتابعة.</li>';
     if (!negListHtml)    negListHtml = '<li><b>لم تُرصد سلبيات جوهرية:</b> المذكرة متكاملة العناصر؛ فقط راجع(ي) تدرج التعليمات وتوزيع الزمن بدقة على المحتوى المخطط.</li>';
 
     /* --- ط) توصية المفتش الافتراضي (مخصصة حسب الملف) --- */
@@ -975,7 +1156,7 @@
         <div style="background:${scoreColor}; color:#fff; font-size:1.6rem; font-weight:900; padding:14px 20px; border-radius:16px; box-shadow:0 4px 16px rgba(0,0,0,0.15); white-space:nowrap;">${score}%</div>
         <div style="flex:1; min-width:240px;">
           <div style="font-weight:900; font-size:1.12rem; color:#14532d;">${verdictTxt}</div>
-          <div style="font-size:0.9rem; color:#166534; margin-top:4px;">تقرير مولَّد خصيصاً من القراءة الفعلية لنصوص ملف «${esc(fileName)}» — ${actCount > 0 ? actCount + ' أنشطة مرصودة' : 'لم تُرصد أنشطة معنونة'}${probFound ? ' + وضعية انطلاقية مستخرجة' : ''}.</div>
+          <div style="font-size:0.9rem; color:#166534; margin-top:4px;">تقرير مولَّد خصيصاً من القراءة الفعلية لنصوص ملف «${esc(fileName)}» — ${actCount > 0 ? actCount + ' أنشطة معنونة مرصودة' : (instrLines.length >= 2 ? instrLines.length + ' تعليمة/سؤال مرصود حرفياً' : 'لم تُرصد أنشطة معنونة')}${probFound ? ' + وضعية انطلاقية مستخرجة' : ''}.</div>
         </div>
       </div>
 
@@ -1065,7 +1246,7 @@
           <span style="background:#e0f2fe; color:#0369a1; padding:2px 10px; border-radius:8px; font-weight:800;">2. وضعية تعلم المورد:</span> ${probFound ? '✅ تقديم وضعية وسند يثيران التساؤل المعرفي حول موضوع الدرس.' : '⚠️ قدّم(ي) وثيقة أو مقالاً قصيراً يثير التساؤل حول الموضوع.'}<br>
           <span style="background:#e0f2fe; color:#0369a1; padding:2px 10px; border-radius:8px; font-weight:800;">3. التساؤل (الإشكالية):</span> ${hasProblem ? '✅ تم طرح مشكل علمي محفز وواضح.' : '⚠️ يجب تأكيد كتابة الإشكالية العلمية بوضوح أمام التلاميذ.'}<br>
           <span style="background:#e0f2fe; color:#0369a1; padding:2px 10px; border-radius:8px; font-weight:800;">4. التصوّرات والفرضيات:</span> ${hasHypo ? '✅ تم فتح المجال لتخمينات التلاميذ واقتراح الفرضيات قبل البحث.' : '⚠️ يجب إعطاء وقت لتسجيل فرضيات التلاميذ على السبورة قبل الأنشطة.'}<br>
-          <span style="background:#e0f2fe; color:#0369a1; padding:2px 10px; border-radius:8px; font-weight:800;">5. البحث والتقصّي:</span> ${actCount > 0 ? '✅ أنشطة ميدانية مرصودة (' + actCount + ') لتمكين الأفواج من بناء المفهوم.' : '⚠️ لم تُرصد أنشطة معنونة؛ جزّئي العمل إلى أنشطة على الوثائق والسندات.'}<br>
+          <span style="background:#e0f2fe; color:#0369a1; padding:2px 10px; border-radius:8px; font-weight:800;">5. البحث والتقصّي:</span> ${actCount > 0 ? '✅ أنشطة ميدانية مرصودة (' + actCount + ') لتمكين الأفواج من بناء المفهوم.' : (instrLines.length >= 2 ? '✅ رُصدت تعليمات/أسئلة موجهة (' + instrLines.length + ') تبني المفهوم خطوة بخطوة (غير معنونة بكلمة «نشاط»).' : '⚠️ لم تُرصد أنشطة معنونة؛ جزّئي العمل إلى أنشطة على الوثائق والسندات.')}<br>
           <span style="background:#e0f2fe; color:#0369a1; padding:2px 10px; border-radius:8px; font-weight:800;">6. الحوصلة (المورد):</span> ${hasSynthesis ? '✅ تم تخصيص مرحلة لتدوين خلاصة علمية للمفهوم المكتسب.' : '⚠️ يجب الحرص على صياغة حوصلة شاملة يدوّنها التلاميذ في نهاية الحصة.'}
         </div>
       </div>
@@ -1074,7 +1255,7 @@
       <div style="display:flex; flex-direction:column; gap:10px;">
         <div style="background:#0f766e; color:#fff; font-weight:900; font-size:1.1rem; padding:10px 16px; border-radius:12px; display:inline-flex; align-items:center; gap:8px; align-self:flex-start;">
           <span style="background:rgba(255,255,255,0.22); padding:2px 10px; border-radius:8px;">6</span>
-          <span>النشاطات وتعليماتها – تطبيق مباشر ${actCount > 0 ? '(مستخرجة من ملفك)' : '(نموذج مقترح)'}</span>
+          <span>النشاطات وتعليماتها – تطبيق مباشر ${actCount > 0 ? '(مستخرجة من ملفك)' : (instrLines.length >= 2 ? '(تعليمات مرصودة من ملفك)' : '(نموذج مقترح)')}</span>
         </div>
         <div style="background:#fff; border:2px solid #0d9488; border-radius:16px; padding:18px; line-height:1.95; font-size:0.96rem; color:#0f172a;">
           ${extActivitiesHtml}
@@ -1196,7 +1377,8 @@
       score: score,
       meta: {
         level: extLevel, field: extField, section: extSection,
-        activities: actCount, problem: probFound, instructions: instrFound,
+        activities: actCount, effActivities: effActCount, instrLines: instrLines.length,
+        problem: probFound, instructions: instrFound,
         oheric: foundOHERIC, tp: foundTP, groups: foundGroups,
         criteria: foundCriteria, integration: foundIntegr,
         recall: hasRecall, synthesis: hasSynthesis, hypothesis: hasHypo,
