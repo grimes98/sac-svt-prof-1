@@ -187,6 +187,7 @@
           <div class="spinner" style="width:50px; height:50px; border:5px solid #daeeee; border-top-color:#00a8a8; border-radius:50%; animation:sacSpin 0.9s linear infinite; margin-bottom:18px;"></div>
           <div id="memoProgressStepText" style="font-weight:800; font-size:1.08rem; color:#0a5860; margin-bottom:8px;">⏳ جارٍ قراءة ملف الـ PDF...</div>
           <div style="font-size:0.88rem; color:#5f7d7d;">يستخدم الذكاء الاصطناعي معايير الوثيقة المرافقة لمنهاج علوم الطبيعة والحياة (الجيل الثاني)</div>
+          <button id="memoCancelAnalyzeBtn" onclick="window.cancelSacMemoAnalysis()" style="margin-top:16px; background:#fff; color:#be123c; border:2px solid #f43f5e; padding:8px 22px; border-radius:12px; font-weight:800; font-size:0.92rem; cursor:pointer; transition:0.2s;">✋ إلغاء التحليل</button>
         </div>
 
         <!-- تقرير النتيجة: يُملأ ديناميكياً بالكامل حسب محتوى كل ملف -->
@@ -263,6 +264,25 @@
     if (e.target === modal) window.closeSacMemoAnalyzer();
   };
 
+  // زر «إلغاء التحليل» أثناء المعالجة — يوقف كل المراحل ويعيد منطقة الرفع
+  window.cancelSacMemoAnalysis = function() {
+    if (analysisCancelled) return;
+    analysisCancelled = true;
+    const stepText = document.getElementById('memoProgressStepText');
+    if (stepText) stepText.textContent = '✋ جارٍ إلغاء التحليل...';
+    const progressDiv = document.getElementById('memoAnalysisProgress');
+    if (progressDiv) progressDiv.style.display = 'none';
+    window.resetSacMemoFile();
+    const statusHeader = document.getElementById('memoAnalyzerStatusHeader');
+    if (statusHeader) {
+      const prev = statusHeader.innerHTML;
+      statusHeader.style.background = '#fef9c3';
+      statusHeader.style.color = '#854d0e';
+      statusHeader.innerHTML = '<span>✋ تم إلغاء التحليل — اختر ملفاً آخر أو أعد المحاولة</span>';
+      setTimeout(() => window.updateSacMemoAnalyzerQuotaUI(), 2600);
+    }
+  };
+
   /* ------------------------- اختيار الملف وفحص الحجم ------------------------- */
   let selectedPdfFile = null;
   window.handleSacMemoFileSelect = function(input) {
@@ -296,12 +316,14 @@
     selectedPdfFile = null;
     const input = document.getElementById('memoPdfFileInput');
     if (input) input.value = '';
-    document.getElementById('memoSelectedFileInfo').style.display = 'none';
-    document.getElementById('memoAnalysisProgress').style.display = 'none';
+    const selInfo = document.getElementById('memoSelectedFileInfo');
+    if (selInfo) selInfo.style.display = 'none';
+    const prog = document.getElementById('memoAnalysisProgress');
+    if (prog) prog.style.display = 'none';
     const rep = document.getElementById('memoAnalysisReport');
-    rep.style.display = 'none';
-    rep.innerHTML = ''; // مسح التقرير السابق لضمان عدم بقاء نتيجة قديمة
-    document.getElementById('memoDropZone').style.display = 'flex';
+    if (rep) { rep.style.display = 'none'; rep.innerHTML = ''; }
+    const drop = document.getElementById('memoDropZone');
+    if (drop) drop.style.display = 'flex';
     window.updateSacMemoAnalyzerQuotaUI();
   };
 
@@ -326,6 +348,7 @@
     const progressDiv = document.getElementById('memoAnalysisProgress');
     const stepText = document.getElementById('memoProgressStepText');
     progressDiv.style.display = 'flex';
+    analysisCancelled = false;
 
     // تشغيل التحليل الحقيقي فوراً بالتوازي مع إظهار خطوات التقدم
     const analysisPromise = generateDynamicSacMemoReport(selectedPdfFile);
@@ -341,16 +364,19 @@
     stepText.textContent = steps[0];
 
     const stepInterval = setInterval(() => {
+      if (analysisCancelled) { clearInterval(stepInterval); return; }
       currentStep++;
       if (currentStep < steps.length) {
         stepText.textContent = steps[currentStep];
       } else {
         clearInterval(stepInterval);
         analysisPromise.then(() => {
+          if (analysisCancelled) return;
           progressDiv.style.display = 'none';
           document.getElementById('memoAnalysisReport').style.display = 'flex';
           window.updateSacMemoAnalyzerQuotaUI();
-        }).catch(() => {
+        }).catch((err) => {
+          if (analysisCancelled || (err && err.sacCancelled)) return;
           progressDiv.style.display = 'none';
           document.getElementById('memoAnalysisReport').style.display = 'flex';
         });
@@ -459,6 +485,7 @@
           diag.push('OCR أعاد نصاً فارغاً');
         }
       } catch (e) {
+        if (e && e.sacCancelled) throw e; // الإلغاء ليس خطأ OCR — نشره للأعلى
         diag.push('OCR: ' + (e && e.message ? e.message.substring(0, 90) : 'خطأ غير معروف'));
       }
     }
@@ -484,6 +511,10 @@
   }
   window.__sacExtractPdfText = extractPdfText;
 
+  /* ------------------------- إلغاء التحليل الجاري ------------------------- */
+  let analysisCancelled = false;
+  function isAnalysisCancelled(){ return analysisCancelled; }
+
   /* ------------------------- OCR بالعربية (Tesseract.js) بمرايا متعددة ------------------------- */
   const TESS_MIRRORS = [
     { js: 'https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js',
@@ -500,36 +531,38 @@
     'https://unpkg.com/@tesseract.js-data/ara'
   ];
 
-  // تحسين صورة الفحص قبل OCR: عكس الخلفيات الداكنة + رمادي + تباين (قوالب كانفا الملوّنة)
-  function preprocessCanvasForOcr(canvas) {
+  // تحويل صورة الصفحة إلى قناتين ثنائيتين جاهزتين للـ OCR:
+  // ① نص داكن على أبيض ② معكوسة (ضروري للترويسات الداكنة المزخرفة كقوالب كانفا)
+  function buildOcrCanvases(srcCanvas) {
     try {
-      const ctx = canvas.getContext('2d');
-      const img = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const w = srcCanvas.width, h = srcCanvas.height;
+      const sctx = srcCanvas.getContext('2d', { willReadFrequently: true });
+      const img = sctx.getImageData(0, 0, w, h);
       const d = img.data;
-      const n = d.length / 4;
-      const g = new Uint8Array(n);
+
+      const cDark = document.createElement('canvas'); cDark.width = w; cDark.height = h;
+      const cInv = document.createElement('canvas'); cInv.width = w; cInv.height = h;
+      const dctx = cDark.getContext('2d'), ictx = cInv.getContext('2d');
+      if (!dctx || !ictx) return [srcCanvas];
+      const darkImg = dctx.createImageData(w, h), invImg = ictx.createImageData(w, h);
+      const dd = darkImg.data, ii = invImg.data;
+
+      // عتبة تكيّفية من متوسط الإضاءة
       let sum = 0;
-      for (let i = 0, j = 0; i < d.length; i += 4, j++) {
+      for (let i = 0; i < d.length; i += 4) sum += (77 * d[i] + 150 * d[i + 1] + 29 * d[i + 2]) >> 8;
+      const thr = Math.max(90, Math.min(170, Math.round(sum / (d.length / 4)) + 6));
+
+      for (let i = 0, j = 0; i < d.length; i += 4, j += 4) {
         const v = (77 * d[i] + 150 * d[i + 1] + 29 * d[i + 2]) >> 8;
-        g[j] = v;
-        sum += v;
+        const bin = v < thr ? 0 : 255;
+        dd[j] = dd[j + 1] = dd[j + 2] = bin;
+        ii[j] = ii[j + 1] = ii[j + 2] = 255 - bin;
+        dd[j + 3] = ii[j + 3] = 255;
       }
-      // إذا كانت الصفحة غالبة عليها خلفية داكنة (كتابة فاتحة) → نعكس الألوان ليفهمها OCR
-      let inverted = false;
-      if (sum / n < 119) {
-        inverted = true;
-        for (let j = 0; j < n; j++) g[j] = 255 - g[j];
-      }
-      let min = 255, max = 0;
-      for (let j = 0; j < n; j++) { const v = g[j]; if (v < min) min = v; if (v > max) max = v; }
-      const range = Math.max(1, max - min);
-      for (let i = 0, j = 0; i < d.length; i += 4, j++) {
-        let v = Math.round((g[j] - min) * 255 / range);
-        if (v > 175) v = 255;  // تبييض الخلفية الضبابية
-        d[i] = d[i + 1] = d[i + 2] = v;
-      }
-      ctx.putImageData(img, 0, 0);
-    } catch (e) {}
+      dctx.putImageData(darkImg, 0, 0);
+      ictx.putImageData(invImg, 0, 0);
+      return [cDark, cInv];
+    } catch (e) { return [srcCanvas]; }
   }
 
   async function createArabicWorker(onProgress, diag) {
@@ -572,36 +605,65 @@
   }
 
   async function ocrPdfPages(pdfDoc, onProgress, diag) {
-    const maxPages = Math.min(pdfDoc.numPages, 8); // حماية من الملفات الكبيرة
+    const maxPages = Math.min(pdfDoc.numPages, 8); // قراءة أول 8 صفحات (الترويسة والأنشطة)
+    if (pdfDoc.numPages > maxPages) diag.push('مذكرة طويلة (' + pdfDoc.numPages + ' صفحة) — قراءة أول ' + maxPages + ' صفحات');
     let worker = null;
     const parts = [];
 
-    if (onProgress) onProgress('🔍 المذكرة عبارة عن صور ممسوحة — جاري تشغيل محرك القراءة الضوئية العربي (OCR)...');
+    if (onProgress) onProgress('🔍 المذكرة ممسوحة أو بنصوص مزخرفة — تشغيل القارئ الضوئي العربي (OCR)...');
     worker = await createArabicWorker(onProgress, diag);
     if (!worker) { diag.push('تعذر إنشاء محرك OCR'); return ''; }
+    if (isAnalysisCancelled()) { try { await worker.terminate(); } catch (e) {} throw { sacCancelled: true }; }
 
+    const OCR_PAGE_TIMEOUT = 45000;
     try {
       for (let p = 1; p <= maxPages; p++) {
+        if (isAnalysisCancelled()) throw { sacCancelled: true };
         try {
           const page = await pdfDoc.getPage(p);
-          const viewport = page.getViewport({ scale: 2.5 }); // تكبير لتحسين دقة التعرف
+          // مقياس ذكي: استهداف ~1850px للضلع الأطول (كافٍ للعربية ولا ينسف الذاكرة)
+          const vp1 = page.getViewport({ scale: 1 });
+          const longest = Math.max(vp1.width, vp1.height);
+          const scale = Math.max(0.9, Math.min(2.4, 1850 / longest));
+          const viewport = page.getViewport({ scale });
+
           const canvas = document.createElement('canvas');
           canvas.width = Math.ceil(viewport.width);
           canvas.height = Math.ceil(viewport.height);
           const ctx = canvas.getContext('2d', { willReadFrequently: true });
           if (!ctx) { diag.push('Canvas 2D غير متاح'); break; }
-          // خلفية بيضاء صريحة (العربية تتطلب تبايناً واضحاً)
           ctx.fillStyle = '#ffffff';
           ctx.fillRect(0, 0, canvas.width, canvas.height);
           await page.render({ canvasContext: ctx, viewport }).promise;
-          preprocessCanvasForOcr(canvas);
-          if (onProgress) onProgress('🔍 OCR: قراءة نص الصفحة ' + p + ' من ' + maxPages + ' ...');
-          const res = await Promise.race([
-            worker.recognize(canvas),
-            new Promise((_, rej) => setTimeout(() => rej(new Error('ocr-timeout')), 90000))
-          ]);
-          if (res && res.data && res.data.text) parts.push(res.data.text);
+          if (isAnalysisCancelled()) throw { sacCancelled: true };
+
+          const variants = buildOcrCanvases(canvas); // [داكن, معكوس]
+          let bestText = '', bestScore = -1;
+          for (let v = 0; v < variants.length; v++) {
+            // المرور الثاني فقط إذا الأول لم يقنع (نص داكن عادة كافٍ)
+            if (v === 1 && bestScore >= 2) break;
+            if (isAnalysisCancelled()) throw { sacCancelled: true };
+            if (onProgress) onProgress('🔍 OCR: صفحة ' + p + '/' + maxPages + (v === 1 ? ' (محاولة معكوسة)' : '') + ' ...');
+            try {
+              const cancelRace = new Promise((_, rej) => {
+                const iv = setInterval(() => { if (isAnalysisCancelled()) { clearInterval(iv); rej({ sacCancelled: true }); } }, 350);
+              });
+              const res = await Promise.race([
+                worker.recognize(variants[v]).finally(() => {}),
+                cancelRace,
+                new Promise((_, rej) => setTimeout(() => rej(new Error('ocr-timeout')), OCR_PAGE_TIMEOUT))
+              ]);
+              if (res && res.data && res.data.text) {
+                const sc = scoreArabicText(res.data.text);
+                const ln = res.data.text.replace(/\s/g, '').length;
+                if (sc > bestScore || (sc === bestScore && ln > bestText.length)) { bestScore = sc; bestText = res.data.text; }
+              }
+            } catch (e) { if (e && e.sacCancelled) throw e; }
+          }
+          if (bestText) { parts.push(bestText); }
+          diag.push('ص' + p + ': نقاط=' + Math.max(0, bestScore) + ' حروف=' + bestText.replace(/\s/g, '').length);
         } catch (e) {
+          if (e && e.sacCancelled) throw e;
           diag.push('صفحة ' + p + ': ' + (e && e.message ? e.message.substring(0, 60) : 'خطأ'));
         }
       }
@@ -610,7 +672,7 @@
     }
     return parts.join('\n');
   }
-  window.__sacOcrPdfPages = ocrPdfPages;
+    window.__sacOcrPdfPages = ocrPdfPages;
 
   /* =========================================================================
      🧠 نواة التحليل البيداغوجي — تعمل على النص المستخرج فعلياً من الملف
@@ -1164,6 +1226,7 @@
         reportContainer.prepend(tech);
       }
     } catch (err) {
+      if (err && err.sacCancelled) throw err; // أُلغي التحليل — لا نعرض بطاقة خطأ
       reportContainer.innerHTML = `
         <div style="background:#fef2f2; border:2px solid #f87171; border-radius:16px; padding:18px 20px; text-align:center;">
           <div style="font-size:1.8rem;">⚠️</div>
