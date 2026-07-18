@@ -425,7 +425,7 @@
       return;
     }
 
-    // الحالة 2: التحليل البيداغوجي التفصيلي الشديد في 10 أقسام دقيقة جداً كما في النموذج الميداني الفعلي
+    // الحالة 2: التفكيك والتحليل البيداغوجي الفعلي في 10 أقسام دقيقة جداً كما في النموذج الميداني الفعلي
     const hasHeader = extractedText.includes("المستوى") || extractedText.includes("الميدان") || extractedText.includes("المقطع") || extractedText.includes("كفاءة") || lowerName.includes("1m") || lowerName.includes("2m") || lowerName.includes("3m") || lowerName.includes("4m");
     const hasProblem = extractedText.includes("وضعية انطلاق") || extractedText.includes("مشكل") || extractedText.includes("إشكالية") || extractedText.includes("تساؤل") || extractedText.includes("سياق");
     const hasOHERIC = extractedText.includes("ملاحظة") || extractedText.includes("فرضية") || extractedText.includes("تجريب") || extractedText.includes("نتيجة") || extractedText.includes("تفسير") || extractedText.includes("استنتاج") || extractedText.includes("تقصي");
