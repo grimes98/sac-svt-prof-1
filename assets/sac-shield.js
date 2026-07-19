@@ -136,7 +136,8 @@
       var dev   = (e.key === 'F12') ||
                   (e.ctrlKey && e.shiftKey && (k === 'i' || k === 'j' || k === 'c'));
       var snip  = (e.metaKey && e.shiftKey && k === 's');                 /* Win+Shift+S */
-      var ctrl  = e.ctrlKey && ['u', 's', 'p', 'x', 'c'].indexOf(k) > -1; /* مصدر/حفظ/طباعة/قص */
+      var noPrt = !!window.__sacNoPrintBlock; /* صفحات وظيفتها الطباعة */
+      var ctrl  = (e.ctrlKey && ['u', 's', 'x', 'c'].indexOf(k) > -1) || (e.ctrlKey && k === 'p' && !noPrt);
       if (shot || dev || snip || ctrl) {
         if (!shot) { e.preventDefault(); e.stopPropagation(); }
         shieldON(); showToast();
@@ -148,7 +149,7 @@
       if (e.key === 'PrintScreen' || e.keyCode === 44) { shieldON(); showToast(); }
     }, true);
 
-    window.addEventListener('beforeprint', function () { shieldON(); });
+    if (!window.__sacNoPrintBlock) window.addEventListener('beforeprint', function () { shieldON(); });
     window.addEventListener('blur', function () { shieldON(); });          /* Snipping/تبديل النوافذ */
     document.addEventListener('visibilitychange', function () { shieldON(); }); /* تبديل التبويبات */
 

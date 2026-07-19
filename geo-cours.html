@@ -77,6 +77,31 @@ footer .srclinks a:hover{background:var(--green)}
 .lbox b{color:#8a5d09}
 @media(max-width:640px){.hero h1{font-size:1.55rem}.gal figure img{height:190px}}
 .acc-body h4{color:var(--green);margin:16px 0 6px;font-size:1.05rem}
+/* 🔐 بوابة الاشتراك — قفل الدروس */
+.acc-item.sac-locked .acc-body{display:none!important}
+.acc-item.sac-locked .acc-btn{opacity:.82}
+.acc-item.sac-locked .acc-btn .arrow{display:none}
+.lock-badge{margin-inline-start:auto;background:linear-gradient(135deg,#f0a53a,#e08d12);color:#fff;font-size:.7rem;font-weight:800;padding:3px 11px;border-radius:999px;box-shadow:0 3px 10px rgba(240,165,58,.35);flex-shrink:0}
+#geoLockModal{position:fixed;inset:0;z-index:9000;display:none;align-items:center;justify-content:center;background:rgba(6,50,50,.72);backdrop-filter:blur(4px);padding:18px}
+#geoLockModal.on{display:flex}
+.gl-box{background:#fff;border-radius:20px;max-width:520px;width:100%;padding:26px;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,.35);max-height:92vh;overflow-y:auto}
+.gl-ic{font-size:3rem;line-height:1}
+.gl-box h2{color:var(--green-d);font-size:1.35rem;margin:10px 0 6px}
+.gl-box>p{color:var(--muted);font-size:.95rem;line-height:1.9}
+.gl-plans{display:flex;gap:10px;justify-content:center;margin:14px 0;flex-wrap:wrap}
+.gl-plans div{border:1.5px solid var(--line);border-radius:12px;padding:8px 16px;font-weight:800;color:var(--green-d);background:#f4fdfd}
+.gl-plans b{display:block;font-size:1.1rem;color:#8a5d09}
+.gl-sub{display:inline-block;margin-top:6px;background:linear-gradient(135deg,var(--green-d),var(--green));color:#fff;font-weight:900;padding:12px 34px;border-radius:12px;font-size:1.05rem;box-shadow:0 8px 20px rgba(0,168,168,.3)}
+.gl-sub:hover{transform:translateY(-2px)}
+.gl-act{display:block;margin:12px auto 0;background:#fff;border:1.5px solid var(--green);color:var(--green);font-family:inherit;font-weight:800;padding:10px 22px;border-radius:11px;cursor:pointer;font-size:.92rem}
+.gl-act:hover{background:var(--green);color:#fff}
+.gl-form{margin-top:12px;text-align:start;background:#f7fcfc;border:1px solid var(--line);border-radius:12px;padding:14px}
+.gl-form input{width:100%;padding:11px 14px;border:1.5px solid var(--line);border-radius:10px;font-family:inherit;font-size:.95rem;margin-bottom:8px}
+.gl-form button{width:100%;background:var(--green);color:#fff;border:none;border-radius:10px;padding:10px;font-family:inherit;font-weight:800;cursor:pointer}
+.gl-form #geoActMsg{margin-top:8px;font-weight:700;font-size:.88rem;text-align:center;line-height:1.7}
+.gl-close{margin-top:14px;background:none;border:none;color:var(--muted);font-family:inherit;font-size:.86rem;cursor:pointer;font-weight:700}
+.gl-close:hover{color:var(--ink)}
+.sub-note{position:relative;margin-top:12px;display:inline-block;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);padding:7px 20px;border-radius:999px;font-size:.88rem;font-weight:700}
 </style>
 </head>
 <body>
@@ -92,6 +117,7 @@ footer .srclinks a:hover{background:var(--green)}
   <div class="hero-inner">
     <div class="kicker">🔬 ركن SVT التخصّصي · الجيولوجيا</div>
     <h1>مقرر الجيولوجيا العامة</h1>
+    <div class="sub-note">🔓 درسان أوّليان مجانيان للتجربة · 🔐 باقي الدروس حصري للمشتركين</div>
   </div>
 </section>
 
@@ -517,6 +543,88 @@ function tog(btn){
     if(el && el.classList){ el.classList.add('open'); setTimeout(function(){el.scrollIntoView();},100); }
   }
 })();
+</script>
+
+<!-- 🔐 نافذة بوابة الاشتراك -->
+<div id="geoLockModal" role="dialog" aria-modal="true">
+  <div class="gl-box">
+    <div class="gl-ic">🔒</div>
+    <h2>درس حصري للمشتركين</h2>
+    <p>الدرسان الأوّلان متاحان <b>مجاناً</b> للتجربة 🎁 — وباقي دروس المقرر (8 دروس كاملة بالصور والجداول) خاصة <b>بالمشتركين</b> في المنصة.</p>
+    <div class="gl-plans">
+      <div>🗓️ شهري<b>1000 دج</b></div>
+      <div>📚 فصلي<b>2000 دج</b></div>
+      <div>👑 سنوي<b>6000 دج</b></div>
+    </div>
+    <a href="ishtirak.html" class="gl-sub">💎 اشترك الآن</a>
+    <button class="gl-act" onclick="geoShowActivate()">🗝️ عندي اشتراك مفعّل — تفعيل الدخول</button>
+    <div class="gl-form" id="geoActForm" style="display:none">
+      <input id="geoActContact" placeholder="البريد الإلكتروني أو الهاتف المستعمل عند الاشتراك">
+      <button onclick="geoCheckMember()">✔ تحقّق وفعّل وصولي</button>
+      <div id="geoActMsg"></div>
+    </div>
+    <button class="gl-close" onclick="closeGeoLock()">✕ رجوع للتصفح المجاني</button>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/* 🔐 بوابة الاشتراك: درسان مجانيان (#ch0 و #ch2) والباقي مقفول حتى الاشتراك */
+var GEO_FREE = ['ch0', 'ch2'];
+var GEO_SUPA_URL = "https://lkxfjjyvqmzuoxmdoswv.supabase.co";
+var GEO_SUPA_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxreGZqanl2cW16dW94bWRvc3d2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMwOTM5NTYsImV4cCI6MjA5ODY2OTk1Nn0.TB5DRKXUB5Gfu-YkodmWxq_EXVbiq7t1o_bzxWj-ZTY";
+function openGeoLock(){ document.getElementById('geoLockModal').classList.add('on'); }
+function closeGeoLock(){ document.getElementById('geoLockModal').classList.remove('on'); }
+function geoShowActivate(){ document.getElementById('geoActForm').style.display = 'block'; }
+function geoUnlockAll(){
+  try{ localStorage.setItem('sac_geo_member', '1'); }catch(e){}
+  document.querySelectorAll('.acc-item.sac-locked').forEach(function(it){
+    it.classList.remove('sac-locked');
+    var b = it.querySelector('.lock-badge'); if(b) b.remove();
+  });
+  closeGeoLock();
+  alert('🎉 مرحباً بك أستاذ(ة)! تم تفعيل كامل مقرر الجيولوجيا لحسابك — بالتوفيق 📚');
+}
+function geoGateInit(){
+  if(localStorage.getItem('sac_geo_member') === '1') return;
+  document.querySelectorAll('.acc-item').forEach(function(it){
+    var btn = it.querySelector('.acc-btn');
+    if(!btn) return;
+    btn.removeAttribute('onclick');
+    if(GEO_FREE.indexOf(it.id) > -1){
+      btn.addEventListener('click', function(){ tog(btn); });
+      return;
+    }
+    it.classList.add('sac-locked');
+    var bd = document.createElement('span');
+    bd.className = 'lock-badge';
+    bd.textContent = '🔒 للمشتركين';
+    btn.appendChild(bd);
+    btn.addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); openGeoLock(); });
+  });
+}
+async function geoCheckMember(){
+  var v = (document.getElementById('geoActContact').value || '').trim();
+  var m = document.getElementById('geoActMsg');
+  if(!v){ m.textContent = '⚠️ اكتب/اكتبي البريد الإلكتروني أو الهاتف المستعمل عند الاشتراك'; m.style.color = '#a11818'; return; }
+  m.textContent = '⏳ جاري التحقق من اشتراكك...'; m.style.color = '#007878';
+  try{
+    if(!window.supabase){ m.textContent = '⚠️ التحقق يحتاج اتصالاً بالإنترنت'; m.style.color = '#a11818'; return; }
+    var sb = window.supabase.createClient(GEO_SUPA_URL, GEO_SUPA_KEY);
+    var r = await sb.from('service_orders').select('type,status').eq('contact', v);
+    var rows = (r && r.data) || [];
+    var okd = rows.some(function(o){
+      return (o.status || '').indexOf('\u2714') > -1 && (o.type || '').indexOf('\u0627\u0634\u062a\u0631\u0627\u0643') > -1;
+    });
+    if(okd){ geoUnlockAll(); }
+    else {
+      m.textContent = '❌ لم نجد اشتراكاً مفعّلاً بهذا الحساب — إن دفعتِ/دفعتَ للتو فانتظر تأكيد الإدارة (✔)، أو أكّد وسيلة الاتصال نفسها المستعملة في الاشتراك.';
+      m.style.color = '#a11818';
+    }
+  }catch(e){ m.textContent = '⚠️ خطأ في الاتصال — حاول/حاولي لاحقاً'; m.style.color = '#a11818'; }
+}
+window.geoCheckMember = geoCheckMember;
+if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', geoGateInit); }
+else { geoGateInit(); }
 </script>
 
 <!-- 🛡️ درع الحماية v2 — علامة مائية ذكية + شاشة تعتيم + فخ نسخ (نفس assets/sac-shield.js) -->
