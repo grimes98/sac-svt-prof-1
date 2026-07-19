@@ -19,6 +19,7 @@
     .btn-dl { background: #0d9488; color: #fff !important; font-weight: 900; font-size: 0.98rem; padding: 12px 18px; border-radius: 12px; text-decoration: none; text-align: center; display: block; border: none; cursor: pointer; box-shadow: 0 4px 12px rgba(13,148,136,0.25); transition: 0.2s; }
     .btn-dl:hover { background: #042f2e; transform: scale(1.02); }
   </style>
+  <link rel="manifest" href="manifest.json">
 </head>
 <body>
   <div class="wrap">
@@ -234,5 +235,18 @@
     </div>
   </div>
 <script src="assets/sac-shield.js" defer></script>
+
+<!-- 📱 PWA: تسجيل مشغّل الخدمة (Service Worker) -->
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function() {
+      navigator.serviceWorker.register("service-worker.js").then(function(reg) {
+        console.log("✓ PWA ServiceWorker registered:", reg.scope);
+      }).catch(function(err) {
+        console.log("PWA ServiceWorker registration error:", err);
+      });
+    });
+  }
+</script>
 </body>
 </html>

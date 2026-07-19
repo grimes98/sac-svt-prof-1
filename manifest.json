@@ -1,8 +1,10 @@
 {
+  "id": "index.html",
   "name": "منصة معهد علوم الطبيعة والحياة SAC SVT prof",
   "short_name": "SAC SVT prof",
   "description": "منصّة رقمية جامعة لأساتذة التّعليم المتوسّط في مادّة علوم الطّبيعة والحياة: وثائق، فروض، اختبارات، مذكّرات، والمكتبة الرقمية",
   "start_url": "index.html",
+  "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#f2fafa",
@@ -11,16 +13,42 @@
   "dir": "rtl",
   "icons": [
     {
-      "src": "assets/Sac.png",
+      "src": "assets/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
-      "src": "assets/Sac.png",
+      "src": "assets/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "الصفحة الرئيسية",
+      "short_name": "الرئيسية",
+      "url": "index.html",
+      "icons": [{ "src": "assets/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "المكتبة الرقمية",
+      "short_name": "المكتبة",
+      "url": "maktaba.html",
+      "icons": [{ "src": "assets/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "الاشتراك في المنصة",
+      "short_name": "اشتراك 💎",
+      "url": "ishtirak.html",
+      "icons": [{ "src": "assets/icon-192.png", "sizes": "192x192" }]
     }
   ]
 }

@@ -49,6 +49,7 @@
         .btn span.tx small { display: block; font-size: 0.8rem; color: #fef08a; font-weight: 500; }
         .success-msg { display: none; background: rgba(16,185,129,0.2); border: 1px solid #10b981; color: #34d399; padding: 12px; border-radius: 12px; font-weight: 700; margin-top: 15px; }
     </style>
+  <link rel="manifest" href="manifest.json">
 </head>
 <body>
     <div class="container">
@@ -143,5 +144,18 @@
         }
     </script>
 <script src="assets/sac-shield.js" defer></script>
+
+<!-- 📱 PWA: تسجيل مشغّل الخدمة (Service Worker) -->
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function() {
+      navigator.serviceWorker.register("service-worker.js").then(function(reg) {
+        console.log("✓ PWA ServiceWorker registered:", reg.scope);
+      }).catch(function(err) {
+        console.log("PWA ServiceWorker registration error:", err);
+      });
+    });
+  }
+</script>
 </body>
 </html>

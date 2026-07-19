@@ -63,6 +63,7 @@ header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.95);backdro
 footer{text-align:center;color:var(--muted);font-size:.85rem;padding:22px 0 30px}
 .tiny{color:var(--muted);font-size:.82rem;text-align:center;margin-top:8px}
 </style>
+  <link rel="manifest" href="manifest.json">
 </head>
 <body>
 
@@ -300,6 +301,19 @@ async function submitSub(){
   document.getElementById('fileName').textContent = '';
 }
 window.submitSub = submitSub;
+</script>
+
+<!-- 📱 PWA: تسجيل مشغّل الخدمة (Service Worker) -->
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function() {
+      navigator.serviceWorker.register("service-worker.js").then(function(reg) {
+        console.log("✓ PWA ServiceWorker registered:", reg.scope);
+      }).catch(function(err) {
+        console.log("PWA ServiceWorker registration error:", err);
+      });
+    });
+  }
 </script>
 </body>
 </html>

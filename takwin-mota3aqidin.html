@@ -605,5 +605,18 @@
 </div>
 <script src="sac-cursor-birds.js"></script>
 <script src="assets/sac-shield.js" defer></script>
+
+<!-- 📱 PWA: تسجيل مشغّل الخدمة (Service Worker) -->
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function() {
+      navigator.serviceWorker.register("service-worker.js").then(function(reg) {
+        console.log("✓ PWA ServiceWorker registered:", reg.scope);
+      }).catch(function(err) {
+        console.log("PWA ServiceWorker registration error:", err);
+      });
+    });
+  }
+</script>
 </body>
 </html>

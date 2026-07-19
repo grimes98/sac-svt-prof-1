@@ -103,6 +103,7 @@ footer .srclinks a:hover{background:var(--green)}
 .gl-close:hover{color:var(--ink)}
 .sub-note{position:relative;margin-top:12px;display:inline-block;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);padding:7px 20px;border-radius:999px;font-size:.88rem;font-weight:700}
 </style>
+  <link rel="manifest" href="manifest.json">
 </head>
 <body>
 
@@ -790,6 +791,19 @@ else { geoGateInit(); }
   });
 })();
 
+</script>
+
+<!-- 📱 PWA: تسجيل مشغّل الخدمة (Service Worker) -->
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function() {
+      navigator.serviceWorker.register("service-worker.js").then(function(reg) {
+        console.log("✓ PWA ServiceWorker registered:", reg.scope);
+      }).catch(function(err) {
+        console.log("PWA ServiceWorker registration error:", err);
+      });
+    });
+  }
 </script>
 </body>
 </html>
