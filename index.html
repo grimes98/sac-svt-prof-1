@@ -285,7 +285,6 @@
       <a href="#library" onclick="closeMenu()">المكتبة</a>
       <a href="#svt" onclick="closeMenu()">ركن SVT</a>
       <a href="#services" onclick="closeMenu()">الخدمات</a>
-      <a href="#upload" onclick="closeMenu()">رفع الملفات</a>
       <button class="btn" onclick="openLogin('user');closeMenu()" id="headerLoginBtn">تسجيل الدخول</button>
     </nav>
   </div>
@@ -369,24 +368,7 @@
     </div>
   </section>
 
-  <!-- UPLOAD -->
-  <section id="upload">
-    <div class="container">
-      <h2 class="sec-title">ارفع ملفاتك الخاصة هنا</h2>
-      <p class="sec-sub">شارك مواردك مع بقية الأساتذة وأثرِ المكتبة الجماعية</p>
-      <div style="max-width:560px;margin:0 auto">
-        <div class="card">
-          <div class="field"><label>اسم الأستاذ</label><input type="text" placeholder="الاسم الكامل"></div>
-          <div class="field"><label>نوع الملف</label><input type="text" placeholder="مذكرة / وثيقة / فرض / عرض..."></div>
-          <div class="field"><label>المستوى</label><input type="text" placeholder="1م / 2م / 3م / 4م"></div>
-          <div class="field"><label>الملف</label><input type="file"></div>
-          <button class="btn" onclick="fakeUpload()">رفع الملف</button>
-          <div class="msg" id="uploadMsg"></div>
-          <div class="hint">الرفع يتطلب ربط المنصة بخادم (backend) وتخزين سحابي. حاليًا هذا نموذج للواجهة.</div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- v008: حُذف نموذج الرفع الوهمي — الرفع الحقيقي يتم من صفحة المكتبة (maktaba.html) عبر Supabase -->
 
   <!-- COMMENTS -->
   <section class="comments-section" id="comments">
@@ -452,7 +434,7 @@
         <a href="#library">المكتبة</a>
         <a href="#svt">ركن SVT</a>
         <a href="#services">الخدمات</a>
-        <a href="#upload">رفع الملفات</a>
+        <a href="maktaba.html">رفع الملفات</a>
       </div>
       <div>
         <h4>الأقسام</h4>
@@ -535,6 +517,7 @@ const library = [
 
 // المحور 3: ركن SVT التخصّصي (قيد الإعداد)
 const svt = [
+  {e:"🌍",t:"الجيولوجيا العامة — مقرر كامل مصوّر",d:"مقرر الجيولوجيا كاملاً (مدخل + 9 فصول + ورشة كارطوغرافية) منقّح للويب مع 78 صورة توضيحية مستخرجة من الوثائق الأصلية: بنية الأرض الداخلية، الصخور والفلزات، الأفعال الداخلية والخارجية، الطيات والفوالق، الزلازل، البراكين، التكتونية، والخرائط الطبوغرافية.",tag:"جديد · مجاني",link:"geo-cours.html",free:true},
   {e:"📂",t:"وثائق الأستاذ",d:"المنهاج، الوثيقة المرافقة، دليل الأستاذ، المخطّطات السنوية ودليل بناء الاختبارات.",tag:"مجاني",link:"wathaiq.html",free:true},
   {e:"🧪",t:"دليل الأعمال المخبرية",d:"قواعد الأمن، الأدوات، المجهر، الكواشف، التشريح ومنهجية إنجاز TP مع أمثلة لكل مستوى.",tag:"مميّز",link:"mokhbar.html",free:false},
   {e:"🗂️",t:"بنك الوضعيات الإدماجية",d:"وضعيات إدماجية جاهزة لكل مستوى وميدان، مبنية على غرار مذكّرات الأساتذة، مع السياق والسندات والتعليمات.",tag:"مميّز",link:"wadiyat.html",free:false},
@@ -543,7 +526,7 @@ const svt = [
 
 const services = [
   {e:"🔬", t:"أداة «تحليل مذكرتي» بالذكاء الاصطناعي", d:"ارفع مذكرتك بصيغة PDF ليقوم الذكاء الاصطناعي البيداغوجي بتحليلها وإعطائك الإيجابيات، السلبيات، واقتراحات التحسين فورا.", tag:"أداة ذكية", link:"javascript:openSacMemoAnalyzer()", free:true},
-  {e:"⬆️", t:"رفع ومشاركة الملفات والموارد", d:"ارفع وشارك مذكراتك، عروضك، أو اختباراتك الخاصة مع بقية الأساتذة لإثراء المكتبة الجماعية الرقمية.", tag:"أداة ومشاركة", link:"#upload", free:true},
+  {e:"⬆️", t:"رفع ومشاركة الملفات والموارد", d:"ارفع وشارك مذكراتك وعروضك واختباراتك مع بقية الأساتذة — رفع حقيقي فوري إلى سحابة المنصة من صفحة المكتبة (PDF · MP4 · صور حتى 50MB)، يظهر مباشرة بشارة «إسهام أستاذ» مع زر تحميل.", tag:"أداة ومشاركة", link:"maktaba.html", free:true},
   {e:"📝", t:"إنجاز الفروض والاختبارات المخصصة", d:"طلب إنجاز فروض واختبارات مخصّصة وفق منهاج الجيل الثاني وشبكات التقويم ومؤشرات الكفاءة ¾ والربع مع سلالم التنقيط.", tag:"خدمة مخصصة", link:"srv-froud.html", free:false},
   {e:"🗂️", t:"إنجاز وتطوير مذكرات الأستاذ", d:"طلب إنجاز وتطوير مذكرات بيداغوجية تفصيلية لجميع المستويات: 1م · 2م · 3م · 4م وفق المسعى العلمي التجريبي والاستقصائي.", tag:"خدمة مخصصة", link:"srv-mothakirat.html", free:false},
   {e:"📒", t:"دفاتر الأستاذ والتدرجات (PDF)", d:"طلب إعداد وتنسيق دفاتر الأستاذ وسجلات التقويم والتدرج السنوي المخصص باسمك بصيغة PDF عالية الدقة جاهزة للطباعة.", tag:"خدمة مخصصة", link:"srv-dafatir-pdf.html", free:false},
@@ -742,10 +725,6 @@ function showHome(){
   document.getElementById('mainSite').style.display='block';
   renderAllGridsNow();
   window.scrollTo(0,0);
-}
-function fakeUpload(){
-  const m=document.getElementById('uploadMsg');m.className='msg ok';
-  m.textContent='✓ تم استلام الملف (نموذج تجريبي) — سيُفعّل الرفع الحقيقي بعد ربط الخادم.';
 }
 
 // التفتيش والتفعيل عند تحميل الصفحة

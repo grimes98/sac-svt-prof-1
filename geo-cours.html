@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#00a8a8">
+<title>مقرر الجيولوجيا العامة كاملاً (مصوّر ومصنّف) | SAC · SVT prof</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>">
+<link rel="stylesheet" href="assets/fonts.css">
+<style>
+:root{--green:#00a8a8;--green-d:#007878;--green-l:#28c8c8;--gold:#f0a53a;--bg:#f2fafa;--card:#fff;--ink:#173a3a;--muted:#5f7d7d;--line:#daeeee;--shadow:0 8px 30px rgba(0,168,168,.10);--radius:16px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Tajawal','Segoe UI',Tahoma,sans-serif;background:var(--bg);color:var(--ink);line-height:2.0}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.container{max-width:980px;margin:0 auto;padding:0 18px}
+header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;gap:12px;height:64px;max-width:980px;margin:0 auto;padding:0 18px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--green);font-size:1.1rem}
+.brand img{width:42px;height:42px;object-fit:contain}
+.back{margin-inline-start:auto;padding:8px 16px;border-radius:11px;font-weight:700;font-size:.9rem;background:#fff;color:var(--green);border:1.5px solid var(--green);transition:.2s}
+.back:hover{background:var(--green);color:#fff}
+.hero{background:linear-gradient(135deg,#064e4e,var(--green-d) 40%,var(--green) 75%,var(--green-l));color:#fff;padding:48px 0 62px;text-align:center;position:relative;overflow:hidden}
+.hero::after{content:"🌍🪨🌋🗺️⛰️🌊";position:absolute;inset:0;font-size:5.5rem;opacity:.07;display:flex;justify-content:space-around;align-items:center;pointer-events:none;letter-spacing:2rem}
+.hero-inner{position:relative;max-width:780px;margin:0 auto;padding:0 18px}
+.hero .kicker{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.35);padding:6px 16px;border-radius:999px;font-size:.85rem;font-weight:700;margin-bottom:14px}
+.hero h1{font-size:2.05rem;font-weight:800;margin-bottom:10px}
+.hero p{font-size:1.05rem;opacity:.95;max-width:700px;margin:0 auto}
+.hero .chips{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+.hero .chip{background:rgba(0,0,0,.18);border:1px solid rgba(255,255,255,.25);padding:5px 14px;border-radius:999px;font-size:.82rem;font-weight:700}
+.intro{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px 26px;box-shadow:var(--shadow);margin-top:-38px;position:relative;z-index:2}
+.intro h2{color:var(--green-d);font-size:1.3rem;margin-bottom:6px}
+.note{background:#f0f7ff;border:1px solid #cfe2f7;border-inline-start:4px solid #3b7dd8;border-radius:10px;padding:12px 16px;margin:12px 0;font-size:.94rem;color:#2b4a70}
+.note.gold{background:#fff8e9;border-color:#f0d9a0;border-inline-start-color:var(--gold);color:#6b4a10}
+.note b{color:#2456a0}.note.gold b{color:#8a5d09}
+.src{display:inline-flex;align-items:center;gap:6px;background:#eefaf7;border:1.5px solid #bfe8dd;color:var(--green-d);font-weight:800;font-size:.85rem;padding:6px 14px;border-radius:999px;margin-top:10px;transition:.2s}
+.src:hover{background:var(--green);color:#fff;border-color:var(--green)}
+.toc{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px;margin:26px 0}
+.toc a{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 13px;font-weight:700;color:var(--green-d);transition:.2s;font-size:.92rem;line-height:1.45}
+.toc a:hover{border-color:var(--green);transform:translateY(-3px);box-shadow:var(--shadow)}
+.toc a .n{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,var(--green),var(--green-l));color:#fff;display:grid;place-items:center;font-size:.85rem;flex:none;font-weight:800}
+.acc-item{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:16px;overflow:hidden;box-shadow:var(--shadow)}
+.acc-btn{width:100%;text-align:right;background:none;border:none;cursor:pointer;font-family:inherit;padding:18px 20px;display:flex;align-items:center;gap:13px;font-size:1.1rem;font-weight:800;color:var(--green-d);transition:.2s}
+.acc-btn:hover{background:rgba(0,168,168,.05)}
+.acc-btn .ic{width:46px;height:46px;border-radius:12px;flex:none;display:grid;place-items:center;font-size:1.45rem;background:linear-gradient(135deg,rgba(0,168,168,.12),rgba(40,200,200,.10))}
+.acc-btn .tt{flex:1;line-height:1.5}
+.acc-btn .tt small{display:block;font-weight:700;font-size:.78rem;color:var(--muted)}
+.acc-btn .arrow{transition:.3s;color:var(--muted);font-size:1.2rem}
+.acc-item.open .acc-btn .arrow{transform:rotate(180deg)}
+.acc-body{display:none;padding:4px 24px 24px;border-top:1px dashed var(--line)}
+.acc-item.open .acc-body{display:block}
+.acc-body h3{color:var(--green-d);font-size:1.12rem;margin:18px 0 8px;display:flex;align-items:center;gap:8px}
+.acc-body h3::before{content:"";width:10px;height:10px;border-radius:3px;background:var(--gold);display:inline-block;transform:rotate(45deg)}
+.acc-body p,.acc-body li{font-size:.99rem;text-align:justify}
+.acc-body ul,.acc-body ol{padding-inline-start:22px;margin:8px 0}
+.acc-body li{margin-bottom:5px}
+.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;margin:14px 0}
+.kv .cell{background:#f6fbfb;border:1px solid var(--line);border-radius:12px;padding:10px 14px;font-size:.9rem}
+.kv .cell b{display:block;color:var(--green-d);font-size:.95rem;margin-bottom:2px}
+.tbl{width:100%;border-collapse:collapse;margin:14px 0;font-size:.9rem;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,90,90,.06)}
+.tbl th{background:#064e4e;color:#fff;padding:10px 12px;text-align:right;font-size:.88rem}
+.tbl td{padding:9px 12px;border-bottom:1px solid #eef6f6;vertical-align:top}
+.tbl tr:nth-child(even) td{background:#f7fcfc}
+.gal{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:16px 0}
+.gal figure{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 3px 12px rgba(0,90,90,.07)}
+.gal figure img{width:100%;height:220px;object-fit:cover;background:#f4f9f9;cursor:zoom-in;transition:.25s}
+.gal figure img:hover{transform:scale(1.02)}
+.gal figcaption{padding:9px 12px;font-size:.82rem;color:#3d5a5a;line-height:1.5;border-top:1px solid var(--line);background:#fbfefe}
+.tagx{display:inline-block;background:var(--gold);color:#4a3005;font-size:.72rem;font-weight:800;border-radius:6px;padding:2px 9px;margin-inline-start:8px;vertical-align:middle}
+footer{margin-top:40px;background:#0b3b3b;color:#cfe9e9;padding:26px 0;text-align:center;font-size:.9rem}
+footer b{color:#fff}
+footer .srclinks{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:12px}
+footer .srclinks a{font-size:.78rem;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);padding:4px 12px;border-radius:999px}
+footer .srclinks a:hover{background:var(--green)}
+.lbox{background:#fdf6e6;border:1.5px dashed #e8c876;border-radius:12px;padding:12px 16px;margin:12px 0;font-size:.92rem}
+.lbox b{color:#8a5d09}
+@media(max-width:640px){.hero h1{font-size:1.55rem}.gal figure img{height:190px}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a class="brand" href="index.html"><img src="assets/Sac.png" alt="SAC" onerror="this.style.display='none'"><span>SAC · SVT prof</span></a>
+    <a class="back" href="index.html#svt">🏠 الرئيسية — ركن SVT</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="kicker">🔬 ركن SVT التخصّصي · الجيولوجيا</div>
+    <h1>مقرر الجيولوجيا العامة كاملاً — مصوّراً ومصنّفاً</h1>
+    <p>مقرر جامعي كامل في الجيولوجيا منقّح ومنظّم للقراءة عبر المنصة: مدخل عام + 9 فصول + ورشة تطبيقية في الكارطوغرافية، مع <b>78 صورة توضيحية</b> مستخرجة من الوثائق الأصلية (أزيد من 900 شريحة درس).</p>
+    <div class="chips">
+      <span class="chip">📚 14 وثيقة مصدر</span><span class="chip">🖼️ 78 صورة مستخرجة</span><span class="chip">🧭 11 محوراً</span><span class="chip">👨‍🏫 إعداد: د. فيصل خليفاوي</span>
+    </div>
+  </div>
+</section>
+
+<main class="container">
+  <div class="intro">
+    <h2>🎯 عن هذا المقرر</h2>
+    <p>هذه الصفحة تجميع ومعالجة رقمية لكامل مقرر <b>«الجيولوجيا العامة»</b> الذي حضّرته أنت (د. فيصل خليفاوي) وشاركته معنا. قمنا بتحميل الوثائق الأربعة عشر من Google Drive، استخرجنا النصوص والصور من داخلها، ثم أعدنا صياغتها في شكل دروس ويب عربية منظّمة ومتسلسلة للاستعمال في التدريس والمراجعة.</p>
+    <div class="note">📎 <b>الوثائق الأصلية</b> متوفرة دائماً عبر روابط Google Drive المدرجة أسفل كل فصل — هذه الصفحة <b>مكملة</b> لها وليست بديلاً عنها.</div>
+    <div class="note gold">🧭 <b>كيف تقرأ:</b> استعمل الفهرس أسفله للانتقال مباشرة للفصل المطلوب. كل فصل يُفتح بالنقر عليه، وفيه الأهداف، المفاهيم، الأرقام الأساسية، الصور المستخرجة بجودتها الأصلية، ورابط الملف المصدر.</div>
+  </div>
+
+  <!-- ======== الفهرس ======== -->
+  <div class="toc" id="toc"></div>
+
+  <!-- ======== الفصول ======== -->
+
+  <div class="acc-item open" id="ch0">
+    <button class="acc-btn" onclick="tog(this)"><span class="ic">🌌</span><span class="tt">مدخل عام: علم الجيولوجيا والأرض في الكون<small>الفصل الأول — ماهية الجيولوجيا وموقع الأرض</small></span><span class="arrow">▾</span></button>
+    <div class="acc-body">
+      <h3>ما علم الجيولوجيا؟</h3>
+      <p>الجيولوجيا (Géologie) هي <b>علم الأرض</b>: تدرس الأرض من حيث تكوينها الداخلي وموادّها الفلزية والصخرية، والقوى المؤثرة فيها عبر الزمن (الفعل الجيولوجي الداخلي والخارجي)، وتاريخ تطوّرها، والظواهر المرتبطة بها كالزلازل والبراكين.</p>
+      <h3>مجالاتها الرئيسية</h3>
+      <ul>
+        <li><b>الجيولوجيا الداخلية (البنية):</b> تركيب الأرض الداخلي، الانفعالات التكتونية، الطيات والفوالق.</li>
+        <li><b>الجيولوجيا الخارجية:</b> التجوية، التعرية، النقل والترسيب، وتشكيل المظاهر الأرضية.</li>
+        <li><b>جيولوجيا المواد:</b> الفلزات والصخور وأنواعها ودورتها.</li>
+        <li><b>الجيولوجيا التاريخية:</b> تعاقب الأزمنة الجيولوجية وتواريخ الصخور والمستحاثات.</li>
+        <li><b>الفروع التطبيقية:</b> الكارطوغرافية الجيولوجية، الجيوفيزياء، الهيدروجيولوجيا، جيولوجيا المناجم والبترول.</li>
+      </ul>
+      <h3>الأرض في المجموعة الشمسية</h3>
+      <p>عندما نشاهد الأرض من مكان بعيد نلاحظ أنها <b>جسم صغير متحرك في الفضاء</b> بين عدد هائل من الأجرام السماوية. حجمها ضئيل جداً مقارنة بالشمس، لكنها تتميّز عن بقية كواكب المجموعة الشمسية الثمانية بجملة من الخصائص التي جعلت منها <b>الكوكب الوحيد المعروف الصالح للحياة</b> حتى اليوم: المسافة المناسبة عن الشمس، وجود الغلاف الغازي والغلاف المائي، والحرارة المعتدلة.</p>
+      <div class="gal">
+        <figure><img src="assets/geo/ch01_intro/img_01.jpg" alt="المجموعة الشمسية" loading="lazy"><figcaption>المجموعة الشمسية وكواكبها — من وثيقة المدخل (الفصل الأول)</figcaption></figure>
+        <figure><img src="assets/geo/ch01_intro/img_02.jpg" alt="الشمس" loading="lazy"><figcaption>الشمس: نجم المجموعة، مصدر الطاقة الأساسي لكل الأفعال الجيولوجية الخارجية</figcaption></figure>
+      </div>
+      <a class="src" target="_blank" rel="noopener" href="https://drive.google.com/file/d/1uQoAJanXu4_f2lAsxSKAa5cdRQItVOm9/view?usp=sharing">📄 الوثيقة المصدر — الفصل الأول (84 شريحة)</a>
+    </div>
+  </div>
+
+  <div class="acc-item" id="ch2">
+    <button class="acc-btn" onclick="tog(this)"><span class="ic">🌍</span><span class="tt">الفصل الثاني: بعض صفات الأرض<small>الشكل — الأبعاد — الحركة — الجاذبية — الحرارة الداخلية</small></span><span class="arrow">▾</span></button>
+    <div class="acc-body">
+      <h3>1) شكل الأرض وأبعادها</h3>
+      <p>الأرض <b>جسم كروي مسطّح قليلاً عند القطبين</b> (جيويد الشكل): نصف قطرها عند خط الاستواء أكبر منه عند القطبين، ولذلك تُقاس الصفة بـ«تسطح» مقداره ≈ 1/298 (0,00335).</p>
+      <div class="kv">
+        <div class="cell"><b>الكتلة</b>5,9742 × 10<sup>24</sup> كغ</div>
+        <div class="cell"><b>نصف القطر المتوسط</b>6371,0 كلم</div>
+        <div class="cell"><b>نصف القطر الاستوائي</b>6378,14 كلم</div>
+        <div class="cell"><b>نصف القطر القطبي</b>6356,8 كلم</div>
+        <div class="cell"><b>نصف قطر النواة</b>3485 كلم</div>
+        <div class="cell"><b>الكثافة المتوسطة</b>5515 كغ/م<sup>3</sup></div>
+        <div class="cell"><b>الحجم</b>108,321 × 10<sup>10</sup> كلم<sup>3</sup></div>
+        <div class="cell"><b>الجاذبية عند السطح</b>9,798 م/ث²</div>
+      </div>
+      <h3>2) حركة الأرض</h3>
+      <ul>
+        <li><b>الحركة الذاتية (حول محورها):</b> دورة واحدة كل 24 سا تقريباً، من الغرب نحو الشرق؛ ناتجها تعاقب الليل والنهار.</li>
+        <li><b>الحركة السنوية (حول الشمس):</b> في مدار إهليجي «بيضوي» تتمه في 365,25 يوماً؛ مع ميل المحور ≈ 23°27' ينتج تعاقب الفصول والتوزيع الحراري.</li>
+      </ul>
+      <h3>3) الجاذبية الأرضية</h3>
+      <p>قوة جذب الأرض للأجسام نحو مركزها، وتتغيّر قيمتها بتغيّر خطوط العرض والارتفاع. هي المسؤولة عن تماسك الغلاف الغازي والمائي حول الأرض، وعن <b>الآليات الخارجية</b>: انحدار الأمطار والجريان السطحي والانهيارات الأرضية.</p>
+      <div class="gal">
+        <figure><img src="assets/geo/ch02_shape/img_01.jpg" alt="الأرض بالأرقام" loading="lazy"><figcaption>«La Terre en chiffres»: الخصائص الفيزيائية للأرض بالأرقام (من ملف الفصل الثاني)</figcaption></figure>
+        <figure><img src="assets/geo/ch02_shape/img_04.jpg" alt="الجاذبية الأرضية" loading="lazy"><figcaption>الجاذبية الأرضية وعلاقتها بالتسارع المركزي للحركة الدورانية</figcaption></figure>
+      </div>
+      <h3>4) حرارة الأرض الداخلية</h3>
+      <p>الحرارة الداخلية ترجع أساساً إلى <b>تحلل العناصر المشعّة</b> (الأورانيوم، الثوريوم، البوتاسيوم 40) إضافة إلى الحرارة البدائية المتبقية من التكوين. يبلغ <b>التدرج الحراري الجيولوجي</b> ≈ 3°م كل 100 م في الطبقات العليا، وهو محرّك الانجرافات الحملانية في الوشاح والظواهر البركانية.</p>
+      <a class="src" target="_blank" rel="noopener" href="https://drive.google.com/file/d/10HqZ2EtQOr5Fmxx30vOqERBbGyGjOgMT/view?usp=sharing">📄 الوثيقة المصدر — الفصل الثاني (71 شريحة)</a>
+    </div>
+  </div>
+
+  <div class="acc-item" id="ch3">
+    <button class="acc-btn" onclick="tog(this)"><span class="ic">🕳️</span><span class="tt">الفصل الثالث: بنية الأرض الداخلية<small>طرق الاستكشاف — القشرة — الوشاح — النواة</small></span><span class="arrow">▾</span></button>
+    <div class="acc-body">
+      <h3>1) كيف ندرس داخل الأرض؟</h3>
+      <ul>
+        <li><b>الطرق المباشرة:</b> الآبار الجيولوجية العميقة (آبار التنقيب عن البترول، بئر كولا الروسية ≈ 12 كلم) — لا تتجاوز أقرب طبقات القشرة.</li>
+        <li><b>الجيوفيزياء (طرق غير مباشرة):</b> تسجيل <b>الموجات الزلزالية</b> الطبيعية والاصطناعية وتحليل انكسارها وانعكاسها عبر الأوساط (الاستكشاف السيزمي البرّي Onshore والبحري Offshore).</li>
+        <li><b>النيازك:</b> تحليل تركيبها يعطي نموذجاً عن التركيب الداخلي العام للأرض.</li>
+      </ul>
+      <h3>2) الطبقات الثلاث</h3>
+      <table class="tbl"><thead><tr><th>الطبقة</th><th>العمق (كلم)</th><th>الحدود</th><th>الكثافة</th><th>الخصائص</th></tr></thead>
+      <tbody>
+        <tr><td><b>القشرة الأرضية</b></td><td>30–70 قارّية<br>5–10 محيطية</td><td>حتى موهو (Mohorovicić)</td><td>2,7 – 3,3</td><td>قارية سميكة فاتحة (سيال)، محيطية رقيقة كثيفة (سيما)</td></tr>
+        <tr><td><b>الوشاح (الستار)</b></td><td>30 → 2900</td><td>حتى غوتنبرغ (Gutenberg)</td><td>3,3 → 5,7</td><td>أوليفين/بيروكسين — علوي (ليتوسفير + أسثينوسفير لدن) وسفلي</td></tr>
+        <tr><td><b>النواة (اللب)</b></td><td>2900 → 6371</td><td>حتى المركز — حد ليمان (Lehmann) عند ±5150</td><td>10 → 13+</td><td>حديد + نيكل: خارجي <b>سائل</b> (مصدر المغناطيسية) وداخلي <b>صلب</b></td></tr>
+      </tbody></table>
+      <div class="lbox"><b>📌 للحفظ السريع:</b> الليتوسفير = القشرة + أعلى الوشاح (صلب/هش، حتى ≈ 100 كلم) وهو مكوّن <b>الصفائح التكتونية</b>. تحته الأسثينوسفير: منطقة لدنة يميل تركيبها للانصهار الجزئي وهي «مزلقة» حركة الصفائح.</div>
+      <div class="gal">
+        <figure><img src="assets/geo/ch03_interior/img_03.jpg" alt="الاستكشاف السيزمي" loading="lazy"><figcaption>الاستكشاف السيزمي لبنية باطن الأرض براً وبحراً (Onshore / Offshore)</figcaption></figure>
+        <figure><img src="assets/geo/ch03_interior/img_01.jpg" alt="تراكيب صخرية" loading="lazy"><figcaption>تراكيب صخرية عمودية ناتجة عن تصلّب مادة منشأها عميق (نسيج عيوقي) — مستخرجة من ملف الفصل</figcaption></figure>
+      </div>
+      <a class="src" target="_blank" rel="noopener" href="https://drive.google.com/file/d/1p5To4M3Drl4qtbj9anPxab3FRtfB9fXd/view?usp=sharing">📄 الوثيقة المصدر — الفصل الثالث (64 شريحة)</a>
+    </div>
+  </div>
+
+  <div class="acc-item" id="ch4">
+    <button class="acc-btn" onclick="tog(this)"><span class="ic">🪨</span><span class="tt">الفصل الرابع: مواد القشرة الأرضية (الفلزات والصخور)<small>خصائص الفلز — أنواع الصخور — دورة الصخور</small></span><span class="arrow">▾</span></button>
+    <div class="acc-body">
+      <h3>1) الفلز (المعدن)</h3>
+      <p>الفلز <b>مادة طبيعية متجانسة</b>، متبلرة القاعدة، ذات تركيب كيميائي خاص وبنية ذرية منتظمة. تُعرَّف الفلزات بخصائصها الفيزيائية:</p>
+      <table class="tbl"><thead><tr><th>الخاصية</th><th>التعريف</th><th>أمثلة</th></tr></thead>
+      <tbody>
+        <tr><td><b>الصلادة</b></td><td>مقاومة الخدش — مقياس موس من 1 إلى 10</td><td>التلك 1 … الكوارتز 7 … الألماس 10</td></tr>
+        <tr><td><b>اللون والخط</b></td><td>اللون الظاهر، ولون بوردة المعدن (الأثبت)</td><td>الهيماتيت: خط أحمر بني</td></tr>
+        <tr><td><b>البريق</b></td><td>معدني / غير معدني (زجاجي، حريري، ترابي…)</td><td>الذهب معدني، الكوارتز زجاجي</td></tr>
+        <tr><td><b>الانفصام / الانكسرام</b></td><td>تشقق منتظم في جهات مفضلة / غير منتظم</td><td>الميكا انفصام تام في وجه واحد</td></tr>
+        <tr><td><b>الكثافة والمغناطيسية</b></td><td>الوزن النوعي، الجذب المغناطيسي، التوصيل</td><td>المغنيتيت مغناطيسي طبيعي</td></tr>
+      </tbody></table>
+      <h3>2) الصخور وأنواعها الثلاثة</h3>
+      <ul>
+        <li><b>الصخور النارية (الصهارية):</b> تتصلّب من الصهارة. <b>بلوتونية (جوافرية):</b> تصلّب بطيء عميقاً → بلورات مرئية خشنة (غرانيت، غابرو). <b>بركانية:</b> تصلّب سريع سطحاً → نسيج دقيق/زجاجي (بازلت، ريوليت).</li>
+        <li><b>الصخور الرسوبية:</b> تتشكّل عبر التجوية ← النقل ← الترسيب ← التصلّب (الإسمنتة). تتميّز بـ<b>التطبق</b> والمستحاثات: رملي، غرين، كلسي، ملفوظات (بريشيا، كونغلوميرا).</li>
+        <li><b>الصخور المتحولة:</b> إعادة تبلور صخور سابقة تحت فعل <b>الضغط والحرارة</b> (التحول الاتصالي/الجهوي): غرانيت → نَيْس، حجر الكلس → رخام، صخر الطفل → لوح (شيست).</li>
+      </ul>
+      <div class="gal">
+        <figure><img src="assets/geo/ch04_crust/img_01.jpg" alt="مقطع قشرة محيطية" loading="lazy"><figcaption>مقطع توضيحي لعلاقة طبقات القشرة القارية والمحيطية والرواسب — من ملف الفصل الرابع</figcaption></figure>
+        <figure><img src="assets/geo/ch04_crust/img_03.jpg" alt="صخر رسوبي" loading="lazy"><figcaption>نسيج صخر مفكّك الحبيبات (بريشيا/كونغلوميرا): أخشاب منقولة مُسمنتة — مثال للصخور الرسوبية</figcaption></figure>
+        <figure><img src="assets/geo/ch04_crust/img_04.jpg" alt="مروحة طميية" loading="lazy"><figcaption>تراكم المفكّكات والرواسب عند مصب وادٍ (مروحة طميية) قرب مساكن — الجانب التطبيقي لدراسة الرواسب</figcaption></figure>
+      </div>
+      <h3>3) دورة الصخور</h3>
+      <p>الناري ← (تجوية وترسيب) ← الرسوبي ← (تحول) ← المتحول ← (انصهار) ← صهارة ← ناري… دورة مستمرة عبر الملايين من السنين تشيّد وتفكّك مواد القشرة باستمرار.</p>
+      <a class="src" target="_blank" rel="noopener" href="https://drive.google.com/file/d/1OxyQLavboVtluEFqRlEUw_KoW4tg1Z08/view?usp=sharing">📄 الوثيقة المصدر — الفصل الرابع (141 شريحة)</a>
+    </div>
+  </div>
+
+  <div class="acc-item" id="ch5">
+    <button class="acc-btn" onclick="tog(this)"><span class="ic">🌊</span><span class="tt">الفصل الخامس: الفعل الجيولوجي الخارجي<small>التجوية — التعرية — النقل — الترسيب — الأشكال الأرضية</small></span><span class="arrow">▾</span></button>
+    <div class="acc-body">
+      <h3>1) التجوية (تفكيك الصخور في مكانها)</h3>
+      <ul>
+        <li><b>فيزيائية (ميكانيكية):</b> تمدّد وانقباض حراري (التفلكن في الصحاري)، التجمّد Breakage بالجليد، تبلور الأملاح في المسام، جذور النبات.</li>
+        <li><b>كيميائية:</b> تحلل مائي، إذابة (الكارست في الأحجار الكلسية)، أكسدة (تصدّأ المعادن الحديدية)، كربنة، هيدروليات.</li>
+      </ul>
+      <h3>2) التعرية (حمل النواتج)</h3>
+      <ul>
+        <li><b>مائية-نهرية:</b> حتّ عمودي في المنبع (تعميق الوادي)، حتّ عرضي أفقي في المجرى (توسيع الوادي وتشكيل الجانبي)، وحتّ رجعي نحو المنبع.</li>
+        <li><b>ريحية:</b> تجريف (متانة/انكماش) وكشط بالرمال المنقولة.</li>
+        <li><b>جليدية:</b> كشط بقيع الأنهار الجليدية (أخاديد U، سيركات، بحيرات).</li>
+        <li><b>بحرية-ساحلية:</b> ضرب الأمواج → جروف (falaises) ورصف كاشط.</li>
+      </ul>
+      <h3>3) النقل والترسيب</h3>
+      <p>تتنقّل المفكّكات والذوائب بأشكال ثلاثة: <b>تدحرجة</b> (جرّ القاع)، <b>عالِقة</b> (رواسب معلّقة بالدوامات)، <b>مذابة</b> (محلول كيميائي). وعند كل نقصان في الطاقة يحدث الترسيب: <b>سهول فيضية، دلتاوات، مراوح طميية، كثبان رملية، مواضع جليدية</b>.</p>
+      <div class="gal">
+        <figure><img src="assets/geo/ch05_external/img_01.jpg" alt="حت النهر" loading="lazy"><figcaption>حتّ مجرى النهر عند ضفته (Rivière Dulais) — الترىة المائية الجانبية تواصل توسيع الوادي</figcaption></figure>
+        <figure><img src="assets/geo/ch05_external/img_02.jpg" alt="الترسيب المائي" loading="lazy"><figcaption>الترسيب المائي: منعطف نهري على سهل فيضي — الرمل يترسب في الضفة البطيئة</figcaption></figure>
+        <figure><img src="assets/geo/ch05_external/img_03.jpg" alt="تعرية" loading="lazy"><figcaption>تعرية الوادي بالأفعال المائية: حتٌّ جانبي وتوسيع للمجال المفتوح</figcaption></figure>
+      </div>
+      <div class="lbox"><b>⚖️ توازن متبادل:</b> تجوية ← نقل ← ترسيب → بناء مظاهر أرضية جديدة؛ والتعرية تحفر ← تبرز الصخور ← يبدأ فعل جديد. لهذا تتبدّل الفيافي والجبال حتى تختفي مع الزمن الجيولوجي.</div>
+      <a class="src" target="_blank" rel="noopener" href="https://drive.google.com/file/d/1wtLHFDopwY4Ozby4XuS1zy5oHbo_HYwW/view?usp=sharing">📄 الوثيقة المصدر — الفصل الخامس (102 شريحة)</a>
+    </div>
+  </div>
+
+  <div class="acc-item" id="ch6">
+    <button class="acc-btn" onclick="tog(this)"><span class="ic">⛰️</span><span class="tt">الفصل السادس: الجيولوجيا البنائية<small>التطبق — أنواع التشوه — الطيات — الفوالق</small></span><span class="arrow">▾</span></button>
+    <div class="acc-body">
+      <h3>1) التطبق (الترسيب الأفقي)</h3>
+      <p>تتراكب الرواسب في طبقات <b>أفقية</b> مبدئيّاً (المبدأ الأفقي — ستينو)، وكل طبقة أحدث من التي تعلوها وتقدم من التي تحتها (مبدأ التراكب) — القاعدة الأولى للتاريخ الجيولوجي النسبي. عندما نرى طبقات مائلة/مقلوبة نعلم أن حدثاً تكتونيّاً أثّر فيها بعد ترسيبها.</p>
+      <h3>2) أنواع التشوهات</h3>
+      <table class="tbl"><thead><tr><th>النوع</th><th>السلوك</th><th>النتيجة البنائية</th></tr></thead>
+      <tbody>
+        <tr><td><b>المرنة (Élastique)</b></td><td>تشوه مؤقت يزول بزوال الإجهاد</td><td>لا أثر بنائي دائم</td></tr>
+        <tr><td><b>اللدنة (Plastique)</b></td><td>انبطاط دائم بدون تشقّق (عمق + حرارة)</td><td><b>الطيات</b></td></tr>
+        <tr><td><b>الهشة (Fragile)</b></td><td>كسر وفقدان الاستمرارية (سطحية باردة)</td><td><b>الفوالق والشقوق</b></td></tr>
+      </tbody></table>
+      <h3>3) الطيات (Plis)</h3>
+      <p>انحناء الطبقات الصخرية تحت إجهاد ضاغط. عناصرها: <b>المحور</b> (خط أعلى الانحناء)، <b>المستوى المحوري</b>، <b>الجناحان</b>، <b>المفصل</b>. تشيّد الطيات السلاسل الجبلية الالتوائية مثل جبال الأطلس وجبال الألب.</p>
+      <ul>
+        <li><b>طية ركبية (مفتوحة):</b> انحناء لطيف جناحاها متباعدين.</li>
+        <li><b>طية منحرقة:</b> جناحاها متقاربان محورها مائل.</li>
+        <li><b>طية مستقيمة (محورية):</b> مستوى محوري قائم، جناحان متماثلان.</li>
+        <li><b>طية راقدة:</b> نفس عمرية الجناحين شبه أفقيان (إجهاد شديد).</li>
+      </ul>
+      <div class="gal">
+        <figure><img src="assets/geo/ch06_structural/img_01.jpg" alt="أنواع الطيات" loading="lazy"><figcaption>أنواع الطيات: ركبية، منحرقة، مستقيمة، راقدة — التصوير الكامل من ملف الفصل السادس</figcaption></figure>
+        <figure><img src="assets/geo/ch06_structural/img_03.jpg" alt="صدع عادي" loading="lazy"><figcaption>صدع عادي (normal): الجدار المعلق هابط بالنسبة للجدار القائم — إجهاد شدّي</figcaption></figure>
+      </div>
+      <h3>4) الفوالق (Failles)</h3>
+      <p>كسر في الصخور يعقبه <b>انزياح</b> كتلتين على جانبيه. نميّز: <b>مستوى الصدع</b> (ميله dip)، <b>الرمية</b> (الانزياح العمودي الظاهر)، <b>الجدار المعلق</b> (فوق المستوى) و<b>الجدار القائم</b> (تحته).</p>
+      <ul>
+        <li><b>صدع عادي:</b> المعلق هابط — إجهاد شدّي (تباعد القشرة، الأخاديد الأفريقية العظيمة).</li>
+        <li><b>صدع مقلوب:</b> المعلق صاعد — إجهاد ضاغط (الجبال الالتوائية والانثنائات الانقلابية).</li>
+        <li><b>صدع انزلاقي أفقي (Decrochement):</b> انزياح جانبي تام للكتلتين أفقياً (سان أندرياس) — حدود تحويلية للصفائح.</li>
+        <li><b>تراكيب مرتبطة:</b> هورست (كتلة مرفوعة) وغرابن (حوض منخفض) بين صدعين متقابلين.</li>
+      </ul>
+      <a class="src" target="_blank" rel="noopener" href="https://drive.google.com/file/d/1t7Isct9ZP5qozMOThr11uT7LBt5AFXfv/view?usp=sharing">📄 الوثيقة المصدر — الفصل السادس (88 شريحة)</a>
+    </div>
+  </div>
+
+  <div class="acc-item" id="ch7">
+    <button class="acc-btn" onclick="tog(this)"><span class="ic">🌐</span><span class="tt">الفصل السابع: الزلازل (Les Séismes)<small>البؤرة — الموجات — القياس — التوزيع — الوقاية</small></span><span class="arrow">▾</span></button>
+    <div class="acc-body">
+      <h3>1) ما الزلزال؟</h3>
+      <p>اهتزاز مفاجئ لسطح الأرض ينشر طاقة ميكانيكية عبر باطنها. يتولد من انكسار صخري (فوالق نشطة)، ثوران بركاني، انهيارات، أو نشاط بشري (متفجرات، خزانات سدية). المصطلحات الأساسية: <b>البؤرة (Focus/Hypocentre)</b> مكان البدء في العمق، <b>المركز السطحي (Épicentre)</b> عموديتها على السطح — منطقة أقصى الأضرار عادة.</p>
+      <h3>2) الموجات الزلزالية</h3>
+      <table class="tbl"><thead><tr><th>الموجة</th><th>النوع</th><th>الوسط المتاح</th><th>الخصائص</th></tr></thead>
+      <tbody>
+        <tr><td><b>P — ضاغطة</b></td><td>داخلية، طولية (تموج ضغط)</td><td>صلب + سائل + غاز</td><td>الأسرع تصل أولاً</td></tr>
+        <tr><td><b>S — قصّية</b></td><td>داخلية، مستعرضة</td><td>الصلب فقط!</td><td>بطيئة، تدمّر باهتزاز جانبي — توقفها في اللب السائل دلّ على سيولته</td></tr>
+        <tr><td><b>L — سطحية</b></td><td>سطحية (رف/ريلاي)</td><td>القشرة فقط</td><td>الأكثر تدميراً للمنشآت</td></tr>
+      </tbody></table>
+      <h3>3) القياس والرصد</h3>
+      <ul>
+        <li><b>السيزموغراف:</b> يسجّل وصول الموجات؛ الفارق الزمني بين P وS يحدّد بعدَ البؤرة.</li>
+        <li><b>سلم ريختر / المغناطيسية (Mw):</b> القوة المنبعثة — مفتوح لوغاريتمي (كل درجة ×30 طاقة).</li>
+        <li><b>سلم مركاتلي المعدّل:</b> الشدة الظاهرة من الآثار (I → XII).</li>
+      </ul>
+      <h3>4) التوزيع العالمي والوقاية</h3>
+      <p>تتركّز الزلازل في <b>أحزمة حدود الصفائح</b>: حزام المحيط الهادئ (حزام النار)، الحزام الألبي-الهملاياي، وسلاسل الظهر المحيطية. الجزائر ضمن الحزام الألبي (زلازل العاصمة/بومرداس 2003، الشلف 1980). <b>الوقاية:</b> تقنين البناء الزلزالي (RPA)، دراسة الفوالق النشطة، حساسية الوسطاء، خطط الإعلام والإخلاء.</p>
+      <div class="gal">
+        <figure><img src="assets/geo/ch07_seismic/img_02.jpg" alt="خريطة الأحزمة" loading="lazy"><figcaption>خريطة الأحزمة الزلزالية العالمية — تلتفّ حول المحيط الهادئ والسلاسل الحديثة (من ملف الفصل)</figcaption></figure>
+        <figure><img src="assets/geo/ch07_seismic/img_01.jpg" alt="طبقات ممزقة" loading="lazy"><figcaption>سلاسل ممزّعة ومائلة على جانب طريق — أثر نشاط تكتوني سابق فوق طبق رسوبي</figcaption></figure>
+      </div>
+      <a class="src" target="_blank" rel="noopener" href="https://drive.google.com/file/d/1e47O4_qVKozUpw9a8OBBajerlXzJQmRA/view?usp=sharing">📄 الوثيقة المصدر — الفصل السابع (58 شريحة)</a>
+    </div>
+  </div>
+
+  <div class="acc-item" id="ch8">
+    <button class="acc-btn" onclick="tog(this)"><span class="ic">🌋</span><span class="tt">الفصل الثامن: الحادثة المهلية (البراكين)<small>البنية — مصادر الصهارة — أنواع الثوران — المنتجات — المخاطر</small></span><span class="arrow">▾</span></button>
+    <div class="acc-body">
+      <h3>1) ما البركان؟</h3>
+      <p>ثوران <b>مواد منصهرة (الصهارة/Magma)</b> من باطن الأرض إلى السطح عبر شقوق الأرض، مصحوباً غالباً بغازات وغلاظات صلبة. بعد التصلب تصبح تلك المواد <b>حمماً (Lave)</b> ورواسم بركانية تكوّن مخروطاً.</p>
+      <h3>2) بنية البركان النموذجية</h3>
+      <ul>
+        <li><b>الغرفة الصهارية:</b> مستودع الصهارة في العمق (بضع كلم).</li>
+        <li><b>المدخنة/القناة البركانية:</b> ممر الصعود.</li>
+        <li><b>الفوهة والحفرة:</b> الفوهة عند القمة، والحفرة الكبيرة (Caldeira) تتشكل بالانهيار بعد ثوريانات عنيفة.</li>
+        <li><b>المخروط البركاني:</b> تراكم الأصطلاء والجارّة عبر عصور الثوريانات.</li>
+      </ul>
+      <h3>3) مصادر الصهارة والتوزيع</h3>
+      <p>تتولد الصهارة في ثلاثة سياقات تكتونية كبرى: <b>مناطق الانفتاح القاري والمحيطي</b> (سلاسل الظهر المحيطية — تذويج ناقص الضغط)، <b>مناطق الاندساس</b> (الصفائح الغائرة تبخّر الوشاح فوقها — أرخبيلات نارية)، و<b>النقاط الساخنة</b> (أعمدة وشاحية — هاواي).</p>
+      <div class="gal">
+        <figure><img src="assets/geo/ch08_volcano/img_02.jpg" alt="مناطق الصهارة" loading="lazy"><figcaption>مناطق توليد الصهارة: انفتاح قاري/محيطي، أرخبيل اندساسي، نقطة ساخنة — الرسم من ملف الفصل الثامن</figcaption></figure>
+      </div>
+      <h3>4) أنواع الثوران</h3>
+      <table class="tbl"><thead><tr><th>النمط</th><th>الصهارة</th><th>الشكل</th><th>الأمثلة</th></tr></thead>
+      <tbody>
+        <tr><td><b>الهاواي</b></td><td>بازلتية سائلة قليلة الغاز</td><td>تدفق حمم واسع — مخروط درعي لطيف</td><td>كيلاويا (هاواي)</td></tr>
+        <tr><td><b>سترومبولي</b></td><td>متوسطة اللزوجة</td><td>قذائف دورية — شواظ</td><td>سترومبولي (إيطاليا)</td></tr>
+        <tr><td><b>فولكاني / بليني</b></td><td>لزجة غنية بالغاز</td><td>انفجاري مدمر: عمود رماد، سحابة تدفق نارية، لاهار</td><td>فيزوف، بيناتوبو، سانت هيلين</td></tr>
+      </tbody></table>
+      <h3>5) المنتجات والمخاطر والفوائد</h3>
+      <p><b>المنتجات:</b> حمم متصلبة، رماد وتُفرة (Téphra)، بومزول وخبث، لاهار (طين بركاني مع المياه)، غازات (H₂O, CO₂, SO₂…). <b>المخاطر:</b> تدمير مباشر، حرائق، تسونامي (كراكاتوا)، تغيير مناخي قصير (شتاء بركاني). <b>الفوائد:</b> تربة خصبة، طاقة حرارية-جوفية، سياحة، معادن. براكين الجزائر كلها <b>خامدة</b> (رسوم الأطلس والهقار) لكنها تشهد على نشاط قديم.</p>
+      <a class="src" target="_blank" rel="noopener" href="https://drive.google.com/file/d/18JbpIeeQ-1hzhW_ySKfFM7A2T0mVeT-2/view?usp=sharing">📄 الوثيقة المصدر — الفصل الثامن (42 شريحة)</a>
+    </div>
+  </div>
+
+  <div class="acc-item" id="ch9">
+    <button class="acc-btn" onclick="tog(this)"><span class="ic">🧭</span><span class="tt">الفصل التاسع: نظرية زحزحة القارات وتكتونية الألواح<small>فيغنر والأدلة — بانجيا — حدود الصفائح — الأدلة الحديثة</small></span><span class="arrow">▾</span></button>
+    <div class="acc-body">
+      <h3>1) الفرضية: من فكرة إلى نظرية</h3>
+      <p>في 1912 قدّم العالم الألماني <b>ألفريد فيغنر</b> فرضية <b>«زحزحة القارات»</b>: كانت القارات متحدة في قارة عظمى واحدة هي <b>بانجيا (Pangée)</b> ثم انشطرت وتباعدت قطعها عبر ملايين السنين. رُفضت الفرضية زمناً لعدم قدرته على شرح «الآلية المحرّكة»، ثم ظهرت في الستينات نظرية <b>تكتونية الألواح</b> التي أكدت وجود الحركة وتفسّر آلياتها.</p>
+      <h3>2) أدلة زحزحة القارات</h3>
+      <ul>
+        <li><b>تطابق السواحل:</b> انطباق شكلي بين افريقيا وأمريكا الجنوبية كقطعتي بازل.</li>
+        <li><b>الحفريات:</b> نفس الأنواع (ميزوصورس المائي، غلوسوبتيريس النباتي) على طرفي محيطات واسعة.</li>
+        <li><b>الصخور والسلاسل:</b> استمرارية الأنظمة الجبلية القديمة (كاليدونية/هيرسينية) بين قارات متباعدة.</li>
+        <li><b>المناخات القديمة:</b> آثار جليدية في مناطق استوائية حالياً (السحب الجليدي الباليومي).</li>
+        <li><b>الأدلة الحديثة:</b> توسّع قاع المحيط (هس)، المغناطيسية الباقية المعكوسة بالتناوب على جانبي الظهر، وتصاعد عمر الرواسب كلما ابتعدنا عن الظهر.</li>
+      </ul>
+      <div class="gal">
+        <figure><img src="assets/geo/ch09_tectonic/img_03.jpg" alt="فيغنر" loading="lazy"><figcaption>العالم الألماني ألفريد فيغنر ونظرية زحزحة القارات (1912–1915)</figcaption></figure>
+        <figure><img src="assets/geo/ch09_tectonic/img_04.jpg" alt="بانجيا" loading="lazy"><figcaption>«Théorie de la Dérive des continents»: إعادة تركيب بانجيا وتفككها عبر الزمن</figcaption></figure>
+      </div>
+      <h3>3) تكتونية الألواح: الصفائح وحدودها</h3>
+      <p>الليتوسفير مجزّأ إلى <b>صفائح</b> تتحرك فوق الأسثينوسفير اللدن. الحدود ثلاثة:</p>
+      <table class="tbl"><thead><tr><th>الحدود</th><th>الحركة</th><th>الظواهر الناتجة</th></tr></thead>
+      <tbody>
+        <tr><td><b>تباعدية (انفتاحية)</b></td><td>ابتعاد الصفيحتين</td><td>ظهرات محيطية، بحر ضيق متسّع، اكتشاف قاع المحيط</td></tr>
+        <tr><td><b>تقاربية (اندساسية/تصادمية)</b></td><td>اقتراب واندساس أو التحام</td><td>خنادق + أرخبيلات نارية، جبال التوائية (الألب، هملايا)</td></tr>
+        <tr><td><b>تحويلية (انكتامية)</b></td><td>انزلاق أفقي جانبي</td><td>فوالق سان أندرياس — زلازل قوية متكررة</td></tr>
+      </tbody></table>
+      <a class="src" target="_blank" rel="noopener" href="https://drive.google.com/file/d/18k-7Xn16QXNEUmpduL2HEoNjk0HySFH2/view?usp=sharing">📄 الوثيقة المصدر — الفصل التاسع ج1 (42 شريحة)</a>
+      <a class="src" target="_blank" rel="noopener" href="https://drive.google.com/file/d/1OD7Vm6rMPoQufIkS9YDc371FMfGThWji/view?usp=sharing">📄 تكملة الفصل التاسع — الصفائح (45 شريحة)</a>
+    </div>
+  </div>
+
+  <div class="acc-item" id="ch10">
+    <button class="acc-btn" onclick="tog(this)"><span class="ic">🗺️</span><span class="tt">ورشة تطبيقية: الكارطوغرافية (La Cartographie)<small>قراءة الخريطة الطبوغرافية — خطوط الكنتور — رسم المقطع الطبوغرافي</small></span><span class="arrow">▾</span></button>
+    <div class="acc-body">
+      <h3>1) الخريطة الطبوغرافية وعناصرها</h3>
+      <p>الخريطة الطبوغرافية <b>تمثيل مسطّح مُصغّر</b> لسطوح الأرض الطبيعية والبشرية بمقاييس متوسطة (1/25000, 1/50000…). عناصرها ثابتة: <b>العنوان، الإطار، المقياس، الإشارة (التوجيه)، الرمز/المفتاح (الدليل)، الارتفاعات وخطوط الكنتور.</b></p>
+      <h3>2) خطوط الكنتور → منحنيات المستوى</h3>
+      <ul>
+        <li><b>خط الكنتور:</b> خط وهمي يصل نقاطاً متساوية الارتفاع. تقاربه = انحدار شديد، تباعده = انحدار ضعيف.</li>
+        <li><b>البعد التعادلي (Equidistance):</b> الفارق الثابت بين خطين متتاليين (مثلاً 10م، 20م).</li>
+        <li>تُرسم التضاريس ثلاثية الأبعاد على مستويات ثم تُسقط → نقرأ القمم (حلقات مغلقة مركزيتها داخلية أعلى)، الوديان (توغل المنحنيات نحو المرتفع)، الظهور (توغلها نحو المنخفض).</li>
+      </ul>
+      <div class="gal">
+        <figure><img src="assets/geo/tp_carto/img_01.jpg" alt="منحنيات المستوى" loading="lazy"><figcaption>من التضاريس إلى المنحنيات: مستويات أفقية كل 20م تُسقط على الخريطة → منحنيات المستوى (ورشة TP)</figcaption></figure>
+        <figure><img src="assets/geo/tp_profile/img_01.jpg" alt="رسم المقطع" loading="lazy"><figcaption>منهجية ومراحل رسم المقطع الطبيعي (A–B) من خريطة طبوغرافية بمقياس 1/25000</figcaption></figure>
+      </div>
+      <h3>3) المقياس والتضخيم العمودي</h3>
+      <ul>
+        <li><b>المقياس العددي:</b> 1/n تعني أن 1 على الخريطة = n سم في الطبيعة (1/25000 = 250م لكل 1 سم).</li>
+        <li><b>المقياس الخطي:</b> شريط متدرج يقرأ المسافة مباشرة.</li>
+        <li><b>التضخيم العمودي (Exagération verticale):</b> مقياس الارتفاعات / مقياس المسافات — نكبّر الارتفاعات ×5 أو ×10 حتى نرى التضاريس على المقطع.</li>
+      </ul>
+      <h3>4) خطوات إنجاز المقطع الطبوغرافي A–B</h3>
+      <ol>
+        <li>حدّد على الخريطة النقطتين A وB وارسم القطع المستقيم بينهما.</li>
+        <li>ضع ورقة على القاطع وعلّم تقاطعات منحنيات الكنتور وارتفاعاتها.</li>
+        <li>ارسم المحورين: الأفقي (مسافات حسب مقياس الخريطة) والعمودي (ارتفاعات حسب مقياس مضخّم).</li>
+        <li>أسقط كل نقطة على ارتفاعها، ثم صِل النقاط بخط متعرج مُنساب — هذا هو المقطع.</li>
+        <li>اُكتب: العنوان، الاتجاه، المقياسين، والتضخيم العمودي.</li>
+      </ol>
+      <a class="src" target="_blank" rel="noopener" href="https://drive.google.com/file/d/10D9OPUoxiLLasgCioahezdN3hL6SADeQ/view?usp=sharing">📄 ورشة TP الكارطوغرافية (89 شريحة)</a>
+      <a class="src" target="_blank" rel="noopener" href="https://drive.google.com/file/d/1E7YgI3gTTHmZhclENacOojjnKXfJdLMI/view?usp=sharing">📄 وثيقة المقطع الطبوغرافي (تفسيرية)</a>
+    </div>
+  </div>
+
+  <!-- ======== مصادر أخرى ======== -->
+  <div class="intro" style="margin-top:26px">
+    <h2>📚 وثائق المرجع الكاملة (Google Drive)</h2>
+    <p style="font-size:.95rem;margin:6px 0 14px">روابط الملفات الأصلية التي بنينا منها هذا المقرر (نفس المصدر العلمي — د. فيصل خليفاوي مقرر General Geology):</p>
+    <div class="srclinks_"><div class="srcWrap">
+      <div class="toc" style="margin-top:10px">
+        <a target="_blank" rel="noopener" href="https://drive.google.com/file/d/1dxDj6w2k022xILWAzR6z0bprCHeD2bcU/view?usp=sharing"><span class="n">📋</span>البرنامج العام للمقرر (34ص)</a>
+        <a target="_blank" rel="noopener" href="https://drive.google.com/file/d/1uQoAJanXu4_f2lAsxSKAa5cdRQItVOm9/view?usp=sharing"><span class="n">1</span>الفصل الأول — المدخل</a>
+        <a target="_blank" rel="noopener" href="https://drive.google.com/file/d/10HqZ2EtQOr5Fmxx30vOqERBbGyGjOgMT/view?usp=sharing"><span class="n">2</span>الفصل الثاني — صفات الأرض</a>
+        <a target="_blank" rel="noopener" href="https://drive.google.com/file/d/1p5To4M3Drl4qtbj9anPxab3FRtfB9fXd/view?usp=sharing"><span class="n">3</span>الفصل الثالث — بنية الأرض</a>
+        <a target="_blank" rel="noopener" href="https://drive.google.com/file/d/1OxyQLavboVtluEFqRlEUw_KoW4tg1Z08/view?usp=sharing"><span class="n">4</span>الفصل الرابع — المواد (141ص)</a>
+        <a target="_blank" rel="noopener" href="https://drive.google.com/file/d/1VoNrHNaQkMfH-8R7_dOlVQyLulegYhyM/view?usp=sharing"><span class="n">4′</span>الفصل الرابع — نسخة مختصرة (72ص)</a>
+        <a target="_blank" rel="noopener" href="https://drive.google.com/file/d/1wtLHFDopwY4Ozby4XuS1zy5oHbo_HYwW/view?usp=sharing"><span class="n">5</span>الفصل الخامس — الفعل الخارجي</a>
+        <a target="_blank" rel="noopener" href="https://drive.google.com/file/d/1t7Isct9ZP5qozMOThr11uT7LBt5AFXfv/view?usp=sharing"><span class="n">6</span>الفصل السادس — البنائية</a>
+        <a target="_blank" rel="noopener" href="https://drive.google.com/file/d/1e47O4_qVKozUpw9a8OBBajerlXzJQmRA/view?usp=sharing"><span class="n">7</span>الفصل السابع — الزلازل</a>
+        <a target="_blank" rel="noopener" href="https://drive.google.com/file/d/18JbpIeeQ-1hzhW_ySKfFM7A2T0mVeT-2/view?usp=sharing"><span class="n">8</span>الفصل الثامن — البراكين</a>
+        <a target="_blank" rel="noopener" href="https://drive.google.com/file/d/18k-7Xn16QXNEUmpduL2HEoNjk0HySFH2/view?usp=sharing"><span class="n">9</span>الفصل التاسع — الزحزحة</a>
+        <a target="_blank" rel="noopener" href="https://drive.google.com/file/d/10D9OPUoxiLLasgCioahezdN3hL6SADeQ/view?usp=sharing"><span class="n">🗺️</span>ورشة TP الكارطوغرافية</a>
+      </div>
+    </div></div>
+  </div>
+
+  <div class="note" style="margin-bottom:30px">💡 <b>اقتراح تطويري:</b> يمكن لاحقاً إضافة اختبارات قصيرة لكل فصل (أسئلة اختيار من متعدد) وأوراق مراجعة PDF قابلة للتحميل — أخبرني إن أردت إضافتها في الإصدار القادم.</div>
+</main>
+
+<footer>
+  <div><b>🔬 ركن SVT التخصصي — مقرر الجيولوجيا العامة</b></div>
+  <div style="margin-top:6px">معالجة رقمية وتصنيف: منصة SAC · SVT prof — المحتوى العلمي: د. فيصل خليفاوي</div>
+  <div style="margin-top:6px;font-size:.8rem;opacity:.85">📄 الصور والوثائق الأصلية محفوظة في روابط المصدر أعلاه — هذه الصفحة معالجة تعليمية للوصول السريع.</div>
+</footer>
+
+<script>
+var tocData=[
+  ['#ch0','🌌','مدخل عام: علم الجيولوجيا والأرض في الكون'],
+  ['#ch2','🌍','الفصل 2: صفات الأرض'],
+  ['#ch3','🕳️','الفصل 3: بنية الأرض الداخلية'],
+  ['#ch4','🪨','الفصل 4: الفلزات والصخور'],
+  ['#ch5','🌊','الفصل 5: الفعل الجيولوجي الخارجي'],
+  ['#ch6','⛰️','الفصل 6: الجيولوجيا البنائية'],
+  ['#ch7','🌐','الفصل 7: الزلازل'],
+  ['#ch8','🌋','الفصل 8: البراكين'],
+  ['#ch9','🧭','الفصل 9: التكتونية وزحزحة القارات'],
+  ['#ch10','🗺️','ورشة: الكارطوغرافية الطبوغرافية']
+];
+(function(){
+  var t=document.getElementById('toc'),i,a;
+  for(i=0;i<tocData.length;i++){
+    a=document.createElement('a');
+    a.href=tocData[i][0];
+    a.innerHTML='<span class="n">'+(i+1)+'</span>'+tocData[i][2];
+    a.addEventListener('click', function(href){ return function(ev){
+      var el=document.querySelector(href);
+      if(el){ ev.preventDefault(); el.classList.add('open'); el.scrollIntoView({behavior:'smooth'}); }
+    };}(tocData[i][0]));
+    t.appendChild(a);
+  }
+})();
+function tog(btn){
+  var it=btn.parentElement;
+  it.classList.toggle('open');
+}
+// فتح الفصل عبر الهاش عند التحميل
+(function(){
+  if(location.hash){
+    var el=document.querySelector(location.hash);
+    if(el && el.classList){ el.classList.add('open'); setTimeout(function(){el.scrollIntoView();},100); }
+  }
+})();
+</script>
+
+</body>
+</html>
