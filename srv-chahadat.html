@@ -103,6 +103,18 @@
 
     footer { background: var(--green-d); color: #dfeeeb; padding: 40px 0 24px; text-align: center; margin-top: 50px; font-weight: 600; font-size: 0.92rem; }
   </style>
+  <!-- ☁️ ربط Supabase: قاعدة بيانات طلبات الخدمات (أُضيف في v019) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    window.SAC_SB_URL = "https://lkxfjjyvqmzuoxmdoswv.supabase.co";
+    window.SAC_SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxreGZqanl2cW16dW94bWRvc3d2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMwOTM5NTYsImV4cCI6MjA5ODY2OTk1Nn0.TB5DRKXUB5Gfu-YkodmWxq_EXVbiq7t1o_bzxWj-ZTY";
+    window.addEventListener('load', function () {
+      if (!window.supabaseClient && window.supabase) {
+        try { window.supabaseClient = window.supabase.createClient(window.SAC_SB_URL, window.SAC_SB_KEY); }
+        catch (e) { console.error('Supabase init error:', e); }
+      }
+    });
+  </script>
 </head>
 <body>
 
@@ -475,8 +487,22 @@
       try { localStorage.setItem('sac_service_orders', JSON.stringify(existingOrders)); } catch(e){}
 
       try {
+        if (!window.supabaseClient && window.supabase && window.SAC_SB_URL) {
+          try { window.supabaseClient = window.supabase.createClient(window.SAC_SB_URL, window.SAC_SB_KEY); } catch (initErr) {}
+        }
         if (window.supabaseClient) {
-          await window.supabaseClient.from('service_orders').insert([newOrder]);
+          // 🔁 إدخال مرن (v019): إذا رفض Supabase عموداً غير موجود في الجدول نحذفه من الحمولة ونعيد الإرسال — حماية من فقدان الطلبات
+          let _payload = newOrder, _err = null;
+          for (let _t = 0; _t < 6; _t++) {
+            const _r = await window.supabaseClient.from('service_orders').insert([_payload]);
+            _err = _r.error || null;
+            if (!_err) break;
+            const _m = /Could not find the '([^']+)' column/.exec(_err.message || '');
+            if (!_m || !(_m[1] in _payload)) break;
+            _payload = Object.assign({}, _payload); delete _payload[_m[1]];
+            console.warn('⚠️ عمود مرفوض من قاعدة البيانات، حُذف وأُعيد إرسال الطلب بدونه:', _m[1]);
+          }
+          if (_err) console.error('Supabase insert failed finally:', _err);
         }
       } catch (e) { console.error('Supabase DB insert error:', e); }
 

@@ -289,7 +289,20 @@ async function submitSub(){
   }catch(e){}
   try{
     const c = sb();
-    if(c){ await c.from('service_orders').insert([order]); }
+    if(c){
+      // 🔁 إدخال مرن (v019): إذا رفض Supabase عموداً غير موجود في الجدول نحذفه من الحمولة ونعيد الإرسال — حماية من فقدان الطلبات
+      let _payload = order, _err = null;
+      for (let _t = 0; _t < 6; _t++) {
+        const _r = await c.from('service_orders').insert([_payload]);
+        _err = _r.error || null;
+        if (!_err) break;
+        const _m = /Could not find the '([^']+)' column/.exec(_err.message || '');
+        if (!_m || !(_m[1] in _payload)) break;
+        _payload = Object.assign({}, _payload); delete _payload[_m[1]];
+        console.warn('⚠️ عمود مرفوض من قاعدة البيانات، حُذف وأُعيد إرسال الطلب بدونه:', _m[1]);
+      }
+      if (_err) console.error('Supabase DB insert error:', _err);
+    }
   }catch(e){ console.error(e); }
 
   btn.disabled = false; btn.textContent = '🚀 تأكيد الاشتراك وإرسال الوصل';
