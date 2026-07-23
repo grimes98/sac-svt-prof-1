@@ -1,0 +1,1287 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#16a34a">
+<title>مقرر البيولوجيا العامة — SAC · SVT prof</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="assets/fonts.css">
+<style>
+:root{
+  --bg:#07130c; --card:#0d1f14; --card2:#12291a; --ink:#eaf7ee; --mut:#9dc4ab;
+  --grn:#22c55e; --grn2:#16a34a; --lime:#a3e635; --amber:#fbbf24; --red:#ef4444;
+  --teal:#0d9488;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Tajawal",sans-serif;background:radial-gradient(1200px 600px at 80% -10%,#14532d33,transparent),radial-gradient(900px 500px at 10% 110%,#14532d2b,transparent),var(--bg);color:var(--ink);line-height:1.95}
+.wrap{max-width:1020px;margin:0 auto;padding:0 16px 70px}
+/* ───── الهيدر ───── */
+header.hero{text-align:center;padding:52px 0 34px;position:relative}
+.badge-home{position:absolute;top:18px;inset-inline-start:8px;background:#14532d;border:1px solid #22c55e55;color:#bbf7d0;padding:7px 16px;border-radius:999px;text-decoration:none;font-weight:700;font-size:.85rem}
+.badge-home:hover{background:#166534}
+.kicker{display:inline-block;background:linear-gradient(135deg,#16a34a22,#22c55e18);border:1px solid #22c55e44;color:#86efac;padding:6px 20px;border-radius:999px;font-weight:800;font-size:.9rem;letter-spacing:.5px}
+h1{font-size:clamp(1.7rem,4.5vw,2.6rem);font-weight:900;margin:14px 0 8px;background:linear-gradient(90deg,#86efac,#22c55e,#a3e635);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--mut);font-size:1.02rem;max-width:760px;margin:0 auto}
+.free-note{position:relative;margin-top:16px;display:inline-block;background:#052e16;border:1px solid #22c55e33;color:#86efac;padding:8px 22px;border-radius:999px;font-weight:700;font-size:.9rem}
+/* ───── الوحدات ───── */
+.unit{margin:22px 0}
+.unit-head{display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,var(--card2),var(--card));border:1px solid #1f3a28;border-radius:20px;padding:16px 20px;box-shadow:0 8px 30px #0006}
+.unit-head.disabled{opacity:.65}
+.unit-ico{font-size:2.1rem;filter:drop-shadow(0 0 14px #22c55e66)}
+.unit-head h2{font-size:1.25rem;font-weight:900}
+.unit-head p{color:var(--mut);font-size:.85rem;margin-top:2px}
+.unit-tag{margin-inline-start:auto;font-size:.75rem;font-weight:900;padding:5px 14px;border-radius:999px;white-space:nowrap}
+.tag-on{background:#052e16;color:#4ade80;border:1px solid #22c55e55}
+.tag-soon{background:#1c1917;color:#fbbf24;border:1px solid #fbbf2444}
+/* ───── الأكورديون ───── */
+.acc-list{margin-top:12px;display:grid;gap:10px}
+.acc-item{background:var(--card);border:1px solid #1f3a28;border-radius:18px;overflow:hidden}
+.acc-btn{width:100%;display:flex;align-items:center;gap:12px;padding:15px 18px;background:none;border:none;color:var(--ink);font-family:inherit;font-size:1.02rem;font-weight:800;cursor:pointer;text-align:right;transition:.25s}
+.acc-btn:hover{background:#22c55e0f}
+.acc-num{flex:0 0 34px;height:34px;border-radius:12px;background:linear-gradient(135deg,#16a34a,#052e16);display:grid;place-items:center;font-weight:900;color:#d1fae5;border:1px solid #22c55e44}
+.acc-arrow{margin-inline-start:auto;transition:.3s;color:#4ade80;font-size:1.1rem}
+.acc-item.open .acc-arrow{transform:rotate(180deg)}
+.acc-body{display:none;padding:6px 22px 24px;border-top:1px dashed #1f3a28}
+.acc-item.open .acc-body{display:block;animation:fadeIn .4s}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+/* القفل */
+.acc-item.sac-locked .acc-body{display:none!important}
+.acc-item.sac-locked .acc-btn{opacity:.55;filter:saturate(.5)}
+.acc-item.sac-locked .acc-arrow{display:none}
+.lock-badge{margin-inline-start:auto;background:#422006;color:#fbbf24;border:1px solid #fbbf2455;font-size:.72rem;font-weight:900;padding:4px 12px;border-radius:999px}
+.acc-item.sac-locked .acc-num{background:linear-gradient(135deg,#78350f,#422006);border-color:#fbbf2444;color:#fde68a}
+/* ───── المحتوى ───── */
+h4{color:var(--lime);font-size:1.12rem;margin:22px 0 8px;padding-inline-start:12px;border-inline-start:4px solid var(--grn);background:linear-gradient(-90deg,transparent,#22c55e11);border-radius:8px;padding:8px 14px;font-weight:900}
+p.def{color:#d3e9da;margin:8px 0}
+ul.pts{margin:8px 0;padding-inline-start:6px;list-style:none}
+ul.pts li{position:relative;padding:6px 26px 6px 8px;color:#cfe8d6}
+ul.pts li::before{content:"◈";position:absolute;inset-inline-start:4px;color:var(--grn)}
+.term{background:#052e16;border:1px solid #1d5c33;color:#86efac;padding:1px 10px;border-radius:8px;font-size:.88em;font-weight:800;white-space:nowrap}
+.en{color:#7dd3fc;font-size:.85em;direction:ltr;unicode-bidi:embed}
+.note{background:#03150c;border:1px solid #14532d;border-inline-start:4px solid var(--amber);border-radius:12px;padding:12px 16px;margin:14px 0;color:#fde68a;font-size:.93rem}
+table.cmp{width:100%;border-collapse:collapse;margin:14px 0;font-size:.88rem}
+table.cmp th{background:#052e16;color:#a7f3d0;padding:9px;border:1px solid #175330}
+table.cmp td{padding:8px;border:1px solid #175330;text-align:center;color:#d3e9da}
+table.cmp tr:nth-child(even) td{background:#0c2417}
+/* ───── المعرض ───── */
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;margin:16px 0}
+.gal figure{background:#0a1a10;border:1px solid #1f3a28;border-radius:14px;overflow:hidden;cursor:zoom-in;transition:.25s}
+.gal figure:hover{transform:translateY(-4px);box-shadow:0 10px 24px #16a34a33;border-color:#22c55e66}
+.gal img{width:100%;height:210px;object-fit:cover;display:block;background:#fff}
+.gal figcaption{padding:8px 12px;font-size:.8rem;color:#a7c9b2;font-weight:700;text-align:center}
+/* زر الوثيقة */
+/* ───── لايت بوكس ───── */
+#lb{display:none;position:fixed;inset:0;background:#000e;z-index:99999;place-items:center;cursor:zoom-out;backdrop-filter:blur(6px)}
+#lb.active{display:flex}
+#lb img{max-width:94vw;max-height:88vh;border-radius:12px;box-shadow:0 0 60px #22c55e33;background:#fff}
+#lbCap{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#052e16dd;border:1px solid #22c55e66;color:#d1fae5;padding:8px 22px;border-radius:999px;font-weight:800;font-size:.9rem}
+/* ───── مودال الاشتراك ───── */
+.modal-back{display:none;position:fixed;inset:0;background:#000a;z-index:99998;place-items:center;padding:16px;backdrop-filter:blur(5px)}
+.modal-back.active{display:flex}
+.modal{background:linear-gradient(160deg,#0d1f14,#07130c);border:1px solid #22c55e55;border-radius:24px;max-width:560px;width:100%;padding:26px;position:relative;box-shadow:0 25px 70px #000}
+.modal h3{color:#86efac;font-size:1.3rem;font-weight:900;margin-bottom:6px}
+.modal .x{position:absolute;top:14px;inset-inline-start:14px;background:#7f1d1d;color:#fff;border:none;width:32px;height:32px;border-radius:50%;cursor:pointer;font-weight:900}
+.plan-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+.plan{background:#052e16;border:1px solid #1d5c33;border-radius:14px;padding:12px 8px;text-align:center}
+.plan b{display:block;color:#a3e635;font-size:1.15rem}
+.plan span{color:#9dc4ab;font-size:.78rem}
+.sub-cta{display:block;text-align:center;background:linear-gradient(135deg,#16a34a,#a3e635);color:#052e16;font-weight:900;padding:13px;border-radius:14px;text-decoration:none;margin:8px 0}
+.sub-cta:hover{filter:brightness(1.1)}
+.member-form{margin-top:14px;border-top:1px dashed #1f3a28;padding-top:14px}
+.member-form label{color:#9dc4ab;font-size:.85rem;font-weight:700}
+.member-form input{width:100%;background:#03150c;border:1px solid #1f3a28;border-radius:12px;color:var(--ink);padding:11px 14px;margin:8px 0;font-family:inherit}
+.member-form button{width:100%;background:#052e16;border:1px solid #22c55e66;color:#86efac;padding:11px;border-radius:12px;font-weight:900;cursor:pointer;font-family:inherit}
+.member-form button:hover{background:#0a3d1f}
+.member-form .msg{min-height:22px;font-size:.85rem;font-weight:800;margin-top:6px;text-align:center}
+footer{text-align:center;color:#5f7d6a;font-size:.85rem;padding:30px 0;border-top:1px solid #15301f;margin-top:50px}
+@media(max-width:560px){.plan-row{grid-template-columns:1fr 1fr}.acc-num{display:none}}
+</style>
+</head>
+<body>
+
+<a class="badge-home" href="index.html">🏠 الرئيسية</a>
+<header class="hero">
+  <span class="kicker">🌿 ركن SVT — مقررات السنة الأولى معهد</span>
+  <h1>مقرر البيولوجيا العامّة</h1>
+  <p>الوحدات الأربع كاملةً الآن: <b>علم الخلية</b>، <b>علم النبات</b>، <b>علم الأجنّة</b> و<b>علم الأنسجة</b> — مواد مستخلصة ومنقّحة للويب من الوثائق الأصلية، مع الصور المجهرية والمخططات بجودة عالية.</p>
+  <div class="free-note">🔓 الفصلان الأوليان مجانيان للجميع — والباقي حصري للمشتركين 💎</div>
+</header>
+
+<div class="wrap">
+
+<!-- ═══════════ الوحدة 1: علم الخلية ═══════════ -->
+<section class="unit" id="unitCytologie">
+  <div class="unit-head">
+    <span class="unit-ico">🧫</span>
+    <div>
+      <h2>الوحدة الأولى: علم الخلية <span class="en">Cytologie</span></h2>
+      <p>من النظرية الخلوية إلى الانقسام الخلوي — 5 فصول بمخططات وصور مجهرية أصلية</p>
+    </div>
+    <span class="unit-tag tag-on">✅ متوفرة الآن</span>
+  </div>
+
+  <div class="acc-list">
+
+  <!-- ▓▓ الفصل 1 (مجاني): البيولوجيا وعلم الخلية ▓▓ -->
+  <div class="acc-item" id="cy0">
+    <button class="acc-btn" onclick="togBio(this)"><span class="acc-num">1</span> الفصل الأوّل: <b>البيولوجيا وعلم الخلية</b> — مدخل <span class="acc-arrow">▼</span></button>
+    <div class="acc-body">
+      <h4>🧬 البيولوجيا <span class="en">Biology</span></h4>
+      <p class="def">تسمى أيضاً <b>علم الأحياء</b>، وهي مشتقة من اليونانية (<span class="en">Bio = حياة / Logy = علم</span>): علم يتعامل مع دراسة كافة أشكال الحياة، ويهتم بالكائنات الحية من حيث بنيتها المرفولوجية والتشريحية، تغذيتها، طرق تكاثرها، خصائصها وصفاتها وسلوكها، وتفاعلها فيما بينها ومع الأوساط التي تعيش فيها، إضافةً إلى انتقال الصفات الوراثية من جيل إلى جيل.</p>
+      <ul>
+        <li>علم واسع جداً ينقسم إلى فروع أهمها: <b>علم الخلية</b>، علم الكائنات الدقيقة، علم الحيوان، علم النبات، علم وظائف الأعضاء <span class="en">(Physiologie)</span>، الكيمياء الحيوية، علم البيئة...</li>
+        <li>ابتداءً من القرن 19، وباكتشاف <span class="term">النظرية الخلوية</span>، صار علم الأحياء وثيق الصلة بالعلوم النظرية والتطبيقية كالطب والصيدلة والزراعة.</li>
+      </ul>
+      <h4>🔬 علم الخلية <span class="en">Cytology</span></h4>
+      <p class="def">أحد أهم فروع علم الأحياء: يهتم بدراسة <b>الخلية</b> التي هي الوحدة الأساسية لبناء الكائن الحي، من الجانبين البنيوي والوظيفي، وما يطرأ عليها من تغيرات فيزيولوجية خلال النمو والتطور.</p>
+      <h4>📜 النظرية الخلوية</h4>
+      <p class="def">مهّد التقدم المجهري في بداية القرن 19 لظهور النظرية الخلوية التي صاغها الألمانيان <span class="en">Matias Schleiden</span> (توصل إلى أن أنسجة النباتات تتشكل من مجموعة خلايا) و<span class="en">Theodor Schwann</span> (توصل إلى النتيجة نفسها عند الحيوان): فكل كائن حي مكوّن من وحدات أساسية متشابهة هي الخلايا، والكائن مهما كبر حجمه نشأ في الأصل من خلية واحدة — لذلك تنص النظرية على أن <b>الخلية هي الوحدة التشريحية والوظيفية لكل الكائنات الحية</b>.</p>
+      <h4>🌍 المميزات العامة للكائنات الحية</h4>
+      <ul>
+        <li><b>1) التنظيم:</b> كائنات وحيدة الخلية تؤدي وظائفها على نحو مبسّط: وحيدات الخلية النباتية <span class="en">Protophytes</span>، وحيدات الخلية الحيوانية <span class="en">Protozoires</span>، والبكتيريا <span class="en">Bacteria</span>. أما متعددة الخلايا الحيوانية <span class="en">Metazoires</span> والنباتية <span class="en">Metaphytes</span> فتنتظم خلاياها المتشابهة في <span class="term">نسيج</span> <span class="en">Tissu</span> يؤدي وظيفة أو عدة وظائف، وتتحد أنسجة لتكوّن عضواً، ومجموعة الأعضاء تكوّن الكائن الحي:
+          <br>📐 <b>عضيات داخل خلوية ← خلايا ← نسيج ← عضو ← كائن حي</b></li>
+        <li><b>2) التفاعل مع الوسط الخارجي:</b> تواجه الكائنات الحية المؤثرات الخارجية بردود أفعال مختلفة؛ فوحيدة الخلية تتأثر لأدنى تغير (ضوء، حرارة، تركيب كيميائي)، وكلما تعقّد تركيب الكائن تعقّدت تفاعلاته.</li>
+        <li><b>3) التغذية والتمثيل:</b> النبات هو الكائن الوحيد القادر على صناعة غذائه بنفسه باستعمال الطاقة الضوئية في <span class="term">البناء الضوئي</span>، وبقية الكائنات تعيش عبر النبات بشكل مباشر أو غير مباشر.</li>
+        <li><b>4) التكاثر:</b> نقل الصفات الوراثية من جيل لآخر للحفاظ على النوع — <b>جنسي</b> (عبر إنتاج الأمشاج الذكرية والأنثوية واتحادها) و<b>لاجنسي</b> (كالتطعيم عند النباتات والانشطار عند وحيدات الخلية).</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ▓▓ الفصل 2 (مجاني): طرق دراسة الخلية ▓▓ -->
+  <div class="acc-item" id="cy1">
+    <button class="acc-btn" onclick="togBio(this)"><span class="acc-num">2</span> الفصل الثاني: <b>طرق دراسة الخلية</b> — المجاهر والتحضيرات <span class="acc-arrow">▼</span></button>
+    <div class="acc-body">
+      <h4>🔬 المجهرية <span class="en">Microscopy</span> ومبدأ عمل المجهر</h4>
+      <p class="def">يستند المجهر على تحييد انحراف حزمة من <b>الفوتونات</b> (المجهر الضوئي) أو حزمة من <b>الإلكترونات</b> (المجهر الإلكتروني) خلال نظام عدسي، فنحصل من عينة صغيرة الأبعاد على صورة مكبّرة. مبدأ العمل هو <b>التكبير</b> مقترناً بأقصى درجة من الإيضاح <b>(الميز)</b>: قوة التكبير نسبة قطر الصورة المرئية إلى قطرها الحقيقي (تكبير 400x يعني زيادة القطر 400 مرة)، وقدرةُ الإيضاح تتناسب <b>عكسياً</b> مع طول الموجة المارة عبر العينة.</p>
+      <h4>💡 المجاهر الضوئية</h4>
+      <ul>
+        <li><b>البسيط:</b> عدستان محدبتان — <span class="term">شيئية</span> تكوّن صورة حقيقية مقلوبة مكبّرة، و<span class="term">عينية</span> تكبّرها إلى صورة خيالية معتدلة — مع عدسة ثالثة مكثّفة للضوء.</li>
+        <li><b>المركب (الأكثر استعمالاً):</b> يشابه البسيط مع عدستين عينيتين؛ طيفه الضوء المرئي [<span class="en">400–760nm</span>]، قدرة إيضاحه <b>0.2µm</b>، سمك الشريحة لا يتعدى <b>10µm</b>، والعينة تُدرس حية أو ميتة. يُستعمل في دراسة الأنسجة وتتبّع المركبات الموسومة.</li>
+      </ul>
+      <h4>⚡ المجاهر الإلكترونية</h4>
+      <ul>
+        <li><b>النافذ <span class="en">TEM</span>:</b> لدراسة الخلية وأجزائها دراسة مباشرة؛ ترتيب أجزائه عكس الضوئي — مدفع إلكتروني أعلى العمود، تحته 6 أزواج عدسات كهرومغناطيسية (تركيز/تكثيف، تحديد التكبير من <b>100x</b> إلى <b>1,000,000x</b>)، وزوج عدسات عرض يكوّن الصورة النهائية على شاشة في القاعدة.</li>
+        <li><b>الماسح <span class="en">SEM</span>:</b> عدسات خاصة تضيّق الشعاع حتى <b>5nm</b>، ولوالب تُحرّكه ذهاباً وإياباً فوق العينة فتُطلق <span class="term">إلكترونات ثانوية</span> تُقاس سرعتها وتُحوَّل إلى شكل طوبوغرافي ثلاثي الأبعاد — لدراسة البنى المرفولوجية السطحية دون الحاجة لعينة رقيقة.</li>
+        <li><b>أجهزة ملحقة ضرورية:</b> مزوّد فولطية عالية (<b>20–40 kV</b>) لتوليد الشعاع، مزوّد تيار للعدسات، تبريد داخلي ومفرغات هواء، كمبيوتر تحكم، ومجهر ضوئي لرؤية الصورة النهائية.</li>
+      </ul>
+      <h4>🧪 التحضيرات المجهرية</h4>
+      <ul>
+        <li><b>للمجهر الضوئي — عينات حية غير مثبتة:</b> ملاحظة مباشرة قصيرة المدة للعمليات الحيوية (بلعمة، انقسام خلوي، حركة) مع إمكانية استعمال ملوّنات فيزيولوجية ك<span class="term">أحمر المعتدل</span>.</li>
+        <li><b>المسحات (ثبيت فيزيائي حراري):</b> خلايا معزولة في معلق (دم، سوائل جنسية، مخاطية، بكتيريا...) تُنشر على صفيحة زجاجية وتُجفَّف وتُلوَّن — كتحضير مسحات الدم.</li>
+        <li><b>الشرائح المستديمة (7 مراحل)</b> لمقاطع <b>5–10µm</b>: <b>تثبيت</b> كيميائي (<span class="en">Ethanol · Citric acid · Formaldehyde</span>) ← <b>غسل</b> (ماء أو كحول حسب المثبّت) ← <b>نزع الماء «النكز»</b> بكحول متصاعد التركيز <b>30%←100%</b> ← <b>ترويق</b> (<span class="en">Xylène · Toluène</span>) ← <b>تشريب وطمر</b> (بسيط بالبرافين، أو مزدوج بالسيلويدين+برافين) ← <b>صبغ</b> ← <b>قطع</b> بجهاز <span class="en">Microtom</span> — فنحصل على شريحة مستديمة تُفحص في أي وقت.</li>
+        <li><b>للمجهر الإلكتروني — البنية الخارجية:</b> <b>التلوين السالب</b> (خلات اليورانيوم أو الكادميوم تحيط بالعينة دون أن تنفذ إليها فتبدو بيضاء على خلفية سوداء) و<b>التظليل</b> (رشّ جانبي بالذهب أو البلاتين في غرفة مفرغة — لدراسة الأشكال وقياس <span class="en">DNA</span>).</li>
+        <li><b>البنية الداخلية:</b> <b>التلوين الموجب</b> (أملاح الرصاص وحمض اليورانيوم تنفذ داخل العينات المصلَّبة بالراتنج أو الأرالديت فتتشبع البنى بالمعادن وتظهر سوداء في محيط منير) و<b>الشطر التجمدي</b> (تجميد فائق السرعة في الآزوت السائل <b>−190°</b> ثم كسر بسكين مجهري ورشّ بالكربون ثم البلاتين لدراسة أسطح الأغشية والعضيات دون تثبيت كيميائي).</li>
+      </ul>
+      <div class="gal" data-gal="cy1">
+        <figure><img src="assets/bio/cyto/ch2/img_01.jpg" alt="أجزاء المجهر الضوئي"><figcaption>🔬 أجزاء المجهر الضوئي ومبدأ عمله (مسار الأشعة من المصدر إلى الشبكية)</figcaption></figure>
+        <figure><img src="assets/bio/cyto/ch2/img_02.jpg" alt="مجهر إلكتروني نافذ"><figcaption>🔬 صورة حقيقية للمجهر الإلكتروني النافذ <span class="en">TEM</span> في المخبر</figcaption></figure>
+        <figure><img src="assets/bio/cyto/ch2/img_03.jpg" alt="مبدأ المجهر النافذ"><figcaption>⚡ مبدأ عمل المجهر الإلكتروني النافذ: مدفع إلكترونات وعدسات كهرومغناطيسية حتى شاشة العرض</figcaption></figure>
+        <figure><img src="assets/bio/cyto/ch2/img_04.jpg" alt="المجهر الماسح"><figcaption>⚡ المجهر الإلكتروني الماسح <span class="en">SEM</span>: الجهاز الحقيقي ومبدأ المسح بالإلكترونات الثانوية</figcaption></figure>
+        <figure><img src="assets/bio/cyto/ch2/img_05.jpg" alt="مسحة جذور البصل"><figcaption>🧅 مسحة ضوئية تُظهر الانقسام الميتوزي في خلايا جذور البصل</figcaption></figure>
+        <figure><img src="assets/bio/cyto/ch2/img_06.jpg" alt="فيروس كورونا"><figcaption>🦠 فيروس كورونا بتقنية التلوين السالب (مجهر إلكتروني)</figcaption></figure>
+        <figure><img src="assets/bio/cyto/ch2/img_07.jpg" alt="تظليل معدني"><figcaption>🧫 عصيات بكتيرية بتقنية التظليل المعدني (ذهب/بلاتين)</figcaption></figure>
+        <figure><img src="assets/bio/cyto/ch2/img_08.jpg" alt="غولجي تلوين موجب"><figcaption>🏭 أجهزة غولجي بتقنية التلوين الموجب: <span class="en">G</span> غولجي · <span class="en">ER</span> شبكة · <span class="en">M</span> ميتوكوندريا · <span class="en">V</span> حويصلات</figcaption></figure>
+        <figure><img src="assets/bio/cyto/ch2/img_09.jpg" alt="الشطر التجمدي"><figcaption>❄️ مراحل تقنية الشطر التجمدي: تجميد فائق ← شطر ← رش معدني ← ملاحظة أسطح العضيات</figcaption></figure>
+      </div>
+    </div>
+  </div>
+
+  <!-- ▓▓ الفصل 3: التركيب العام للخلية ▓▓ -->
+  <div class="acc-item" id="cy2">
+    <button class="acc-btn" onclick="togBio(this)"><span class="acc-num">3</span> الفصل الثالث: <b>التركيب العام للخلية</b> — بدائيات وحقيقيات النواة <span class="acc-arrow">▼</span></button>
+    <div class="acc-body">
+      <h4>🌐 تقسيم العالم الحي حسب البنية الخلوية</h4>
+      <ul>
+        <li><b>بدائيات النواة <span class="en">Procaryotes</span>:</b> كائنات وحيدة الخلية مادتها الوراثية منتشرة في السيتوبلازم لعدم وجود غلاف نووي — البكتيريا والبكتيريا الخضراء المزرقة <span class="en">Cyanobactéries</span>.</li>
+        <li><b>حقيقيات النواة <span class="en">Eucaryotes</span>:</b> المادة الوراثية مفصولة عن السيتوبلازم بغلاف نووي — وحيدات ومتعددات الخلايا الحيوانية والنباتية.</li>
+      </ul>
+      <h4>🦠 أولاً: خلية بدائية النواة (البكتيريا)</h4>
+      <p class="def">كائن حي مجهري وحيد الخلية (<b>0.2–2µm</b>) يعيش في جميع الأوساط ويتكاثر بسرعة، بأشكال مختلفة من كروي إلى عصوي إلى حلزوني.</p>
+      <ul>
+        <li><b>مكونات دائمة (عند كل البكتيريا):</b> ① <b>الجدار الخلوي</b>: صلب يعطي الشكل، أساسه الدهون السكرية والبيبتيدات السكرية <span class="en">Peptidoglycane</span> (الميورين <span class="en">Myorine</span>) — ميزة تصنيفية بصبغة غرام: <b>موجب+</b> غني بالميورين، <b>سالب−</b> فقير بها. ② <b>الغشاء السيتوبلازمي</b> فسيفسائي مائع مقرّ المبادلات. ③ <b>السيتوبلازم</b> سائل متجانس بريبوزومات، مقرّ الأيض الخلوي. ④ <b>الجهاز النووي</b>: <span class="en">ADN</span> خيطي + جزيئات حلقية هي <span class="term">البلاسميدات</span> تحمل مورثات خاصة.</li>
+        <li><b>مكونات إضافية:</b> <b>السياط</b> (امتدادات دقيقة من بروتين الفيلاجين للحركة)، <b>الشعيرات «الأويار»</b> (استطالات أقصر تكثر عند غرام سالب — امتصاص، تحسس، التصاق، حماية، ولا دور لها في الحركة)، <b>الأبواغ الداخلية</b> (تحيط الخلية بمحتواها الدائم بجدار صلب مقاوم للظروف القاسية)، <b>المحفظة</b> (غدق يحيط بالجدار يحمي من البلعمة ويساعد على الالتصاق — عامل مقاومة).</li>
+      </ul>
+      <h4>🧬 ثانياً: الخلية حقيقية النواة</h4>
+      <p class="def">تنقسم مكوناتها حسب النشاط إلى: <b>المجموعة النشطة <span class="en">Protoplasme</span></b> — الغشاء السيتوبلازمي + السيتوبلازم (هيالوبلازم شفاف + عضيات: جهاز غولجي، ميتوكوندري، جسيمات حالة «ليزوزومات»، شبكة إندوبلازمية، فجوات) + النواة (غشاء نووي، مادة صبغية، عصارة نووية، نويات) — و<b>المجموعة الخاملة <span class="en">Paraplasme</span></b>: الأصبغة، الحبيبات الإفرازية، الجليكوجين، القطرات الليبيدية، الجدار السيليلوزي (نباتية)، المكتتفات.</p>
+      <div class="table-wrap"><table class="cmp">
+        <tr><th>وجه المقارنة</th><th>الخلية النباتية 🌿</th><th>الخلية الحيوانية 🐾</th></tr>
+        <tr><td>الأغلفة</td><td>جدار خلوي سيليلوزي + غشاء بلازمي (تحافظ الأوراق على شكلها)</td><td>غشاء بلازمي فقط</td></tr>
+        <tr><td>الجهاز الفجوي</td><td>متطوّر — غالباً فجوة عصارية عملاقة</td><td>فجوات صغيرة أو منعدمة</td></tr>
+        <tr><td>البلاستيدات</td><td>بلاستيدات خضراء وصبغات (كلوروفيل) تلوّن الثمار</td><td>غائبة</td></tr>
+        <tr><td>المريكز والهيكل</td><td>تخلو من المريكز والهيكل الخلوي</td><td>مريكز + أنيبيبات دقيقة وهيكل خلوي</td></tr>
+      </table></div>
+      <div class="table-wrap"><table class="cmp">
+        <tr><th>الخصائص</th><th>خلية بدائية النواة</th><th>خلية حقيقية النواة</th></tr>
+        <tr><td>التنظيم</td><td>وحيدات الخلايا</td><td>وحيدات ومتعددات الخلايا تشكّل أنسجة مختلفة</td></tr>
+        <tr><td>الحجم</td><td><span class="en">1–10µm</span></td><td><span class="en">5–100µm</span></td></tr>
+        <tr><td>النواة</td><td>غير حقيقية (لا غلاف نووي)</td><td>حقيقية (بغلاف نووي)</td></tr>
+        <tr><td><span class="en">DNA</span></td><td>حلقي منتشر في السيتوبلازم، غير مرتبط بالهيستونات</td><td>معقّد <span class="en">DNA</span>–هيستونات ضمن شبكة كروماتينية داخل النواة</td></tr>
+        <tr><td>الصيغة الصبغية</td><td>أحادية <span class="en">n</span></td><td>ثنائية <span class="en">2n</span></td></tr>
+        <tr><td>اصطناع البروتين</td><td>الترجمة والاستنساخ في السيتوبلازم ومتزامنتان</td><td>الاستنساخ داخل النواة والترجمة في الهيالوبلازم</td></tr>
+        <tr><td>العضيات الغشائية</td><td>غائبة</td><td>عديدة محاطة بأغشية</td></tr>
+        <tr><td>الانقسام الخلوي</td><td>انشطار ثنائي</td><td>خيطي بتشكيل مغزل الانقسام</td></tr>
+        <tr><td>الهيكل الخلوي</td><td>غائب</td><td>أنيبيبات دقيقة وخيوط دقيقة ووسطية</td></tr>
+        <tr><td>الريبوزومات</td><td>موجودة</td><td>موجودة</td></tr>
+      </table></div>
+      <h4>🦠 ثالثاً: الفيروسات — وحدة حياتية ناقصة</h4>
+      <p class="def">كائنات صغيرة جداً (من بضع عشرات إلى مئات النانومتر) — <b>ليست خلية</b> بالمفهوم الحقيقي: تحتوي أحد الحمضين النوويين فقط (<span class="en">ADN</span> أو <span class="en">ARN</span>)، ولا تحتوي أي عضية، وغير قادرة على التكاثر إلا داخل الخلية المصابة لافتقارها مصادر الطاقة، لذلك تُعدّ <span class="term">وحدة حياتية ناقصة</span>.</p>
+      <ul>
+        <li><b>التمييز بينها:</b> بالشكل (كروي، عصوي، معقد)، ونوع المرض (مناعية، جلدية، عضوية...)، ونوع النسيج المصاب (غدد، كبد...).</li>
+        <li><b>التقسيم:</b> فيروسات حيوانية (مادتها <span class="en">ARN</span>)، نباتية (<span class="en">ADN</span>)، بكتيرية (<span class="en">ADN</span> و<span class="en">ARN</span>).</li>
+        <li><b>المكونات:</b> <b>مادة وراثية</b> مسؤولة عن إحداث المرض + <b>محفظة</b> من وحدات البيبتيد تحدد شكل الفيروس وتساعد على الالتصاق بالخلية المستقبلة + <b>غلاف</b> إضافي في بعض الفيروسات («الفيروسات المغلفة» — الأشد مقاومة).</li>
+      </ul>
+      <div class="gal" data-gal="cy2">
+        <figure><img src="assets/bio/cyto/ch3/img_01.jpg" alt="أشكال البكتيريا"><figcaption>🦠 الأشكال المختلفة للبكتيريا: حلزونية وعصوية (صور مجهرية)</figcaption></figure>
+        <figure><img src="assets/bio/cyto/ch3/img_02.jpg" alt="جدار غرام موجب وسالب"><figcaption>🧱 بنية الجدار الخلوي: غرام موجب غني بالميورين مقابل غرام سالب فقير بها</figcaption></figure>
+        <figure><img src="assets/bio/cyto/ch3/img_03.jpg" alt="مكونات البكتيريا"><figcaption>🧬 المكونات الدائمة والإضافية للخلية البكتيرية: سوط، أويار، كبسولة، جدار، <span class="en">ADN</span></figcaption></figure>
+        <figure><img src="assets/bio/cyto/ch3/img_04.jpg" alt="الخلية النباتية"><figcaption>🌿 مكونات الخلية النباتية: جدار سيليلوزي، بلاستيدة خضراء، فجوة عصارية كبيرة</figcaption></figure>
+        <figure><img src="assets/bio/cyto/ch3/img_05.jpg" alt="الخلية الحيوانية"><figcaption>🐾 مكونات الخلية الحيوانية: مريكز وحويصلات، دون جدار خلوي</figcaption></figure>
+        <figure><img src="assets/bio/cyto/ch3/img_06.jpg" alt="فيروس HIV"><figcaption>🦠 بنية فيروس <span class="en">HIV</span>: حمض <span class="en">RNA</span> وإنزيم الاستنساخ العكسي داخل محفظة مغلفة</figcaption></figure>
+        <figure><img src="assets/bio/cyto/ch3/img_07.jpg" alt="أشكال الفيروسات"><figcaption>🔬 أشكال الفيروسات: خطي (تبغ مبرقش) · معقد (بكتيريوفاج <span class="en">T</span>) · كروي (زكام)</figcaption></figure>
+      </div>
+    </div>
+  </div>
+
+  <!-- ▓▓ الفصل 4: مكونات الخلية (3 أجزاء) ▓▓ -->
+  <div class="acc-item" id="cy3">
+    <button class="acc-btn" onclick="togBio(this)"><span class="acc-num">4</span> الفصل الرابع: <b>مكوّنات الخلية</b> — الغشاء، السيتوبلازم، الجدار والفجوات <span class="acc-arrow">▼</span></button>
+    <div class="acc-body">
+      <h4>🧱 الجزء الأول: الغشاء السيتوبلازمي</h4>
+      <p class="def">الجزء الخارجي الرقيق الشفاف المحيط بالخلية كحاجز فيزيائي يفصل مكوناتها عن الوسط الخارجي — وهو <b>مقرّ المبادلات</b> بين الخلية والوسط.</p>
+      <ul>
+        <li><b>المعطف الخلوي:</b> سلاسل وتفرعات سكرية مرتبطة ببروتينات أو ليبيدات الناحية الخارجية — وظائفه: <b>الحماية</b> من التحلل والتمزق (أغلب الأنزيمات لا تستطيع إماهته)، <b>التحام الخلايا</b> (جذور مشحونة سالبة تسهّل الارتباط بوجود <span class="en">Ca²⁺ · Mg²⁺</span>)، و<b>خصوصية الخلايا</b> (كنظام الزمر الدموية <span class="en">A.B.O</span>).</li>
+        <li><b>البروتينات:</b> <b>باطنية/خارجية</b> متوقفة على أحد السطحين، و<b>ضمنية</b> (الأكثر انتشاراً) متموضعة بين جزيئات الفوسفوليبيدات: أنزيمات <span class="en">Permease</span>، نواقل، مستقبلات...</li>
+        <li><b>الدهون:</b> الليبيدات عنصر هيكلي، وأكثرها <b>الفوسفوليبيدات</b> المرتبطة بالكولسترول؛ ثنائيةُ القطبية تجعلها تصطف في <b>طبقة مزدوجة</b> ثابتة مرنة: غير نافذة لمعظم الجزيئات المذابة في الماء وغير المذابة في الدهون، وغير نافذة للأيونات (<span class="en">Na⁺ · Cl⁻ · K⁺</span>)، وهندستها غير ثابتة (طبقة مائعة).</li>
+      </ul>
+      <h4>🚪 طرق انتقال المواد عبر الغشاء</h4>
+      <ul>
+        <li><b>1) الانتشار الحر:</b> انتقال المواد الذائبة في الدهون من الوسط الأعلى تركيزاً إلى الأدنى <b>دون طاقة</b>، والسرعة تتناسب مع سرعة الذوبان في الدهون؛ والماء يعبر ثقوب <span class="en">Aquaporine</span> (قطر الثقب نحو <b>2nm</b> مبطنة ببروتينات محبة للماء) نحو الوسط الأكثر تركيزاً.</li>
+        <li><b>2) النقل بالمساعدة — الانتشار المسهّل (غير الفعال):</b> للمواد غير الذائبة في الدهون (سكريات، أحماض أمينية) عبر بروتينات ناقلة متخصصة، مع تدرج التركيز ودون طاقة — السرعة تتوقف على عدد النواقل وتشبعها، وتستمر العملية ما دامت الخلية تستهلك المادة في البناء الحيوي (فسفرة تأكسدية).</li>
+        <li><b>3) النقل الفعال:</b> نواقل تعمل <b>كمضخات عكس تدرج التركيز</b> بصرف طاقة <span class="en">ATP</span> — <b>أولي</b> مباشر و<b>ثانوي</b> يستغل طاقة انتقال مرافقة (دخول الغلوكوز مع <span class="en">Na⁺</span>). أمثلة مضخات: <span class="en">Na⁺/K⁺</span>، <span class="en">Ca²⁺</span> في الليف العضلي والعصبي، <span class="en">H⁺/K⁺</span> في المعدة، وبروتونات <span class="en">H⁺</span> في الليزوزومات.</li>
+        <li><b>4) النقل بالحويصلات:</b> مبادلات مع تغيير بنية الغشاء —
+          <b>الإدخال الخلوي</b>: <b>الجرع (شرب خلوي)</b> لجزيئات صغيرة قطيرات · <b>البلعمة</b> لجزيئات صلبة (بكتيريا، بقايا) عند وحيدات الخلية والكريات البيضاء والبالعات بأرجل كاذبة: إدمصاص ← انخماص ← فجوة هاضمة ← هضم (يتطلب طاقة) · <b>الإدخال بالمستقبلات</b>: تتجمع معقدات (مستقبل+ركيزة) في <span class="term">آبار مغطاة</span> ببروتين <b>الكلاترين</b> (قد تضم البئر نحو ألف مستقبل) ثم تنخمص حويصلات تفقد الكلاترين وتتحلل — كدخول البروتينات الليبيدية والكوليسترول.
+          <b>الإطراح الخلوي</b>: طرح بقايا الهضم والسموم أو إفراز مواد مهمة (هرمونات، إنزيمات، مواد مغذية) عبر حويصلات إفرازية في 4 مراحل: <b>هجرة ← التصاق ← التحام واندماج ← تفريغ</b>.</li>
+      </ul>
+      <div class="gal" data-gal="cy3a">
+        <figure><img src="assets/bio/cyto/ch4/img_01.jpg" alt="النموذج الفسيفسائي"><figcaption>🧱 الهندسة الجزيئية للغشاء: النموذج الفسيفسائي المائع</figcaption></figure>
+        <figure><img src="assets/bio/cyto/ch4/img_02.jpg" alt="منحنى الذوبان"><figcaption>📈 الانتشار الحر: سرعة مرور المواد تتناسب مع ذوبانها في الدهون</figcaption></figure>
+        <figure><img src="assets/bio/cyto/ch4/img_03.jpg" alt="النقل غير الفعال"><figcaption>🫧 النقل غير الفعال: العبور الحر مع تدرج التركيز دون طاقة</figcaption></figure>
+        <figure><img src="assets/bio/cyto/ch4/img_04.jpg" alt="تشبع النواقل"><figcaption>📊 الانتشار المسهّل: السرعة تتوقف عند تشبع النواقل الغشائية</figcaption></figure>
+        <figure><img src="assets/bio/cyto/ch4/img_05.jpg" alt="النقل الفعال"><figcaption>🔄 النقل الفعال وأنواعه: مضخة <span class="en">ATPase</span> وناقلات مرافقة (سكر <span class="en">+ Na⁺</span>)</figcaption></figure>
+        <figure><img src="assets/bio/cyto/ch4/img_06.jpg" alt="مضخة صوديوم بوتاسيوم"><figcaption>⚙️ مضخة الصوديوم-بوتاسيوم: دورة الفسفرة وتغير البنية في 6 مراحل</figcaption></figure>
+        <figure><img src="assets/bio/cyto/ch4/img_07.jpg" alt="الجرع الخلوي"><figcaption>🔬 مراحل الجرع الخلوي بالمجهر الإلكتروني: انخماص الغشاء حتى تحرر حويصلة الشرب (<span class="en">a←e</span>)</figcaption></figure>
+        <figure><img src="assets/bio/cyto/ch4/img_08.jpg" alt="البلعمة"><figcaption>🍽️ مراحل البلعمة الخلوية: إدمصاص ← انخماص ← فجوة هاضمة ← إطراح البقايا</figcaption></figure>
+        <figure><img src="assets/bio/cyto/ch4/img_09.jpg" alt="الإدخال بالمستقبلات"><figcaption>🎯 الإدخال بواسطة المستقبلات: آبار مغطاة ببروتين الكلاترين <span class="en">(Clathrine)</span></figcaption></figure>
+        <figure><img src="assets/bio/cyto/ch4/img_10.jpg" alt="الإطراح الخلوي"><figcaption>🔬 مراحل الإطراح الخلوي بالمجهر الإلكتروني: هجرة ← التصاق ← التحام ← تفريغ</figcaption></figure>
+      </div>
+
+      <h4>🟣 الجزء الثاني: السيتوبلازم والعضيات</h4>
+      <p class="def"><b>السيتوبلازم:</b> محلول شبه شفاف يحوي مكونات الخلية الحية وغير الحية عدا الغشاء البلازمي والنواة — مكوّن أساساً من الماء الحر (النسبة الغالبة) مع بروتينات وليبيدات ومواد عضوية ومعدنية، ويتأثر بالعوامل الخارجية (درجة الحرارة و<span class="en">pH</span>).</p>
+      <ul>
+        <li><b>الشبكة الأندوبلازمية:</b> أوعية غشائية متفرعة متصلة تشكّل نظاماً مغلقاً من التجاويف، وغشاؤها يتصل بالغشاء السيتوبلازمي من جهة وبالغشاء الخارجي للنواة من جهة أخرى فينقسم السيتوبلازم إلى: <b>سيتوزول</b> <span class="en">Cytosole</span> (هيالوبلازم) خارج الأوعية و<b>سيتوبلازم داخلي</b> بين التجاويف. <b>الخشنة</b> (ريبوزومات على سطحها): تربط الأحماض الأمينية بفضل <span class="en">ARNm · ARNt</span> مكوّنةً البروتينات التي تنتقل إلى تجاويفها ثم إلى غولجي. <b>الملساء</b> (بلا ريبوزومات): أنزيمات بناء الليبيدات الفوسفورية والكولسترول، تصنيع هرمونات الخلايا الغدية (الكظرية)، وتخليص الخلية من السموم (الكبد).</li>
+        <li><b>جهاز غولجي:</b> وحدات بنيوية غشائية هي <span class="term">الدكتوزوم</span> — تجمع كييسات خارجية مقوّسة مطبقة (<b>3–8</b> غالباً وقد تبلغ 20) بوجهين: <b>تكويني محدّب</b> (علاقة مع الشبكة والحويصلات الانتقالية) و<b>نضجي</b> (حويصلات إفرازية). يعمل على تجميع الجزيئات المخلّقة حياتياً (بروتينات، كربوهيدرات، دهون) القادمة من الشبكة وتكوين حويصلات إفرازية تنقلها داخل الخلية أو خارجها، وله دور رئيسي في تكوين الجسيمات الحالة الأولية.</li>
+      </ul>
+      <h4>🕸️ الهيكل الخلوي</h4>
+      <p class="def">دعامة بروتينية من 3 عناصر (<b>خيوط دقيقة + أنيبيبات دقيقة + خيوط وسطية</b>) في تغيّر مستمر (بلمرة/إزالة بلمرة، فسفرة/إزالة فسفرة): جزيئات بسيطة <span class="en">Monomères</span>، مبلمرات مستقرة (تحدد شكل الخلية وتمايزاتها الغشائية)، وأخرى غير مستقرة تشارك في الحركة: التقلص العضلي، الهجرة الجنينية، تنقّل العضيات والحويصلات، حركة الأغشية (إدخال/إطراح، أرجل كاذبة).</p>
+      <ul>
+        <li><b>الأنيبيبات الدقيقة (<span class="en">25nm</span>):</b> أنابيب مجوّفة من بلمرة <span class="en">α/β-Tubuline</span> في ثنائيات غير متجانسة تكوّن خيوطاً أولية <span class="en">Protofilament</span>، واتحاد <b>13</b> خيطاً حلزونياً يعطي الأنيبيب القطبي (− في طرف <span class="en">α</span> و+ في طرف <span class="en">β</span>). المحركات الجزيئية: <span class="en">Kinesin</span> نحو (+) و<span class="en">Dynein</span> (بوجود <span class="en">Dynactine</span>) نحو (−) بوجود <span class="en">ATP</span>، والبلمرة تصحبها فسفرة <span class="en">GDP←GTP</span>. <b>غير دائمة:</b> مغزل الانقسام، دوران السيتوبلازم، هجرة العضيات، محاور الخلايا العصبية. <b>دائمة:</b> الجسم المركزي والأهداب والسياط — <b>الجسيم المركزي</b>: مريكزان متعامدان قرب النواة في المرحلة البينية، كل مريكز <b>9 ثلاثيات</b> أنيبيبات (A داخلي مكتمل من 13 خيطاً وB وC غير مكتملين). <b>الهدب/السوط</b> امتداد للغشاء البلازمي بثلاث مناطق: <b>جسم قاعدي</b> (بتركيب المريكز)، <b>منطقة انتقالية</b> (9 ثلاثيات بلا ألياف شعاعية)، <b>محور</b> (9 ثنائيات محيطية + ثنائية مركزية = <span class="en">9+2</span>).</li>
+        <li><b>الخيوط الوسطية (نحو <span class="en">10nm</span>):</b> شبكة من مبلمرات بروتينات ليفية ثابتة صعبة التفكك؛ في السيتوزول تمتد من الغلاف النووي إلى الغشاء السيتوبلازمي، وفي البلازما النووية شبكة محيطية مثبتة بالجهة الداخلية للغلاف (<b>طبقة لامينا</b>) — دورها دعم الخلية وإرساء العضيات. <b>6 عائلات:</b> اللامينات (شبكة النواة المحيطية)، الفيمنتين (أنسجة ضامة — خيوط الشد)، الدسمين (أنسجة عضلية — خيوط الربط)، البروتينات الليفية الحمضية الدبقية <span class="en">GFAP</span> (خلايا نجمية وخلايا شوان)، السيتوكيراتين (طلائية + ملحقات بشرية: شعر، أظافر، جلد)، وبروتينات الخيوط العصبية.</li>
+        <li><b>الخيوط الدقيقة — الأكتين:</b> بلمرة <span class="en">Actin G</span> الكروي في سلسلتين ملتفتين (<b>5–8nm</b>) — أكثر بروتينات الخلية تواجداً. بروتينات مرافقة: <span class="en">Thymosine</span> يوقف البلمرة، <span class="en">Profilline</span> يحفّزها، <span class="en">Tropomyosine</span> تشكّل حزم الأكتين، <span class="en">Myosine I</span> إرساء الخيوط في الغشاء البلازمي. <b>والميوزين:</b> خيط من بلمرة نحو 200 جزيئة، كل جزيئة بقسمين: ميروميوزين خفيف (سلسلتان خفيفتان ملتفتان) وثقيل (رأس بتحت وحدتين — مواقع ارتباط بالأكتين بنشاط <span class="en">ATPasique</span> مستهلك للطاقة).</li>
+        <li><b>تنظيم الخيوط الدقيقة ودورها:</b> ① <b>القشرة الخلوية</b>: شبكة أكتين تحت الغشاء مثبتة بنقاط إرساء من ميوزين <span class="en">I</span> — حركات الامتداد والانقباض وتنقل الخلية، وتكوين الأرجل الكاذبة. ② <b>الحلقة التقلصية</b> <span class="en">Anneau contractile</span>: تنفصل بها الخليتان البنتان بالاختناق في الانقسام السيتوبلازمي الحيواني. ③ <b>الجهاز التقلصي العضلي</b>: وحدات <span class="term">ساركومير</span> <span class="en">Sarcomères</span> — تفاعل رؤوس الميوزين مع الأكتين بوجود <span class="en">Ca²⁺</span> و<span class="en">ATP</span> فينزلق الأكتين فوق الميوزين فيحدث التقلص.</li>
+      </ul>
+      <h4>🧪 الجسيمات الحالة (الليزوزومات) والأجسام الدقيقة</h4>
+      <ul>
+        <li><b>الليزوزومات:</b> أكياس غشائية مختلفة الأشكال (<b>0.2–0.5µm</b>)، غشاؤها مبطّن من الداخل ببروتينات سكرية فلا ينفذ محتواه الأنزيمي؛ توجد في معظم متعددات الخلايا الحيوانية (وتنعدم في بدائيات النواة والنبات)، وتكثر في الخلايا الدفاعية (بالعات، كريات بيضاء). <b>الأولية:</b> حويصلات تحوي أنزيمات الإماهة الحمضية <span class="en">Hydrolases acides</span> في وسط <span class="en">pH≈5</span> (بمضخة <span class="en">H⁺</span> مقابل 7.2 في السيتوزول): محلّلات البروتين <span class="en">Protease</span>، السكريات <span class="en">Glycosidase</span>، الدهون <span class="en">Lipase</span>، الأحماض النووية <span class="en">Nuclease</span>، الفوسفات <span class="en">Phosphatase</span>، الدهون الفوسفورية <span class="en">Phospholipase</span>، والمركبات الكبريتية <span class="en">Sulfatase</span> — تفرغ محتواها داخل الفجوات الهاضمة أو خارج الخلية. <b>الثانوية (الفجوة الهاضمة <span class="en">Phagosome</span>):</b> <b>مغاير</b> <span class="en">Hétérolysosome</span> (التأم أولي مع جسيم من خارج الخلية = هضم مغاير) و<b>ذاتي</b> <span class="en">Autolysosome</span> (مع جسيم من داخلها = هضم ذاتي).</li>
+        <li><b>الأجسام الدقيقة <span class="en">Microsomes</span>:</b> عضيات «وهمية» لا توجد في الخلية الحية — تتكوّن عند التفكيك بالطرد المركزي من انغلاق حويصلات الشبكة الأندوبلازمية: <b>محبَّبة</b> (بريبوزومات — من الخشنة) و<b>ملساء</b> (من الملساء أو الميتوكوندريا أو غولجي). استعملها العلماء لدراسة تركيب الشبكة ووظائفها، وتُستعمل في الطب لدراسة فعالية الأدوية الجديدة وتداخلاتها (نشاط تنفسي ضعيف يثبت نشاط الشبكة التنفسي).</li>
+      </ul>
+      <div class="gal" data-gal="cy3b">
+        <figure><img src="assets/bio/cyto/ch4b/img_01.jpg" alt="الشبكة وغولجي"><figcaption>🟣 السيتوبلازم: الشبكة الأندوبلازمية الخشنة وجهاز غولجي (<span class="en">Cis/Trans</span>) والحويصلات</figcaption></figure>
+        <figure><img src="assets/bio/cyto/ch4b/img_02.jpg" alt="عناصر الهيكل الخلوي"><figcaption>🕸️ عناصر الهيكل الخلوي: خيوط دقيقة ووسطية وأنيبيبات دقيقة تنقل العضيات</figcaption></figure>
+        <figure><img src="assets/bio/cyto/ch4b/img_03.jpg" alt="صورة فلورية للهيكل"><figcaption>🧪 صورة فلورية للهيكل الخلوي: بلازما نووية محاطة بسيتوزول ليفي مضيء</figcaption></figure>
+        <figure><img src="assets/bio/cyto/ch4b/img_04.jpg" alt="بلمرة التوبولين"><figcaption>🔩 بلمرة التوبولين: ثنائية <span class="en">α/β-Tubuline</span> ← خيط أولي ← أنيبيب دقيق من 13 خيطاً (قطبان <span class="en">+/−</span>)</figcaption></figure>
+        <figure><img src="assets/bio/cyto/ch4b/img_05.jpg" alt="المحركات الجزيئية"><figcaption>🚂 المحركات الجزيئية: <span class="en">Kinesin</span> نحو <span class="en">(+)</span> و<span class="en">Dynein/Dynactin</span> نحو <span class="en">(−)</span> على الأنيبيب</figcaption></figure>
+        <figure><img src="assets/bio/cyto/ch4b/img_06.jpg" alt="الجسيم المركزي مجهرياً"><figcaption>🔬 الجسيم المركزي بالمجهر الإلكتروني: مريكزان متعامدان من ثلاثيات الأنيبيبات</figcaption></figure>
+        <figure><img src="assets/bio/cyto/ch4b/img_07.jpg" alt="بنية المريكز"><figcaption>🧭 بنية المريكز: 9 ثلاثيات — الأنيبيب <span class="en">A</span> مكتمل (13 خيطاً) و<span class="en">B · C</span> غير مكتملين</figcaption></figure>
+        <figure><img src="assets/bio/cyto/ch4b/img_08.jpg" alt="بنية الهدب والسوط"><figcaption>🌊 بنية الهدب والسوط: محور (<span class="en">9+2</span>) ← منطقة انتقالية ← جسم قاعدي</figcaption></figure>
+        <figure><img src="assets/bio/cyto/ch4b/img_09.jpg" alt="بنية الخيط الوسطي"><figcaption>🧵 بنية الخيط الوسطي: مونومير ← ثنائية ← رباعية ← 8 خيوط أولية ملتفة</figcaption></figure>
+        <figure><img src="assets/bio/cyto/ch4b/img_10.jpg" alt="بلمرة الأكتين"><figcaption>🧵 بلمرة الأكتين: من <span class="en">Actine G</span> الكروي إلى خيط <span class="en">Actine F</span> المزدوج (<span class="en">5–8nm</span>)</figcaption></figure>
+        <figure><img src="assets/bio/cyto/ch4b/img_11.jpg" alt="بنية الميوزين"><figcaption>🛠️ بنية خيط الميوزين: رؤوس نشطة وسلاسل بيبتيدية ملتفة حلزونياً</figcaption></figure>
+        <figure><img src="assets/bio/cyto/ch4b/img_12.jpg" alt="حركة الخلية"><figcaption>🚶 حركة الخلية بالقشرة الخلوية: بلمرة أكتين ← امتداد ← التصاق ← انقباض</figcaption></figure>
+        <figure><img src="assets/bio/cyto/ch4b/img_13.jpg" alt="الاختناق الخلوي"><figcaption>🔬 الاختناق الخلوي بالحلقة التقلصية (مجهر إلكتروني ماسح)</figcaption></figure>
+        <figure><img src="assets/bio/cyto/ch4b/img_14.jpg" alt="الحلقة التقلصية"><figcaption>➰ الحلقة التقلصية تخنق الخلية الأم إلى خليتين بنتين</figcaption></figure>
+        <figure><img src="assets/bio/cyto/ch4b/img_15.jpg" alt="الساركومير"><figcaption>💪 الوحدة المتقلصة (ساركومير): انزلاق الأكتين على الميوزين بوجود <span class="en">ATP · Ca²⁺</span></figcaption></figure>
+        <figure><img src="assets/bio/cyto/ch4b/img_16.jpg" alt="ساركوميرات مجهرية"><figcaption>🔬 الساركوميرات بالمجهر الإلكتروني: أقراص <span class="en">Z</span> والحزم العضلية</figcaption></figure>
+        <figure><img src="assets/bio/cyto/ch4b/img_17.jpg" alt="الجسيم الحال الأولي"><figcaption>🧪 الجسيم الحال الأولي: أنزيمات الإماهة الحمضية ومضخة <span class="en">H⁺</span> (<span class="en">pH≈5</span> مقابل 7.2 في السيتوزول)</figcaption></figure>
+        <figure><img src="assets/bio/cyto/ch4b/img_18.jpg" alt="الجسيم الحال الثانوي"><figcaption>🔬 الجسيم الحال الثانوي (فجوة هاضمة) بالمجهر الإلكتروني</figcaption></figure>
+      </div>
+
+      <h4>🧱 الجزء الثالث: الجدار الخلوي والفجوات</h4>
+      <p class="def"><b>الجدار الخلوي السيليلوزي</b> من أهم الصفات المميزة للخلية النباتية: غلاف صلب يحيط بالغشاء البلازمي من الخارج (سمكه نحو <b>2–3µm</b>) — يعطي القوة والصلابة ويحفظ الخلية من المؤثرات الخارجية، ويساعد على النمو بمرونة الجدار الأولي، ويعطي شكلاً منتظماً للخلية.</p>
+      <ul>
+        <li><b>تطوّر بنية الجدار:</b> في المراحل الأخيرة من الانقسام الخيطي (نهاية الطور الانفصالي / بداية النهائي) تتجمع حويصلات من الشبكة الأندوبلازمية وأجسام غولجي وسط المغزل مكوّنةً ال<span class="en">Phragmoplast</span> وبداخله <span class="term">الصفيحة الخلوية</span>، التي تكبر بتجمّع بكتات الكالسيوم والمغنيزيوم لتصبح <b>الصفيحة الوسطى</b> <span class="en">Middle lamella</span> الفاصلة بين الخليتين البنتين، ثم ترسب المواد (سليلوز، أشباه سيليلوز، بكتين) على جانبيها مكوّنةً <b>الجدار الأولي</b>، ثم يتكوّن <b>الجدار الثانوي</b> من 3 طبقات الوسطى منها سميكة.</li>
+        <li><b>أولي مقابل ثانوي:</b> الأولي أغنى بأشباه السيليلوز والبكتين، أليافه أقصر مبعثرة وأكثر مرونة؛ الثانوي أغنى بالسيليلوز، أليافه أطول مرتبة في طبقات وأقل مرونة.</li>
+        <li><b>مكونات الجدار:</b> <b>السيليلوز</b> <span class="en">Cellulose</span> (الهيكل الأساسي: سلاسل طويلة من جزيئات الغلوكوز بروابط <span class="en">β-1,4</span>، نافذ للماء والمواد الذائبة) · <b>المواد البكتينية</b> (بكتين وحمض بكتيك في الجدار الأولي والصفيحة الوسطى على شكل بكتات <span class="en">Ca · Mg</span>) · <b>أشباه السيليلوز</b> <span class="en">Hemicellulose</span> (معقد كربوهيدراتي: سكريات خماسية كالزيلوز والأرابينوز وسداسية كالمانوز — في الجدار الأولي) · <b>اللجنين</b> <span class="en">Lignine</span> (معقد بوليفينولي في الصفيحة الوسطى والجدارين — مسؤول عن صلابة الأوعية الخشبية والخلايا السكلارنشيمية) · <b>السوبرين «الفلين»</b> <span class="en">Subérine</span> (شمع ثنائي الكربوكسيل غير نفوذ — جدر خلايا الفلين) · <b>الكيوتين</b> <span class="en">Cutine</span> (شمع أحادي الكربوكسيل — الجدار الخارجي للبشرة، غير نفوذ) · <b>السليكا</b> <span class="en">Silica</span> (معدنية تترسب في بشرة الحشائش فتجعل حواف الأوراق حادة مسننة، وفي جدر الدياتوم).</li>
+        <li><b>الفجوات <span class="en">Vacuoles</span>:</b> تجاويف سيتوبلازمية مملوءة بالعصير الخلوي يحيط بها غشاء داخلي <span class="en">Tonoplaste</span> — تجمع نواتج الأيض (سكريات، أملاح، أحماض عضوية) لاستخدامها عند الحاجة، وتلعب دوراً في الإفراز والإخراج والتخلص من الفضلات، وتحافظ على <span class="term">ضغط الامتلاء</span>، وتجمع الماء الزائد. <b>تطورها في الأعضاء:</b> في الخلايا المرستمية كريات صغيرة مع نواة مركزية كبيرة، ومع التمايز تكبر وتلتحم لتنتهي فجوةً عصارية عملاقة واحدة. <b>وفي البذور:</b> مع انخفاض الماء عند النضج تتحول العصارة إلى مواد صلبة بروتينية هي <span class="term">حبيبات الأليرون</span>، وقد تكون دهنية أو نشوية.</li>
+      </ul>
+      <div class="gal" data-gal="cy3c">
+        <figure><img src="assets/bio/cyto/ch4c/img_01.jpg" alt="طبقات الجدار"><figcaption>🧱 طبقات الجدار الخلوي: غشاء بلازمي ← جدار ثانوي ← أولي ← صفيحة وسطى</figcaption></figure>
+        <figure><img src="assets/bio/cyto/ch4c/img_02.jpg" alt="مراحل تكون الجدار"><figcaption>🔄 مراحل تكوّن الجدار: ألياف السيليلوز من المبعثرة إلى المرتبة في طبقات</figcaption></figure>
+        <figure><img src="assets/bio/cyto/ch4c/img_03.jpg" alt="الجدار مجهرياً"><figcaption>🔬 جدار الخلية النباتية بالمجهر الإلكتروني: صفيحة وسطى وطبقات ثانوية <span class="en">S1·S2·S3</span></figcaption></figure>
+        <figure><img src="assets/bio/cyto/ch4c/img_04.jpg" alt="تطور الفجوات"><figcaption>💧 تطور الفجوات: <span class="en">A</span> في الأعضاء (حتى فجوة عصارية عملاقة) · <span class="en">B</span> في البذور (حبيبات تخزينية)</figcaption></figure>
+      </div>
+    </div>
+  </div>
+
+  <!-- ▓▓ الفصل 5: الدورة الخلوية والانقسام ▓▓ -->
+  <div class="acc-item" id="cy4">
+    <button class="acc-btn" onclick="togBio(this)"><span class="acc-num">5</span> الفصل الخامس: <b>الدورة الخلوية والانقسام الخلوي</b> <span class="acc-arrow">▼</span></button>
+    <div class="acc-body">
+      <h4>♻️ الدورة الخلوية</h4>
+      <p class="def"><b>دورة حياة الخلية:</b> سلسلة التغيرات التي تحدثها الخلية ابتداءً من تشكّلها من الخلية الأم وحتى انتهاء الانقسامات وإنتاج خلايا جديدة — تنقسم إلى <b>مرحلة بينية</b> و<b>مرحلة انقسام</b>.</p>
+      <div class="table-wrap"><table class="cmp">
+        <tr><th>الطور</th><th>أهم الأحداث</th></tr>
+        <tr><td><b>المرحلة البينية</b> (نحو 90% من الزمن) — <span class="en">G1</span></td><td>تصنيع البروتين، زيادة كمية السيتوبلازم وعدد العضيات بسرعة؛ الكروموسومات على شكل كروماتين</td></tr>
+        <tr><td>طور البناء — <span class="en">S</span></td><td>يتضاعف ال<span class="en">DNA</span>؛ كل كروموسوم يصبح كروماتيدين متطابقين ملتصقين بمنطقة السنترومير</td></tr>
+        <tr><td>طور النمو الثاني — <span class="en">G2</span></td><td>نمو سريع تحضيراً للانقسام</td></tr>
+        <tr><td>طور الانقسام الخيطي — <span class="en">M</span></td><td>تقصر الكروموسومات وتظهر في المنطقة الاستوائية ثم ينشطر كلٌّ منها نحو قطبي الخلية</td></tr>
+      </table></div>
+      <h4>➗ الانقسام اللاميتوزي المباشر <span class="en">Amitosis</span></h4>
+      <p class="def">أدنى أنواع انقسام الخلية («الانقسام الثنائي البسيط») — يشيع بين الكائنات الدقيقة ووحيدات الخلية أثناء التكاثر اللاجنسي: عند بلوغ الخلية حداً من النمو تستطيل النوية وتنشطر، ثم تستطيل النواة وتنشطر، ثم يتخصّر السيتوبلازم فالجدار، فيحيط بكل نواة جديدة جزء من سيتوبلازم الأم وتتكوّن خليتان — كما في البكتيريا والكائنات الأولية (الأوجلينا).</p>
+      <h4>🧬 الانقسام الميتوزي <span class="en">Mitosis</span></h4>
+      <p class="def">يحدث في الخلايا الجسدية: كل خلية تنقسم لتعطي خليتين بكل منهما <b><span class="en">2n</span></b> من الصبغيات بنفس العدد والشكل الموجودين في الخلية الأم — أهميته: <b>النمو، تعويض التالف من الأنسجة، التكاثر اللاجنسي في الأوليات</b> — ولا يحدث في الخلايا العصبية ولا في كريات الدم الحمراء.</p>
+      <ul>
+        <li><b>1) الطور التمهيدي <span class="en">Prophase</span>:</b> تزداد سماكة الكروموسومات ويقلّ طولها وتتميز إلى كروماتيدات؛ يتحرك كل زوج سنتريولات نحو أحد القطبين مكوّناً خيوط المغزل؛ اختفاء النوية والغشاء النووي.</li>
+        <li><b>2) الطور الاستوائي <span class="en">Metaphase</span>:</b> تنتظم الكروموسومات في صف واحد بمنتصف الخلية، ويرتبط كل كروموسوم بخيوط المغزل عبر السنترومير.</li>
+        <li><b>3) الطور الانفصالي <span class="en">Anaphase</span>:</b> انقسام سنترومير كل كروموسوم بتقلّص خيوط المغزل، وتباعد كل كروماتيد عن قرينه نحو أحد القطبين (بمجرد انفصالهما يسمّى كلٌّ منهما كروموسوماً).</li>
+        <li><b>4) الطور النهائي <span class="en">Telophase</span>:</b> اختفاء خيوط المغزل وتضاعف السنتريولات؛ تكوّن غلاف نووي جديد؛ استطالة الكروموسومات متحوّلةً إلى شبكة كروماتينية.</li>
+        <li><b>5) الانقسام السيتوبلازمي <span class="en">Cytokinesis</span>:</b> يتخصّر السيتوبلازم في منتصف الخلية مكوّناً خليتين متشابهتين (قد يبدأ قبل نهاية الخيطي)؛ أما <b>الخلية النباتية</b> فتتكوّن فيها الصفيحة الوسطى ثم الجدار الخلوي دون تخصّر.</li>
+      </ul>
+      <h4>🧬 الانقسام المنصّف <span class="en">Meiosis</span></h4>
+      <p class="def">يختزل عدد الصبغيات إلى النصف ويحدث في الخلايا الجنسية، فتتشكل الأمشاج بالنمط النووي الفردي <b><span class="en">1n</span></b> — يتألف من انقسامين:</p>
+      <ul>
+        <li><b>المنصّف الأول <span class="en">Meiosis I</span>:</b> انقسام ميتوزي بنفس المراحل، يختلف عنه فقط في الطور الانفصالي حيث <b>لا يحدث انشطار</b> للصبغي الواحد إلى صبغيين.</li>
+        <li><b>المنصّف الثاني <span class="en">Meiosis II</span>:</b> يجري مماثلاً للانقسام الميتوزي العادي بأطواره الأربعة — وبهذا ينتج عن الانقسامين معاً <b>أربع خلايا</b> تحمل كلٌّ منها نصف عدد الصبغيات ونصف المادة الوراثية للخلية الأم <b><span class="en">1n</span></b>.</li>
+      </ul>
+      <div class="gal" data-gal="cy4">
+        <figure><img src="assets/bio/cyto/ch5/img_01.jpg" alt="دورة حياة الخلية"><figcaption>♻️ دورة حياة الخلية: مرحلة بينية (<span class="en">G1·S·G2</span>) ثم طور الانقسام <span class="en">M</span></figcaption></figure>
+        <figure><img src="assets/bio/cyto/ch5/img_02.jpg" alt="الانقسام المباشر"><figcaption>➗ الانقسام اللاميتوزي المباشر: انشطار ثنائي في البكتيريا وطولي في الأوجلينا</figcaption></figure>
+        <figure><img src="assets/bio/cyto/ch5/img_03.jpg" alt="مراحل الميتوزي"><figcaption>🧬 مراحل الانقسام الميتوزي: تمهيدي ← استوائي ← انفصالي ← نهائي + انقسام سيتوبلازمي</figcaption></figure>
+        <figure><img src="assets/bio/cyto/ch5/img_04.jpg" alt="المنصف الثاني"><figcaption>🧬 أطوار الانقسام المنصف الثاني <span class="en">Meiosis II</span>: نحو أربع خلايا أحادية الصيغة (<span class="en">1n</span>)</figcaption></figure>
+      </div>
+    </div>
+  </div>
+
+  </div><!-- /acc-list unitCytologie -->
+</section>
+
+<!-- ═══════════ الوحدة 2: علم النبات ═══════════ -->
+<section class="unit" id="unitBotanique">
+  <div class="unit-head">
+    <span class="unit-ico">🌿</span>
+    <div>
+      <h2>الوحدة الثانية: علم النبات <span class="en">Botanique</span></h2>
+      <p>من النباتات البدائية إلى التشريح الدقيق للأعضاء — 5 فصول مترابطة</p>
+    </div>
+    <span class="unit-tag tag-on">✅ متوفرة الآن</span>
+  </div>
+
+  <div class="acc-list">
+
+  <!-- ▓▓ الفصل 1 (مجاني) ▓▓ -->
+  <div class="acc-item" id="ch0">
+    <button class="acc-btn" onclick="togBio(this)"><span class="acc-num">1</span> الفصل الأوّل: تشكّل وتكوين الأنسجة عند <b>النباتات البدائية</b> <span class="acc-arrow">▼</span></button>
+    <div class="acc-body">
+      <h4>🏷️ أولاً: التسمية العلمية الثنائية <span class="en">Nomenclature binominale</span></h4>
+      <p class="def">لتنوّع الأصناف النباتية الهائل (أزيد من <b>450</b> ألف صنف)، رتّبها العلماء وفق نظام متناسق يكون فيه <span class="term">النوع</span> الوحدة الأساسية للتصنيف، وهو علم قائم بذاته يُسمّى <span class="term">علم التصنيف النباتي</span> <span class="en">Plant systematic</span>.</p>
+      <ul class="pts">
+        <li>العالم <span class="term">Carl Von Linné</span> أوّل من صمّم نظام التسمية الثنائية في كتابه «الأصناف النباتية».</li>
+        <li>الاسم العلمي = كلمتان: <b>اسم الجنس</b> (يُكتب أوّلاً بحرف كبير) ثم <b>اسم النوع</b> (بأحرف صغيرة).</li>
+        <li>يُكتب الاثنان <b>باللاتينية مائلة</b>، أو غير مائلة مع تسطيرها — مثال: <span class="en">Chlamydomonas nivalis</span>.</li>
+      </ul>
+
+      <h4>🌊 ثانياً: النباتات اللازهرية — الثالوسيات <span class="en">Thallophytes</span></h4>
+      <p class="def">نباتات بدائية جسمها الإعاشي عبارة عن <span class="term">ثالوس</span> <span class="en">Thallus</span> ببنية مفلطحة أو خيطية؛ <b>لا جذور ولا سيقان ولا أوراق ولا أزهار</b>، وقد تكون مجهرية وحيدة الخلية أو عملاقة نسبياً. تنقسم لثلاث مجموعات:</p>
+      <ul class="pts">
+        <li><b>الطحالب</b> <span class="en">Phycophytes</span>: منتشرة في البيئات المائية العذبة والمالحة وحتى اليابسة الرطبة؛ أشكالها خيوط أو أشرطة، ومنها <b>الكلبس العملاق</b> <span class="en">Laminaria stenophylla</span> الذي يتجاوز طوله <b>100 متر</b> 🌊، وطحالب <span class="en">Diatomes</span> وحيدة الخلية العائمة.</li>
+        <li><b>الفطريات</b> <span class="en">Mycophyta</span>: خلاياها <b>تفتقر للكلوروفيل</b> ← غير ذاتية التغذية. تنمو بكتلة متشابكة من الخيوط المتفرعة: كل خيط = <span class="term">خيط فطري</span> <span class="en">Hypha</span> ومجموعها = <span class="term">الغزل الفطري</span> <span class="en">Mycelium</span>. خيوطها نوعان: <b>مدمجة</b> <span class="en">Coenocytic</span> (سيتوبلازم متصل بأنوية عديدة بلا جدر) و<b>مقسّمة</b> <span class="en">Septate</span> (بجدر عرضية).</li>
+        <li><b>الأشنات</b> <span class="en">Lichenophytes</span>: نتاج <b>علاقة تكافلية</b> بين فطر وطحلب (أو بكتيريا خضراء مزرقة): الطحلب يصنع الغذاء بالتركيب الضوئي، والفطر يحميه ويمتص الماء والأملاح المعدنية — تركيبها <span class="term">الأشن</span> قد يبلغ <b>2 متر</b>، ومثالها <span class="en">Xanthoria parietina</span>.</li>
+      </ul>
+
+      <h4>🌱 ثالثاً: الحزازيات <span class="en">Bryophytes</span></h4>
+      <p class="def">نباتات <b>بلا أوعية ناقلة</b>؛ جسمها الإعاشي بسيقان غير مكتملة ووريقات بسيطة، تعيش في الأوساط الرطبة جداً، <b>لها أشباه جذور</b> لا جذور حقيقية، ولا يتجاوز طولها غالباً <b>20 سم</b>. تطورياً هي <span class="term">حلقة الوصل</span> بين الطحالب الثالوسية والنباتات الوعائية المتطورة.</p>
+      <ul class="pts">
+        <li><b>كبدية</b> <span class="en">Hepatic</span>: جسم ثالوسي منبطح على سطح التربة — مثل <span class="en">Fossombronia pusilla L.</span></li>
+        <li><b>قائمة</b> <span class="en">Mousses</span>: جسم بساق ووريقات مرتفعة قليلاً — مثل <span class="en">Polytrichum formosum L.</span></li>
+      </ul>
+
+      <div class="note">🧠 <b>خلاصة الفصل:</b> النباتات البدائية (لازهرية) تنقسم إلى <b>ثالوسيات</b> (طحالب + فطريات + أشنات) وحزازيات؛ قاعدة التسمية العلمية = جنس + نوع باللاتينية وفق نظام لينيوس.</div>
+
+      <table class="cmp">
+        <tr><th>المجموعة</th><th>بيئتها</th><th>ملامح أساسية</th><th>أمثلة</th></tr>
+        <tr><td><b>الطحالب</b></td><td>مائية/رطبة</td><td>كلوروفيل، ثالوس خيطي أو عملاق</td><td>Laminaria · Diatomes</td></tr>
+        <tr><td><b>الفطريات</b></td><td>على الأوساط العضوية</td><td>بلا كلوروفيل، خيوب وغزل فطري</td><td>خيوط مدمجة ومقسّمة</td></tr>
+        <tr><td><b>الأشنات</b></td><td>الأشجار والصخور</td><td>تكافل فطر + طحلب</td><td>Xanthoria parietina</td></tr>
+        <tr><td><b>الحزازيات</b></td><td>رطبة جداً</td><td>بلا أوعية ناقلة، ≤20سم</td><td>Fossombronia · Polytrichum</td></tr>
+      </table>
+
+      <div class="gal" data-gal="ch0">
+        <figure><img src="assets/bio/botany/ch1/img_01.jpg" alt="كلبس عملاق"><figcaption>🌊 غابة الكلبس العملاق تحت الماء (<span class="en">Laminaria</span>) — يتجاوز 100م</figcaption></figure>
+        <figure><img src="assets/bio/botany/ch1/img_02.jpg" alt="الخيوط الفطرية"><figcaption>🍄 نمطا الخيوط الفطرية: مدمّجة <span class="en">Coenocytic</span> ومقسّمة <span class="en">Septate</span></figcaption></figure>
+        <figure><img src="assets/bio/botany/ch1/img_03.jpg" alt="أشن"><figcaption>🌫️ الأشن <span class="en">Xanthoria parietina</span> على غصن — قمة التكافل بين فطر وطحلب</figcaption></figure>
+        <figure><img src="assets/bio/botany/ch1/img_04.jpg" alt="حزازية كبدية"><figcaption>🌱 حزازية كبدية <span class="en">Hepatic</span> — جسم منبطح على التربة الرطبة</figcaption></figure>
+        <figure><img src="assets/bio/botany/ch1/img_05.jpg" alt="حزازية قائمة"><figcaption>🌱 حزازية قائمة <span class="en">Mousses</span> — سيقان ووريقات («الحزاز الحقيقي»)</figcaption></figure>
+      </div>    </div>
+  </div>
+
+  <!-- ▓▓ الفصل 2 (مجاني) ▓▓ -->
+  <div class="acc-item" id="ch1">
+    <button class="acc-btn" onclick="togBio(this)"><span class="acc-num">2</span> الفصل الثاني: تشكّل وتكوين الأنسجة عند <b>النباتات المتطورة</b> <span class="acc-arrow">▼</span></button>
+    <div class="acc-body">
+      <h4>🌸 أولاً: النباتات الزهرية <span class="en">Phanerogames</span></h4>
+      <p class="def">تتمثّل النباتات المتطورة أساساً في الزهرية، وهي التي توجد أعضاؤها التكاثرية <b>داخل أزهار</b>، وتنقسم إلى شعبتين:</p>
+      <ul class="pts">
+        <li><b>معرّاة البذور</b> <span class="en">Gymnospermes</span>: أزهار بسيطة <b>مخروطية</b> الشكل بكرابل منبسطة ← البويضات <b>معرّضة</b> للوسط الخارجي — كما عند الصنوبريات 🌲.</li>
+        <li><b>مغطّاة (مغلّفات) البذور</b> <span class="en">Angiospermes</span>: بويضات <b>مغلّفة داخل المبيض</b>؛ تضمّ كل النباتات ذات الأزهار الحقيقية، وتنقسم حسب عدد فلقات الأجنّة إلى: <span class="term">ثنائيات الفلقة</span> <span class="en">Dicotyledones</span> و<span class="term">أحاديات الفلقة</span> <span class="en">Monocotyledones</span>.</li>
+      </ul>
+
+      <h4>🔄 ثانياً: دورة حياة النبات الراقي</h4>
+      <p class="def">تعاقب أحداث وظواهر خلال مرحلة زمنية: من <b>انتاش البذور</b> ← نمو الجهاز الخضري ← تشكّل الأزهار ← تكوين الثمار ← انتشار البذور... وهكذا، وتنقسم إلى جيلين:</p>
+      <ul class="pts">
+        <li><b>الجيل المشيجي</b> <span class="en">Gametophyte</span>: مرحلة إنتاج الأمشاج (الذكرية داخل حبات الطلع، والأنثوية داخل الكيس الجنيني) — خلايا أحادية الصيغة <span class="en">(n)</span>.</li>
+        <li><b>الجيل البوغي</b> <span class="en">Sporophyte</span>: النبات نفسه ثنائي الصيغة <span class="en">(2n)</span> — وهو <b>الجيل السائد</b> عند الزهرية، إذ تهيمن البوغية وتتقلّص المشيجية لمرحلة قصيرة من الدورة.</li>
+      </ul>
+      <p class="def">خلية أم الكيس الجنيني تنقسم اختزالياً لتعطي 4 خلايا <span class="en">n</span>، تنحلّ 3 منها وتختفي، وتبقى واحدة هي <span class="term">الخلية الجرثومية الكبرى</span> التي تنقسم استوائياً لتكوّن <b>الكيس الجنيني</b> بأنويته (البيضية، المساعدتان، النواتان القطبيتان، المضادّات).</p>
+
+      <h4>💞 ثالثاً: الإلقاح والإخصاب المضاعف</h4>
+      <ul class="pts">
+        <li><b>الإلقاح</b>: انتقال حبوب الطلع من المِئبَر إلى المَيسَم؛ إن كان داخل نفس الزهرة فهو <span class="term">ذاتي</span> <span class="en">Autogame</span>، وإن بين زهرتين مختلفتين فهو <b>خلطي</b> (بالريح أو الحشرات أو الماء).</li>
+        <li>حبة الطلع تنبت <b>أنبوب اللقاح</b> الذي يخترق الميسم والقلم حاملاً نواتين منويتين <span class="en">(n)</span>.</li>
+        <li><b>الإخصاب المضاعف</b> — يحدث عند <b>مغلّفات البذور فقط</b>: مشيج ذكري يخصّب البيضية ← <span class="term">الزيجوت</span> <span class="en">(2n)</span> (الجنين المستقبلي)، ومشيج ذكري ثانٍ يتحد مع النواتين القطبيتين ← نواة ثلاثية الصيغة <span class="en">(3n)</span> تكوّن <span class="term">التحالُب</span> (نسيج التغذية الجنيني).</li>
+      </ul>
+
+      <div class="note">🧠 <b>العلاقة الذهبية:</b> مغلّفات البذور = إخصاب مضاعف (زيجوت 2n + تحالب 3n) مع سيادة الجيل البوغي؛ معرّاة البذور = بلا مبيض مغلّف، أزهار مخروطية، مثالها الصنوبريات.</div>
+
+      <div class="gal" data-gal="ch1">
+        <figure><img src="assets/bio/botany/ch2/img_01.jpg" alt="دورة حياة النبات الزهري"><figcaption>🔄 دورة حياة النبات الزهري: تعاقب الجيل البوغي <span class="en">(2n)</span> والمشيجي <span class="en">(n)</span></figcaption></figure>
+        <figure><img src="assets/bio/botany/ch2/img_02.jpg" alt="تكوين الكيس الجنيني"><figcaption>🌼 تكوين الكيس الجنيني من الخلية الجرثومية الكبرى (خلية أم ← 4 بويضات ← كيس بأنويته)</figcaption></figure>
+        <figure><img src="assets/bio/botany/ch2/img_03.jpg" alt="تكوين حبة اللقاح"><figcaption>🌾 تكوين حبة اللقاح: خلية أم ← رباعية <span class="en">n</span> ← حبة لقاح ناضجة بنواة توليدية</figcaption></figure>
+        <figure><img src="assets/bio/botany/ch2/img_04.jpg" alt="الإخصاب المضاعف"><figcaption>💞 الإخصاب المضاعف: زيجوت <span class="en">(2n)</span> + تحالب <span class="en">(3n)</span> — خاصية مغلّفات البذور</figcaption></figure>
+        <figure><img src="assets/bio/botany/ch2/img_05.jpg" alt="أنبوب اللقاح"><figcaption>🧪 حبة لقاح ثنائية النواة وأنبوبها — النواة التوليدية + النواتان المنويتان</figcaption></figure>
+      </div>    </div>
+  </div>
+
+  <!-- ▓▓ الفصل 3 (مقفل) ▓▓ -->
+  <div class="acc-item" id="ch2">
+    <button class="acc-btn" onclick="togBio(this)"><span class="acc-num">3</span> الفصل الثالث: <b>الأنسجة النباتية</b> — الإنشائية والدائمة <span class="acc-arrow">▼</span></button>
+    <div class="acc-body">
+      <h4>🧬 أولاً: الأنسجة الإنشائية (الميريستيمات)</h4>
+      <p class="def">أنسجة إبتدائية خلاياها <b>صغيرة متماسكة</b>، بلا فجوات عصارية، نواتها كبيرة نسبياً، وتتميز بـ<span class="term">قدرة عالية على الانقسام المتتالي</span> — هي مولّد باقي الأنسجة في النبات.</p>
+      <ul class="pts">
+        <li><b>مواقعها:</b> القمة النامية للجذر (محمية بالقلنسوة الجذرية) والقمة النامية للساق (تحيط بها براعم الأوراق) ← <span class="term">ميريستيمات قمّية</span> مسؤولة عن <b>النمو الطولي</b>.</li>
+        <li><b>الميريستيمات الجانبية</b> (كالكامبيوم) ← <b>النمو الثانوي</b> (التغلظ).</li>
+      </ul>
+
+      <h4>🛡️ ثانياً: أنسجة الحماية (الهوائية)</h4>
+      <ul class="pts">
+        <li><b>البشرة</b> <span class="en">Épiderme</span>: الطبقة السطحية في الأوراق والأعضاء النضرة؛ خلاياها حية رقيقة الجدران، وتحمل فتحات <span class="term">الثغور</span> للتبادل الغازي، وبعض خلاياها كبيرة منتفخة الآفاق.</li>
+        <li><b>القشرة الفلينية</b> <span class="en">Périderme</span>: طبقات خلايا الفلين الميتة المقاومة للتسربات — تتجدد من <span class="term">كامبيوم فليني</span> وتحمي السيقان المتغلظة.</li>
+      </ul>
+
+      <h4>🫧 ثالثاً: الأنسجة القاعدية (البارنشيم)</h4>
+      <p class="def">خلايا حية كبيرة متعددة الأوجه بجدر رقيقة وفجوات عصارية واسعة ومسافات بينية؛ تؤدي وظائف <b>التركيب الضوئي</b> (الحشوي)، التخزين، والتهوية، وتملأ الفراغات بين الأنسجة المتخصصة.</p>
+
+      <h4>💪 رابعاً: أنسجة الدعم والأنسجة الناقلة</h4>
+      <ul class="pts">
+        <li><b>الكولانشيم</b> <span class="en">Collenchyme</span>: خلايا حية جدرها سميكة غير متخشبة تدعم الأعضاء النامية دون تخشينها — ثلاثة أنماط مجهرية: <span class="term">زاوي</span>، <span class="term">مماسي</span>، <span class="term">حلقي</span>.</li>
+        <li><b>السكلانشيم</b> <span class="en">Sclérenchyme</span>: خلايا ميتة بجدر متخشبة (لجنين) شديدة الصلابة — ألياف وخلايا حجرية.</li>
+        <li><b>الخشب</b> <span class="en">Xylème</span>: أوعية خشبية ميتة منقطة/حلزونية/حلقية/شبكية ← ترفع <b>النسغ الناقص</b> (الماء والأملاح) من الجذر إلى الأعضاء الهوائية.</li>
+        <li><b>اللحاء</b> <span class="en">Phloème</span>: أنابيب غربالية حية (بلا نوى، بمساعدة خلايا مرافقة) ← تنقل <b>النسغ الكامل</b> (المواد العضوية المصنّعة) من الأوراق لبقية الأعضاء.</li>
+      </ul>
+      <div class="note">📦 <b>للتذكير:</b> كثير من خلايا البارنشيم تختص بـ<b>التخزين</b> (نشا، دهون، بروتينات) أو تتحول لجيوب إفرازية خاصة.</div>
+
+      <div class="gal" data-gal="ch2">
+        <figure><img src="assets/bio/botany/ch3/img_01.jpg" alt="القمم النامية"><figcaption>🧬 القمّتان الناميتان: ميريستيم الساق (أعلى) والجذر مع القلنسوة (أسفل)</figcaption></figure>
+        <figure><img src="assets/bio/botany/ch3/img_02.jpg" alt="ميريستيمات وبارنشيم"><figcaption>🔬 خلايا إنشائية نامية وبارنشيم حية — تصغير مجهري بالأصباغ</figcaption></figure>
+        <figure><img src="assets/bio/botany/ch3/img_03.jpg" alt="أنواع الكولانشيم"><figcaption>💪 أنواع الكولانشيم الثلاثة: <b>زاوي</b> و<b>مماسي</b> و<b>حلقي</b></figcaption></figure>
+        <figure><img src="assets/bio/botany/ch3/img_04.jpg" alt="أنواع الخشب"><figcaption>🪵 مقطع طولي للخشب: حلزوني وحلقي وشبكي ونقطي (نضج متدرج)</figcaption></figure>
+        <figure><img src="assets/bio/botany/ch3/img_05.jpg" alt="اللحاء"><figcaption>🌿 اللحاء: أنبوب غربالي + خلية مرافقة والوصلات البلازمية <span class="en">Plasmodesms</span></figcaption></figure>
+        <figure><img src="assets/bio/botany/ch3/img_06.jpg" alt="خشب وجيب إفرازي"><figcaption>🪵 مقاطع خشبية (طولي وعرضي) وبنية الجيوب الإفرازية داخلها</figcaption></figure>
+        <figure><img src="assets/bio/botany/ch3/img_07.jpg" alt="القشرة الفلينية"><figcaption>🛡️ القشرة الفلينية: فلين ميت + كامبيوم فليني + قشرة ثانوية</figcaption></figure>
+        <figure><img src="assets/bio/botany/ch3/img_08.jpg" alt="أنسجة تخزين"><figcaption>📦 خلايا بارنشيم مخزنة (أصباغ ونشا) داخل الخشب واللحاء الثانويين</figcaption></figure>
+      </div>    </div>
+  </div>
+
+  <!-- ▓▓ الفصل 4 (مقفل) ▓▓ -->
+  <div class="acc-item" id="ch3">
+    <button class="acc-btn" onclick="togBio(this)"><span class="acc-num">4</span> الفصل الرابع: <b>بيولوجيا النبات</b> — التشريح الابتدائي والثانوي للأعضاء <span class="acc-arrow">▼</span></button>
+    <div class="acc-body">
+      <h4>🥕 أولاً: التركيب التشريحي الابتدائي للجذور</h4>
+      <p class="def">في المقطع العرضي للجذر ثنائي الفلقة، من الخارج إلى الداخل:</p>
+      <ul class="pts">
+        <li><b>البشرة</b> (طبقة امتصاصية تحمل الأوبار)، ثم <b>القشرة</b> بطبقاتها الخارجية والوسطى (بارنشيم) والداخلية،</li>
+        <li><b>محيط الدار</b> <span class="en">Péricycle</span> (طبقة تولّد الجذور الجانبية والكامبيوم لاحقاً)،</li>
+        <li><b>الحزم الإشعاعية</b>: خشب ابتدائي ولحاء ابتدائي <b>متناوبان</b> مع <b>نخاع</b> مركزي.</li>
+      </ul>
+
+      <h4>🎋 ثانياً: التركيب التشريحي الابتدائي للسيقان</h4>
+      <ul class="pts">
+        <li><b>ثنائيات الفلقة:</b> حزم وعائية (خشب + لحاء) <span class="term">مفتوحة</span> مرتبة في حلقة حول <b>نخاع</b> مركزي واسع، موصولاً عبر <b>أشعة نخاعية</b>.</li>
+        <li><b>أحاديات الفلقة:</b> حزم <span class="term">مغلقة</span> (بلا كامبيوم) منتشرة في أرجاء المقطع بلا نخاع مميز.</li>
+      </ul>
+
+      <h4>🍃 ثالثاً: التركيب التشريحي الابتدائي للأوراق</h4>
+      <ul class="pts">
+        <li><b>بشرة علوية</b> مغطاة بطبقة عازلة (كيوتيكل)؛ <b>بشرة سفلية</b> تحمل أغلب <b>الثغور</b>.</li>
+        <li><b>النسيج الوسطي</b> <span class="en">Mésophylle</span>: <b>عمادي</b> (خلايا أسطوانية مستطيلة عمودية على البشرة، غنية بالصانعات الخضراء ← وظيفتها <span class="term">البناء الضوئي</span>) و<b>إسفنجي</b> (خلايا دائرية بمسافات بينية واسعة للتبادل الغازي).</li>
+        <li>عروق مركزية تحمل حزم الخشب واللحاء <b>المغلقة</b>.</li>
+      </ul>
+
+      <h4>📈 رابعاً: البنية الثانوية (النمو الثانوي / التغلظ)</h4>
+      <p class="def">يحدث <b>عند ثنائيات الفلقة فقط</b>: الكامبيوم الحزمي + الكامبيوم البيني يتحدان في حلقة نشطة تنقسم:</p>
+      <ul class="pts">
+        <li>إلى الداخل ← <b>خشب ثانوي</b> يتراكم سنوياً مكوّناً <span class="term">الحلقات السنوية</span>، ويدفع الخشب الابتدائي الضيق نحو المركز.</li>
+        <li>إلى الخارج ← <b>لحاء ثانوي</b>، بينما تنشأ القشرة الفلينية (فلين + كامبيوم فليني) خارجياً لحماية الساق المتغلظة.</li>
+        <li><b>الجذور أيضاً</b> تتغلظ: كامبيوم ينشأ من تحوّل خلايا محيط الدار وما بين الحزم، فيتكوّن خشب ولحاء ثانويان قبل أن تهيمن بنية الفلين الخارجية.</li>
+      </ul>
+      <div class="note">🧠 <b>خلاصة:</b> الابتدائي = بشرة + قشرة/نخاع + حزم ابتدائية · الثانوي = كامبيوم ينتج خشباً ولحاءً ثانويين (حلقات سنوية) + قشر فليني خارجي — امتياز ثنائيات الفلقة.</div>
+
+      <div class="gal" data-gal="ch3">
+        <figure><img src="assets/bio/botany/ch4/img_01.jpg" alt="جذر ثنائية الفلقة 1"><figcaption>🥕 قطاع جذر ثنائي الفلقة — رسم تخطيطي بالأسماء (خشب+لحاء+نخاع)</figcaption></figure>
+        <figure><img src="assets/bio/botany/ch4/img_02.jpg" alt="جذر ثنائية الفلقة 2"><figcaption>🥕 تفاصيل محيط الدار والحزم الإشعاعية المتناوبة (رسم)</figcaption></figure>
+        <figure><img src="assets/bio/botany/ch4/img_03.jpg" alt="جذر بلا نخاع"><figcaption>🥕 قطاع جذري متطوّر بلا نخاع مركزي (خشب متصل)</figcaption></figure>
+        <figure><img src="assets/bio/botany/ch4/img_04.jpg" alt="حزم الجذر أحادية"><figcaption>🌾 جذر أحادي الفلقة: حزم وعائية عديدة (خشب حلقي وغير حلقي)</figcaption></figure>
+        <figure><img src="assets/bio/botany/ch4/img_05.jpg" alt="مقطع مجهري جذر"><figcaption>🔬 صور مجهرية لمقطع عرضي حقيقي في جذر (قشرة واستيل مركزي)</figcaption></figure>
+        <figure><img src="assets/bio/botany/ch4/img_06.jpg" alt="ساق: نخاع وحزم مفتوحة"><figcaption>🎋 مقطع ساق: كولانشيم زاوي، نخاع وحزم وعائية <b>مفتوحة</b></figcaption></figure>
+        <figure><img src="assets/bio/botany/ch4/img_07.jpg" alt="مقطع ساق مجهري"><figcaption>🔬 مقطع مجهري لساق: بشرة وسكلانشيم وحزم خشب/لحاء مغلقة</figcaption></figure>
+        <figure><img src="assets/bio/botany/ch4/img_08.jpg" alt="ورقة: بشرة وثغور"><figcaption>🍃 رسم قطاع الورقة: بشرة علوية وسفلية، ثغور، حزمة وعائية مغلقة</figcaption></figure>
+        <figure><img src="assets/bio/botany/ch4/img_09.jpg" alt="ورقة مجهرية"><figcaption>🔬 الورقة مجهرياً: نسيج عمادي وإسفنجي وثغور سفلية</figcaption></figure>
+        <figure><img src="assets/bio/botany/ch4/img_10.jpg" alt="تغلظ الساق مبكر"><figcaption>📈 بداية التغلظ الثانوي بالساق: كامبيوم حزمي + بيني (ثنائية الفلقة)</figcaption></figure>
+        <figure><img src="assets/bio/botany/ch4/img_11.jpg" alt="ساق قديمة"><figcaption>🌳 مقطع ساق بعد سنوات: حلقات سنوية وخشب/لحاء ثانوي وقشر فيليني</figcaption></figure>
+        <figure><img src="assets/bio/botany/ch4/img_12.jpg" alt="تغلظ الجذر"><figcaption>📈 تغلظ الجذر الثانوي: كامبيوم من خلايا البراشية ومحيط الدار</figcaption></figure>
+        <figure><img src="assets/bio/botany/ch4/img_13.jpg" alt="جذر متحجر"><figcaption>🌳 مقطع جذر متقدم: قلب مركزي، خشب ثانوي، حلقات، قشر فليني</figcaption></figure>
+      </div>    </div>
+  </div>
+
+  <!-- ▓▓ الفصل 5 (مقفل) ▓▓ -->
+  <div class="acc-item" id="ch4">
+    <button class="acc-btn" onclick="togBio(this)"><span class="acc-num">5</span> الفصل الخامس: <b>مرفولوجيا وتحوّرات الأعضاء النباتية</b> <span class="acc-arrow">▼</span></button>
+    <div class="acc-body">
+      <h4>🌿 أولاً: المجموع الخضري والجذري</h4>
+      <ul class="pts">
+        <li><b>المجموع الخضري:</b> يظهر فوق سطح التربة — <b>الساق</b> التي تحمل البراعم والأوراق والأزهار والثمار.</li>
+        <li><b>المجموع الجذري:</b> ينمو تحت التربة ويتألف من الجذر الرئيسي والثانوية؛ وظيفته <b>تثبيت</b> النبات و<b>تزويده</b> بالماء والأملاح الذائبة، وقد تتحور أجزاؤه لوظائف إضافية.</li>
+      </ul>
+
+      <h4>🥕 ثانياً: الجذور — الأنماط والتحورات</h4>
+      <p class="def">ينشأ الجذر من نمو <span class="term">الجذير</span> الجنيني بعد إنبات البذرة؛ فيتشكل الجذر الابتدائي الذي يتفرع للثانوية، ويقوم بالوظائف: التثبيت، امتصاص الماء والأملاح <b>بالأوبار الماصة</b> وتوصيلها للساق.</p>
+      <ul class="pts">
+        <li><b>وتدية عادية:</b> محور عمودي يستدق لأسفل تنشأ عن الجذير دون تحور — <b>وتدية درنية (متشحمة):</b> تحولت للتخزين في السنة الأولى.</li>
+        <li><b>ليفية</b> <span class="en">Fibrous</span>: رفيعة متساوية كثيرة تنمو بدل الأصلي عند قاعدة الساق الجنينية — تسود في أحاديات الفلقة وخاصة النجيلية <span class="en">Triticum durum</span>.</li>
+        <li><b>جانبية/عرضية:</b> تنشأ من الساق أو الأوراق لا من الجذير مباشرة.</li>
+      </ul>
+
+      <h4>🎋 ثالثاً: السيقان — الوظائف والأنواع</h4>
+      <p class="def">تنشأ من نمو <span class="term">السويقة</span> الجنينية؛ وظائفها: إنتاج الأوراق وأعضاء التكاثر وحملها (البناء الضوئي والتكاثر)، توصيل <b>النسغ الناقص بالخشب</b> و<b>النسغ الكامل باللحاء</b>، التخزين (بطاطا <span class="en">Solanum tuberosum</span> للنشا وقصب السكر <span class="en">Saccharum officinarum</span> للسكر)، البناء الضوئي للعشبية، والتكاثر الخضري.</p>
+      <ul class="pts">
+        <li><b>أرضية (تحورات):</b> <b>البصلة</b> <span class="en">Bulb</span> (ساق قرصية بجذور ليفية أسفلية وأوراق حرشفية داخلية بيضاء مختزنة — بصل <span class="en">Allium cepa L.</span> الزنبقية)، الدرنات، والأبصال الصغيرة.</li>
+        <li><b>خشبية:</b> سميكة فقدت خضرتها (فلين خارجاً وخشب داخلاً) — الأشجار والشجيرات المعمرة · <b>عشبية:</b> خضراء طرية تبني ضوئياً.</li>
+        <li><b>تحورات خاصة:</b> التسلق بالالتفاف حول دعامة (<span class="en">Convolvulus arvensis</span>)، والأشواك (<span class="en">Rosa</span>).</li>
+      </ul>
+
+      <h4>🌱 رابعاً: البراعم وتحوراتها</h4>
+      <ul class="pts">
+        <li><b>إبطية</b> <span class="en">Axillary</span> في آباط الأوراق (فروع جانبية وأزهار وثمار)؛ <b>عرضية</b> <span class="en">Adventitious</span> في غير مواضعها.</li>
+        <li><b>براعم ساكنة</b> تقاوم الشتاء: أوراق حرشفية سميكة خارجية (قد تفرز صموغاً) تحمي الداخلية الخضراء — مع الربيع تتساقط الحراشف وتتفتح البراعم (التكاثر الخضري).</li>
+        <li>تحوراتها: نوع يتكون في إبط الورقة (<span class="en">Dioscorea bulbifera</span>)، ونوع يتطور عن برعم زهري (<span class="en">Ananas comosus</span>).</li>
+      </ul>
+
+      <h4>🍎 خامساً: الثمار — من المبيض إلى البذور</h4>
+      <p class="def">بعد الإخصاب يذبل الكأس والتويج والطلع والقلم والميسم ولا يبقى إلا <b>المبيض</b> الذي يتطور إلى <span class="term">الثمرة</span>: بذرة (أو عدة بذور بأجنّتها) + <span class="term">الغلاف الثمري</span> <span class="en">Pericarp</span> — وظيفتها حماية البذور ونشرها. <b>حقيقية</b> (من المبيض فقط) أو <b>كاذبة/ملحقة</b> <span class="en">Pseudocarps</span> (يدخل فيها التخت كالتفاح والكمثرى أو الشمراخ الزهري كالتين).</p>
+      <table class="cmp">
+        <tr><th>النمط</th><th>الوصف</th><th>أمثلة علمية</th></tr>
+        <tr><td><b>طرية</b> <span class="en">Fleshy</span></td><td>غلاف عصاري كثيف مليء بالعصارة</td><td>التفاحة <span class="en">Pomme</span> · الأفوكادو</td></tr>
+        <tr><td><b>جافة متفتحة</b> <span class="en">Déhiscentes</span></td><td>ينفتح الغلاف عند النضج فتتحرر البذور</td><td><span class="en">Pisum · Raphanus</span></td></tr>
+        <tr><td><b>جافة غير متفتحة</b> <span class="en">Indéhiscentes</span></td><td>لا ينفتح إلا بعد تحلله؛ غالباً بذرة واحدة: فقيرة <span class="en">Akène</span>، مجنحة <span class="en">Samara</span>، برة <span class="en">Caryopsis</span>، بندقة <span class="en">Nut</span></td><td><span class="en">Helianthus · Ailanthus · Hordeum · Quercus</span></td></tr>
+        <tr><td><b>منشقة</b> <span class="en">Schizocarpes</span></td><td>من كرابل ملتحمة تنفصل عند النضج لثميرات</td><td>أمثلة الخيمية</td></tr>
+        <tr><td><b>متجمعة</b></td><td>ثمار صغيرة متجمعة على تخت زهري واحد</td><td>توت · تين · أناناس</td></tr>
+      </table>
+      <p class="def"><b>البذرة والجنين:</b> الجنين محور قصير يحمل فلقة (<span class="en">Monocot</span>) أو فلقتين (<span class="en">Dicot</span>) هما الأوراق الجنينية، ويتصل بالمحور من أسفله <span class="term">الجذير</span> ومن أعلاه <span class="term">السويقة</span> — نواة النبات المستقبلي.</p>
+
+      <div class="gal" data-gal="ch4">
+        <figure><img src="assets/bio/botany/ch5/img_01.jpg" alt="الشكل العام للنبات"><figcaption>🌿 الشكل العام لأجزاء النبات: مجموع خضري (ساق خشبية/عشبية) وجذري (وتدي/ليفي)</figcaption></figure>
+        <figure><img src="assets/bio/botany/ch5/img_02.jpg" alt="الدرنة"><figcaption>🥔 الدرنة: براعم («عيون»)، أوراق حرشفية، عديسة ونهاية ساقية</figcaption></figure>
+        <figure><img src="assets/bio/botany/ch5/img_03.jpg" alt="ساق أرضية"><figcaption>🌰 ساق أرضية درنية التحكّم بالتخزين (كقلقاس/كولوكاسيا)</figcaption></figure>
+        <figure><img src="assets/bio/botany/ch5/img_04.jpg" alt="الأوراق المركبة"><figcaption>🍃 أنماط الورقة المركبة: راحية، ريشية، ريشية مركبة</figcaption></figure>
+        <figure><img src="assets/bio/botany/ch5/img_05.jpg" alt="ثمرة طرية"><figcaption>🥑 ثمرة طرية (بسيطة) — الأفوكادو بقسميها الخارجي واللبي</figcaption></figure>
+        <figure><img src="assets/bio/botany/ch5/img_06.jpg" alt="ثمار جافة"><figcaption>🫘 ثمار جافة متفتحة (<span class="en">Pisum</span>) وغير متفتحة (<span class="en">Helianthus · Hordeum · Ailanthus</span>)</figcaption></figure>
+        <figure><img src="assets/bio/botany/ch5/img_07.jpg" alt="تفتح الثمار"><figcaption>🍃 صور متنوعة لتفتح الثمار العليا وتحرر البذور <span class="en">(Datura · Gossypium…)</span></figcaption></figure>
+      </div>    </div>
+  </div>
+
+  </div><!-- /acc-list -->
+</section>
+
+<!-- ═══════════ الوحدة 3: علم الأجنّة ═══════════ -->
+<section class="unit" id="unitEmbryologie">
+  <div class="unit-head">
+    <span class="unit-ico">🐣</span>
+    <div>
+      <h2>الوحدة الثالثة: علم الأجنّة <span class="en">Embryologie</span></h2>
+      <p>من الوظيفتين الجنسيتين إلى مصير الوريقات الجنينية — 10 فصول (2014–2016 · أ. عميرة · ذ. جفادن)</p>
+    </div>
+    <span class="unit-tag tag-on">✅ متوفرة الآن</span>
+  </div>
+
+  <div class="acc-list">
+
+  <!-- ▓ الفصل 1 (مجاني): الوظيفة الجنسية الذكرية ▓ -->
+  <div class="acc-item" id="em0">
+    <button class="acc-btn" onclick="togBio(this)"><span class="acc-num">1</span> الفصل الأوّل: <b>الوظيفة الجنسية الذكرية</b> <span class="acc-arrow">▼</span></button>
+    <div class="acc-body">
+      <h4>♂ الجهاز التناسلي الذكري</h4>
+      <p class="def">يضمن إنتاج الخلايا الجنسية الذكرية (<b>النطاف</b>)، نقلها وتخزينها وتذويتها في <b>المسالك التناسلية الذكرية</b>، ووضعها على مستوى المسالك التناسلية الأنثوية أثناء الإخصاب.</p>
+      <ul>
+        <li><b>الخصية <span class="en">Testicule</span>:</b> عضو مزدوج يتواجد ضمن كيس جلدي خارجي هو الصفن <span class="en">Scrotum</span> (قطر الخصية 3–4 سم)؛ تغطيها مساحة بنسيج ليفي كثيف هو <b>الغميص الأبيض</b> <span class="en">Albuginée</span> الذي يبعث استطالات بينية <span class="en">Cloisons interlobulaires</span> تقسمها إلى <b>200–300 فصيصة</b> خصوية — وهي غدة جنسية مزدوجة الإفراز: <b>خارجي</b> (تشكيل النطاف عبر 2–4 أنابيب منوية في كل فصيصة تصل نحو <b>جسم هيقمور</b> <span class="en">Corps de Highmore</span>) و<b>داخلي</b> (خلايا ليديغ <span class="en">Cellules de Leydig</span> تفرز التستوسترون) — وتتكون الخصيتان داخل البطن ثم تهبطان حتى تخرجان تماماً في الشهر الثامن من الحمل.</li>
+        <li><b>الأنابيب المنوية <span class="en">Tubes séminifères</span>:</b> طولها 30–70 سم وقطرها 150–250 ميكرون؛ جدار من غشاء ونسيج طلائي هو <b>الطلائية المنوية</b> <span class="en">Epithélium séminal</span> يضم نوعين من الخلايا: خلايا جنسية بمختلف المراحل تنتهي بتشكل النطاف (<b>تشكل النطاف <span class="en">Spermatogénèse</span></b>) وخلايا جسمية هرمية الشكل تسمى <b>خلايا سرتولي</b> <span class="en">Cellules de Sertoli</span> للدعامة والتغذية.</li>
+        <li><b>مسلك النطاف:</b> أنابيب منوية ← أنابيب مستقيمة <span class="en">Tubes droits</span> ← شبكة خصوية <span class="en">Rete testis</span> ← قنوات صادرة <span class="en">Canaux efférents</span> ← <b>قناة البربخ</b> <span class="en">Canal épididymaire</span> (لو انفردت بلغت ~6 أمتار؛ البربخ يغطي الخصية ووظيفته الأساسية <b>تخزين النطاف</b> مع جزء من السائل المنوي قبل القذف وإتمام نضجها) ← قناة ناقلة <span class="en">Canal déférent</span> (45 سم) ← قناة قاذفة <span class="en">Canal éjaculateur</span> (2 سم) تنفتح على الإحليل البروستاتي.</li>
+        <li><b>الغدد الجنسية الملحقة</b> <span class="en">Glandes annexes</span> (إفراز خارجي مغذٍّ يصب في السائل المنوي): <b>الحويصلتان المنويتان</b> <span class="en">Vésicules séminales</span> (إفراز غني بسكر الفواكه والبروستاغلاندينات وهرمونات بيبتيدية) · <b>البروستات</b> <span class="en">Prostate</span> (غدة عنقودية عند قاعدة المثانة؛ لها وظيفة إفرازية في تصنيع قسم من السائل المنوي ذي الرائحة المميزة (سبارمين <span class="en">Spermine</span>) وقاعدي التركيب الغني بالزنك والكالسيوم والمغنيزيوم والفوسفور، ووظيفة ميكانيكية معصّرة للقناة المشتركة للبول والمني) · <b>غدتا كوبر</b> <span class="en">Glandes de Cowper</span> (بصليتان إحليليتان تفرزان مواد لزجة تسهل نقل النطاف أثناء القذف).</li>
+        <li><b>القضيب <span class="en">Pénis</span>:</b> عضو الجماع والقناة المشتركة للبول والمني؛ يحتوي أجساماً ناصبة <span class="en">Corps érectiles</span>: إسفنجي <span class="en">spongieux</span> وكهفيان <span class="en">Corps caverneux</span> يسمحان بالانتصاب.</li>
+        <li><b>المني <span class="en">Sperme</span>:</b> نتيجة القذف — سائل أبيض لزج كثيف مائل إلى الصفرة، قاعدي (<span class="en">pH 7–7.8</span>)، يتركب من الحيوانات المنوية + السائل المنوي (إفرازات البربخ، الحويصلتين، البروستات وغدتي كوبر).</li>
+      </ul>
+      <h4>🔬 النطفة <span class="en">Spermatozoïde</span></h4>
+      <p class="def">خلية متحركة طولها <b>60µm</b>، عمرها 48–72 ساعة، وتتكون من: <b>رأس</b> بيضي مسطح (يحتوي النواة، وعلى قمته الجسم القمي أو <b>الأكروسوم</b> الذي يساعد في اندماج الحيوان مع البويضة أثناء الإخصاب بإنزيمات تساعد على إذابة أغشية البويضة) · <b>عنق</b> (منطقة اتصال) · <b>سوط</b> هو أطول جزء يساعده في الحركة (قطعة متوسطة، رئيسية، نهائية).</p>
+      <h4>🏭 مراحل تشكل النطاف <span class="en">Spermatogénèse</span></h4>
+      <ul>
+        <li><b>1) مرحلة التكاثر <span class="en">Multiplication</span>:</b> تتكاثر المنسليات المنوية بالانقسامات الخيطية <span class="en">Mitoses</span> — منسلية داكنة الكروماتين <span class="en">Ad</span> تشبه الخلية الأم وتضمن التجديد، ومنسلية فاتحة الكروماتين <span class="en">Ap</span> تنقسم لتعطي منسليتين <span class="en">B</span> دائماً بالانقسامات الخيطية، فتعطي خليتين منويتين من الدرجة الأولى <span class="en">Spermatocytes I</span> — الخلايا الأولية ثنائية الصيغة <span class="en">Diploïdes</span> لتنتهي بالنطاف أحادية الصيغة <span class="en">Haploïdes</span>، ويكون تشكل النطاف مستمراً ودائماً منذ البلوغ.</li>
+        <li><b>2) مرحلة النمو <span class="en">Accroissement</span>:</b> يكبر حجم الخلايا المنوية الأولى وتدخل الانقسام المنصّف الاختزالي الأول (<span class="en">Méiose I</span>) الذي يدوم <b>23 يوماً</b> ← خليتان منويتان من الدرجة الثانية <span class="en">Spermatocytes II</span> ذات <b>1n</b> صبغي و<b>2k</b> من <span class="en">ADN</span> (إحداهما تحمل x والأخرى y).</li>
+        <li><b>3) مرحلة النضج <span class="en">Maturation</span>:</b> تدوم 24 ساعة — الطلائع المنوية <span class="en">Spermatides</span> تنقسم بالمنصّف الثاني المتساوي <span class="en">(Division équationnelle)</span> دون تضاعف ال<span class="en">ADN</span> ← طليعتان منويتان ذات <b>1n</b> و<b>1k</b>.</li>
+        <li><b>4) مرحلة التمايز <span class="en">Différenciation</span> (23 يوماً):</b> الطليعة تتحول إلى نطفة بعد تخلصها من السيتوبلازم الزائد وظهور السوط، عبر: نشاط جهاز غولجي ← حويصلة طرفية <span class="en">Vésicule acrosomiale</span> غنية بإنزيمات حالة تتمدد فوق ثلثي النواة ← الجسمان المركزيان: القريب <span class="en">Centriole proximal</span> (غير نشط) والبعيد <span class="en">Distal</span> (ينتج أنيبيبات محور السوط) مع غلاف ميتوكوندري حلزوني بالقطعة المتوسطة — ثم تهاجر النطاف بعدها من الأنابيب المنوية نحو البربخ حيث تُنضج وتُخزن.</li>
+        <li>📌 نظرياً: كل منسلية <span class="en">Ap</span> تعطي 4 خلايا منوية أولى ← 8 من الدرجة الثانية ← 16 طليعة ← 16 نطفة، لكن الخزعات الخصوية <span class="en">(Biopsies testiculaires)</span> بيّنت أن نحو <b>25%</b> من الخلايا فقط تضمن هذا المسار كاملاً.</li>
+      </ul>
+      <h4>⚠️ العوامل المؤثرة على تشكل النطاف وتشوهاتها</h4>
+      <ul>
+        <li>الحرارة · نقص التروية الدموية <span class="en">ischémie</span> · الإشعاعات (<span class="en">x · y</span>) · بعض أنواع العدوى الجرثومية الخصوية · تناول بعض الأدوية المضادة للانقسام <span class="en">antimitotiques</span> لعلاج السرطان · المواد الكيميائية (تبغ، مخدرات، كحول).</li>
+        <li>قد تأخذ النطاف أشكالاً غير طبيعية: برأس صغير أو كبير، ذات رأسين أو سوطين، أو نطاف بدون سوط — وإذا تجاوزت هذه التشوهات نسبة <b>40%</b> فسوف يؤدي ذلك إلى <b>العقم</b>.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ▓ الفصل 2 (مجاني): الوظيفة الجنسية الأنثوية ▓ -->
+  <div class="acc-item" id="em1">
+    <button class="acc-btn" onclick="togBio(this)"><span class="acc-num">2</span> الفصل الثاني: <b>الوظيفة الجنسية الأنثوية</b> <span class="acc-arrow">▼</span></button>
+    <div class="acc-body">
+      <h4>♀ الجهاز التناسلي الأنثوي</h4>
+      <p class="def">يضمن إنتاج الخلايا الجنسية الأنثوية (<b>البويضة</b>)، استقبال ونقل النطاف، الإلقاح، هجرة وتعشيش البيضة الملقحة، تطور الجنين خلال الحمل ثم ولادته.</p>
+      <ul>
+        <li><b>المبيضان <span class="en">Ovaires</span>:</b> غدتان جنسيتان أنثويتان بيضاويتا الشكل (~4 سم) تتوضعان جانبَي الكلية، ويتكون كل منهما من: <b>منطقة قشرية</b> <span class="en">zone corticale</span> تحتوي البويضات والجريبات والجسم الأصفر، و<b>منطقة لُبّية</b> <span class="en">zone médullaire</span> تحتوي الأوعية الدموية والأعصاب — وهو غدة مزدوجة: داخلي (هرمونَي الأستروجين والبروجسترون) وخارجي (إنتاج وطرح الخلايا البيضية أثناء الإباضة).</li>
+        <li><b>قناتا فالوب <span class="en">Trompes de Fallope</span>:</b> أنبوب موصل بين الرحم والمبيض يبطنه خلايا هدبية تساعد على دفع البويضة باتجاه تجويف الرحم، وخلايا مفرزة تغذي الجنين في أيامه الأولى — وهو <b>موقع عملية الإخصاب</b>؛ تنقسم إلى 3 أجزاء: <b>زوائد الصوان</b> <span class="en">Franges du pavillon</span>، <b>الحبالة</b> <span class="en">Ampoule</span>، و<b>البرزخ</b> <span class="en">Isthme</span>.</li>
+        <li><b>الرحم <span class="en">Utérus</span>:</b> عضو عضلي يشبه الإجاصة المقلوبة؛ بطانته الداخلية <b>الغشاء الرحمي</b> <span class="en">Endomètre</span> تثخن قبل الحيض بتأثير الدورة الشهرية ثم تتساقط نزيفاً عند عدم التعشيش لتتجدد طبقة جديدة؛ وطبقته العضلية <span class="en">Myomètre</span> لها دور رئيسي أثناء الولادة.</li>
+        <li><b>عنق الرحم <span class="en">Col utérin</span>:</b> جزء عضلي ضيق أسطواني الشكل يبرز بداخل تجويف المهبل؛ غدده تفرز مادة مخاطية <span class="en">Glaire cervicale</span> تسمح بمرور النطاف وتحمي الرحم من المحيط الخارجي.</li>
+        <li><b>المهبل <span class="en">Vagin</span>:</b> يمتد من عنق الرحم إلى الفرج — جداره من المخاطية <span class="en">muqueuse</span> والعضلية <span class="en">musculeuse</span>.</li>
+        <li><b>الفرج:</b> مجموع الأعضاء الخارجية ويضم: الشفرتين الكبرى والصغرى <span class="en">Grandes et petites lèvres</span>، البظر <span class="en">Clitoris</span>، وغدتي بارثولين <span class="en">Glandes de Bartholin</span> اللتين تفرزان مادة مخاطية تسهل دخول القضيب.</li>
+      </ul>
+      <h4>🌸 الدورة الجنسية عند المرأة (~28 يوماً ±2)</h4>
+      <ul>
+        <li><b>دورة المبيض — المرحلة الجريبية (قبل الإباضة):</b> نمو جريب دوغراف (~14 يوماً) ← <b>الإباضة</b> في نصف الدورة: يتميز بترقيق جدران الجريب الناضج بفعل أنزيمات خاصة، فتطرح تقلصات المبيض <b>الخلية البيضية الثانية</b> لتنشفط من طرف زوائد الصوان ← <b>المرحلة الأستروبروجسترونية (اللوتينية):</b> يتحول باقي الجريب إلى <b>جسم أصفر</b> بتكاثر خلاياه الحبيبية وامتلائها بمادة صفراء.</li>
+        <li><b>دورة الرحم:</b> <b>تكاثرية</b> (في بداية الدورة وبعد الحيض تثخن مخاطية الرحم بتكاثر خلاياها وشعيراتها الدموية تحت تأثير الأستروجينات) ← <b>إفرازية</b> (يزداد سمك المخاطية وتفرز غددها إفرازات مخاطية غنية بالغليكوجين) — تبلغ التغيرات أقصاها في <b>اليوم 21</b> استعداداً محتملاً لتعشيش جنين؛ وعند عدم الإخصاب تتقلص العروق الدموية وتنفجر فيُطرح دم الحيض غير المتخثر (عامل يمنع تخثره تفرزه الرحم).</li>
+        <li><b>سن اليأس:</b> توقف الدورات المبيضية بنفاذ مخزون الجريبات ← توقف الهرمونات المبيضية ← انقطاع الطمث.</li>
+      </ul>
+      <div class="gal" data-gal="em1">
+        <figure><img src="assets/bio/embryo/em2/img_01.jpg" alt="مبيض بالغة"><figcaption>🥚 رسم تخطيطي لمبيض أنثى بالغة: بويضات، حويصلات دوغراف ناضجة، إباضة، جداره وجسم أصفر</figcaption></figure>
+        <figure><img src="assets/bio/embryo/em2/img_02.jpg" alt="دورة الرحم"><figcaption>🌙 دورة الرحم (28 يوماً): الحيض، المرحلة التكاثرية ثم الإفرازية مع تخلخل وحمي وغدد أنبوبية</figcaption></figure>
+      </div>
+    </div>
+  </div>
+
+  <!-- ▓ الفصل 3: تنظيم الوظيفة الجنسية ▓ -->
+  <div class="acc-item" id="em2">
+    <button class="acc-btn" onclick="togBio(this)"><span class="acc-num">3</span> الفصل الثالث: <b>تنظيم الوظيفة الجنسية</b> — محور تحت السرير البصري/النخامية <span class="acc-arrow">▼</span></button>
+    <div class="acc-body">
+      <h4>🧠 محور المراقبة العصبية-الغدية</h4>
+      <p class="def">تخضع الوظيفتان (ذكرية وأنثوية) لمراقبة مضاعفة <b>عصبية-غدية</b>: محور <b>تحت السرير البصري</b> <span class="en">Hypothalamus</span> و<b>الغدة النخامية</b> هو المسؤول المنظم للوظيفتين.</p>
+      <ul>
+        <li><b>تحت السرير البصري:</b> عند البلوغ وبتأثير تنبيهات خارجية، تقوم عصبونات خاصة بإفراز هرمون <span class="en">GnRH</span> <span class="en">(Gonadotropin Releasing Hormone)</span> — هرمون عشري الأحماض الأمينية يؤدي بدوره إلى إفراز هرمونات جنسية نخامية.</li>
+        <li><b>الفص الأمامي للنخامية <span class="en">Anté-hypophyse</span>:</b> يحثّ <span class="en">GnRH</span> على إفراز محفزات الغدد الجنسية <span class="en">Gonadostimulines</span>: <b><span class="en">FSH</span></b> <span class="en">(Follicule Stimulating Hormone)</span> و<b><span class="en">LH</span></b> <span class="en">(Luteinizing Hormone)</span> اللذين يؤثران على الغدد الجنسية (الخصية والمبيض).</li>
+      </ul>
+      <h4>♂ عند الذكر (شكل7)</h4>
+      <ul>
+        <li><b><span class="en">FSH</span> ← خلايا سرتولي</b> (الوظيفة الخارجية للخصية): إذ يسمح بتطور خلايا سرتولي وتشكل النطاف — أدواره الثلاثة: تنشيط تشكيل الخلايا الجنسية الذكرية عبر سرتولي · تحريض إفراز الهرمون المثبط <span class="en">Inhibine</span> الذي يؤثر بطريق مراقبة رجعية سالبة على إفراز <span class="en">FSH</span> (مباشرة عبر تحت السرير البصري بانخفاض <span class="en">GnRH</span>، أو غير مباشرة على النخامية الأمامية) · والتحث على إنتاج بروتين <span class="en">ABp</span> <span class="en">(Androgen Binding Protein)</span>.</li>
+        <li><b><span class="en">LH</span> ← خلايا ليديغ</b> (الوظيفة الداخلية): إذ يضمن انقسامات خلايا ليديغ وإفراز <b>التستوسترون</b> الذي يدخل خلايا سرتولي ويرتبط ببروتين <span class="en">ABp</span> لضمان السير الحسن للمجاري التناسلية — له وظيفتان: تأثير إيجابي على المسالك التناسلية والغدد الملحقة · تأثير سلبي على إفراز <span class="en">LH</span> (مراقبة رجعية) — إضافةً إلى كونه الهرمون المسؤول عن ظهور <b>الصفات الجنسية الثانوية</b> عند الذكر.</li>
+      </ul>
+      <h4>♀ عند الأنثى</h4>
+      <ul>
+        <li><b>المرحلة الجريبية:</b> يحثّ <span class="en">FSH</span> عدداً من الجريبات على النمو فيصل منها حويصلة واحدة فقط لمرحلة النضج = <b>حويصلة دوغراف</b>، وتقوم قشرتها الداخلية بإفراز الأستروجين الذي يؤدي بدوره إلى إفراز <span class="en">LH</span> المسبب للتبويض.</li>
+        <li><b>مرحلة الإباضة:</b> تصل نسبة <span class="en">LH</span> إلى الذروة في منتصف الدورة (اليوم 14) ← تمزّق الجريب وتحرير البويضة.</li>
+        <li><b>المرحلة اللوتينية:</b> يتحول باقي الجريب إلى <b>جسم أصفر</b> يفرز البروجسترون وكمية قليلة من الأستروجين لتهيئة الرحم للحمل؛ حال حدوثه يستمر الجسم الأصفر ويعوَّض بالمشيمة حتى نهاية الثلاثي الأول من الحمل، وعند عدم حدوثه يتحول إلى <b>جسم أبيض</b> يتلاشى ← نقص البروجسترون ← نزول الطمث.</li>
+        <li><b>هرمون الأستروجين:</b> يفرز من خلايا القشرة الداخلية للجريبات؛ يحرّض تقلصات الرحم العفوية، ويؤثر على مخاطية الرحم (تكاثر وتطور الغدد) وهو المسؤول عن إظهار <b>الصفات الجنسية الثانوية الأنثوية</b>.</li>
+        <li><b>هرمون البروجسترون:</b> يفرز من الجسم الأصفر؛ وظيفته: زيادة سمك جدار الرحم في المرحلة الإفرازية، يمنع دورة الحيض والتبويض في حالة الحمل، يثبّت إفراز <span class="en">FSH</span>، ويعمل على استمرار الحمل بتثبيت الجنين بجدار الرحم.</li>
+      </ul>
+      <div class="gal" data-gal="em2">
+        <figure><img src="assets/bio/embryo/em3/img_01.jpg" alt="التنظيم الهرموني الذكري"><figcaption>⚙️ شكل7: التنظيم العصبي-الهرموني للوظيفة الذكرية — <span class="en">GnRH ← LH·FSH</span> ← خلايا ليديغ وسرتولي ومراقبة رجعية (<span class="en">Inhibine · Testostérone</span>)</figcaption></figure>
+      </div>
+    </div>
+  </div>
+
+  <!-- ▓ الفصل 4: الأسبوع الأول — الإلقاح والتفلج ▓ -->
+  <div class="acc-item" id="em3">
+    <button class="acc-btn" onclick="togBio(this)"><span class="acc-num">4</span> الفصل الرابع: <b>الأسبوع الأول</b> — الإلقاح والتفلج <span class="acc-arrow">▼</span></button>
+    <div class="acc-body">
+      <h4>💫 الإلقاح <span class="en">Fécondation</span></h4>
+      <p class="def">هو إتحاد نواة المشيج الذكري (<b>النطفة</b>) ونواة المشيج الأنثوي (<b>البويضة</b>) لتكوين البيضة المخصبة <span class="en">Zygote</span> التي تمثل أول مراحل التطور الجنيني — تكمن أهميته في: تكوين بيضة مخصبة بالصيغة <b>2n</b> · مساهمة الأب والأم بنصف المورثات (<b>التنوّع</b>) · تنشيط الخلية البيضية وبدء عملية الانقسام (<b>التفلج</b>).</p>
+      <ul>
+        <li><b>فترة ومكان وقوعه:</b> يكون الإلقاح ممكناً خلال فترة حياة الأعراس — الأنثوية ~<b>48 سا</b>، بينما تمتد حياة النطفة داخلها حتى <b>72 سا</b> — لذلك يجب أن يحدث الجماع خلال 48 سا قبل أو بعد الإباضة؛ ويحدث الإلقاح على مستوى <b>الثلث الخارجي لقناة فالوب: الحبالة (القارورة)</b>.</li>
+        <li><b>عبور النطاف من المهبل إلى فالوب:</b> وسط المهبل <b>حمضي</b> (<span class="en">pH 3–4</span> بوجود بكتيريا <span class="en">Lactobacillum</span> التي تحول الجليكوجين إلى حمض اللاكتيك) ← يموت عدد كبير من النطاف؛ أما عنق الرحم فوسطه قاعدي ملائم للنطاف بفضل مخاطية <span class="en">Glaire cervicale</span> التي لا تسمح إلا بمرور النطاف السليمة جيدة الحركة (يبقى نحو <b>2 مليون</b> تصل إلى الرحم) — والمني كثيف <span class="en">Coagulé</span> ببروتينات بروستاتية (<span class="en">Fibrinogène</span>) تسيله أنزيمات <span class="en">Fibrinolysine</span>.</li>
+        <li><b>تأهيل النطاف <span class="en">Capacitation</span>:</b> زيادة النشاط الحركي والنضج الوظيفي عبر التخلص من البلازما المنوية: نقص الوزن الجزيئي وإزالة الغمد البروتيني القاسي المحيط برأس النطفة لعرض مستقبلات اختراق جدار البويضة بواسطة إنزيمات بروتيوليتية — كما يفرز جسم المرأة أثناء الإثارة الجنسية هرمون <b>الأوكسيتوسين</b> النخامي الذي يعمل على تقلص عضلات المهبل والرحم وقناة فالوب مما يساعد النطاف على الصعود — فتصل أحسن النطاف إلى الحبالة خلال نحو ساعة (~200 نطفة)، حيث الوسط قلوي غني بالبوتاسيوم والجليكوجين والبيكاربونات.</li>
+      </ul>
+      <h4>🧬 مراحل الإلقاح بالمعنى الدقيق (3 مراحل)</h4>
+      <ul>
+        <li><b>1) اختراق الركام البيضي والإكليل المشع:</b> بواسطة إنزيمات مفرزة من الأكروزوم كالهيالورونيداز <span class="en">Hyaluronidases</span> التي تباعد الخلايا، وأنزيم اختراق الإكليل <span class="en">CPE</span> الذي يعمل تخريب خلايا الإكليل المشع ← تقدّم النطفة ذات الأكروزوم السليم.</li>
+        <li><b>2) اختراق المنطقة الشفافة:</b> ترتبط مستقبلات <span class="en">ZP3</span> فيها ببروتينات الأكروزوم فتُحرَّر إنزيمات <span class="en">Acrosine</span> التي تعمل شق ممر ضيق ينفذ منه رأس النطفة فيصل سيتوبلازم البويضة = <b>التفاعل الأكروزومي</b>.</li>
+        <li><b>3) اندماج أغشية النطفة والبويضة:</b> يدخل الرأس والسوط في سيتوبلازم البويضة تاركاً غشاء النطفة خارجاً ← ينطلق <b>التفاعل القشري لمنع تعدد النطاف</b> <span class="en">(Blocage de la polyspermie)</span>: حبيبات قشرية (تنشأ من غولجي أثناء نضج البويضة) تُطرح بالإفراز <span class="en">Exocytose</span> تفرز إنزيمات تحلل مستقبلات النطاف وتغيّر بنية المنطقة الشفافة فتصبح أكثر ثخانة وصلابة مشكّلةً <b>غشاء الإخصاب</b>.</li>
+        <li><b>النتائج:</b> يؤدي تحرير الكالسيوم إلى إكمال البويضة انقسامها الثاني ← بويضة ناضجة بكمية <span class="en">ADN</span> نفسها + <b>طليعة نواة أنثوية</b>؛ وتتشكل <b>طليعة نواة ذكرية</b> (تضاعف المريكز القريب ← مغزل، والنطفة تفقد ذيلها) ← يتلاشى الغشاءان النوويان وتتكثف الكروموزومات وتختلط = <b>نواة واحدة 2n</b> تتوضع صبغياتها على خط الاستواء فيبدأ أول انقسام خيطي للتفلج — أخيراً يتشكل <b>الزيجوت 2n</b> ويتحدد بذلك جنس الجنين (كروموزوم X أو Y).</li>
+      </ul>
+      <h4>🍇 التفلج <span class="en">Segmentation</span></h4>
+      <p class="def">هو انقسام البويضة المخصبة (ميتوزي أو متساوٍ) إلى خلايا تعرف ب<b>الفلجات</b> <span class="en">Blastomères</span> كبيرة الحجم في البداية ثم تصغر فأصغر كلما تقدم — وتنتهي بتكوين الطور الجنيني المعروف ب<b>البلاستولا</b> <span class="en">Blastula</span> (بيضة الإنسان عديمة المح ← انقسام كلي متساوٍ). مميزاته: منتظم في البداية ثم عشوائي متتالٍ · تركيب متعمد للخلية الوحيدة المخصبة · لا يتضمن نمواً (ثبات حجم البويضة مع تصغير الخلايا) · ثبات الشكل مع ظهور تجويف داخلي في طور البلاستولا.</p>
+      <ul>
+        <li><b>الهجرة عبر قناة فالوب:</b> يرافق التفلجَ هجرتُها عبر القناة حتى تصل إلى تجويف الرحم (<b>اليوم 4</b>) بمساعدة أهداب القناة (البروجسترون) وتقلصات عضلاتها (الأوسيتوسين) — توقيت الانقسامات: 30 سا بعد الإلقاح ← 4 فلجات (36–40 سا) ← 8 فلجات (40–50 سا)، مع مصادفة مراحل 3، 5، 7 لاختلاف سرعة الفلجتين الأصليتين.</li>
+        <li><b>الجسم التوتي <span class="en">Morula</span>:</b> كتلة من <b>16–64 فلجة</b> تشبه حبة التوت تتشكل بعد 50–80 سا من الإلقاح (يوم 3–4) ويبقى حجمها نفس حجم البويضة (<b>150 ميكرون</b>) محاطة بمنطقة شفافة؛ خلاياها الخارجية أقل حجماً من الداخلية مع ارتباطات فجوية محكمة تسمح بالتبادلات بين التوتي والوسط الخارجي.</li>
+        <li><b>البلاستولا <span class="en">Blastula</span>:</b> عند بلوغ ~<b>60 خلية</b> تظهر تجاويف بين الخلايا الداخلية تتحد مشكلةً تجويفاً واحداً بسائل الرحم = <b>البلاستوسيل</b> <span class="en">Blastocèle</span>؛ ويُعاد توزيع الخلايا إلى: <b>طبقة محيطية صغيرة مغذية = تروفوبلاست</b> <span class="en">Trophoblaste</span> (تعطي لاحقاً <b>المشيمة</b>) و<b>طبقة داخلية كبيرة = البرعم الجنيني</b> <span class="en">Embryoblaste (Bouton embryonnaire)</span> (تعطي الجنين وأغلب ملحقاته: الأمنيوس والكوريون) — يكبر التجويف فيتحرر الكيس الأرومي من المنطقة الشفافة بإنزيمات المغذية المذيبة لها، ويبقى خاضعاً لمفرزات رحم الأم مع بداية <b>التعشيش: اليوم 6–7 بعد الإلقاح</b> (اليوم 21 من الدورة) بالتصاق البلاستولا على طلائية الرحم باتجاه البرعم الجنيني.</li>
+      </ul>
+      <div class="gal" data-gal="em3">
+        <figure><img src="assets/bio/embryo/em4/img_01.jpg" alt="مخاطية العنق"><figcaption>🚪 شكل9: مخاطية عنق الرحم قبل الإباضة (متشابكة مانعة) وأثناءها (منتظمة نافذة للنطاف)</figcaption></figure>
+        <figure><img src="assets/bio/embryo/em4/img_02.jpg" alt="مراحل الإلقاح"><figcaption>🧬 شكل10: المراحل الأساسية للإلقاح — اختراق الإكليل المشع ثم المنطقة الشفافة فاندماج الأغشية</figcaption></figure>
+        <figure><img src="assets/bio/embryo/em4/img_03.jpg" alt="التفاعل الأكروزومي"><figcaption>🎯 شكل11: التفاعل الأكروزومي — اختراق المنطقة الشفافة ودخول النطفة سيتوبلازم البويضة</figcaption></figure>
+        <figure><img src="assets/bio/embryo/em4/img_04.jpg" alt="التفاعل القشري"><figcaption>🛡️ شكل12: التفاعل القشري ومنع تعدد النطاف — انفجار الحبيبات القشرية وتشكّل غشاء الإلقاح</figcaption></figure>
+        <figure><img src="assets/bio/embryo/em4/img_05.jpg" alt="اندامج الأنوية"><figcaption>🧬 شكل13: الإخصاب واندماج الأنوية وبداية أول انقسام تفلجي (مرحلة الفلجين)</figcaption></figure>
+        <figure><img src="assets/bio/embryo/em4/img_06.jpg" alt="مراحل التفلج"><figcaption>🗺️ شكل14: مراحل التفلج الكاملة — من البويضة الملقحة إلى التوتي فالبلاستوسيست وبداية التعشيش (30سا ← 8 أيام)</figcaption></figure>
+      </div>
+    </div>
+  </div>
+
+  <!-- ▓ الفصل 5: الأسبوع الثاني — التعشيش ▓ -->
+  <div class="acc-item" id="em4">
+    <button class="acc-btn" onclick="togBio(this)"><span class="acc-num">5</span> الفصل الخامس: <b>الأسبوع الثاني</b> — التعشيش <span class="acc-arrow">▼</span></button>
+    <div class="acc-body">
+      <h4>🌱 التعشيش <span class="en">Nidation</span></h4>
+      <p class="def">هو <b>تثبيت الجنين داخل بطانة الرحم</b> المهيأة من قبل الاستروجين والبروجسترون المفرزَين من الجسم الأصفر، ويكون التثبيت خلال اليوم <b>6–14</b> من الأسبوع الثاني من التطور الجنيني.</p>
+      <ul>
+        <li><b>مكان التثبيت الطبيعي:</b> في <b>الجزء العلوي الجانبي للرحم</b> — أما الحالات غير الطبيعية: <b>تثبيت أنبوبي</b> (في إحدى أقسام القناة: الصوان، الحبالة أو المضيق ← ينمو الجنين إلى غاية عدم اتساع المكان (أقصى مدة نحو شهرين) مما يؤدي إلى نزيف داخلي يستلزم عملية جراحية استعجالية وبالتالي موت الجنين) · <b>تثبيت سفلي</b> (القسم السفلي من جوف الرحم ← يؤدي إلى اتساع العنق وموت الجنين قبل موعد الولادة) · <b>تثبيت جوفي</b> (في الرباط العريض للمبيض أو مخاطية الأمعاء ← يتطلب عملية جراحية استعجالية في بداية الحمل لاستئصال الجنين) · <b>تثبيت مبيضي</b> (داخل المبيض) — وقد لا يحدث تعشيش أصلاً في حالة قلة هرمون الجسم الأصفر الحملي.</li>
+      </ul>
+      <h4>🗓️ اليوم 6–7: تشكّل الطبقة المغذية المزدوجة</h4>
+      <ul>
+        <li>خلال التعشيش تفرز طبقة الخلايا المغذية هرموناً يساعد على بقاء الجسم الأصفر (إلى غاية الثلاثي الأول من الحمل) ويقوم بتغيير التفاعل المناعي للرحم اتجاه الجنين (كأنه ليس جسم غريب) — وهو هرمون <b>HCG</b> <span class="en">(Hormone Chorionique Gonadotropine)</span> المشابه في تركيبه ل<span class="en">LH</span>، ويظهر في بول المرأة من اليوم <b>8–9</b> بعد الإلقاح = <b>اختبار كشف الحمل</b>.</li>
+        <li>تتقسم طبقة الخلايا المغذية انقسامات سريعة جداً وتتغلغل بفضل إنزيماتها المذيبة داخل الرحم، وتتمايز إلى طبقتين: <b>المغذية الخلوية <span class="en">Cytotrophoblaste</span></b> (القريبة من الجنين: كبيرة ذات أغشية وأنوية كبيرة) و<b>المغذية المندمجة الخلوية <span class="en">Syncytiotrophoblaste</span></b> (ذات خلايا مقترنة تغلف السابقة بدون أغشية ← كتلة خلوية متعددة الأنوية).</li>
+      </ul>
+      <h4>🗓️ اليوم 8: التجويف الأمينوسي والقرص الجنيني</h4>
+      <ul>
+        <li>تنفصل خلايا البرعم الجنيني عن الطبقة المغذية لتكوّن <b>التجويف الأمينوسي</b> <span class="en">Cavité amniotique</span> المُحيط بالخلايا الأمينوسية؛ وتتمايز الخلايا إلى <b>جنينية داخلية <span class="en">Endoblaste</span></b> (مكعبة صغيرة) و<b>جنينية خارجية <span class="en">Epiblaste</span></b> (عمودية طويلة تعطي مستقبلاً الطبقة الخارجية والوسطى) = <b>القرص الجنيني ثنائي الطبقات</b> <span class="en">Disque Embryonnaire Didermique</span>.</li>
+      </ul>
+      <h4>🗓️ اليوم 9–10: الطور الجوفي</h4>
+      <ul>
+        <li>يزداد انغراس الحويصل الأصلي في بطانة الرحم وتسد فوهة دخوله بسدادة ليفية؛ ظهور فجوات صغيرة في الطبقة المغذية تتجمع وتكوّن فجوات واسعة = <b>المرحلة الجوفية</b> <span class="en">Phase lacunaire</span> · تفرز خلايا بطانة الرحم الجليكوجين · في القطب اللاجنيني يتشكل غشاء رقيق هو <b>غشاء هوسر</b> <span class="en">Membrane de Heuser</span> (انقسام الورقة الداخلية) وتتشكل حدود التجويف خارج الجوف العام: <b>كيس المحي الابتدائي</b> <span class="en">Sac vitellin primaire</span> · ثم تنفصل طبقات أخرى من الوجه الداخلي للمغذية = <b>الميزوديرم خارج الجنيني</b> <span class="en">Méisoderme extra-embryonnaire</span> الذي يحيط بالجوف الأمينوسي والمحي.</li>
+      </ul>
+      <h4>🗓️ اليوم 11–14: الاتصال المباشر مع دم الأم</h4>
+      <ul>
+        <li>ينظم الحويصل الأصلي تماماً وتزول فوهة الدخول · تتسع فجوات الطبقة المندمجة وتتخرب الأوعية الشعيرية الدموية الرحمية للأم بفضل إنزيمات المغذية (الكهيولية) فيتحقق <b>اتصال مباشر بين دم الأم والشبكة الفجوية</b> · تزداد الطبقة المتوسطة تكاثراً لتجتمع الفراغات مشكلةً <b>الجوف الكوريوني</b> <span class="en">Cavité chorionique</span> · ويبقى جزء من منطقة الاتصال بين الجنين والطبقة المغذية = <b>سويقة الاتصال</b> <span class="en">Pédicule embryonnaire</span> (الحبل السري لاحقاً).</li>
+        <li>يوم 13–14: تختفي الفوهة تماماً بتجند طلائية الرحم، وقد يحدث أحياناً <b>نزيف موضع التعشيش</b> نتيجة ازدياد تدفق دم الأم يوافق اليوم 28 من الدورة (خطأ في تقدير زمن الولادة: مدة الحمل تحسب من الطمث المعتاد الأخير) · تستمر خلايا الطبقة الداخلية في التكاثر وتشكل خلايا مستحلبة تبطن غشاء هوسر = <b>كيس المحي الثاني</b> <span class="en">Sac vitellin secondaire</span> أصغر من الأول يرافقه زوال تدريجي للمح الأول.</li>
+        <li>📌 خلاصة الأسبوع الثاني: تثبيت الجنين (يوم 6–14) وتغذيته من دم الأم القادم من الأوعية الرحمية · تشكل الورقة الجنينية ذات الطبقتين · ظهور شق الخط البدئي مع نهاية الأسبوع = أول خطوة نحو السعيدة <span class="en">Gastrula</span> · تكوّن أول الملحقات (الأمنيوس، الكوريون، المحي الثاني).</li>
+      </ul>
+      <div class="gal" data-gal="em4">
+        <figure><img src="assets/bio/embryo/em5/img_01.jpg" alt="أماكن التثبيت"><figcaption>📍 شكل1: الأماكن المختلفة لتثبيت البويضة — الطبيعي وغير الطبيعي (أنبوبي، سفلي، جوفي، مبيضي)</figcaption></figure>
+        <figure><img src="assets/bio/embryo/em5/img_02.jpg" alt="التعشيش يوم 6-8"><figcaption>🐣 التعشيش يوم 6–8: التصاق البلاستوسيست، تآكل الطلائية بالإنزيمات وتداخل الطبقة المغذية</figcaption></figure>
+        <figure><img src="assets/bio/embryo/em5/img_03.jpg" alt="يوم 9-12"><figcaption>🐣 يوم 9–12: الطور الجوفي، غشاء هوسر، والاتصال المباشر بين دم الأم والشبكة الفجوية</figcaption></figure>
+        <figure><img src="assets/bio/embryo/em5/img_04.jpg" alt="يوم 13-14"><figcaption>🐣 شكل2: يوم 13–14 — الجوف الكوريوني، كيس المح الثاني وسويقة الاتصال</figcaption></figure>
+        <figure><img src="assets/bio/embryo/em5/img_05.jpg" alt="نهاية الأسبوع الثاني"><figcaption>🐣 شكل3: البلاستوسيست في نهاية الأسبوع الثاني — مدمج خلوي، تجويف أمينوسي، كيس مح وتجويف كوريوني</figcaption></figure>
+      </div>
+    </div>
+  </div>
+
+  <!-- ▓ الفصل 6: الأسبوع الثالث ▓ -->
+  <div class="acc-item" id="em5">
+    <button class="acc-btn" onclick="togBio(this)"><span class="acc-num">6</span> الفصل السادس: <b>الأسبوع الثالث</b> — الملحقات، الجاسترولة والحبل الظهري <span class="acc-arrow">▼</span></button>
+    <div class="acc-body">
+      <h4>🧬 ملامح الأسبوع الثالث</h4>
+      <p class="def">يتميز ب: تطور بعض <b>الملحقات الجنينية</b> (الوِشيقة) · تشكل <b>الجزيرات الدموية</b> و<b>الزغابات المشيمية</b> · <b>المعيدة</b> (تشكل الوريقة الجنينية المتوسطة) · توضع <b>الحبل الظهري</b> الذي يعطي انطلاقاً للعصبية (تشكل الأنبوب العصبي).</p>
+      <h4>🎈 الملحقات الجنينية <span class="en">Annexes embryonnaires</span></h4>
+      <ul>
+        <li><b>الوِشيقة (الردب المنباري) <span class="en">Allantoïde</span>:</b> في اليوم 16 يبعث كيس المح الثاني امتداداً نحو سويقة التثبيت يسمى الردب المنباري أو الوشيقة؛ وفي اليوم 20 تظهر على مستوى الميزونشيم الحشوي المحيط بها خلايا كروية الشكل هي <b>المنسليات البدائية</b>.</li>
+        <li><b>الجزيرات الدموية <span class="en">Ilots de Wolff et Pander</span>:</b> في اليوم 17 تظهر ضمن الميزونشيم كتل خلوية هي الجزيرات الدموية: على مستوى سويقة التثبيت حول الوشيقة ← تعطي <b>الدورة السرية</b> · على مستوى الصفيحة الحشوية ← تعطي أول <b>الخلايا الدموية</b> · على مستوى الصفيحة الكوريونية ← تعطي <b>الشبكة الوعائية للمشيمة</b>.</li>
+        <li><b>تطور المشيمة <span class="en">Placenta</span>:</b> في اليوم 13 تظهر على مستوى الطبقة المغذية وضمن المدمج الخلوي كل خلوية = <b>الزغابات الأولية</b> <span class="en">Villosités primaires</span> ← في اليوم 15 يدخل ميزونشيم كوريوني في محورها ← <b>ثانوية</b> ← بين اليوم 18–21 تتمايز جزر دموية أصلية في محور الميزونشيم داخل الزغابات ← <b>ثالثية</b> · وعلى مستوى المدمج الخلوي تتّحد الفجوات الوعائية المملوءة بدم الأم فتتشكل <b>فجوات بين زغابية</b> <span class="en">Chambres intervilleuses</span>.</li>
+      </ul>
+      <h4>🌀 الجاسترولة <span class="en">Gastrulation</span></h4>
+      <p class="def">مجموعة حركات خلوية تهدف إلى تشكيل <b>الوريقة الثالثة (المتوسطة)</b>.</p>
+      <ul>
+        <li><b>تشكل الخط البدني <span class="en">Ligne primitive</span>:</b> في اليوم 16 تظهر تكتلات خلوية على ظهر الوريقة الخارجية (الإكتودرم) تتكثف ثم يرسم خط على تلك الكتلة = <b>الخط البدني</b>؛ ونقطة نهايته <b>عقدة هانسن</b> <span class="en">Nœud de Hensen</span> التي من خلالها يمكن تمييز <b>الجهة الرأسية من الذنبية</b>.</li>
+        <li><b>تشكل الوريقة الوسطى (الحشوية) <span class="en">Mésoderme</span>:</b> في اليوم 17 تنفصل خلايا الوريقة الخارجية المتكاثفة نحو الداخل فتنتشر يميناً ويساراً بين الوريقتين الخارجية والداخلية مشكلة <b>الورقة الحشوية الوسطى</b> ← تتمايز الورقة الخارجية — وتبقى منطقتان تلتصق فيهما الوريقتان: <b>الصفيحة القفوية والشرجية</b>.</li>
+        <li><b>تشكل الحبل الظهري <span class="en">La Chorde</span>:</b> تتوغل بعض خلايا الوريقة الخارجية نحو الداخل (=المتوسطة) عبر عقدة هانسن قمّدة محورية نحو الأمام ← يُنمو هذا الامتداد مشكلاً قناة تُدعى <b>القناة الحبلية</b> وتكون قاعدتها ملتصقة بالوريقة الداخلية (سقف كيس المح الثاني)؛ وفي اليوم 19 يمتد الحبل نحو المنطقة الذنبية دافعاً عقدة هانسن — وفي مكانها تبقى ثغرة تسمى <b>قناة ليبركوهن</b> <span class="en">Canal de Liberkuhn</span> تسمح بالاتصال بين التجويف الأمينوسي وكيس المح 2.</li>
+        <li><b>العصبية <span class="en">Neurulation</span> (ثلاث مراحل):</b> ① <b>اللوحة العصبية</b> <span class="en">Plaque neurale</span>: اليوم 18 يكبر سمك النسيج الأرومي الخارجي بجانبي عقدة هانسن ويمتد ليصبح على شكل مضرب ② <b>الميزابة العصبية</b> <span class="en">Gouttière neurale</span>: اليوم 19 ترتفع حواف الصفيحة لتشكل الميزابة ③ بقية النسج التي تبقى مرتبطة بحواف الميزابة = <b>الأعراف العصبية</b> <span class="en">Crêtes neurales</span>.</li>
+      </ul>
+      <p class="def">📌 خلاصة: يصبح الجنين <b>ثلاثي الوريقات الجنينية</b> (المعيدة)، تتوضّع المنطقة الحبلية وتنطلق العصبية مع تشكل أولى القطع الظهرية — بداية مرحلة جديدة: <b>التعضي</b>.</p>
+      <div class="gal" data-gal="em5">
+        <figure><img src="assets/bio/embryo/em6/img_01.jpg" alt="الوشيقة"><figcaption>🎈 شكل1: الوشيقة (الردب المنباري) وظهور المنسليات البدائية في الميزونشيم الحشوي</figcaption></figure>
+        <figure><img src="assets/bio/embryo/em6/img_02.jpg" alt="الجزيرات الدموية"><figcaption>🩸 شكل2: تشكّل الجزيرات الدموية (<span class="en">Wolff·Pander</span>) نحو الدورة السرية والشبكة الوعائية المشيمية</figcaption></figure>
+        <figure><img src="assets/bio/embryo/em6/img_03.jpg" alt="الزغابات"><figcaption>🌿 شكل3: تطور الزغابات المشيمية — أولية (يوم13) ← ثانوية (يوم15) ← ثالثية (يوم18–21) وفجوات بين زغابية</figcaption></figure>
+        <figure><img src="assets/bio/embryo/em6/img_04.jpg" alt="الخط البدني"><figcaption>📏 شكل4: تشكّل الخط البدني (أ) وتوغل الخلايا الخارجية (ب) — يوم 16–17</figcaption></figure>
+        <figure><img src="assets/bio/embryo/em6/img_05.jpg" alt="الحبل الظهري"><figcaption>🦴 شكل5: مراحل تشكّل الحبل الظهري انطلاقاً من عقدة هانسن</figcaption></figure>
+        <figure><img src="assets/bio/embryo/em6/img_06.jpg" alt="مقطع حبلية"><figcaption>✂️ شكل6: مقطع عرضي بمستوى ثقب القناة الحبلية (قناة ليبركوهن)</figcaption></figure>
+      </div>
+    </div>
+  </div>
+
+  <!-- ▓ الفصل 7: الأسبوع الرابع ▓ -->
+  <div class="acc-item" id="em6">
+    <button class="acc-btn" onclick="togBio(this)"><span class="acc-num">7</span> الفصل السابع: <b>الأسبوع الرابع</b> — الانفراد وانهياء العصبية <span class="acc-arrow">▼</span></button>
+    <div class="acc-body">
+      <h4>🌀 انفراد الجنين <span class="en">Individualisation</span></h4>
+      <ul>
+        <li>يتمثل في <b>التفاف بطني لحواف الجنين</b> يرتكز على المنطقة التي أصبحت <b>المنطقة السرية</b> — نتيجته: ينعزل الجنين عن الملحقات وبقاء ربطه بها فقط بالحبل السري = ما يسمى أيضاً <b>دوران الجنين</b>.</li>
+        <li>يؤدي النمو السريع للنسيج العصبي إلى دوران الطرف الرأسي نحو المنطقة البطنية · ونمو التجويف الأمينوسي من الناحية الذنبية — ويساهم نموهما المتقارب في الضغط التالي على كيس المح الثاني: <b>سقف كيس المح الثاني يشكل أنبوباً طولياً = المعي الابتدائي</b> · وما تبقى منه يشكل <b>الحويصلة المحية (السرية)</b> <span class="en">Vésicule vitelline</span> · وفي النهاية يحتل التجويف الأمينوسي كل الجوف العام الخارج جنيني (الجوف الكوريوني السيلومي) · وتصبح سويقة التثبيت في المنطقة البطنية مقابلةً لكيس المح الثاني = <b>الحبل السري الابتدائي</b> (المنباري والحويصل السري مغلفان بجدار الأمنيوس).</li>
+      </ul>
+      <h4>🧠 انتهاء تشكل العصبية</h4>
+      <ul>
+        <li>بانغلاق الأنبوب العصبي والثغرات الخلفية والأمامية (<b>اليوم 26 و28</b> على التوالي) — يعطي الأنبوب العصبي ما بعد: <b>الجهاز العصبي المركزي</b> حيث تصبح الناحية الرأسية للأنبوب أكثر عرضاً فتعطي <b>الدماغ</b> <span class="en">Encéphale</span> والباقي يعطي <b>النخاع الشوكي</b> <span class="en">Moelle épinière</span>، وفي نهاية الأسبوع الرابع تظهر 3 مناطق دماغية: <b>المخ الأمامي، المتوسط والخلفي</b>.</li>
+        <li><b>الأعراف العصبية:</b> تعطي ما بعد <b>الجهاز العصبي المحيطي</b> (العقد الشوكية والعصبونات).</li>
+      </ul>
+      <h4>🧩 تطور النسيج المتوسط وتمايز الخارجي</h4>
+      <ul>
+        <li><b>القرب محوري</b>: يتعرض النسيج المتوسط القرب محوري إلى تفلج قسامي مشكلاً <b>الجسيدات (القطع الظهرية)</b> <span class="en">Somites</span>: <b>7</b> أزواج في اليوم 22، <b>10</b> في اليوم 23، <b>14</b> في اليوم 25، و<b>25</b> زوجاً في اليوم 28 — وهي التي بدورها تنقسم إلى جزأين: عضلي وعظمي محوري محيطياً بالفقرات.</li>
+        <li><b>الجانبي الجسمي:</b> يكثر النسيج المتوسط الجانبي الجسمي فيرتفع معه النسيج الخارجي ليشكل <b>طليعة الأطراف</b>: طلائع الطرفين العلويين في اليوم 27 والسفليين في اليوم 28.</li>
+        <li><b>ظهور التشكيلات الخيشومية</b> أثناء الأسبوع الرابع على جدران المعي الأولي (النسيج الخارجي والداخلي) لتشكل الجهاز الخيشومي · <b>وتمايز النسيج الخارجي:</b> تشكّل الحويصلات الحسية (السمعية، الشمية والبصرية).</li>
+      </ul>
+      <div class="gal" data-gal="em6">
+        <figure><img src="assets/bio/embryo/em7/img_01.jpg" alt="انفراد الجنين"><figcaption>🌀 شكل1: مراحل انفراد الجنين ودورانه داخل التجويف الأمينوسي</figcaption></figure>
+        <figure><img src="assets/bio/embryo/em7/img_02.jpg" alt="القطع الظهرية"><figcaption>🧩 جنين إنسان يوم 23: تشكّل القطع الظهرية (الجسيدات — 10 أزواج) مع الثغرتين الأمامية والخلفية</figcaption></figure>
+        <figure><img src="assets/bio/embryo/em7/img_03.jpg" alt="جنين 28 يوم"><figcaption>👶 جنين يوم 28: طلائع الأطراف، التشكيلات الخيشومية والحويصلات الحسية</figcaption></figure>
+      </div>
+    </div>
+  </div>
+
+  <!-- ▓ الفصل 8: المظهر الخارجي والمقاطع ▓ -->
+  <div class="acc-item" id="em7">
+    <button class="acc-btn" onclick="togBio(this)"><span class="acc-num">8</span> الفصل الثامن: <b>المظهر الخارجي والمقاطع العرضية</b> لجنين 22–28 يوماً <span class="acc-arrow">▼</span></button>
+    <div class="acc-body">
+      <h4>👶 تطور المظهر الخارجي يوماً بيوم</h4>
+      <div class="table-wrap"><table class="cmp">
+        <tr><th>اليوم</th><th>أهم المعالم</th></tr>
+        <tr><td><b>22</b></td><td>قد الجنين <b>1.8 ملم</b> · بداية انغلاق الأنبوب العصبي (تحديد نصفيه الأمامي والخلفي) · تشكل <b>7</b> أزواج من القطع الظهرية</td></tr>
+        <tr><td><b>25</b></td><td>اكتمال انغلاق الأنبوب العصبي (بقاء ثقبين عصبيين مفتوحين) · ظهور بروز القلب في الجهة البطنية · اقتراب كيس المح 2 والردب المنباري ← أصل تكوين الحبل السري · <b>14</b> زوجاً من الجسيدات</td></tr>
+        <tr><td><b>27</b></td><td>قد <b>4 ملم</b> · ملاحظة البرعم الجبهي والذيل المنحني · انتفاخ بطني للقلب والكبد · انعزال الحبل في النهاية الأمامية (مستقبلاً النخامية/جيب راتك) المساهم في تكوين الجمجمة · 3 حويصلات دماغية · <b>15–25</b> زوجاً من الجسيدات</td></tr>
+        <tr><td><b>28</b></td><td>قد <b>4.25 ملم</b> ذو حدود واضحة، مغطى بالأمنيوس، يرتبط بالملحقات بالحبل السري · انغلاق الثغرات العصبية الخلفية والأمامية · ملاحظة الطلائع البصرية والسمعية، الأقراص الخيشومية والجسيدات · ظهور <b>عرف وولف</b></td></tr>
+      </table></div>
+      <h4>✂️ المقاطع العرضية لجنين يوم 28</h4>
+      <ul>
+        <li><b>على مستوى المنطقة فوق السرية (شكل4):</b> ظهور <b>الطلائع الأنتودرمية للكبد والبنكرياس</b> · أرومة علوية ظهرية، طلائع عقدية، أنبوب عصبي، حبل، أنبوب هضمي أمامي، قطع ظهرية، سيلوم جنيني، وريقتان (جسمية وحشوية جنينية)، جدار بطني مغلق + ملحقات (تجويف أمينوسي، أمنيوس، سيلوم خارجي).</li>
+        <li><b>على مستوى المنطقة تحت السرية (شكل5):</b> جدار بطني مغلق، تقارب الوريقتين الحشويتين (المساريقا الظهرية) التي عن طريقها <b>تهاجر المنسليات</b> ابتداءً من اليوم 28 · ظهور <b>الطليعة الكلوية</b> · طليعة كلوية وسيلوم جنيني والأبهر الظهري.</li>
+        <li><b>على مستوى المنطقة السرية (شكل6):</b> يظهر الجزء الضيق الذي يربط الأنبوب الهضمي والحويصل السري = <b>القناة السرية</b> ← تشكل <b>الحلقة السرية</b>.</li>
+        <li><b>مقطع سهمي كامل (شكل7):</b> تشكل الأنبوب العصبي وتمايز 3 حويصلات دماغية (أمامي، متوسط، خلفي) · ظهور طليعة الغدة النخامية · تواصل بين الأنبوب الهضمي والحويصل السري في منطقة الحبل السري · يحتوي الأنبوب الهضمي على طليعة بنكرياسية و<b>3 طلائع بطنية: درقية، رئوية وكبدية</b> · القلب من الجهة البطنية · ونتيجةً تحديدُ الجنين بالنسبة لملحقاته بتقارب الحويصل السري والردب المنباري.</li>
+      </ul>
+      <div class="gal" data-gal="em7">
+        <figure><img src="assets/bio/embryo/em8/img_01.jpg" alt="جنين 22 يوم"><figcaption>👶 شكل1: المظهر الخارجي لجنين يوم 22 (قدّ 1.8 ملم وأولى القطع الظهرية)</figcaption></figure>
+        <figure><img src="assets/bio/embryo/em8/img_02.jpg" alt="جنين 25 يوم"><figcaption>👶 شكل2: جنين يوم 25 — بروز القلب، ثقب عصبي خلفي مفتوح و14 زوجاً من الجسيدات</figcaption></figure>
+        <figure><img src="assets/bio/embryo/em8/img_03.jpg" alt="جنين 27-28"><figcaption>👶 شكل3: جنين يوم 27–28 — برعم جبهي، انحناء ذيلي، انتفاخ بطني (قلب وكبد)</figcaption></figure>
+        <figure><img src="assets/bio/embryo/em8/img_04.jpg" alt="مقطع فوق السرية"><figcaption>➕ شكل4: مقطع عرضي لجنين يوم 28 على مستوى المنطقة فوق السرية (طلائع كبدية وبنكرياسية)</figcaption></figure>
+        <figure><img src="assets/bio/embryo/em8/img_05.jpg" alt="مقطع تحت السرية"><figcaption>➕ شكل5: مقطع عرضي تحت المنطقة السرية — تقارب الوريقتين الحشويتين وطليعة كلوية</figcaption></figure>
+        <figure><img src="assets/bio/embryo/em8/img_06.jpg" alt="مقطع السرية"><figcaption>➕ شكل6: مقطع عرضي على مستوى المنطقة السرية — القناة السرية والحلقة السرية</figcaption></figure>
+        <figure><img src="assets/bio/embryo/em8/img_07.jpg" alt="مقطع سهمي"><figcaption>📐 شكل7: مقطع سهمي كامل لجنين يوم 27–28 — ثلاث حويصلات دماغية، قلب، طلائع درقية ورئوية وكبدية</figcaption></figure>
+      </div>
+    </div>
+  </div>
+
+  <!-- ▓ الفصل 9: التطور النهائي للملحقات ▓ -->
+  <div class="acc-item" id="em8">
+    <button class="acc-btn" onclick="togBio(this)"><span class="acc-num">9</span> الفصل التاسع: <b>التطور النهائي للملحقات الجنينية</b> — الوشيقة، الحبل السري، الكوريون والمشيمة <span class="acc-arrow">▼</span></button>
+    <div class="acc-body">
+      <ul>
+        <li><b>الردب المنباري (الوشيقة):</b> يتطور داخل سويقة التثبيت ويأخذ استطالة قليلة، وينتهي بالاجتماع مع الحويصل المحي لتكوين <b>الحبل السري الابتدائي</b>.</li>
+        <li><b>الحويصل السرية (المحية):</b> يختنق تجويف المح 2 خلال الأسبوع الرابع ويعطي المعي الابتدائي، والباقي يشكل الحويصل السري الذي يجتمع مع الردب المنباري لتكوين الحبل السري الابتدائي — <b>لا يحتوي تجويف المح 2 على مدخرات غذائية عند الإنسان</b> ويكون طوله صغيراً.</li>
+        <li><b>الغشاء الأمينوسي:</b> غشاء رقيق مقفل يحيط بالجنين من كل جانب على هيئة كيس مملوء بسائل هو <b>السائل الأمينوسي</b>؛ ينشأ في البداية من إفراز الخلايا الأمينوسية، ومعظم هذا السائل لاحقاً مصدره الأم، كما يشارك الجنين في صنعه وذلك بطرح البول والعرق ضمنه — يزداد حجمه مع نمو الجنين حتى يبلغ أشده في الشهر <b>7 (1.5 لتر)</b>، لكنه ينقص تدريجياً حتى يصير نحو لتر فقط قبل الولادة.</li>
+        <li><b>صفات السائل الأمينوسي:</b> شفاف في الأشهر الأولى ثم يميل إلى اللون الأبيض المصفر في نهاية الحمل · طعمه مالح ورائحته تشبه المني · تركيبه: <b>98–99% ماء</b> والبقية أملاح معدنية، بروتين، سكاكر، مخاط وبعض كريات الدم البيضاء · يبدأ الجنين بابتلاع السائل في الشهر الخامس حيث تمتصه أمعاؤه إلى مجرى دمه ومنه إلى المشيمة فدم الأم، وعن طريق جهازه البولي يطرحه ثانيةً في الكيس الأمينوسي — يستطيع الجنين في نهاية الحمل ابتلاع ما يقارب <b>400 ملل يومياً</b> · وقد يكون السائل قليلاً جداً (<b>نقص السائل</b>: حالات شاذة لا يستطيع فيها الابتلاع كشذوذ الجهاز العصبي المركزي أو الهضمي كانسداد المريء) أو كثيراً فيؤدي إلى <b>الاستسقاء الأمينوسي</b> (تكون كميته أكثر من <b>1500 ملل</b>، وأحياناً مصطبغاً باللون الأحمر) وقد يرجع ذلك إلى موت الجنين.</li>
+        <li><b>فوائده أثناء الحمل:</b> تغذية الجنين (مواد سكرية وغير عضوية يمتصها الجنين قيئمو) · حماية ووقاية من الصدمات المفاجئة والحركات العنيفة للأم · حرية حركة الجنين (نمو جهازه العضلي) · حفظ درجة حرارة الجنين · منع التصاق الجنين بالغشاء الأمينوسي ومنع التشوهات. <b>وأثناء الولادة:</b> توزيع الضغط الناتج عن تقلص الرحم بشكل متساوٍ · توسيع عنق الرحم · يساهم في تحريض المخاض لاحتوائه على مواد مذيبة للتقلص الرحمي. <b>ومن دراسته:</b> تحديد جنس الجنين · معرفة الشذوذات الجنسية · التشخيص المبكر للأمراض المرتبطة بالجنس · تحديد زمرة دم الجنين.</li>
+        <li><b>الحبل السري:</b> يجتمع الردب المنباري، الحويصل المحي (الذي يصغر كثيراً)، والأوعية الدموية التي تشكلت في الكوريون داخل ميزوديرم سويقة التثبيت (الوريقة المتوسطة الخارج جنينية) المحاطة بالأمنيوس ← يتشكل الحبل السري الذي يربط الجنين بالمشيمة: يصل طوله حوالي <b>50 سم</b> وسمكه <b>1.5 سم</b>، ويحتوي على <b>شريانين سريين</b> ينقلان الدم من الجنين إلى المشيمة، و<b>وريداً سرياً واحداً</b> ينقل الدم من المشيمة إلى الجنين.</li>
+        <li><b>الكوريون:</b> يسمى أيضاً الميزونشيم أو الميزوديرم الخارج جنيني، هو عبارة عن الغشاء الخارجي في الأغشية الجنينية؛ ينشأ من طبقة الخلايا المغذية للحويصل الأصلي — في البداية يكون الكوريون كله مغطى بالزغابات الأولية، ولاحقاً تختفي ويحل محلها الزغابات الثانوية ثم الثلاثية التي تغطي جزءاً منه فقط، ويساهم هذا الجزء في تكوين <b>المشيمة</b>.</li>
+        <li><b>المشيمة:</b> جزء جنيني (يتشكل من كوريون البلاستوسيست من جهة) + جزء من رحم الأم (مخاطية الرحم من جهة أخرى)؛ تبدأ المشيمة في التشكل عند نهاية الأسبوع الثاني من المدمج الخلوي الذي يمتد كثيراً بعد جرفه لمخاطية الرحم وتبدو متحدةً معها، وتحفر فيه فجوات تُسقى عن طريق الأوعية الدموية الرحمية للأم؛ ومنذ الأسبوع الثالث تتطور زغابات الكوريون التي تكبر وتسبح في الفجوات الممتلئة بدم الأم — وتتواجد هذه الزغابات عند الإنسان في منطقة سويقة التثبيت فقط وتدوم في هذه <b>المنطقة القرصية</b> فقط · تظهر أوعية دموية داخل الزغابات الكوريونية تتشابك فيما بعد بالأوعية السرية الصادرة من الجنين = <b>مشيمة دموية-كوريونية</b>: يمر دم الجنين إلى المشيمة عن طريق الشريانين السريين وينتقل عبر أوعية الزغابات المشيمية ثم يعود إلى الجنين عن طريق الوريد السري؛ بينما يتدفق دم الأم من الشريانين الرحميين إلى الفجوات الدموية حيث تسبح فيها زغابات المشيمة.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ▓ الفصل 10: مصير الوريقات ▓ -->
+  <div class="acc-item" id="em9">
+    <button class="acc-btn" onclick="togBio(this)"><span class="acc-num">10</span> الفصل العاشر: <b>التطور النهائي للوريقات الجنينية الثلاث</b> — خريطة المصير <span class="acc-arrow">▼</span></button>
+    <div class="acc-body">
+      <h4>🗂️ خريطة مصير الوريقات الثلاث</h4>
+      <div class="table-wrap"><table class="cmp">
+        <tr><th>الوريقة</th><th>المسار</th><th>ما تعطيه لاحقاً</th></tr>
+        <tr><td rowspan="3"><b>الخارجية</b><br><span class="en">Ectoderme</span></td><td>النسيج العصبي ← الأنبوب العصبي</td><td>الدماغ (أمامي، متوسط، خلفي) + تحت السرير البصري + النخاع الشوكي</td></tr>
+        <tr><td>الأعراف العصبية</td><td>العقد والأعصاب الدماغية والحسية + الخلايا الملونة</td></tr>
+        <tr><td>بقية النسيج</td><td>البشرة الجلدية ومشتقاتها (شعر، أظافر، غدد جلدية) + أعضاء الحس (أنف، أذن، عين) + غدة الثدي + ميناء الأسنان + الغدة النخامية</td></tr>
+        <tr><td rowspan="3"><b>المتوسطة</b><br><span class="en">Mésoderme</span></td><td>قرب المحوري</td><td>الجمجكة + العمود الفقري (عظام) + العضلات المخططة</td></tr>
+        <tr><td>حشوي</td><td>الجهاز البولي والتناسلي</td></tr>
+        <tr><td>جانبي: جسمي / حشوي + خارج جنيني</td><td>جسمي: شغاف القلب + الأطراف · حشوي: العضلات الملساء + القلب · خارج جنيني: الخلايا الدموية ومكونات الدم</td></tr>
+        <tr><td><b>الداخلية</b><br><span class="en">Endoderme</span></td><td colspan="2">الجهاز التنفسي (الرئتان) + الجهاز الهضمي والغدد الملحقة (الكبد والبنكرياس) + المثانة والغدة الدرقية</td></tr>
+      </table></div>
+      <div class="gal" data-gal="em9">
+        <figure><img src="assets/bio/embryo/em10/img_01.jpg" alt="مصير الوريقات"><figcaption>🗂️ خريطة مصير الوريقات الجنينية الثلاث: الخارجية (إكتودرم)، المتوسطة (ميزودرم)، الداخلية (أنتودرم)</figcaption></figure>
+      </div>
+      <p class="def">✅ بهذا يكتمل مقرر علم الأجنّة: من الوظيفة الجنسية وتنظيمها الهرموني، إلى الإلقاح والتفلج والتعشيش، فتشكل الوريقات الثلاث وانفراد الجنين وملحقاته، وصولاً إلى خريطة مصير كل ورقة جنينية — والخطوة الموالية هي التعضي <span class="en">Organogenèse</span> بإذن الله.</p>
+    </div>
+  </div>
+
+  </div><!-- /acc-list unitEmbryologie -->
+</section>
+
+<!-- ═══════════ الوحدة 4: علم الأنسجة ═══════════ -->
+<section class="unit" id="unitHistologie">
+  <div class="unit-head">
+    <span class="unit-ico">🧪</span>
+    <div>
+      <h2>الوحدة الرابعة: علم الأنسجة <span class="en">Histologie</span></h2>
+      <p>طلائية، ضامة، عضلية، عصبية + ورشة مخبرية للطلائية — بيولوجيا الحيوان (أ. عميرة · سنة أولى)</p>
+    </div>
+    <span class="unit-tag tag-on">✅ متوفرة الآن</span>
+  </div>
+
+  <div class="acc-list">
+
+  <!-- ▓ الفصل 1 (مجاني): الأنسجة الطلائية ▓ -->
+  <div class="acc-item" id="hi0">
+    <button class="acc-btn" onclick="togBio(this)"><span class="acc-num">1</span> الفصل الأوّل: <b>الأنسجة الطلائية</b> <span class="en">Epithelial tissue</span> <span class="acc-arrow">▼</span></button>
+    <div class="acc-body">
+      <h4>📖 تعريفها ومميزاتها ووظيفتها</h4>
+      <p class="def">مجموعة من الخلايا تغطي <b>السطوح الخارجية</b> أو تبطّن <b>السطوح الداخلية</b> لوظيفة الوقاية، ومنها ما يتخصص بوظائف أخرى — تتكون عموماً من صف واحد أو أكثر من الخلايا <span class="en">Cells</span>، والمادة البينية <span class="en">Matrix</span> تكاد تنعدم فيها، أما الألياف <span class="en">Fibers</span> فمنعدمة.</p>
+      <ul>
+        <li><b>مميزاتها:</b> تنشأ من الطبقات الجنينية الثلاث (إكتودرم، ميزودرم، أندودرم) · خلايا متالصقة بروابط خلوية · تستقر على <b>الغشاء القاعدي</b> <span class="en">Basement membrane</span> الذي يفصلها عن النسيج الضام · تتكاثر لتعويض خلاياها التالفة · <b>لا تحتوي على أوعية دموية ولا على ألياف عصبية</b>.</li>
+        <li><b>وظيفتها:</b> الحماية (ميكانيكية كالجلد أو كيميائية كطالئية المعدة) · الإفراز (الغدد) · الامتصاص (طالئية الأمعاء) · استقبال مؤثرات حسية (أعضاء الحس) · النقل (الأوعية الدموية) · الحركة (أهداب طالئية قناة فالوب) · الطرح (العرق) · التكاثر (الغدد الجنسية).</li>
+      </ul>
+      <h4>🛡️ أولاً: الأنسجة الطلائية الواقية <span class="en">Lining epitheliums</span></h4>
+      <p class="def">تُصنّف حسب شكل الخلايا (<b>حرشفية</b>: عرضها أكبر من طولها · <b>مكعبة</b>: طول = عرض · <b>عمودية</b>: طول أكبر من عرض) وحسب عدد طبقاتها (<b>بسيطة</b> صف واحد · <b>مركبة</b> أكثر من صف).</p>
+      <ul>
+        <li><b>بسيطة حرشفية <span class="en">Squamous</span>:</b> خلايا مفلطحة قرصية، حوافها بسيطة أو متعرجة، تظهر مغزلية في القطاع العرضي مع نواة كروية مركزية — بطانة محافظ بومان في الكلية، الأوعية الدموية واللمفية، حويصلات الهواء (الرئتان)، والغشاء المبطن للتجويف الجسمي <span class="en">Le peritonea</span>.</li>
+        <li><b>بسيطة مكعبة <span class="en">Cuboidal</span>:</b> خلايا مربعة في القطاع العرضي بنواة مركزية مستديرة — أنيببات الكلية، حويصلات الدرقية، شبكية العين، قنوات الغدد خارجية الإفراز (لعابية، بنكرياسية)، المبيض.</li>
+        <li><b>بسيطة عمودية <span class="en">Columnar</span>:</b> خلايا طويلة كالأعمدة بنواة بيضاوية ذات موقع قاعدي — تبطّن القناة الهضمية من المعدة حتى المستقيم، المرارة، قناة فالوب، البربخ والرحم.</li>
+        <li><b>بسيطة مصففة كاذبة <span class="en">Pseudostratified</span>:</b> نوعان من الخلايا: طويلةً نهاياتها الداخلية ضيقة والخارجية عريضة، وصغيرةً مخروطيةً محصورة بين قواعد النوع الأول لا تبلغ السطح — تقع الأنوية بمستويين فتبدو كأنها مركّبة وهي في الحقيقة صف واحد — تبطن بعض الغدد (النكفية)، الوعاء الناقل، الأنف والقصبة الهوائية.</li>
+      </ul>
+      <ul>
+        <li><b>مركبة حرشفية:</b> عدة طبقات: خلايا العميقة عمودية بنوى بيضوية، الوسطية مضلعة بنوى مستديرة، والسطحية مسطحة حرشفية بنوى متطاولة — بطانة الفم، البلعوم، المريء، المهبل والشرج (بدون كيراتين) وبشرة الجلد واللسان (بكيراتين).</li>
+        <li><b>مركبة مكعبة:</b> الطبقة العليا مكعبة والباقية متعددة الأضلاع — تبطن الغدد العرقية، الدهنية، البنكرياسية واللعابية.</li>
+        <li><b>مركبة عمودية:</b> كالمكعبة عدا أن طبقتها الخارجية عمودية — تبطن بعض القنوات الإخراجية (المجرى البولي للذكر/الإحليل) والحنجرة.</li>
+        <li><b>انتقالية (متحولة) <span class="en">Transitional</span>:</b> لأعضاء جدرانها مرنة كالمثانة والحالب — ممتلئةً تبدو بطانتها بطبقات قليلة صغيرة، ومرتخيةً تبدو كعدة طبقات أسطحُ خلاياها الخارجية محدبة، مع كثرة المادة بين الخلوية التي تسمح بانزلاق الخلايا أثناء التمدد.</li>
+      </ul>
+      <p class="def">🔄 <b>تحورات تركيبية:</b> خلايا بأصباغ (<b>ميلانين</b> <span class="en">Melanin</span> في خلايا الميلانوسيت تعطي البشرة لونها وتحمي من الأشعة فوق البنفسجية، و<b>الكيراتين</b> <span class="en">Keratin</span> في الكيراتينوسيت لحماية من الحر والبرد) · <b>أهداب</b> <span class="en">Cilia</span> (قناتَي البيض والبربخ = عمودي بسيط، والقصبة والأنف = مصففة كاذبة) · <b>زغيبات</b> <span class="en">Villi</span> (امتدادات مجهرية إصبعية الشكل تزيد سطح الامتصاص — الأمعاء الدقيقة = عمودي بسيط).</p>
+      <h4>🧪 ثانياً: الأنسجة الطلائية الغدّية <span class="en">Glandular epitheliums</span></h4>
+      <p class="def">أنسجة طلائية إفرازية تكوّن تراكيب تُعرف ب<b>الغدد</b> تنشأ من الأسطح الطلائية عن طريق الانغماد في النسيج الضام تحتها، ووظيفتها الأساسية: <b>الإنتاج والإفراز</b>.</p>
+      <ul>
+        <li><b>حسب وسط الإفراز:</b> <b>خارجية الإفراز (قنوية) <span class="en">Exocrine</span></b> تطرح مفرزاتها عبر قنوات داخل الجسم (مخاطية، لعابية) أو خارجه (لبنية، عرقية، دهنية) · <b>داخلية الإفراز (صماء/لاقنوية) <span class="en">Endocrine</span></b> تطرح مفرزاتها (هرمونات) مباشرة في الدم عبر أوعية دموية بدون قنوات (درقية، نخامية، تناسلية، كظر) · <b>مختلطة <span class="en">Mixed</span></b> ذات إفراز داخلي وخارجي (كبد، بنكرياس).</li>
+        <li><b>حسب شكل القناة:</b> <b>أنبوبية <span class="en">Tubular</span></b>: بسيطة (معوية) · ملتفة <span class="en">Spiral</span> (عرقية) · متفرعة <span class="en">Branched</span> (معدية) · مركبة <span class="en">Compound</span> (دمعية) — <b>حويصلية <span class="en">Alveolar</span></b>: بسيطة (مخاطية) · متفرعة (دهنية) · مركبة (ثديية، نكفية) — <b>أنبوبية-حويصلية <span class="en">Tubulo-Alveolar</span></b> (لعابية، بنكرياس خارجي).</li>
+        <li><b>حسب طبيعة المادة المفرزة:</b> هرمونات وإنزيمات (صماء)، دموع (دمعية)، عرق (عرقية)، مخاط (مخاطية)، دهن (دهنية)، لبن (لبنية)، لعاب (لعابية)...</li>
+        <li><b>حسب أسلوب الإفراز:</b> <b>كلي <span class="en">Holocrine</span></b>: تنفجر الخلية بأكملها لتفرغ محتوياتها فتموت وتُستبدل (الغدد الدهنية) · <b>قمّي <span class="en">Apocrine</span></b>: يتآكل الغشاء في قمة الخلية الإفرازية ليخرج الإفراز ثم يُرمَّم وتعود الخلية لطبيعتها (لبنية، عرقية) · <b>حبيبي <span class="en">Mérocrine</span></b>: طرح المواد على شكل حبيبات إفرازية دون أي تلف لغشاء البلازما (لعابية، بنكرياس خارجي، بعض الصماء).</li>
+        <li>📌 كل الغدد السابقة <b>متعددة الخلايا</b>؛ وتوجد غدد <b>وحيدة الخلية</b> كالخلية الكأسية <span class="en">Goblet cell</span> الموجودة بين خلايا طلائية القصبة والقناة الهضمية لإفراز المخاط.</li>
+      </ul>
+      <h4>🩸 التغذية والتجديد</h4>
+      <p class="def">لا تحتوي الأنسجة الطلائية على أوعية دموية — تتم تغذيتها عن طريق أوعية النسيج الضام <b>بالانتشار</b> عبر الغشاء القاعدي (البسيطة والمصففة الكاذبة)، أما المركبة فعن طريق <b>الحليمات الوعائية</b> <span class="en">Vascular papillae</span> دون إتلاف الغشاء القاعدي. وتتجدد عن طريق خلايا أصلية طويلة العمر قوية الانقسام — مثال: <b>48 ساعة</b> لطالئية الأمعاء، و<b>40 يوماً</b> لقناتي فالوب.</p>
+      <div class="gal" data-gal="hi0">
+        <figure><img src="assets/bio/histo/h1/img_01.jpg" alt="أنواع الطلائية"><figcaption>🔲 شكل1: الطلائية البسيطة (حرشفية، مكعبة، عمودية، مصففة كاذبة) والمركبة (حرشفية، مكعبة، عمودية، انتقالية)</figcaption></figure>
+        <figure><img src="assets/bio/histo/h1/img_02.jpg" alt="أهداب وزغيبات"><figcaption>🌾 شكل2: تحوّرات الأنسجة الطلائية — الزغيبات (امتصاص) والأهداب (حركة)</figcaption></figure>
+        <figure><img src="assets/bio/histo/h1/img_03.jpg" alt="انغماد الغدد"><figcaption>🕳️ شكل3: انغماد الأسطح الطلائية الواقية في النسيج الضام لتكوين الغدد</figcaption></figure>
+        <figure><img src="assets/bio/histo/h1/img_04.jpg" alt="خارجية وداخلية الإفراز"><figcaption>🔬 شكل4: الغدد خارجية الإفراز (قنوات ناقلة) وداخلية الإفراز (خلايا طلائية حول أوعية دموية)</figcaption></figure>
+        <figure><img src="assets/bio/histo/h1/img_05.jpg" alt="غدد أنبوبية"><figcaption>🧪 شكل5: الغدد أنبوبية القناة — بسيطة (معوية)، ملتفة (عرقية)، متفرعة (معدية)، مركبة (دمعية)</figcaption></figure>
+        <figure><img src="assets/bio/histo/h1/img_06.jpg" alt="غدد حويصلية"><figcaption>🧪 شكل6: الغدد حويصلية القناة — بسيطة (مخاطية)، متفرعة (دهنية)، مركبة (ثديية ونكفية)</figcaption></figure>
+        <figure><img src="assets/bio/histo/h1/img_07.jpg" alt="أنبوبية حويصلية"><figcaption>🧪 شكل7: الغدد أنبوبية-حويصلية (اللعابية والبنكرياس الخارجي)</figcaption></figure>
+        <figure><img src="assets/bio/histo/h1/img_08.jpg" alt="أساليب الإفراز"><figcaption>💧 شكل8: أساليب الإفراز — كلي (تموت الخلية)، قمّي (تنفصل القمة)، حبيبي (بلا تلف)</figcaption></figure>
+        <figure><img src="assets/bio/histo/h1/img_09.jpg" alt="خلية كأسية"><figcaption>🔬 شكل9: الخلية الكأسية (<span class="en">Cellule à mucus</span>) بين خلايا الطلائية — غدة وحيدة الخلية</figcaption></figure>
+      </div>
+    </div>
+  </div>
+
+  <!-- ▓ الفصل 2 (مجاني): الأنسجة الضامة ▓ -->
+  <div class="acc-item" id="hi1">
+    <button class="acc-btn" onclick="togBio(this)"><span class="acc-num">2</span> الفصل الثاني: <b>الأنسجة الضامة</b> <span class="en">Connective Tissue</span> <span class="acc-arrow">▼</span></button>
+    <div class="acc-body">
+      <h4>📖 تعريفها ومميزاتها</h4>
+      <p class="def">مجموعة من الخلايا وظيفتها الأساسية <b>ربط أجزاء الجسم</b> المختلفة بعضها ببعض، مع إسناد أجزائه — لذلك يطلق عليه أيضاً <b>النسيج الساند</b>؛ ويتكون من ثلاثة عناصر تنتجها الخلايا نفسها: <b>خلايا</b> (غير مرتبطة) + <b>ألياف</b> + <b>مادة أساسية</b> <span class="en">Matrix</span>.</p>
+      <ul>
+        <li><b>مميزاتها:</b> تنشأ من الطبقة الوسطى (الميزودرم) · خلاياها متباعدة بينها المادة الأساسية والألياف · غنية بالأوعية الدموية · لا توجد على السطح ولا ترتكز على غشاء قاعدي · عدد خلاياها قليل.</li>
+        <li><b>وظيفتها:</b> ربط الأنسجة والأعضاء وتدعيمها · تكوين الغضاريف والعظام · الدفاع عن الجسم (الخلايا البلعمية الكبيرة) · خزن الدهون · منع تجلط الدم في الأوعية (الخلايا الصارية).</li>
+        <li><b>تصنيفها:</b> <b>النسيج الضام الأصيل</b> (شبه سائلة) و<b>المتخصص</b>: <b>هيكلي</b> (غضروف شبه صلبة، عظم صلبة) و<b>وعائي</b> (دم ولمف سائلة).</li>
+      </ul>
+      <h4>🧵 أولاً: النسيج الضام الأصيل</h4>
+      <ul>
+        <li><b>الألياف (3 أنواع):</b> <b>الغروية/البيضاء <span class="en">Collagen</span></b>: حزم متوازية غير متفرعة تحتوي الكولاجين؛ ليّنة قابلة للانثناء لكنها غير مرنة، تعطي القوة والصلابة (أوتار وأربطة لتحمل الصدمات) — <b>المرنة/الصفراء <span class="en">Elastic</span></b>: تتفرع وتمتد منفردة ويمكنها الاستطالة حتى <b>250%</b> من طولها الأصلي بفضل بروتين المطاطين (رئتان، أدمة، شرايين) — <b>الشبكية <span class="en">Reticuline</span></b>: شبكة رقيقة متشعبة حول الألياف العضلية والخلايا العصبية وخلايا الكبد والخلايا الدهنية والنسيج اللمفاوي تعطي الدعامة (نفس طبيعة الكولاجين لكنها أقل سمكاً = ألياف بيض فتية).</li>
+        <li><b>المادة الأساسية:</b> عديدات سكر مخاطية <span class="en">Mucopolysaccharides</span> بقوام مخاطي شبه سائل + ماء، بروتينات، سكريات وأملاح معدنية.</li>
+        <li><b>الخلايا الثابتة</b> (تنشأ وتستقر في النسيج حتى زوالها): <b>الليفية <span class="en">Fibroblasts</span></b> (الأكثر انتشاراً — كبيرة متفرعة تفرز الألياف والمادة الأساسية) · <b>الدهنية <span class="en">Adipocytes</span></b> (تختزن الدهن في فجوة كبيرة فتندفع نواتها جانباً جوار الغشاء ← شكل الخاتم) · <b>خلايا النسيج المتوسط <span class="en">Mesenchymal</span></b> (جنينية غير متمايزة لترميم وتجديد النسيج).</li>
+        <li><b>الخلايا المهاجرة</b> (ك.د.ب = تتكون في أعضاء أخرى ثم تهاجر): <b>البلعمية الكبيرة <span class="en">Macrophages</span></b> (أقدام كاذبة؛ تنشط أثناء الالتهابات فتكبر وتبتلع الأجسام الغريبة والجراثيم وتهضمها بإنزيماتها) · <b>الصارية <span class="en">Mast cells</span></b> (جلدية تحيط بالأوعية — تفرز الهيبارين المانع للتجلط والهستامين لتفاعلات الحساسية) · <b>البالزمية <span class="en">Plasma</span></b> (تنتج الأجسام المضادة — لمفاوية، جدار القناة الهضمية، الرحم) · <b>اللمفاوية <span class="en">Lymphocytes</span></b> (مناعة خاصة أثناء الالتهابات الفيروسية — جهاز لمفاوي: طحال وعقد لمفاوية ودم) · <b>الحامضية <span class="en">Eosinocyte</span></b> (محبة للأصباغ الحامضة — نواة ذات فصين وحبيبات سيتوبلازمية).</li>
+      </ul>
+      <div class="table-wrap"><table class="cmp">
+        <tr><th>نوع الأصيل</th><th>مميزاته</th><th>موقعه ووظيفته</th></tr>
+        <tr><td><b>الفجوي (الهالي)</b> <span class="en">Areolar</span></td><td>جميع الألياف بنسب متفاوتة · فجوات (هالات) بتحلل المادة بين الخلوية · أشهر خلاياه الليفية · مادة كثيرة لزجة</td><td>مرونة الأعضاء (يزول الضغط بزوال مؤثره) · تغليف الأوعية، ما تحت الجلد، القناة الهضمية</td></tr>
+        <tr><td><b>المرن (المطاطي)</b></td><td>قلة الخلايا وكثافة الألياف الصفراء على البيضاء</td><td>أعضاء تحتاج مرونة وقوة: الأربطة الصفراء، الحبال الصوتية، الرئتين، جدران الشرايين والرحم</td></tr>
+        <tr><td><b>الدهني</b> <span class="en">Adipose</span></td><td>قلة المادة الأساسية معوَّضة بكثرة الخلايا الدهنية · بيضاء وبعض الشبكية</td><td>إعطاء الطاقة (تحويل أحماض أمينية وجلوكوز إلى دهون) · تقليل استهلاك الماء · حماية الكليتين وتثبيتهما وتثبيت العين في محجرها · تنظيم الحرارة (تحت الجلد، حول الكلية والعين، المساريقا)</td></tr>
+        <tr><td><b>الشبكي</b></td><td>كثرة الشبكية + بعض البيضاء · خلايا متفرعة متصلة بشكل شبكي · مادته الأساسية هي اللمف</td><td>حماية ودعامة: العقد اللمفاوية، الطحال، الكبد، نخاع العظام، اللوزتان، غدة الثيموس</td></tr>
+        <tr><td><b>المخاطي</b></td><td>خلايا قليلة نجمية ليفية مبعثرة · مادة مخاطية كثيرة · غروية قليلة فقط (لا مرنة ولا شبكية)</td><td>جنيني — يشاهد في <b>الحبل السري</b> فقط (غير موجود عند البالغ)</td></tr>
+        <tr><td><b>الليفي</b></td><td>ألياف غروية يتخللها قليل من المرنة · خلايا ليفية · تترتب في حزم متوازية</td><td>قوة النسيج: أربطة المفاصل، أوتار العضلات، أدمة الجلد، سمحاق العظام</td></tr>
+      </table></div>
+      <h4>🦴 ثانياً: النسيج الضام المتخصص — الهيكلي</h4>
+      <ul>
+        <li><b>الغضروف <span class="en">Cartilage</span>:</b> نسيج ضام هيكلي مرن، يكون في الجنين ثم يتحول معظمه إلى عظام؛ مادته الخاللية شبه صلبة تتركب من بروتين <b>الكوندرين</b> تفرزه خلايا <b>الكوندروسيت</b> — خلاياه: كوندروبالست (مولدة) وكوندروسيت (ناضجة) تقع في <b>محافظ</b> صغيرة (كل محفظة عدة خلايا حتى 8)؛ <b>لا يحتوي أوعية دموية ولا أعصاب</b> ويحيط به <b>الغشاء الغضروفي</b> الذي يضمن تغذيته بالانتشار. ينشأ من الميزودرم بتمايز خلاياه إلى كوندروبالست تكوّن الألياف والمادة الأساسية — ويتدهور حسب السن (نقص الخلايا فالمادة)، والتكلس (ترسب فوسفات وكربونات الكالسيوم)، وذوو الوزن الزائد والرياضيون أكثر عرضة للتلف بكثرة الاحتكاك.</li>
+        <li><b>أنواع الغضروف (3):</b> <b>الزجاجي الشفاف <span class="en">Hyalin</span></b> (الأكثر انتشاراً؛ مادة خاللية شفافة كالزجاج بها قليل من ألياف الكولاجين ويندر وجود ألياف، ويحيط به الغالف الغضروفي — هيكل جنيني، قصبة، أنف، أذن داخلية، مفاصل، حنجرة) · <b>الليفي <span class="en">Fibrous</span></b> (كثرة الألياف البيضاء لمقاومة الضغوط القوية؛ قليل الخلايا؛ <b>بدون غشاء غضروفي</b> — مرحلة انتقالية؛ أقراص بين الفقرات، وعند تآكله يضغط على العصب الشوكي مسبباً آلاماً حادة بالعنق والظهر) · <b>المرن <span class="en">Elastic</span></b> (غني بالألياف الصفراء المرنة — بين المفاصل، صوان الأذن، جناحَي الأنف، لسان المزمار).</li>
+        <li><b>العظم <span class="en">Bone</span>:</b> أعلى درجات التخصص بين الأنسجة الرابطة — نسيج صلب يكون معظم هيكل أجسام الفقاريات العليا؛ صفته المميزة: وجود <b>الأملاح اللاعضوية (المعدنية)</b> في مادته الأساسية (فوسفات وكربونات الكالسيوم) وهي سبب صلابته؛ يحاط بغالف خارجي <b>سمحاق عظمي</b> وغالف داخلي (كلاهما نسيج ضام ليفي) وتملأ فراغاته الداخلية ب<b>نخاع العظم</b>؛ خلاياه: <b>أوستيوبالست</b> (بانية مولدة)، <b>أوستيوسيت</b> (ناضجة)، <b>أوستيوكالست</b> (هادمة).</li>
+        <li><b>أنواعه:</b> <b>إسفنجي <span class="en">Spongy</span></b> (مادته شبكة حواجز دقيقة غير منتظمة تتفرع وتلتقي؛ سطح حواجزه أعداد كبيرة من الخلايا البانية وبينها هادمة متعددة الأنوية (اتحاد خلايا بانية غير فعالة)، والناضجة في فجوات؛ مملوء بنخاع العظم — فقرات وعظام منبسطة كالجمجمة ولوح الكتف) · <b>كثيف مصمت <span class="en">Compact</span></b>: وحدات متكررة = <b>جهاز هافرس <span class="en">Havers System</span> (الأستيون)</b> — قناة هافرس تتوسط الجهاز موازيةً محور العظم الطولي (أوعية لمفاوية وأعصاب) · يحيط بها 4–20 <b>صفائح عظمية</b> <span class="en">Bone Lamellae</span> مستديرة (مادة بين خلوية من كالسيوم وأملاح فوسفور = الصلابة) · بين الصفائح <b>الخلايا العظمية</b> داخل محافظ <span class="en">Gaps</span> تبرز منها <b>لقيبات</b> <span class="en">Canaliculi</span> دقيقة في كل الاتجاهات توصل المحافظ ببعضها وبقناة هافرس مشكلة شبكة نقل (غذائية، أكسجين، فضلات) · + قنوات فولكمان (مقاطع طولية) تربط قنوات هافرس ببعضها · أجهزة لاهافرسية توجد بين أجهزة هافرس ولا تحتوي قنوات — <b>العظام الطويلة (ساعد، فخذ، ساق)</b>.</li>
+        <li><b>التعظم:</b> <b>غشائي <span class="en">Membranous</span></b> (يحل العظم محل نسيج ضام أصيل ليفي ضمن غشاء: تتمايز خلايا النسيج المتوسط إلى بانية للعظم تفرز المادة الأساسية كحواجز ويزيد ترسب الأملاح فتتحول لمادة عظمية ثم تتمايز البانية إلى ناضجة — مثل: <b>عظام الجمجمة</b>) · <b>غضروفي <span class="en">Cartilaginous</span></b> (يحل محل الغضروف الزجاجي الشفاف: بانية غضروف ← بانية عظم ← مادة أساسية ← تكلس ← موت الخلايا الغضروفية الناضجة؛ تتمدد أوعية غالف الغضروف وتتمركز في الوسط، ثم تتمايز البانية إلى ناضجة وتتشكل القنيات — مثل: <b>العظام الطويلة</b>). <b>أنواع العظام حسب الشكل:</b> قصيرة (رسغ اليد والقدم، كاحل) · مفلطحة (ضلوع) · طويلة (فخد، ساق) · غير منتظمة (فقرات) · هوائية (جبهة وجانبَي الجمجمة).</li>
+      </ul>
+      <h4>🩸 ثالثاً: النسيج الضام الوعائي — الدم <span class="en">Blood</span></h4>
+      <ul>
+        <li><b>عموميات:</b> سائل مائع ذو <span class="en">pH</span> متعادل (7.4)، أحمر متغير حسب كمية الأكسجين؛ حجمه عند البالغ نحو <b>5 لتر</b> (6–7% من وزن الجسم) — يتكون من: كريات حمراء + كريات بيضاء + صفائح (<b>45%</b>) وبلازما (<b>55%</b>).</li>
+        <li><b>كريات الدم الحمراء:</b> أقراص مقعرة الوجهين <b>عديمة النواة</b> (في الثدييات) قطرها 7.5µm وسمكها 2.5µm؛ عددها ~<b>5 ملايين/مم³</b> في الرجل و4.5 مليون في المرأة؛ تركيزها مساوٍ لتركيز البلازما؛ لها غشاء مرن يمررها في الشعيرات الدموية — محتوياتها <b>الهيموجلوبين</b>: جزيء بروتيني (غلوبين 95%) يحتوي عنصر الحديد (<b>هيم 4 ذرات 5%</b>) — ينقل الأكسجين من الرئة إلى الأنسجة وثاني أكسيد الكربون من الأنسجة إلى الرئة؛ مكان تكونها <b>النخاع الأحمر للعظم</b>؛ مدة حياتها <b>120 يوماً</b> ثم تموت وتتحطم في الطحال والكبد، ويصغر حجمها مع تقدم عمرها.</li>
+        <li><b>كريات الدم البيضاء</b> (5000–10000/مم³، وتزداد لأضعاف عند الالتهاب): <b>وحيدة النواة</b> (عديمة الحبيبات): <b>اللمفوسيت</b> 20–30% (صغيرة 6–12µm بسيتوبلازم قليل؛ تنتج الأجسام المضادة؛ تزداد في السرطانات؛ نخاع العظم والعقد اللمفاوية؛ نوعان λt وλb تتمايز الأخيرة إلى بالزموسيت) · <b>المونوسيت</b> 3–8% (أكبر الكريات ~20µm بنواة كلوية الشكل أو حذوة حصان؛ تزداد في المالاريا؛ لا تبقى في الدورة بل تهاجر للأنسجة وتتمايز إلى <b>بالعات Macrophages</b>) — <b>متعددة النواة (محببة)</b>: <b>المتعادلة <span class="en">Neutrophils</span></b> 65–75% (تصبغ بالأصباغ المتعادلة، 7–9µm بنواة مفصصة؛ تبتلع الميكروبات وتهضمها بليزوزوماتها = <b>خط الدفاع الأول</b>) · <b>الحامضية <span class="en">Eosinophils</span></b> 2–4% (تصبغ بالأصباغ الحامضة؛ أكبر حجماً 9–10µm نواتها ذات فصين؛ نخاع العظم الأحمر) · <b>القاعدية <span class="en">Basophils</span></b> 0.5–1% (تصبغ بالأصباغ القاعدية؛ أقل الكريات عدداً؛ النواة تملأ أغلب حيز الخلية وحبيباتها تحتوي <b>الهستامين والهيبارين</b>).</li>
+        <li><b>الصفائح الدموية <span class="en">Platelets</span>:</b> أجسام سيتوبلازمية بلا لون وبلا أنوية (في الثدييات)، شكلها غير منتظم قطرها 2–5µm (نحو ربع الكريات الحمراء) — تقوم ب<b>تخثر الدم</b> بإفراز أنزيمات تساعد على تكوين الألياف اللازمة؛ عددها 150–450 ألف/مم³؛ تتشكل في النخاع الأحمر؛ مدة حياتها 4–5 أيام (تتحطم في الطحال).</li>
+        <li><b>البلازما <span class="en">Plasma</span>:</b> سائل أصفر به <b>90% ماء</b> و10% مواد أخرى: أملاح معدنية، فيتامينات، غازات مذابة (أكسجين، ثاني أكسيد الكربون)، كربوهيدرات، بروتينيات (أهمها ألبومين، غلوبيلين، فيبرينوجين)، دهون، هرمونات، أصبغة صفراء وفضلات الأيض — وظيفتها: نقل المواد الكيميائية والمغذية والفضلات داخل الجسم.</li>
+      </ul>
+      <div class="gal" data-gal="hi1">
+        <figure><img src="assets/bio/histo/h2/img_01.jpg" alt="ألياف النسيج الضام"><figcaption>🧵 شكل1: ألياف النسيج الضام — البيضاء (غروية)، الصفراء (مرنة)، الشبكية (<span class="en">Reticular</span>)</figcaption></figure>
+        <figure><img src="assets/bio/histo/h2/img_02.jpg" alt="خلايا النسيج الضام"><figcaption>🔬 شكل2: خلايا النسيج الضام — ليفية، دهنية، بلعمية كبيرة، صارية، بالزمية، صبغية، لمفاوية، حامضية</figcaption></figure>
+        <figure><img src="assets/bio/histo/h2/img_03.jpg" alt="أنواع الأصيل"><figcaption>🧩 شكل3: أنواع النسيج الضام الأصيل الستة — فجوي، مرن، دهني، شبكي، مخاطي، ليفي</figcaption></figure>
+        <figure><img src="assets/bio/histo/h2/img_04.jpg" alt="غضروف زجاجي"><figcaption>🦴 شكل4: الغضروف الزجاجي تحت المجهر — خلايا غضروفية داخل محافظ <span class="en">Lacunae</span> ومادة الكوندرين</figcaption></figure>
+        <figure><img src="assets/bio/histo/h2/img_05.jpg" alt="غضروف ليفي"><figcaption>🦴 شكل5: الغضروف الليفي — ألياف بيضاء كثيفة لمقاومة الضغوط (أقراص بين الفقرات)</figcaption></figure>
+        <figure><img src="assets/bio/histo/h2/img_06.jpg" alt="غضروف مرن"><figcaption>🦴 شكل6: الغضروف المرن — ألياف صفراء غنية بغشاء غضروفي (صوان الأذن)</figcaption></figure>
+        <figure><img src="assets/bio/histo/h2/img_07.jpg" alt="عظم إسفنجي"><figcaption>🦴 شكل7: العظم الإسفنجي — شبكة حواجز غير منتظمة وفراغات بنخاع العظم</figcaption></figure>
+        <figure><img src="assets/bio/histo/h2/img_08.jpg" alt="عظم كثيف هافرس"><figcaption>🦴 شكل8: العظم الكثيف — جهاز هافرس (قناة هافرس، صفائح عظمية، خلايا عظمية، لقيبات)</figcaption></figure>
+        <figure><img src="assets/bio/histo/h2/img_09.jpg" alt="مكونات الدم"><figcaption>🩸 شكل9: مكونات الدم — كريات حمراء، صفائح، بلازما، لمفوسيت، مونوسيت، حامضية، متعادلة، قاعدية</figcaption></figure>
+      </div>
+    </div>
+  </div>
+
+  <!-- ▓ الفصل 3: الأنسجة العضلية ▓ -->
+  <div class="acc-item" id="hi2">
+    <button class="acc-btn" onclick="togBio(this)"><span class="acc-num">3</span> الفصل الثالث: <b>الأنسجة العضلية</b> <span class="en">Muscle Tissues</span> <span class="acc-arrow">▼</span></button>
+    <div class="acc-body">
+      <h4>📖 تعريفها ومميزاتها</h4>
+      <p class="def">من أكثر الأنسجة انتشاراً، وهو النسيج المسؤول عن <b>حركة مختلف أجزاء الجسم</b> — يتكون من خلايا عضلية متطاولة تدعى <b>الألياف العضلية</b> وقليل من المادة البينية.</p>
+      <ul>
+        <li>يقدّر عدد عضلات الجسم بحوالي <b>600 عضلة</b> · تنشأ من <b>الميزودرم</b>، خلاياها طويلة فقدت القدرة على الانقسام واكتسبت القدرة على الانقباض · تحتوي شبكة من الشعيرات الدموية لإمدادها بالأكسجين والمواد الغذائية وتتصل بها نهايات عصبية لنقل الإشارات.</li>
+        <li>تحتوي الألياف على <b>لييفات عضلية</b> مغمورة بسيتوبلازم عضلي يسمى <b>الساركوبلازم</b> <span class="en">Sarcoplasme</span>، وغشاؤها البلازمي يسمى <b>الساركوالم</b> <span class="en">Sarcolemme</span> — وتتميز اللييفات بخواص: قابلية التهيج <span class="en">Excitability</span>، الانقباضية <span class="en">Contractility</span>، المطاطية <span class="en">Extensibility</span>، والتمدد <span class="en">Elasticity</span>.</li>
+        <li><b>وظيفتها:</b> إحداث الحركة (موضعية كحركة العين في محجرها، أو انتقالية للانتقال وتغيير وضع الجسم — إرادية كالأطراف ولاإرادية كالأمعاء والقلب) · الحفاظ على وضع الجسم (شد العظام حول المفصل لتثبيته — أوضح مثال: مفصل الركبة) · حمايته من الصدمات · <b>توليد الحرارة</b> (عند الانقباض تُستهلك طاقة كيميائية <span class="en">ATP</span> لا تُستغل بنسبة 100% فيتبدد جزء منها حرارةً تنتشر في الأنسجة — والارتجاف عند البرد آلية فيزيولوجية تنقبض بها العضلات الهيكلية لبثّ الدفء، وكل بصلة شعر مزودة بعضلة لاإرادية توقف الشعر في حالات الفزع) · تخزين الجليكوجين (العضلات الهيكلية).</li>
+        <li><b>تصنيفها:</b> وفقاً لتركيبها، شكلها، وظيفتها وموقعها إلى: <b>ملساء، هيكلية، وقلبية</b>.</li>
+      </ul>
+      <h4>🥩 1) العضلات الملساء (غير المخططة — اللاإرادية) <span class="en">Smooth muscles</span></h4>
+      <ul>
+        <li>تحت سيطرة الجهاز العصبي اللاإرادي (تعمل في اليقظة والنوم)، حركتها بطيئة · عديمة الخطوط بالمجهر الضوئي · الليفة رفيعة طويلة مدببة الطرفين (<b>مغزلية</b>) بداخلها لييفات عضلية وكمية قليلة من الساركوبلازم ونواة بيضة في الوسط · ميتوكوندري قليلة جداً · لييفاتها موازية للمحور الطولي · بيضاء اللون · بين الألياف نسيج ضام ليفي (شبكة من الألياف الغروية وبعض الألياف المرنة).</li>
+        <li>توجد في جدران الأحشاء = <b>عضلات حشوية</b>: جدار المعدة والقناة الهضمية، الأوعية الدموية، المثانة البولية، الرحم، الأعضاء التنفسية والجلد — وظيفتها تبعاً لموقعها: الجهاز الهضمي (دفع الغذاء) · الرحم (المساعدة على خروج الجنين) · الأوعية الدموية واللمفية (انسياب الدم واللمف) · الجهاز التنفسي (دفع الهواء) · المثانة (المساعدة على التمدد) · والجلد.</li>
+      </ul>
+      <h4>💪 2) العضلات المخططة (الهيكلية — الإرادية) <span class="en">Skeletal muscles</span></h4>
+      <ul>
+        <li>تشكل الجزء الأكبر من عضلات الجسم (اللحم) · سميت هيكلية لارتباطها بالهيكل العظمي وإرادية لخضوعها للجهاز العصبي المركزي · مخططة لأن اللييفات تتركب — كما أظهر الميكروسكوب الإلكتروني — من خيوط بروتينية سميكة (ميوزين) وأخرى رفيعة (أكتين) مرتبة بنظام يجعلها تبدو مخططة (<b>أشرطة معتمة وأخرى مضيئة بالتبادل</b>) · ميتوكوندري كثيرة لإنتاج الطاقة والانقباض السريع · حمراء اللون · ترتبط بالهيكل العظمي وتشكل عضلات اللسان.</li>
+        <li><b>بنية العضلة الهيكلية:</b> الليفة طويلة أسطوانية الشكل بداخلها عدد كبير من الأنوية حافيّة الموضع ← تُعدّ <b>مدمجاً خلوياً</b> · تنضم الألياف في حزم عضلية بنسيج ضام <b>اللحمة الباطنة</b> · تنضم الحزم مع بعضها بنسيج ضام <b>اللحمة المحيطية</b> لتكوّن عضلات الجسم · وتغلف العضلة كلها بنسيج ضام = <b>غالف العضلة</b>.</li>
+        <li><b>بنية اللييف:</b> خيط رفيع فاتح (<b>أكتين</b> <span class="en">Actin</span>) وخيط سميك داكن (<b>ميوزين</b> <span class="en">Myosin</span>) · القرص القاتم <span class="en">A band</span> يتكون أساساً من الميوزين وبعض الأكتين · القرص المضيء <span class="en">I band</span> يتكون من الأكتين وينصفه خيط رفيع <span class="en">z band</span> · المسافة بين خطين z = <b>قطعة عضلية (ساركومير)</b> <span class="en">Sarcomère</span> · لهذه الأقراص المعتمة والمضيئة تظهر العضلة مخططة عرضياً.</li>
+        <li><b>التقلص العضلي:</b> انزلاق خيوط الأكتين على خيوط الميوزين عند وصول الإشارة العصبية إلى الألياف العضلية ← انقباض العضلة (نقص طول القطعة العضلية) بواسطة استهلاك الطاقة — التي تلزم أيضاً لانبساطها.</li>
+      </ul>
+      <h4>❤️ 3) العضلات القلبية <span class="en">Cardiac Muscles</span></h4>
+      <ul>
+        <li>توجد في القلب فقط، بانقباضات منتظمة دورية تحدث دقات القلب — أهمّ عضلة في جسم الإنسان على الإطلاق (تتوقف حياته على استمرارها بالانقباض والانبساط) · تجمع صفات النوعين السابقين: <b>مخططة</b> (أشرطة أقل وضوحاً) و<b>غير إرادية</b>.</li>
+        <li>الألياف أسطوانية أقل قطراً وأقصر من ألياف الهيكلية · تظهر في القطاع الطولي <b>متفرعة</b> تتصل فروعها بنسيج ضام رخو مكونة حزماً، وهذه الحزم منفصلة بنسيج ضام مرن مشكلة عضلة واحدة (القلب) — هذه الاتصالات تساعد على توصيل الإشارات العصبية إلى كل الألياف ← <b>انقباض كلي أو عدمه</b>.</li>
+        <li>تتركب الألياف من مدمج خلوي، والأنوية تقع في <b>وسط الليفة</b> · تبدو مخططة عرضياً لوجود <b>الأقراص البينية</b> <span class="en">Intercalated discs</span> التي تمثل مكان اتصال كل ليفة بالمجاورة لها · ميتوكوندري متوسطة · حمراء اللون · <b>غير قابلة للإنهاك</b> عكس العضلات الهيكلية.</li>
+      </ul>
+      <div class="gal" data-gal="hi2">
+        <figure><img src="assets/bio/histo/h3/img_01.jpg" alt="ملساء"><figcaption>🥩 شكل1: الأنسجة العضلية الملساء (المعدة) — ليفة مغزلية بنواة وسطية ولييفات عضلية</figcaption></figure>
+        <figure><img src="assets/bio/histo/h3/img_02.jpg" alt="بنية الهيكلية"><figcaption>🥩 شكل2: بنية العضلات المخططة — عضلة ← حزمة ألياف ← ليفة ← لييفات بخيوط أكتين وميوزين</figcaption></figure>
+        <figure><img src="assets/bio/histo/h3/img_03.jpg" alt="بنية اللييف"><figcaption>🥩 شكل3: بنية اللييف العضلي — خيوط أكتين رفيعة وميوزين سميكة بين قرصي Z (داكنة وفاتحة)</figcaption></figure>
+        <figure><img src="assets/bio/histo/h3/img_04.jpg" alt="التقلص"><figcaption>💪 شكل4: آلية التقلص — انزلاق الأكتين على الميوزين فيقصر الساركومير (راحة ↔ تقلص)</figcaption></figure>
+        <figure><img src="assets/bio/histo/h3/img_05.jpg" alt="قلبية"><figcaption>❤️ شكل5: العضلات القلبية — ألياف متفرعة بأقراص بينية <span class="en">Intercalated disks</span> (رسم + مجهر ضوئي)</figcaption></figure>
+      </div>
+    </div>
+  </div>
+
+  <!-- ▓ الفصل 4: النسيج العصبي ▓ -->
+  <div class="acc-item" id="hi3">
+    <button class="acc-btn" onclick="togBio(this)"><span class="acc-num">4</span> الفصل الرابع: <b>النسيج العصبي</b> <span class="en">Neural tissue</span> <span class="acc-arrow">▼</span></button>
+    <div class="acc-body">
+      <h4>📖 تعريفها</h4>
+      <p class="def">ينقسم الجهاز العصبي إلى قسمين: <b>المركزي</b> (الدماغ والحبل الشوكي) و<b>المحيطي</b> (الأعصاب الشوكية وعقدها) — تتركب هذه الأنسجة من خلايا تخصصت في استقبال المؤثرات الخارجية والداخلية ونقلها بين أجزاء الجسم المختلفة، لذا فهي مسؤولة عن <b>تنظيم الأنشطة المختلفة لأعضاء الجسم</b>. تنشأ من <b>الإكتودرم</b> باتجاهين: خلايا إكتوديرمية ← أمهات الخلايا العصبية <span class="en">Neuroblasts</span> تتكاثر بنشاط ← خلايا عصبية <span class="en">Neurons</span> مكتملة لا تتكاثر بعد ذلك · وأخرى إسفنجية <span class="en">Spongioblasts</span> ← خلايا الغراء العصبي <span class="en">Glial cells</span> التي تربط الخلايا العصبية وتحميها.</p>
+      <h4>🧠 الخلية العصبية <span class="en">Neuron</span></h4>
+      <ul>
+        <li>هي الوحدات البنائية والوظيفية للجهاز العصبي — تشبه خلايا العضلات في <b>عدم قدرتها على الانقسام</b>، وتتكون من جزأين:</li>
+        <li><b>جسم الخلية العصبية:</b> النواة + السيتوبلازم بكل العضيات الخلوية: ميتوكوندري (إنتاج الطاقة) · الشبكة الهيولية المحببة (بدء صنع البروتينات) · جهاز غولجي (إكمالها) · الشبكة الهيولية الملساء · <b>حبيبات نسل</b>: توجد في الجسم والاستطالات السيتوبلازمية لكنها لا توجد بالمحور — وظيفتها تخزين المواد الغذائية التي تستهلكها الخلية أثناء نشاطها، لذلك يشير عددها إلى <b>حيوية الخلية</b> ويقل في حالة المرض · <b>لييفات عصبية</b> للحركة داخل الخلية.</li>
+        <li><b>الزوائد السيتوبلازمية:</b> عدد من الزوائد الصغيرة المتفرعة = <b>الزوائد الشجيرية</b> <span class="en">Dendrites</span> (تستقبل المؤثرات وتنقل السيالات العصبية إلى جسم الخلية، يمتد فيها جزء من السيتوبلازم وعضياته عدا أجسام غولجي) · وزائدة واحدة طويلة = <b>المحور</b> <span class="en">Axon</span> (يمتد من الجسم وينتهي بتفرعات صغيرة إنتهائية؛ سيتوبلازمه = إكسوبلازم؛ ينقل السيالات العصبية بعيداً عن جسم الخلية إلى خلية أو نسيج آخر لأداء وظيفة محددة) — وتتجمع محاور الخلايا العصبية مع بعضها لتكون حزماً تسمى <b>الأعصاب</b> <span class="en">Nerves</span>.</li>
+      </ul>
+      <h4>🕸️ خلايا الغراء العصبي (الدبقية) <span class="en">Glial cells</span></h4>
+      <ul>
+        <li>تمثل <b>90%</b> من النسيج العصبي (يحيط بكل خلية عصبية نحو 10 منها)؛ تسمى <b>الساندة</b> وهي قادرة على الانقسام <span class="en">(Mitose)</span> عكس الخلايا العصبية — وظيفتها: دعم وحماية الخلايا العصبية · تخليص النسيج العصبي من الفضلات · تغذيته.</li>
+        <li><b>في الجهاز العصبي المركزي:</b> الغراء الكبيرة <span class="en">Macroglia</span>: <b>النجمية <span class="en">Astrocytes</span></b> (أكبر الدبقية، بعدة استطالات، نوعان: <span class="en">Protoplasmiques et Fibreux</span> — تعمل كوسيط بين الدم والنسيج العصبي، دعامة ميكانيكية وأيضية) · <b>قليلة الأفرع <span class="en">Oligodendrocytes</span></b> (تفرز الغمد الميليني في المركزي) · <b>الطلائية السيسائية <span class="en">Ependymocytes</span></b> (حركة السائل الدماغي الشوكي) · والغراء الصغيرة <span class="en">Microglia</span> (صغيرة الحجم بأنوية صغيرة = <b>بالعات الجهاز العصبي المركزي</b>).</li>
+        <li><b>في الجهاز العصبي المحيطي:</b> خلايا شوان <span class="en">Schwann</span> (تفرز الغمد الميليني في المحيطي) · الخلايا الساتلة <span class="en">Satellite</span>.</li>
+      </ul>
+      <h4>🔀 تقسيم الخلايا العصبية</h4>
+      <ul>
+        <li><b>حسب عدد الزوائد:</b> وحيدة القطب <span class="en">Unipolar</span> (زائدة واحدة هي المحور — المراحل الجنينية فقط) · وحيدة القطب كاذبة <span class="en">Pseudo-unipolar</span> (زائدة واحدة تتفرع في نهايتها إلى فرعين: زوائد شجيرية + محور — العقد العصبية للجذر الظهري) · ذات قطبين <span class="en">Bipolar</span> (فرعان: المحور وآخر مستقل من جسم الخلية — شبكية العين) · متعددة الأقطاب <span class="en">Multipolar</span> (الأكثر شيوعاً: محور واحد وعدد من الاستطالات تخرج مستقلة من الجسم، وجسم الخلية بأشكال نجمي وهرمي).</li>
+        <li><b>من حيث الوظيفة:</b> <b>حسية <span class="en">Sensory</span></b> (تنقل المؤثرات من المستقبلات الحسية إلى المركزي) · <b>حركية <span class="en">Motor</span></b> (تنقل السيالات من المراكز العصبية إلى كل أعضاء الجسم كالعضلات) · <b>رابطة <span class="en">Interneurones</span></b> (تصل الحسية والحركية ببعضها وتشكل التركيب الأساسي للمخ والحبل الشوكي كما تحمل التوصيلات المختلفة).</li>
+        <li><b>تبعاً لطول المحور:</b> خلايا بمحور طويل (المخ والنخاع الشوكي) · وأخرى بمحور قصير (قشرة المخ، المخيخ، شبكة العين).</li>
+      </ul>
+      <h4>🧵 الألياف العصبية <span class="en">Nerve fibers</span></h4>
+      <ul>
+        <li>تتمثل في المحور الأسطواني والأغشية المحيطة به (<b>الأغماد</b>) — وقد يكون محاطاً بالغمد النخاعي (ميلينية/نخاعية) أو غير محاط به (غير ميلينية).</li>
+        <li>سبب تكوّن الغمد النخاعي: وجود خلايا تلتف حول المحور عدة لفات ← الغمد هو مركبات ممتدة من الغشاء البلازمي لهذه الخلايا (<b>70% دسم و30% بروتين</b>) ويسمى <b>الصفيحة العصبية</b> (ذلك في ذات المحاور الطويلة): خلايا شوان (محيطي) · خلايا <span class="en">Oligodendrocytes</span> (مركزي).</li>
+        <li>على امتداد الليفة المحتوية على الغمد توجد اختناقات متعددة = <b>العقد الرانفيية</b>، والمسافة بين كل عقدتين متتاليتين = <b>العقلة</b> <span class="en">Internode</span> · سرعة توصيل الإشارة في الألياف ذات الغمد أكبر من عديمته، وكلما كان الغمد أكثر سمكاً كانت السرعة أسرع.</li>
+      </ul>
+      <h4>⚡ التشابك العصبي <span class="en">Synapses</span></h4>
+      <p class="def">مكان التقاء التفرعات النهائية لمحور خلية عصبية مع التفرعات الشجيرية لخلية أخرى (عصبي-عصبي) — <b>لا يوجد أي اتصال سيتوبلازمي بين الخليتين</b>: كلا المغلفين بغشاء ما قبل وما بعد التشابك على الترتيب، ويفصل بينهما <b>الفراغ (الشق) المشبكي</b> — دوره: إيصال السيالة العصبية من العنصر قبل المشبكي إلى العنصر بعد المشبكي. ومن أمثلته: <b>مشبك عصبي-عضلي</b> (اتصال عصبون بليف عضلي) و<b>مشبك عصبي-خلوي</b> (اتصال عصبون بخلايا غدية).</p>
+      <h4>🔗 تركيب العصب <span class="en">Nerve</span></h4>
+      <p class="def">مجموعة من الألياف العصبية تتجمع لتكون <b>حزم عصبية</b> مرتبطة معاً بنسيج ضام فجوي = <b>لفافة الحزمة العصبية</b>؛ تحاط كل حزمة بغالف من النسيج الضام = <b>غالف الحزمة العصبية</b> <span class="en">Perineurium</span>؛ ومجموعة الحزم تُغلف بنسيج ضام غني بالأوعية الدموية يسمى <b>غالف العصب</b> <span class="en">Epineurium</span>.</p>
+      <div class="gal" data-gal="hi3">
+        <figure><img src="assets/bio/histo/h4/img_01.jpg" alt="الخلية العصبية"><figcaption>🧠 شكل1: الخلية العصبية — جسم بنواة وحبيبات نسل، زوائد شجيرية، محور بغمد نخاعي وعقد رانفيية</figcaption></figure>
+        <figure><img src="assets/bio/histo/h4/img_02.jpg" alt="خلايا الغراء"><figcaption>🧠 شكل2: خلايا الغراء العصبي — نجمية (<span class="en">Astrocyte</span>)، قليلة الأفرع، دبقية صغيرة (<span class="en">Microglia</span>)، سيسائية</figcaption></figure>
+        <figure><img src="assets/bio/histo/h4/img_03.jpg" alt="أنواع العصبية"><figcaption>🧠 شكل3: أنواع الخلايا العصبية حسب الزوائد — وحيدة قطب كاذبة، ثنائية القطب، متعددة الأقطاب</figcaption></figure>
+        <figure><img src="assets/bio/histo/h4/img_04.jpg" alt="الغمد الميليني"><figcaption>🧠 شكل4: تكوين الغمد الميليني — لفات خلايا <span class="en">Oligodendrocyte</span> (مركزي) وخلايا شوان (محيطي)</figcaption></figure>
+        <figure><img src="assets/bio/histo/h4/img_05.jpg" alt="التشابك"><figcaption>⚡ شكل5: التشابك العصبي — التقاء تفرعات محور خلية بشجيرات أخرى عبر الشق المشبكي</figcaption></figure>
+        <figure><img src="assets/bio/histo/h4/img_06.jpg" alt="تركيب العصب"><figcaption>🔬 شكل6: تركيب العصب (مقطع حقيقي) — حزم ألياف عصبية، نسيج ضام وأوعية دموية</figcaption></figure>
+      </div>
+    </div>
+  </div>
+
+  <!-- ▓ ورشة TP (مجانية): الطلائية تحت المجهر ▓ -->
+  <div class="acc-item" id="hi4">
+    <button class="acc-btn" onclick="togBio(this)"><span class="acc-num">🧫</span> ورشة مخبرية <b>TP</b>: الأنسجة الطلائية تحت المجهر — مقاطع حقيقية ونماذج <span class="acc-arrow">▼</span></button>
+    <div class="acc-body">
+      <p class="def">ورشة أعمال تطبيقية <span class="en">(TP)</span> على الأنسجة الطلائية: مقاطع مجهرية حقيقية ومخططات للتشخيص — قارني بين كل نسيج ونظيره في الفصل الأول: تجدين هنا الطلائية العمودية والحرشفية البسيطة، المصففة الكاذبة المهدبة، والحرشفية المركبة (فموية وبشرة بطبقة كيراتين)، مع نماذج للغدد وأساليب إفرازها (حبيبي وقمّي).</p>
+      <ul>
+        <li>🔍 <b>منهجية الملاحظة:</b> حددي أولاً <b>الغشاء القاعدي</b>، ثم عدد طبقات الخلايا (صف واحد ← بسيطة / أكثر ← مركبة)، وشكل خلايا الطبقة السطحية (مفلطحة ← حرشفية / مربعة ← مكعبة / أعمدة ← عمودية)، ووجود الملحقات (أهداب، زغبيات، كيراتين) — فتصلين إلى التشخيص الصحيح.</li>
+        <li>💡 لاحظي في البشرة: الطبقة العليا عديمة النوى (<b>كيراتين</b>) فوق الحليمات الوعائية التي تغذي الطلائئية عبر الغشاء القاعدي؛ وفي المصطفة الكاذبة: أنوية بمستويات مختلفة رغم أنها صف واحد.</li>
+      </ul>
+      <div class="gal" data-gal="hi4">
+        <figure><img src="assets/bio/histo/h5/img_01.jpg" alt="عمودية بسيطة"><figcaption>🧫 طلائية عمودية بسيطة رسم تخطيطي — خلايا ممدودة بأنوية قاعدية</figcaption></figure>
+        <figure><img src="assets/bio/histo/h5/img_02.jpg" alt="إفراز حبيبي"><figcaption>🧫 خلية إفرازية بأسلوب حبيبي: طرح حبيبات إفرازية دون تلف الغشاء</figcaption></figure>
+        <figure><img src="assets/bio/histo/h5/img_03.jpg" alt="غدة أنبوبية"><figcaption>🧫 غدة أنبوبية القناة — نموذج ثلاثي الأبعاد</figcaption></figure>
+        <figure><img src="assets/bio/histo/h5/img_04.jpg" alt="مقطع قناة"><figcaption>🧫 مقطع مجهري حقيقي: طبقات طلائية حول تجويف قناة</figcaption></figure>
+        <figure><img src="assets/bio/histo/h5/img_05.jpg" alt="عمودية وكأسية"><figcaption>🧫 طلائية عمودية بخلية كأسية (صورة مجهرية)</figcaption></figure>
+        <figure><img src="assets/bio/histo/h5/img_06.jpg" alt="مصففة كاذبة"><figcaption>🧫 طلائية مصففة كاذبة مهدبة — أهداب، خلية كأسية وأنوية بمستويات مختلفة</figcaption></figure>
+        <figure><img src="assets/bio/histo/h5/img_07.jpg" alt="إفراز قمي"><figcaption>🧫 أسلوب الإفراز القمي: انفصال قمة الخلية الإفرازية ثم ترميمها</figcaption></figure>
+        <figure><img src="assets/bio/histo/h5/img_08.jpg" alt="حرشفية مركبة"><figcaption>🧫 طلائية حرشفية مركبة (بشرة الجلد) — حليمات وعائية تحت الغشاء القاعدي</figcaption></figure>
+        <figure><img src="assets/bio/histo/h5/img_09.jpg" alt="كيراتين"><figcaption>🧫 بشرة الجلد: طبقة الكيراتين السطحية فوق الخلايا الحية</figcaption></figure>
+        <figure><img src="assets/bio/histo/h5/img_10.jpg" alt="حرشفية بسيطة"><figcaption>🧫 طلائية حرشفية بسيطة (صورة مجهرية) — بطانة رقيقة جداً</figcaption></figure>
+        <figure><img src="assets/bio/histo/h5/img_11.jpg" alt="فموية"><figcaption>🧫 طلائية حرشفية مركبة في التجويف الفموي — خلايا سطحية ومتوسطة</figcaption></figure>
+      </div>
+    </div>
+  </div>
+
+  </div><!-- /acc-list unitHistologie -->
+</section>
+
+<footer>
+  منصة SAC · SVT prof — مقرر البيولوجيا العامة · علم الخلية 🧫 علم النبات 🌿 علم الأجنّة 🐣 علم الأنسجة 🧪
+</footer>
+</div><!-- /wrap -->
+
+<!-- 🔒 مودال الاشتراك -->
+<div class="modal-back" id="bioLockModal">
+  <div class="modal">
+    <button class="x" onclick="bioLockClose()">✕</button>
+    <h3>🔒 هذا الفصل حصري للمشتركين</h3>
+    <p style="color:#9dc4ab;font-size:.92rem">الفصلان الأوليان مجانيان — انضمّي للمشتركين لتكملي باقي مقرر علم النبات (والجيولوجيا أيضاً بنفس الاشتراك!)</p>
+    <div class="plan-row">
+      <div class="plan"><b>1000 دج</b><span>شهري</span></div>
+      <div class="plan" style="border-color:#fbbf24;background:#42200622"><b>2000 دج ⭐</b><span>فصلي — الأكثر طلباً</span></div>
+      <div class="plan"><b>6000 دج</b><span>سنوي</span></div>
+    </div>
+    <a class="sub-cta" href="ishtirak.html">💎 اشتركي الآن — تأكيد فوري بوصل التحويل</a>
+    <div class="member-form">
+      <label>🗝️ عندك اشتراك مؤكَّد؟ فعّليه بنفس بريدك/هاتفك:</label>
+      <input id="bioActInput" type="text" placeholder="البريد الإلكتروني أو رقم الهاتف المستعمل في الاشتراك" dir="rtl">
+      <button onclick="bioCheckMember()">✅ تفعيل وصولي</button>
+      <div class="msg" id="bioActMsg"></div>
+    </div>
+  </div>
+</div>
+
+<!-- 🔍 لايت بوكس -->
+<div id="lb" onclick="this.classList.remove('active')"><img id="lbImg" src="" alt=""><div id="lbCap"></div></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="sac-cursor-birds.js"></script>
+<script src="assets/sac-shield.js" defer></script>
+<script>
+/* ---------- أكورديون ---------- */
+function togBio(btn){
+  const item = btn.parentElement;
+  if(item.classList.contains('sac-locked')){ document.getElementById('bioLockModal').classList.add('active'); return; }
+  item.classList.toggle('open');
+}
+/* فتح أول فصل مجاني تلقائياً */
+document.addEventListener('DOMContentLoaded', () => {
+  const first = document.getElementById('ch0');
+  if(first) first.classList.add('open');
+});
+
+/* ---------- بوابة الاشتراك ---------- */
+const BIO_FREE = ['ch0','ch1','cy0','cy1','em0','em1','hi0','hi1','hi4'];
+const SB_URL = "https://lkxfjjyvqmzuoxmdoswv.supabase.co";
+const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxreGZqanl2cW16dW94bWRvc3d2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMwOTM5NTYsImV4cCI6MjA5ODY2OTk1Nn0.TB5DRKXUB5Gfu-YkodmWxq_EXVbiq7t1o_bzxWj-ZTY";
+let _sb = null;
+function sb(){ if(!_sb && window.supabase){ try{ _sb = window.supabase.createClient(SB_URL, SB_KEY); }catch(e){} } return _sb; }
+
+function bioApplyLocks(){
+  document.querySelectorAll('.acc-item').forEach(it => {
+    if(!BIO_FREE.includes(it.id) && localStorage.getItem('sac_bio_member') !== '1'){
+      it.classList.add('sac-locked');
+      const arrow = it.querySelector('.acc-arrow');
+      if(arrow){ const b = document.createElement('span'); b.className = 'lock-badge'; b.textContent = '🔒 للمشتركين'; arrow.replaceWith(b); }
+    }
+  });
+}
+function bioUnlockAll(){
+  localStorage.setItem('sac_bio_member','1');
+  document.querySelectorAll('.sac-locked').forEach(it => {
+    it.classList.remove('sac-locked');
+    const b = it.querySelector('.lock-badge');
+    if(b){ const a = document.createElement('span'); a.className = 'acc-arrow'; a.textContent = '▼'; b.replaceWith(a); }
+  });
+  document.getElementById('bioLockModal').classList.remove('active');
+}
+function bioLockClose(){ document.getElementById('bioLockModal').classList.remove('active'); }
+async function bioCheckMember(){
+  const v = document.getElementById('bioActInput').value.trim();
+  const msg = document.getElementById('bioActMsg');
+  if(!v){ msg.style.color = '#fbbf24'; msg.textContent = '✍️ اكتبي البريد أو الهاتف أولاً'; return; }
+  msg.style.color = '#9dc4ab'; msg.textContent = '⏳ جاري التحقق من الاشتراك...';
+  const c = sb();
+  if(!c){ msg.style.color = '#ef4444'; msg.textContent = '⚠️ تعذر الاتصال — عاودي بعد قليل'; return; }
+  try{
+    const { data, error } = await c.from('service_orders').select('id,status,type,contact').ilike('contact', v).limit(10);
+    if(error) throw error;
+    const ok = (data||[]).some(r => (r.status||'').includes('✔') && (r.type||'').includes('اشتراك'));
+    if(ok){
+      msg.style.color = '#4ade80'; msg.textContent = '🎉 تم التفعيل! كل الفصول انفتحت لك';
+      setTimeout(bioUnlockAll, 700);
+    } else {
+      msg.style.color = '#ef4444'; msg.textContent = '❌ لا يوجد اشتراك مؤكد ✔ بهذا الاتصال بعد — تأكدي من الرقم أو تواصلي معنا بعد التسديد';
+    }
+  }catch(e){
+    msg.style.color = '#ef4444'; msg.textContent = '⚠️ خطأ في التحقق: ' + (e && e.message ? e.message : 'غير معروف');
+  }
+}
+bioApplyLocks();
+
+/* ---------- لايت بوكس ---------- */
+const lb = document.getElementById('lb'), lbImg = document.getElementById('lbImg'), lbCap = document.getElementById('lbCap');
+document.querySelectorAll('.gal figure').forEach(fig => {
+  fig.addEventListener('click', () => {
+    const img = fig.querySelector('img');
+    lbImg.src = img.src;
+    lbCap.textContent = fig.querySelector('figcaption').textContent;
+    lb.classList.add('active');
+  });
+});
+document.addEventListener('keydown', e => { if(e.key === 'Escape'){ lb.classList.remove('active'); bioLockClose(); } });
+</script>
+
+<!-- 📱 PWA: تسجيل مشغّل الخدمة (Service Worker) -->
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function() {
+      navigator.serviceWorker.register("service-worker.js").then(function(reg) {
+        console.log("✓ PWA ServiceWorker registered:", reg.scope);
+      }).catch(function(err) {
+        console.log("PWA ServiceWorker registration error:", err);
+      });
+    });
+  }
+</script>
+</body>
+</html>
