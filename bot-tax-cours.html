@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#16a34a">
+<title>علم النبات التصنيفي — SAC · SVT prof</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="assets/fonts.css">
+<style>
+:root{
+  --bg:#07130c; --card:#0d1f14; --card2:#12291a; --ink:#eaf7ee; --mut:#9dc4ab;
+  --grn:#22c55e; --grn2:#16a34a; --lime:#a3e635; --amber:#fbbf24; --red:#ef4444;
+  --teal:#0d9488;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Tajawal",sans-serif;background:radial-gradient(1200px 600px at 80% -10%,#14532d33,transparent),radial-gradient(900px 500px at 10% 110%,#14532d2b,transparent),var(--bg);color:var(--ink);line-height:1.95}
+.wrap{max-width:1020px;margin:0 auto;padding:0 16px 70px}
+header.hero{text-align:center;padding:52px 0 34px;position:relative}
+.badge-home{position:absolute;top:18px;inset-inline-start:8px;background:#14532d;border:1px solid #22c55e55;color:#bbf7d0;padding:7px 16px;border-radius:999px;text-decoration:none;font-weight:700;font-size:.85rem}
+.badge-home:hover{background:#166534}
+.kicker{display:inline-block;background:linear-gradient(135deg,#16a34a22,#22c55e18);border:1px solid #22c55e44;color:#86efac;padding:6px 20px;border-radius:999px;font-weight:800;font-size:.9rem;letter-spacing:.5px}
+h1{font-size:clamp(1.7rem,4.5vw,2.6rem);font-weight:900;margin:14px 0 8px;background:linear-gradient(90deg,#86efac,#22c55e,#a3e635);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--mut);font-size:1.02rem;max-width:760px;margin:0 auto}
+.free-note{position:relative;margin-top:16px;display:inline-block;background:#052e16;border:1px solid #22c55e33;color:#86efac;padding:8px 22px;border-radius:999px;font-weight:700;font-size:.9rem}
+.unit{margin:22px 0}
+.unit-head{display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,var(--card2),var(--card));border:1px solid #1f3a28;border-radius:20px;padding:16px 20px;box-shadow:0 8px 30px #0006}
+.unit-ico{font-size:2.1rem;filter:drop-shadow(0 0 14px #22c55e66)}
+.unit-head h2{font-size:1.25rem;font-weight:900}
+.unit-head p{color:var(--mut);font-size:.85rem;margin-top:2px}
+.unit-tag{margin-inline-start:auto;font-size:.75rem;font-weight:900;padding:5px 14px;border-radius:999px;white-space:nowrap}
+.tag-on{background:#052e16;color:#4ade80;border:1px solid #22c55e55}
+.acc-list{margin-top:12px;display:grid;gap:10px}
+.acc-item{background:var(--card);border:1px solid #1f3a28;border-radius:18px;overflow:hidden}
+.acc-btn{width:100%;display:flex;align-items:center;gap:12px;padding:15px 18px;background:none;border:none;color:var(--ink);font-family:inherit;font-size:1.02rem;font-weight:800;cursor:pointer;text-align:right;transition:.25s}
+.acc-btn:hover{background:#22c55e0f}
+.acc-num{flex:0 0 34px;height:34px;border-radius:12px;background:linear-gradient(135deg,#16a34a,#052e16);display:grid;place-items:center;font-weight:900;color:#d1fae5;border:1px solid #22c55e44}
+.acc-arrow{margin-inline-start:auto;transition:.3s;color:#4ade80;font-size:1.1rem}
+.acc-item.open .acc-arrow{transform:rotate(180deg)}
+.acc-body{display:none;padding:6px 22px 24px;border-top:1px dashed #1f3a28}
+.acc-item.open .acc-body{display:block;animation:fadeIn .4s}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+.acc-item.sac-locked .acc-body{display:none!important}
+.acc-item.sac-locked .acc-btn{opacity:.55;filter:saturate(.5)}
+.acc-item.sac-locked .acc-arrow{display:none}
+.lock-badge{margin-inline-start:auto;background:#422006;color:#fbbf24;border:1px solid #fbbf2455;font-size:.72rem;font-weight:900;padding:4px 12px;border-radius:999px}
+.acc-item.sac-locked .acc-num{background:linear-gradient(135deg,#78350f,#422006);border-color:#fbbf2444;color:#fde68a}
+h4{color:var(--lime);font-size:1.12rem;margin:22px 0 8px;padding-inline-start:12px;border-inline-start:4px solid var(--grn);background:linear-gradient(-90deg,transparent,#22c55e11);border-radius:8px;padding:8px 14px;font-weight:900}
+p.def{color:#d3e9da;margin:8px 0}
+ul.pts{margin:8px 0;padding-inline-start:6px;list-style:none}
+ul.pts li{position:relative;padding:6px 26px 6px 8px;color:#cfe8d6}
+ul.pts li::before{content:"◈";position:absolute;inset-inline-start:4px;color:var(--grn)}
+.term{background:#052e16;border:1px solid #1d5c33;color:#86efac;padding:1px 10px;border-radius:8px;font-size:.88em;font-weight:800;white-space:nowrap}
+.en{color:#7dd3fc;font-size:.85em;direction:ltr;unicode-bidi:embed}
+.note{background:#03150c;border:1px solid #14532d;border-inline-start:4px solid var(--amber);border-radius:12px;padding:12px 16px;margin:14px 0;color:#fde68a;font-size:.93rem}
+table.cmp{width:100%;border-collapse:collapse;margin:14px 0;font-size:.88rem}
+table.cmp th{background:#052e16;color:#a7f3d0;padding:9px;border:1px solid #175330}
+table.cmp td{padding:8px;border:1px solid #175330;text-align:center;color:#d3e9da}
+table.cmp tr:nth-child(even) td{background:#0c2417}
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;margin:16px 0}
+.gal figure{background:#0a1a10;border:1px solid #1f3a28;border-radius:14px;overflow:hidden;cursor:zoom-in;transition:.25s}
+.gal figure:hover{transform:translateY(-4px);box-shadow:0 10px 24px #16a34a33;border-color:#22c55e66}
+.gal img{width:100%;height:210px;object-fit:cover;display:block;background:#fff}
+.gal figcaption{padding:8px 12px;font-size:.8rem;color:#a7c9b2;font-weight:700;text-align:center}
+#lb{display:none;position:fixed;inset:0;background:#000e;z-index:99999;place-items:center;cursor:zoom-out;backdrop-filter:blur(6px)}
+#lb.active{display:flex}
+#lb img{max-width:94vw;max-height:88vh;border-radius:12px;box-shadow:0 0 60px #22c55e33;background:#fff}
+#lbCap{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#052e16dd;border:1px solid #22c55e66;color:#d1fae5;padding:8px 22px;border-radius:999px;font-weight:800;font-size:.9rem}
+.modal-back{display:none;position:fixed;inset:0;background:#000a;z-index:99998;place-items:center;padding:16px;backdrop-filter:blur(5px)}
+.modal-back.active{display:flex}
+.modal{background:linear-gradient(160deg,#0d1f14,#07130c);border:1px solid #22c55e55;border-radius:24px;max-width:560px;width:100%;padding:26px;position:relative;box-shadow:0 25px 70px #000}
+.modal h3{color:#86efac;font-size:1.3rem;font-weight:900;margin-bottom:6px}
+.modal .x{position:absolute;top:14px;inset-inline-start:14px;background:#7f1d1d;color:#fff;border:none;width:32px;height:32px;border-radius:50%;cursor:pointer;font-weight:900}
+.plan-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+.plan{background:#052e16;border:1px solid #1d5c33;border-radius:14px;padding:12px 8px;text-align:center}
+.plan b{display:block;color:#a3e635;font-size:1.15rem}
+.plan span{color:#9dc4ab;font-size:.78rem}
+.sub-cta{display:block;text-align:center;background:linear-gradient(135deg,#16a34a,#a3e635);color:#052e16;font-weight:900;padding:13px;border-radius:14px;text-decoration:none;margin:8px 0}
+.sub-cta:hover{filter:brightness(1.1)}
+.member-form{margin-top:14px;border-top:1px dashed #1f3a28;padding-top:14px}
+.member-form label{color:#9dc4ab;font-size:.85rem;font-weight:700}
+.member-form input{width:100%;background:#03150c;border:1px solid #1f3a28;border-radius:12px;color:var(--ink);padding:11px 14px;margin:8px 0;font-family:inherit}
+.member-form button{width:100%;background:#052e16;border:1px solid #22c55e66;color:#86efac;padding:11px;border-radius:12px;font-weight:900;cursor:pointer;font-family:inherit}
+.member-form button:hover{background:#0a3d1f}
+.member-form .msg{min-height:22px;font-size:.85rem;font-weight:800;margin-top:6px;text-align:center}
+footer{text-align:center;color:#5f7d6a;font-size:.85rem;padding:30px 0;border-top:1px solid #15301f;margin-top:50px}
+@media(max-width:560px){.plan-row{grid-template-columns:1fr 1fr}.acc-num{display:none}}
+</style>
+</head>
+<body>
+
+<a class="badge-home" href="index.html">🏠 الرئيسية</a>
+<header class="hero">
+  <span class="kicker">🔬 ركن SVT التخصصي — علم النبات</span>
+  <h1>علم النبات التصنيفي <span class="en" style="font-size:.55em">Botanique systématique</span></h1>
+  <p>المقرر كاملاً في خمس وحدات: <b>مدخل إلى علم النبات التصنيفي</b>، <b>الطحالب</b> (مدخل وتصنيف)، <b>الفطريات والأشنات</b> (مدخل وتصنيف)، <b>الحزازيات</b> و<b>السرخسيات</b> — محتوى منقّح للويب من وثائق المقرر الأصلية، مع الصور المجهرية ومخططات دورات الحياة بجودة عالية.</p>
+  <div class="free-note">🔓 الوحدة الأولى (المدخل) مجانية بالكامل — وباقي الفصول حصري للمشتركين 💎</div>
+</header>
+
+<div class="wrap">
+<!-- ═══════════ الوحدة 1: مدخل إلى علم النبات التصنيفي ═══════════ -->
+<section class="unit" id="unitIntro">
+  <div class="unit-head">
+    <span class="unit-ico">📗</span>
+    <div>
+      <h2>الوحدة الأولى: مدخل إلى علم النبات التصنيفي <span class="en">Introduction à la taxonomie végétale</span></h2>
+      <p>التعريف، التاريخ، أنظمة التصنيف، المراتب التصنيفية والمجموعات النباتية الكبرى — فصل واحد شامل</p>
+    </div>
+    <span class="unit-tag tag-on">مجاني ✓</span>
+  </div>
+
+  <div class="acc-list">
+    <div class="acc-item" id="ch0">
+      <button class="acc-btn" onclick="togTax(this)"><span class="acc-num">1</span> الفصل الأوّل: مدخل عام إلى علم النبات التصنيفي <span class="en">Généralités</span> <span class="acc-arrow">▼</span></button>
+      <div class="acc-body">
+
+        <h4>أولاً: ما هو علم النبات التصنيفي؟</h4>
+        <p class="def">تنقسم الموجودات التي يحتويها هذا الكون إلى قسمين: <b>كائنات حية</b> (الحيوان، النبات، البكتيريا...) و<b>كائنات غير حية</b> (الماء، الهواء، المعادن...). وتُعتبر <span class="term">صفة الحياة</span> المعيار الموحّد الفاصل بين القسمين، وهي عبارة عن كل المادة التي يتألف منها جسم الكائن الحي — أي <span class="term">البروتوبلازم</span> <span class="en">Protoplasme</span> — وهي مادة معقّدة التركيب، عليها تحدث التغيرات الفيزيائية والتفاعلات الكيميائية التي تنعكس على وظائف الحيوية: <b>التنفس، الحركة، الهضم والتغذية</b>.</p>
+        <p class="def">وعلم التصنيف هو أحد فروع علم الأحياء، يهتم بـ<b>توظيف الكائنات الحية في المجاميع</b> حسب درجة تآلفها من نباتات وحيوانات وكائنات مجهرية، ويخطّط تسميتها وتقسيمها إلى مجموعات مرتّبة ومتمايزة داخله بالاعتماد على <b>معايير تصنيفية محددة</b> مثل الشكل، السلوك، الصفات الجينية والبييوكيميائية. ويُعتبر <span class="term">النوع</span> <span class="en">Espèce / Specie</span> الوحدة الأساسية في علم التصنيف، ويُعرَّف بأنه مجموعة من الكائنات الحية المتشابهة القادرة على التزاوج فيما بينها وإنتاج أفراد جديدة خصبة.</p>
+        <p class="def">وقد وضع <span class="term">ليني</span> <span class="en">Linné</span> التسمية الثنائية لكل الكائنات الحية: لكل نوع اسم لاتيني مكوّن من مقطعين (اسم الجنس ثم النوع)، وهو ما يُعرف بـ<span class="term">الاسم العلمي</span> <span class="en">Nom scientifique</span> المستعمل في كل أنحاء العالم تفادياً لاختلاف الأسماء المحلية.</p>
+
+        <h4>ثانياً: أنظمة تصنيف الكائنات الحية عبر التاريخ</h4>
+        <table class="cmp">
+          <tr><th>النظام</th><th>الأساس</th><th>الممالك</th></tr>
+          <tr><td><b>الثنائي</b></td><td>الأقدم: تقسيم تقليدي</td><td>مملكتان: <b>النباتية</b> و<b>الحيوانية</b></td></tr>
+          <tr><td><b>الثلاثي</b> <span class="en">Hogg &amp; Haeckel (1861–1866)</span></td><td>إضافة المجهر الضوئي ودراسة العالم المجهري</td><td>3 ممالك: النباتات، الحيوان، <b>الأوليات</b></td></tr>
+          <tr><td><b>الرباعي</b> (نظام كوبلاند <span class="en">Copeland</span>)</td><td>الفصل بين حقيقيات النواة وبدائياتها (وجود النواة أو غيابها) مع إضافة مملكة مستقلة للبدائيات</td><td>4 ممالك: النباتات، الحيوان، الأوليات، <b>البدائيات</b></td></tr>
+          <tr><td><b>الخماسي</b> (نظام ويتكر <span class="en">Whittaker 1969</span>)</td><td>فصل الفطريات من المملكة النباتية: جدرها من <span class="term">كيتين</span> <span class="en">Chitine</span> وليست ذاتية التغذية، عكس النباتات (سيليلوز + تركيب ضوئي)</td><td>5 ممالك: النباتات، الحيوان، <b>الفطريات</b>، الأوليات، البدائيات</td></tr>
+        </table>
+        <p class="def">ويُعتبر نظام ويتكر الأكثر شمولاً وقبولاً، وقد غيّرت تبعاً له عدة تصنيفات اعتمدت معايير أدقّ وأعمق.</p>
+
+        <h4>ثالثاً: لمحة تاريخية عن علم النبات</h4>
+        <p class="def">كان الإنسان في الأزمنة القديمة يجمع النباتات البرّية ويصطادها ويتعرّف على خصائصها لغرض الاستعمال، أما الدراسة العلمية فلم تكن قد تبلورت بعد. ومع الحاجة الغذائية والصحّية للنباتات خاصة بعد استقرار الإنسان وظهور الزراعة، تطوّرت المعرفة النباتية عبر أربعة عصور كبرى:</p>
+        <ul class="pts">
+          <li><b>العصر الأول (من القرن 4 ق.م إلى ~1736م):</b> الاهتمام بالنباتات كغذاء ودواء — <span class="term">أرسطو</span> وتلميذه <span class="term">ثيوفراستوس</span> صاحب أول سجلّ مكتوب في علم النبات («التاريخ الطبيعي للنباتات»)، ثم <span class="term">ديوسكوريدس</span> صاحب الموسوعة المعروفة «المادة الطبية» التي وُظّفت فيها مئات النباتات الطبية.</li>
+          <li><b>إسهام الحضارة الإسلامية:</b> <span class="term">جابر بن حيان</span> (711–785م) بالتركيبة الكيميائية للنباتات الطبية، <span class="term">أبو بكر الرازي</span> (856–925م)، <span class="term">ابن سينا</span> (981–1037م) في النباتات الطبية وخصائصها، <span class="term">ابن البيطار</span> (1097–1248م) في المفردات النباتية، وغيرهم — وقد أثرى هؤلاء الدراسات النباتية من الناحية الطبية والدوائية.</li>
+          <li><b>العصر الثاني (~1736–1753م):</b> عصر المقارنة بين الصفات النباتية ووضع أولى القواعد المنهجية للتصنيف — <span class="term">كارل فون ليني</span> <span class="en">Carolus Linnaeus</span> (1707–1776) وتلامذته: توظيف أجزاء النبات (ساق، جذر، أوراق، ثمار) وتمييز الاختلافات القليلة بينها ثم تقسيمها، مع التسمية الثنائية.</li>
+          <li><b>العصر الثالث (~1753–1900م):</b> الدراسات الفيزيولوجية والضوئية للنباتات، دورات الحياة، ودراسة الأصناف والعلاقات الطبيعية فيما بينها — <span class="term">داروين</span>، <span class="term">لامارك</span> و<span class="term">براون</span>.</li>
+          <li><b>العصر الرابع (1900م إلى الآن):</b> عصر نظرية الخلية والوراثة بين الأصناف؛ تقسيم النباتات إلى أقسام عديدة وتفرّع مدارس تصنيفية مختلفة — <span class="term">تايس</span> و<span class="term">إنجلر</span> <span class="en">Engler</span>، وفي العصر الحالي تقنيات حديثة تركّز على دراسة <b>الجينوم</b> لتحديد العلاقات القرابية بين الأصناف.</li>
+        </ul>
+
+        <h4>رابعاً: أنظمة (مناهج) التصنيف الثلاثة</h4>
+        <ul class="pts">
+          <li><b>النظام الاصطناعي (الميكانيكي):</b> يستند إلى صفة ظاهرية واحدة، وتُهمَل بقية الصفات — مثال: تصنيف النباتات استناداً إلى صفاتها المورفولوجية (الأشجار، الشجيرات، الأعشاب) أو اعتماد صفة الأعضاء الجنسية وحدها كما فعل ليني، وهو أشهر مصنّف ميكانيكي.</li>
+          <li><b>النظام الطبيعي:</b> يعتمد على مجموع العلاقات التشابهية بين النباتات من كل الصفات، مثل صفات الأزهار — أشهر من اعتمده <span class="term">دو كوندول</span> <span class="en">De Candolle</span>.</li>
+          <li><b>النظام التطوري:</b> يخدم فيه أكبر عدد ممكن من الصفات والميزات مع إبراز درجة القرابة والتطور بين المجاميع النباتية، وذلك بالاحتكام إلى الآباء والأجداد — من أشهر من اعتمده <span class="term">بيسي</span> <span class="en">Bessey</span> و<span class="term">إنجلر</span> <span class="en">Engler</span>.</li>
+        </ul>
+
+        <h4>خامساً: المراتب التصنيفية — مثال نبات القمح</h4>
+        <p class="def">ترتّب المراتب التصنيفية من الأوسع (المملكة) إلى الأضيق (النوع ثم الصنف)، وكل مرتبة تضم مرتبة أدنى منها. مثال نبات <b>القمح الصلب</b>:</p>
+        <table class="cmp">
+          <tr><th>المرتبة</th><th>المثال</th></tr>
+          <tr><td>المملكة <span class="en">Règne</span></td><td><span class="en">Plantae</span></td></tr>
+          <tr><td>الشُّعبة <span class="en">Embranchement</span></td><td><span class="en">Liliophyta</span> (النباتات البذرية الزهرية)</td></tr>
+          <tr><td>تحت الشعبة</td><td><span class="en">Angiospermes</span> — مغطاة البذور</td></tr>
+          <tr><td>الصنف <span class="en">Classe</span></td><td><span class="en">Monocotylédones</span> — أحادية الفلقة</td></tr>
+          <tr><td>تحت الصنف</td><td><span class="en">Commelinidae</span></td></tr>
+          <tr><td>الرتبة <span class="en">Ordre</span></td><td><span class="en">Poales</span></td></tr>
+          <tr><td>العائلة <span class="en">Famille</span></td><td><span class="en">Poaceae</span> — النجيلية</td></tr>
+          <tr><td>تحت العائلة</td><td><span class="en">Poaideae</span></td></tr>
+          <tr><td>الجنس <span class="en">Genre</span></td><td><span class="en">Triticum</span> — الحنطة</td></tr>
+          <tr><td>النوع <span class="en">Espèce</span></td><td><span class="en">Triticum durum L.</span> — القمح الصلب</td></tr>
+          <tr><td>الصنف الزراعي <span class="en">Variété</span></td><td>بليوني <span class="en">Belyouni</span></td></tr>
+        </table>
+        <p class="def">ويرتبط علم التصنيف النباتي بالعديد من فروع علم النبات الأخرى: علم التشريح الظاهري <span class="en">Morphologie</span>، علم التشريح والتركيب <span class="en">Anatomie</span>، علم البيئة النباتية <span class="en">Écologie végétale</span>، وعلم الخلية والوراثة <span class="en">Génétique</span>.</p>
+
+        <h4>سادساً: لواحق التسمية في المراتب التصنيفية</h4>
+        <p class="def">تتميّز بين المراتب التصنيفية بلاحقة الاسم الموحّدة في كل مرتبة، وفق المدعو <span class="en">De Rivières (2002)</span>:</p>
+        <table class="cmp">
+          <tr><th>المرتبة</th><th>الطحالب</th><th>الفطريات</th><th>النباتات البذرية</th></tr>
+          <tr><td>الشُّعبة <span class="en">Embranchement</span></td><td><span class="en">-phyta</span></td><td><span class="en">-mycota</span></td><td><span class="en">-phyta</span></td></tr>
+          <tr><td>الصنف <span class="en">Classe</span></td><td><span class="en">-phyceae</span></td><td><span class="en">-mycètes</span></td><td><span class="en">-opsida</span></td></tr>
+          <tr><td>تحت الصنف</td><td><span class="en">-phycidae</span></td><td><span class="en">-mycétidae</span></td><td><span class="en">-idae</span></td></tr>
+          <tr><td>العائلة <span class="en">Famille</span></td><td colspan="3"><span class="en">-aceae</span> عند الجميع</td></tr>
+        </table>
+        <p class="def">مثال: الجنس <b>وردة</b> <span class="en">Rosa</span> — بإضافة اللاحقة <span class="en">-aceae</span> نحصل على العائلة <span class="en">Rosaceae</span>، وبإضافة <span class="en">-ales</span> نحصل على الرتبة <span class="en">Rosales</span> التي تنتمي إلى صنف ثنائيات الفلقة <span class="en">Magnoliopsidae</span> المنحدرة من شعبة النباتات البذرية <span class="en">Magnoliophyta</span> المنتمية بدورها إلى المملكة النباتية <span class="en">Plantae</span>.</p>
+        <div class="note">⚠️ تجدر الإشارة إلى أن الأنظمة التصنيفية تختلف فيما بينها حسب التطور والمدارس التصنيفية، والمثال السابق لتوضيح الفكرة فقط.</div>
+
+        <h4>سابعاً: المجموعات النباتية الكبرى</h4>
+        <p class="def">يعود انتماء أي كائن إلى المملكة النباتية إلى تحقّق الشروط الأساسية فيه:</p>
+        <ul class="pts">
+          <li>أن تكون له القدرة على تصنيع غذائه بنفسه (ذاتي التغذية) من مواد غير عضوية عن طريق <b>التركيب الضوئي</b> بواسطة الصبغات المتواجدة في خلاياه.</li>
+          <li>أن تكون خلاياه محاطة بجدار <b>سيليلوزي</b> يضمن حماية الخلية والنبات.</li>
+          <li>أن يكون <b>متعدّد الخلايا</b>.</li>
+        </ul>
+        <p class="def">وتضم المملكة النباتية نباتات متفاوتة في الأحجام، من الطحالب المجهرية إلى الأشجار المعمّرة. أما الفطريات فقد أُبعدت حديثاً من المملكة النباتية ورُفعت إلى مملكة مستقلة، لأن جدرها الخلوية من <span class="term">كيتين</span> (مثل الحشرات) وليست ذاتية التغذية.</p>
+
+        <h4>المرشِّيات مقابل الكورمِّيات</h4>
+        <table class="cmp">
+          <tr><th>الوجه</th><th>المرشِّيات <span class="en">Thallophytes</span></th><th>الكورمِّيات <span class="en">Cormophytes</span></th></tr>
+          <tr><td>التركيب</td><td>جسم مرشة <span class="en">Thalle</span> بأشكال مختلفة (خيطية، شريطية، كروية...) دون تمييز جذر/ساق/ورق</td><td>نباتات مركّبة بأنسجة متمايزة (جذر، ساق، أوراق حقيقية أو أشباهها)</td></tr>
+          <tr><td>النواة</td><td>بدائية التنظيم الخلوي، متجمعة</td><td>حقيقية النواة، متعددة الخلايا المتمايزة</td></tr>
+          <tr><td>التكاثر</td><td>بالأبواغ <span class="en">les spores</span> أو التكاثر الجنسي بالأمشاج</td><td>أعضاء تكاثرية متمايزة (مشيجية/بوغية)</td></tr>
+          <tr><td>الأمثلة</td><td><b>الطحالب، الفطريات، الأشنات</b></td><td><b>الحزازيات، السرخسيات، النباتات البذرية</b></td></tr>
+        </table>
+        <ul class="pts">
+          <li><b>الحزازيات <span class="en">Bryophytes</span>:</b> نباتات صغيرة الحجم تعيش في الأماكن الرطبة، تمتصّ خلاياها من الوسط المحيط بها مباشرة (لا نظام خاص لنقل الماء).</li>
+          <li><b>السرخسيات <span class="en">Ptéridophytes</span>:</b> تمتاز بتطوّر الأوعية الناقلة وأعضاء حقيقية (جذور)، لكن الإلقاح عندها يبقى رهين وجود وسط مائي لتنقّل الأمشاج الذكرية.</li>
+          <li><b>النباتات البذرية <span class="en">Spermaphytes</span>:</b> الأكثر تطوّراً؛ الإلقاح ظاهري <span class="en">Phanérogames</span> (عكس مستورات الإلقاح الخاصة بالمجموعات السابقة) — تضم معراة البذور ومغطاة البذور، وهي الأوسع انتشاراً والأكثر تكيّفاً مع الظروف الحالية.</li>
+        </ul>
+        <div class="note">📌 بالأرقام التقريبية للأصناف المعروفة (حسب الوثيقة): يبلغ عدد الكائنات الحية المسجّلة نحو <b>1.7 مليون</b> كائن، تتوزّع الطحالب منها على ~25 ألف نوع، الفطريات ~80 ألف، الحزازيات ~23 ألف، السراخس ~15 ألف، بينما تستأثر النباتات البذرية وحدها بـ~250 ألف نوع.</div>
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ═══════════ الوحدة 2: الطحالب ═══════════ -->
+<section class="unit" id="unitAlgae">
+  <div class="unit-head">
+    <span class="unit-ico">🦠</span>
+    <div>
+      <h2>الوحدة الثانية: الطحالب <span class="en">Les Algues — Phycologie</span></h2>
+      <p>فصلان: مدخل عام (المميزات، المورفولوجيا، الخلوية، التكاثر والدورات) ثم التصنيف التفصيلي للأقسام</p>
+    </div>
+    <span class="unit-tag tag-on">🔒 مشتركين</span>
+  </div>
+
+  <div class="acc-list">
+    <div class="acc-item" id="al0">
+      <button class="acc-btn" onclick="togTax(this)"><span class="acc-num">2</span> الفصل الأوّل: مدخل عام إلى الطحالب — التعريف، المميزات، الأشكال والتكاثر <span class="acc-arrow">▼</span></button>
+      <div class="acc-body">
+
+        <h4>1. تعريف الطحالب</h4>
+        <p class="def">تُعرَّف الطحالب على أنها مجموعة من الكائنات الحية <b>ذاتية التغذية</b>، ويسمّى العلم الذي يدرس شمول الطحالب بـ<span class="term">علم الطحالب</span> <span class="en">Phycologie</span>. ويعود ظهورها إلى العصور الأولى لبداية الحياة على سطح الكرة الأرضية (حوالي <b>1.3 مليار سنة</b>). وتُعتبر الطحالب الخضراء المزركّة <span class="en">Les Cyanobactéries</span> (بدائية النواة) من أقدم أنواع الطحالب التي تمت دراستها في العالم السابق.</p>
+        <p class="def">يمكن تعريف الطحالب أيضاً بأنها كائنات بدائية متعددة الأشكال، تفتقر الأنسجة الأوعائية، تحتوي على عدة أنواع من الصبغات أهمها <span class="term">الكلوروفيل (أ)</span> الذي يُعتبر صبغة أساسية، ولها حراكية تكاثرية متنوعة. وتتوزع الطحالب على الممالك الثلاث: الخضراء المزركة بدائية النواة، وحيدة الخلية تنتمي إلى مملكة الأوليات، أما الطحالب المركبة (مرشيات) فتنتمي إلى المملكة النباتية.</p>
+
+        <h4>2. أهم مميزات الطحالب</h4>
+        <ul class="pts">
+          <li>بساطة تركيب أجسامها: تكون إما <b>وحيدة الخلية</b> أو متعددة الخلايا، مع غياب الجذور والسيقان والأوراق الحقيقية.</li>
+          <li>بساطة بنيتها التكاثرية: فلم تتمايز الخلايا الخضرية من جسم الطحلبة إلى خلايا تكاثرية متخصصة.</li>
+          <li>دورة حياتها <b>كُعرية</b> (تتعاقب فيها الأطوار دون ثبات شكلي واحد).</li>
+          <li>وجودها المشترك في صبغة <b>الكلوروفيل أ</b> هو الصبغة المميزة للنباتات التي تستطيع بها صناعة غذائها ذاتياً.</li>
+          <li>تتنوع مواطنها: الأوساط المائية (عذبة ومالحة)، أو على اليابسة، أو محمولة في الهواء، والبعض يعيش متطفلاً على الكائنات الحية.</li>
+          <li>يُشترط وجود <b>وسط مائي</b> لحدوث عملية التكاثر الفعلية.</li>
+          <li>تختلف في أحجامها اختلافاً هائلاً: من <b>3 ميكرون</b> إلى أكثر من <b>40 متراً</b> عند بعض الطحالب البحرية مثل <span class="en">Macrocystis pyrifera</span> الذي قد يصل طوله إلى حوالي <b>60 متراً</b> — أي أكبر من أشجار الكرة الأرضية.</li>
+        </ul>
+
+        <div class="gal">
+          <figure><img src="assets/svt/botsys/u2a/img_01.jpg" alt="مقارنة خلايا"><figcaption>🔬 رسم مقارنة: الخلية الحيوانية ← خلية <span class="en">Chlamydomonas</span> بسوطيها ← خلية <span class="en">Chlorella</span> غير المتحركة</figcaption></figure>
+          <figure><img src="assets/svt/botsys/u2a/img_03.jpg" alt="تنوع الطحالب"><figcaption>🌊 تنوّع مظهري للطحالب: مرشات وخيوط في الأوساط الطبيعية والمائية العذبة</figcaption></figure>
+        </div>
+
+        <h4>3. مورفولوجيا الطحالب (الأشكال الظاهرية)</h4>
+        <p class="def">تتنوع الطحالب في أشكالها وأحجامها، وتوجد في عدة تجليات مورفولوجية رئيسية:</p>
+        <ul class="pts">
+          <li><b>وحيدة الخلية</b> (~1/5 الطحالب): إما متحركة بالأسواط مثل <span class="en">Euglena</span> و<span class="en">Chlamydomonas</span>، أو غير متحركة مثل <span class="en">Chlorella</span>.</li>
+          <li><b>المستعمرات</b>: تجمّع عدد من الخلايا المفردة — نوعان:
+            <br>&nbsp;&nbsp;◦ <b>التجمّعات</b>: خلايا مترابطة بمادة هلامية (مطاطية)، عددها غير محدد، قد تكون متحركة مثل <span class="en">Hydrurus</span> أو غير متحركة مثل <span class="en">Synura</span>.
+            <br>&nbsp;&nbsp;◦ <b>المحدودة</b>: عدد وترتيب الخلايا ثابت طيلة الحياة؛ متحركة مثل <span class="en">Volvox</span> (أكثر من 4000 خلية) أو غير متحركة مثل <span class="en">Pediastrum</span> — وقد تكون مستعمرات مسطحة أو مستديرة.</li>
+          <li><b>الخيطية</b>: خلايا منقسمة بشكل متعاقد على محور الخيط — <b>بسيطة</b> (انقسام في اتجاه واحد مع وجود الحواجز الخلوية: <span class="en">Spirogyra</span>، <span class="en">Ulothrix</span>) أو <b>متفرعة</b> بتفرع حقيقي (انقسام الخلايا القمية: <span class="en">Cladophora</span>) أو كاذب (حواجز جيلاتينية: <span class="en">Tolypothrix</span>).</li>
+          <li><b>الأنبوبية (السيفونية)</b>: مدمجة خلوية (أنبوبة واحدة متعددة النوى دون حواجز داخلية) مثل <span class="en">Vaucheria</span>.</li>
+          <li><b>الرقائقية</b>: كبيرة مرئية بالعين المجردة، من أرقق الطحالب — حقيقية (انقسامات في كل الاتجاهات: <span class="en">Ulva</span> خسّ البحر) أو كاذبة (تجمّع خيوط متفرعة بمادة جيلاتينية: <span class="en">Palmaria</span> من الحمراء).</li>
+          <li><b>محاور كاملة</b>: يتمايز الجسم إلى محور كامل يشبه ساقاً تحمل أبهاراً تشبه أوراق، مع كاذبات جذرية للتثبيت — أرقى الطحالب شكلاً: جنس <span class="en">Chara</span>.</li>
+        </ul>
+
+        <div class="gal">
+          <figure><img src="assets/svt/botsys/u2a/img_02.jpg" alt="Synura"><figcaption>🧫 مستعمرات تجمعية ذهبية — <span class="en">Synura sp</span> (خلايا مترابطة بمادة هلامية)</figcaption></figure>
+          <figure><img src="assets/svt/botsys/u2a/img_05.jpg" alt="Volvox"><figcaption>🟢 مستعمرة محدودة متحركة — <span class="en">Volvox sp</span>: كرة جوفاء بآلاف الخلايا والمستعمرات البنوية</figcaption></figure>
+          <figure><img src="assets/svt/botsys/u2a/img_04.jpg" alt="Pediastrum"><figcaption>✳️ مستعمرة محدودة غير متحركة — <span class="en">Pediastrum sp</span>: قرص نجمي مسطّح</figcaption></figure>
+          <figure><img src="assets/svt/botsys/u2a/img_06.jpg" alt="Spirogyra"><figcaption>🌀 خيط <span class="en">Spirogyra</span> بصانعاته اللولبية (البيرينوئيد واضح داخل الشريط الكلوروفيلي)</figcaption></figure>
+          <figure><img src="assets/svt/botsys/u2a/img_07.jpg" alt="Ulothrix"><figcaption>〰️ خيوط <span class="en">Ulothrix sp</span>: خيطية بسيطة غير متفرعة بصانعات حلقية</figcaption></figure>
+          <figure><img src="assets/svt/botsys/u2a/img_08.jpg" alt="Cladophora"><figcaption>🌿 خيوط <span class="en">Cladophora sp</span>: التفرّع الحقيقي الناتج عن انقسام الخلايا القمّية</figcaption></figure>
+          <figure><img src="assets/svt/botsys/u2a/img_09.jpg" alt="Tolypothrix"><figcaption>🪢 خيوط <span class="en">Tolypothrix sp</span>: التفرّع الكاذب عبر الحواجز الجيلاتينية</figcaption></figure>
+          <figure><img src="assets/svt/botsys/u2a/img_10.jpg" alt="Vaucheria"><figcaption>🧪 خيوط <span class="en">Vaucheria sp</span>: تركيب أنبوبي (سيفوني) مدمج خلوي بلا حواجز داخلية</figcaption></figure>
+          <figure><img src="assets/svt/botsys/u2a/img_12.jpg" alt="Ulva"><figcaption>🥬 <span class="en">Ulva</span> (خسّ البحر): رقائقية حقيقية من صفوف الخلايا المنقسمة في كل الاتجاهات</figcaption></figure>
+          <figure><img src="assets/svt/botsys/u2a/img_11.jpg" alt="Palmaria"><figcaption>🌺 مرشة <span class="en">Palmaria</span> الحمراء: رقائقية كاذبة (تجمّع خيوط متماسكة بمادة جيلاتينية)</figcaption></figure>
+          <figure><img src="assets/svt/botsys/u2a/img_13.jpg" alt="Chara"><figcaption>🌱 جنس <span class="en">Chara</span>: محاور كاملة بأفرع حلقية وكاذبات جذرية — أقرب الطحالب شكلاً للنباتات الراقية</figcaption></figure>
+        </div>
+
+        <h4>4. النمو عند الطحالب</h4>
+        <ul class="pts">
+          <li><b>النمو الشامل والمتدرّج:</b> تنقسم كل خلايا الجسم فيضرب حجم الطحلبة وتزداد — مثل <span class="en">Ulva</span>.</li>
+          <li><b>النمو الخيطي:</b> نمو الخيط من خلال انقسام عدد من الخلايا المكوّنة له — يلاحظ غالباً في الطحالب البحرية.</li>
+          <li><b>النمو المحدود:</b> تقتصر خلايا النمو على أجزاء محددة:
+            <br>&nbsp;&nbsp;◦ <b>قمّي:</b> خلايا النمو في قمة النبات (الأكثر شيوعاً مثل <span class="en">Chara</span>).
+            <br>&nbsp;&nbsp;◦ <b>بيني:</b> انقسام خلية أو خلايا وسطية مثل <span class="en">Laminaria</span>.
+            <br>&nbsp;&nbsp;◦ <b>كاذب:</b> خلايا النمو في قاعدة الطحلبة — أندر حدوثاً.</li>
+        </ul>
+        <div class="gal">
+          <figure><img src="assets/svt/botsys/u2a/img_14.jpg" alt="أنماط النمو"><figcaption>📐 أنماط نمو المرشة عند الطحالب <span class="en">(Croissance des thalles: A–E)</span> مع عنق <span class="en">Laminaria</span> وماسكه القرصي</figcaption></figure>
+        </div>
+
+        <h4>5. الخصائص الخلوية للطحالب</h4>
+        <ul class="pts">
+          <li><b>الجدار الخلوي:</b> يتباين بمواد رئيسية سيليلوزية (مثل النباتات الراقية، مع استبدال السيليلوز أحياناً بمواد سكرية أخرى كالمانانات والكزيلانات)، أو بمواد مخاطية غروية كحامض الألجينيك — وله أدوار عدة: التماسك والتلاحم (خاصة في المستعمرات)، حماية من الجفاف، والمساهمة في الحركة الإسموزية. ويبقى خالياً في بعض الأنواع (مثل <span class="en">Euglena</span> بلا جدار خلوي) أو متركّباً تحت <b>الأهداب المتحركة</b>.</li>
+          <li><b>النواة:</b> وحيدة في الغالب، وقد تتعدد فتكون الخلية متعددة النوى.</li>
+          <li><b>الصانعات الخضراء (الكروماتوبلاست):</b> تشكّل الجزء الأساسي من الخلية الطحلبية وتتخذ أشكالاً مختلفة (كروية، نجمية، شريطية لولبية...)؛ تحتوي الصبغات: <b>الكلوروفيل أ</b> الضروري في الطحالب كلها + الكلوروفيل <span class="en">b</span> و<span class="en">c</span>/<span class="en">d</span> والكاروتينات، وتضيف الحمراء صبغتي <span class="en">Phycoérythrine</span> و<span class="en">Phycocyanine</span> المسؤولتين عن اللون الأحمر والأرجواني المميز.</li>
+          <li><b>المواد المدخرة:</b> تختلف حسب الصبغات السائدة: <b>نشا</b> عند الخضراء، <b>نشا فلوريدي</b> عند الحمراء، أما البرّية والبنّية فتخزّن مركّبات كربونية متعددة مثل <b>المانيتول</b> بالإضافة إلى زيوت ودهون.</li>
+        </ul>
+
+        <h4>6. التكاثر عند الطحالب</h4>
+        <ul class="pts">
+          <li><b>التكاثر الخضري (اللاجنسي المباشر):</b>
+            <br>&nbsp;&nbsp;◦ <b>الانقسام الخلوي الطولي</b>: انشطار الخلية ثم انفصالها إلى فردين مستقلين (وحيدة الخلية مثل <span class="en">Chroococcus</span>).
+            <br>&nbsp;&nbsp;◦ <b>التجزؤ</b>: انقطاع الخيط أو جزء منه فينمو معطياً طحلبة جديدة.
+            <br>&nbsp;&nbsp;◦ <b>تكوين المستعمرات الذاتية:</b> كل خلية داخل المستعمرة يمكنها تشكيل مستعمرة جديدة مشابهة (<span class="en">Volvox</span>، <span class="en">Pediastrum</span>).</li>
+          <li><b>التكاثر اللاجنسي بالأبواغ:</b> عبر خلايا متخصصة أو أبواغ تنمو معطية طحالب جديدة، وأهم أنواعها:
+            <br>&nbsp;&nbsp;◦ <span class="en">Zoospores</span>: أبواغ متحركة بأسواط (تتشكل داخل الخلايا الخضرية) — <span class="en">Chlamydomonas</span>.
+            <br>&nbsp;&nbsp;◦ <span class="en">Aplanospores</span>: أبواغ لا تتشكل أسواطها، تنفصل داخل الخلية الأم ثم قد تتحور إلى بواغ متحركة.
+            <br>&nbsp;&nbsp;◦ <span class="en">Autospores</span>: خلايا وسيطة غير مخصّصة، تنفصل عند تمزق جدار الخلية الأم ولا تتحول للمتحركة.
+            <br>&nbsp;&nbsp;◦ <span class="en">Hypnospores</span>: خلايا سميكة الجدار تُنتج في الظروف غير الملائمة (تحمّل سلبي).
+            <br>&nbsp;&nbsp;◦ <span class="en">Akinete</span>: خلية خضرية كبيرة سميكة الجدار، مخزون غذائي ضخم، تصبر على الظروف القاسية ثم تنمو طحلبة جديدة.</li>
+          <li><b>التكاثر الجنسي:</b> يحدث في غالبية الطحالب باتحاد خليتين جنسيتين (أمشاج) تندجان نواتاهما — ثلاثة أنماط:
+            <br>&nbsp;&nbsp;◦ <span class="en">Isogamie</span>: أمشاج متشابهة شكلياً متحركة (بسوطين).
+            <br>&nbsp;&nbsp;◦ <span class="en">Anisogamie</span>: مشيجان متحركان مختلفان في الحجم (صغير ذكري وكبير أنثوي).
+            <br>&nbsp;&nbsp;◦ <span class="en">Oogamie</span>: مشيج ذكري صغير متحرك + خلية أنثوية غير متحركة (بويضة) داخل أعضاء مخصصة.</li>
+        </ul>
+
+        <h4>7. دورات الحياة عند الطحالب</h4>
+        <ul class="pts">
+          <li><b>دورة أحادية <span class="en">Haplophasique</span>:</b> الطحلبة أحادية الصيغة الصبغية في كل مراحلها عدا الزيجوت (2n) الذي يخضع مباشرة لانقسام اختزالي فيعطي طحلبة جديدة أحادية — مثال: <span class="en">Chlamydomonas</span>.</li>
+          <li><b>دورة ثنائية <span class="en">Diplophasique</span>:</b> الطحلبة ثنائية الصيغة في كل مراحلها عدا الأمشاج (n) التي تتكون بعد الانقسام الاختزالي — مثال: <span class="en">Fucus</span>.</li>
+          <li><b>دورة متعددة <span class="en">(تبادل الأجيال)</span>:</b> تناوب بين طورين: <b>مشيجي (n)</b> ينتج الأمشاج و<b>بوغي (2n)</b> ينتج الأبواغ الثنائية بالانقسام الاختزالي — الطوران متشابهان مثل <span class="en">Ulva</span>، أو غير متشابهين بسيادة البوغي (<span class="en">Laminaria</span>) أو بسيادة المشيجي (<span class="en">Porphyra</span>).</li>
+        </ul>
+        <div class="gal">
+          <figure><img src="assets/svt/botsys/u2a/img_15.jpg" alt="دورة Chlamydomonas"><figcaption>🔁 دورة حياة أحادية عند <span class="en">Chlamydomonas</span>: الزيجوت (2n) الوحيد ثنائي الصيغة، ثم انقسام اختزالي مباشر</figcaption></figure>
+          <figure><img src="assets/svt/botsys/u2a/img_16.jpg" alt="دورة Fucus"><figcaption>🔁 دورة حياة ثنائية عند <span class="en">Fucus</span>: الثالوس (2n) سائد، والأمشاج (n) الوحيدة أحادية الصيغة</figcaption></figure>
+          <figure><img src="assets/svt/botsys/u2a/img_17.jpg" alt="دورة Laminaria"><figcaption>🔁 دورة متعددة بتبادل أجيال عند <span class="en">Laminaria</span>: بوغي ضخم (2n) ← مشيجيان مجهريان (n)</figcaption></figure>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="acc-item" id="al1">
+      <button class="acc-btn" onclick="togTax(this)"><span class="acc-num">3</span> الفصل الثاني: تصنيف الطحالب — المعايير والأقسام التفصيلية <span class="en">Classification des algues</span> <span class="acc-arrow">▼</span></button>
+      <div class="acc-body">
+
+        <h4>1. معايير تصنيف الطحالب</h4>
+        <p class="def">قبل التعرّف لنظام تصنيف الطحالب يجب أن نعلم أنه في سنة <b>1969</b> أسّس ويتكر نظام التصنيف الخماسي للكائنات الحية بخمس ممالك. وحسب شكل المرشة، تتوزع الطحالب بين ثلاث ممالك: بدائيات النواة، الأوليات والنباتية. ومن أجل دراسة أنواعها بدقة اعتُمدت ستة معايير تصنيفية:</p>
+        <ul class="pts">
+          <li><b>1.</b> نوع الصباغ.</li>
+          <li><b>2.</b> نوع الغذاء المدخّر وطرق التغذية.</li>
+          <li><b>3.</b> طرق التكاثر.</li>
+          <li><b>4.</b> المظهر الخارجي والتركيب الخلوي.</li>
+          <li><b>5.</b> تركيب جدار الخلية.</li>
+          <li><b>6.</b> أنواع أسواط الحركة والأهداب.</li>
+        </ul>
+        <div class="gal">
+          <figure><img src="assets/svt/botsys/u2b/img_06.jpg" alt="الشجرة التصنيفية"><figcaption>🌳 الشجرة التصنيفية للمملكة النباتية: النباتات الخضراء <span class="en">Chlorobionte</span> ← الجنينيات <span class="en">Embryophytes</span> ← الوعائية <span class="en">Tracheophytes</span> ← البذرية <span class="en">Spermatophytes</span> (مع فصل خفيات/ظاهرية الإلقاح وأحادية/ثنائية الفلقة)</figcaption></figure>
+        </div>
+        <p class="def">وعلى هذا الأساس تتوزع الطحالب على ثلاث ممالك: <b>مملكة البدائيات</b> <span class="en">Monera</span> (قسم الطحالب الخضراء المزركة <span class="en">Cyanobactéries</span> — دُرست في السنة الأولى سابقاً)، و<b>مملكة الأوليات</b> <span class="en">Protista</span> التي تضم الأقسام التالية موضوع هذا الفصل.</p>
+
+        <h4>2. قسم الطحالب الخضراء <span class="en">Chlorophyta</span></h4>
+        <p class="def"><b>الخصائص العامة:</b> تتواجد في الأوساط المائية (عذبة ومالحة) وبعضها يعيش في التربة الرطبة أو على الصخور وجذوع الأشجار؛ شبيهة بالنباتات الراقية إذ تحتوي خلاياها على نواة حقيقية وصبغات ضوئية (كلوروفيل <span class="en">a</span> و<span class="en">b</span>، كاروتينات وزانثوفيلات) متممركزة في الصانعات الخضراء؛ الغذاء المدخّر <b>نشا</b> والسيليلوز مكوّن أساسي للجدار؛ تتنوع في الشكل (وحيدة الخلية، مستعمرات، خيوط متفرعة وغير متفرعة) وتتكاثر خضرياً وجنسياً ولاجنسياً.</p>
+        <p class="def">تضم طائفتين: <span class="en">Charophyceae</span> و<span class="en">Chlorophyceae</span> هذه الأخيرة تقسم إلى <b>ثماني رتب</b>:</p>
+        <table class="cmp">
+          <tr><th>الرتبة</th><th>أبرز خصائصها</th><th>أمثلة</th></tr>
+          <tr><td><span class="en">Volvocales</span></td><td>مياه عذبة؛ أفراد وحيدة الخلية أو مستعمرات متحركة بالأسواط؛ تكاثر جنسي ولاجنسي — عائلتان: وحيدة الخلية <span class="en">Chlamydomonaceae</span> والمستعمرات <span class="en">Volvocaceae</span></td><td><span class="en">Chlamydomonas</span> (سوطان أماميان لكل خلية)، <span class="en">Volvox</span> (مستعمرة كروية بعدد هائل من الخلايا تتصل بروابط سيتوبلازمية)، <span class="en">Eudorina, Gonium, Pandorina</span></td></tr>
+          <tr><td><span class="en">Chlorococcales</span></td><td>مياه عذبة؛ غير متحركة (لا أسواط ولا أهداب) والحركة فقط في الأبواغ المتحركة؛ تحت رتبتين: <span class="en">Zoosporinae</span> (تكاثر بالأبواغ المتحركة) و<span class="en">Autosporinae</span> (بالأبواغ الذاتية فقط)</td><td><span class="en">Chlorococcum</span> (خلايا مستديرة صغيرة وحيدة النواة)، <span class="en">Chlorella</span> (وحيد الخلية كروي، صانعة فنجانية، تكاثر ذاتي)</td></tr>
+          <tr><td><span class="en">Oedogoniales</span></td><td>مياه عذبة؛ تتثبت بالقاعدة بخيوط قاعدية؛ خيوط بسيطة أو متفرعة من خلايا أسطوانية وحيدة النواة بصانعة شريطية</td><td><span class="en">Oedogonium</span></td></tr>
+          <tr><td><span class="en">Ulothricales</span></td><td>خيوط طحلبية متفرعة أو غير متفرعة، تتثبت بالقاعدة؛ صانعة خضراء شريطية</td><td><span class="en">Ulothrix</span></td></tr>
+          <tr><td><span class="en">Chaetophorales</span></td><td>عذبة ومالحة؛ خيوط متفرعة تنتهي بشعيرات؛ قسم زاحف وقسم قائم مع كاذبات جذرية مغطاة بغلاف مخاطي</td><td><span class="en">Stigeoclonium</span></td></tr>
+          <tr><td><span class="en">Cladophorales</span></td><td>خيوط متفرعة بخلايا أسطوانية متعددة النوى (مدمج جزئي) وجدر سميكة؛ تجمعات معوّقة تتثبت بأشباه جذور؛ مياه عذبة غالباً</td><td><span class="en">Cladophora</span> (أشهر أجناسها)</td></tr>
+          <tr><td><span class="en">Conjugales</span> — <b>المزاوجات</b></td><td>مياه عذبة راكدة؛ وحيدة أو متعددة الخلايا خيطية؛ التكاثر الجنسي <b>بالاقتران</b> (قناة اقتران بين خليتين، أمشاج غير متحركة) — ومنه اشتق الاسم؛ الصانعات نجمية عند <span class="en">Zygnema</span> ولولبية عند <span class="en">Spirogyra</span></td><td><span class="en">Spirogyra</span>، <span class="en">Zygnema</span> (عائلة <span class="en">Zygnemataceae</span>)</td></tr>
+          <tr><td><span class="en">Siphonales</span> — <b>الأنبويات</b></td><td>بحرية غالباً استوائية؛ أجسام خيطية وأنبوبية مدمجة خلوية <b>متعددة النوى</b>؛ صانعات عديدة الشكل الشبكي؛ تكاثر جنسي من نوع متشابه الأمشاج</td><td><span class="en">Siphonocladus</span></td></tr>
+        </table>
+        <div class="gal">
+          <figure><img src="assets/svt/botsys/u2b/img_01.jpg" alt="اقتران Spirogyra"><figcaption>💚 التكاثر الجنسي بالاقتران عند <span class="en">Spirogyra</span>: التقاء خيطين ← تكوّن أنابيب الاقتران ← اندماج المشيج الذكري مع الأنثوي في زيجوت</figcaption></figure>
+          <figure><img src="assets/svt/botsys/u2b/img_02.jpg" alt="Siphonocladus"><figcaption>🧬 صورة مجهرية لخيوط <span class="en">Siphonocladus</span> المتفرعة (رتبة الأنبويات): مدمج خلوي متعدد النوى</figcaption></figure>
+        </div>
+
+        <h4>3. قسم الطحالب الحارية <span class="en">Charophyta</span></h4>
+        <p class="def">تعيش في المياه العذبة والمالحة، وهي طحالب متمايزة الحجم يمكن رؤيتها بالعين المجردة. تختلف عن الخضر بتميّزها شكلياً وتشريحياً: محور مركزي رفيع طويل أخضر اللون يتكون من <b>عقد وسلاميات</b>، والمحور متفرع تنشأ عند كل عقدة فروع جانبية، ويثبت نفسه في الوسط بأشباه جذور متعددة الخلايا. أعضاء التكاثر مبثوثة خضر اللون حول الفروع، والتكاثر جنسي بالأمشاج وتوجد مرحلة خيطية (<b>برتوهالم/الطور الخيطي</b>) في دورة الحياة — ولهذه الخصائص وُضعت في مجموعة مستقلة مع تشابه وثيق بالخضراء (أحادية الصيغة، الكلوروفيل سائد يعطي اللون الأخضر، النشا مادة مدخرة). الرتبة: <span class="en">Charales</span> — العائلة: <span class="en">Characeae</span> — أشهر أجناسها: <span class="en">Chara</span>.</p>
+
+        <h4>4. قسم الطحالب اليوغلينية <span class="en">Euglenophyta</span></h4>
+        <ul class="pts">
+          <li>مياه عذبة غنية بالمواد العضوية وتربة رطبة؛ وحيدة الخلية وأحياناً مستعمرات.</li>
+          <li>الخلية <b>بلا جدار خلوي</b> — ولهذا تتحرك حركة أميبية وتغيّر شكلها، بالإضافة إلى أسواط وفجوات متقلصة.</li>
+          <li>كلوروفيل <span class="en">a</span> يعطي اللون الأخضر مع كاروتينات (بعضها أبيض بلا صبغات)؛ الصانعات كروية أو شريطية أو نجمية حسب النوع.</li>
+          <li>الغذاء المدخّر: <b>باراميلون</b> (نشا معدّل يتكون في السيتوبلازم خارج الصانعة).</li>
+          <li>لها صفات حيوانية (التغذية بابتلاع جزيئات المادة) وصفات نباتية (تكوين الغذاء ذاتياً)؛ التكاثر بالانقسام الثنائي.</li>
+        </ul>
+        <p class="def">رتبة <span class="en">Euglenales</span> — جنس <span class="en">Euglena</span>: طحلبة خضراء وحيدة الخلية مغزلية الشكل، توجد في البرك والمستنقعات؛ لا تحتوي جداراً بل يحيط بالخلية غلاف جيلاتيني؛ <b>سوطان غير متساويين</b> في الطول (وهي من أبرز مميزاتها)؛ تتكاثر خضرياً ولاجنسياً (أبواغ متحركة وغير متحركة)، وفي الظروف غير الملائمة تتحوصل بغلاف سميك ثم تنقسم وحدات متشابهة عند التحسّن. ورتبة <span class="en">Vaucheriales</span> (عائلتا <span class="en">Botrydiaceae</span> و<span class="en">Vaucheraceae</span>): جنس <span class="en">Vaucheria</span> بخيوط خضراء معفرة متفرعة غير مقسمة، جدار بطبقتين (بكتينية خارجية وسيليلوزية داخلية)، فجوة عصارية كبيرة، غذاء مدخّر على شكل زيوت.</p>
+
+        <h4>5. قسم الطحالب الصفراوية — الدياتومات <span class="en">Bacillariophyta</span></h4>
+        <p class="def">تسمّى أيضاً <b>المنشطرات</b> أو الطحالب الذهبية. عائلة واحدة <span class="en">Bacillariophyceae</span>: عذبة ومالحة وتربة رطبة، طافية أو متثبتة؛ معظمها وحيد الخلية وقد يتجمع في مستعمرات؛ <b>دقيقة الأشكال جميلة متناظرة</b>؛ الخلايا بصانعة أو اثنتين تضمان الفوكسوزانتين والكاروتينات والكلوروفيل (<span class="en">a, c</span>)؛ المواد المدخرة <b>زيوت دهنية</b>؛ والميزة الفاصلة: جدار خلوي بكتيني <b>مشبَّع بالسليكا</b> يبقى أحفوراً بعد موت الطحلبة؛ التكاثر خضري (انقسام) وجنسي.</p>
+        <div class="gal">
+          <figure><img src="assets/svt/botsys/u2b/img_03.jpg" alt="دياتومات"><figcaption>✨ صور مجهرية لأنواع من الدياتومات <span class="en">(Bacillariophyta)</span>: صدف سيليكية جميلة التناظر تبقى محفوظة كأحافير</figcaption></figure>
+        </div>
+
+        <h4>6. قسما الصفراء <span class="en">Xanthophytae</span> والخضراء المعفرة <span class="en">Chrysophyta</span></h4>
+        <ul class="pts">
+          <li><b>الصفراء <span class="en">Xanthophytae</span>:</b> مياه عذبة؛ أشكال متنوعة (وحيدة كروية، مدمج خلوي، خيطية)؛ غذاء مدخّر زيوت ودهون (لا نشا)؛ جدار بكتيني؛ خلية وحيدة النواة؛ الصبغة الإضافية <b>الزانثوفيل</b> يعطي اللون الأصفر المخضر رغم وجود كلوروفيل (<span class="en">a, c</span>) وكاروتينات؛ لا يوجد بالصانعات مراكز لتكوين النشا؛ أشكال قديمة أو قريبة.</li>
+          <li><b>الخضراء المعفرة <span class="en">Chrysophyta</span>:</b> وحيدة الخلية أو خيطية أحياناً؛ صانعة أو اثنتان بلون أصفر بفعل <b>الفوكسوزانتين</b>؛ الغذاء المدخّر دهون؛ أشكال متحركة بسوطين أو سوط؛ أنواعها تفوق <b>6000 نوع</b>؛ التكاثر لاجنسي والجنسي نادر الوجود.</li>
+        </ul>
+        <div class="gal">
+          <figure><img src="assets/svt/botsys/u2b/img_04.jpg" alt="صفراء ومعفرة"><figcaption>🔬 عينات مجهرية من الطحالب الصفراء <span class="en">Xanthophyta</span> (خلية بسوطين) والخضراء المعفرة <span class="en">Chrysophyta</span> (مستعمرات ذهبية)</figcaption></figure>
+        </div>
+
+        <h4>7. قسم الطحالب الحمراء <span class="en">Rhodophyta</span></h4>
+        <ul class="pts">
+          <li>بحرية تعيش في أعماق متعددة من البحار والمحيطات.</li>
+          <li>الصبغات السائدة: <span class="en">Phycoérythrine</span> الحمراء و<span class="en">Phycocyanine</span> الزرقاء مع وسيط من الكاروتينات والكلوروفيل.</li>
+          <li>الغذاء المدخّر: <b>النشا الفلوريدي</b>؛ الجدار من بكتين مع سيليلوز.</li>
+          <li><b>لا توجد أشكال متحركة</b> في هذه المجموعة (لا أطوار تكاثرية بأسواط).</li>
+          <li>في الأنواع متعددة الخلايا توجد جدر عرضية بفتحات خاصة تشبه ما عند النباتات الراقية تسمح بالتصال بين الخلايا.</li>
+          <li>أشكال متنوعة: وحيدة الخلية، خيطية بسيطة، متفرعة، إلى حراكية رقائقية.</li>
+          <li>دورة الحياة متعددة بوجود <b>طور مشيجي وطور بوغي</b> وكل منهما مستقل عن الآخر.</li>
+        </ul>
+        <p class="def">تنقسم الحمراء إلى تحت صنفين: <b>البدائية <span class="en">Bangioideae</span></b> (وحيدة الخلية أو خيوط بسيطة؛ النمو شامل غير قمّي؛ صانعة واحدة محورية نجمية في الخلية؛ أبواغ من انقسام مباشر) و<b>المتقدمة <span class="en">Florideae</span></b> (مجمعات خيطية على هيئة رقائقات؛ نمو قمّي؛ عدة صانعات جدارية؛ الأبواغ تنشأ بطريقة غير مباشرة).</p>
+        <p class="def">رتبة <span class="en">Bangiales</span> — عائلة <span class="en">Bangiaceae</span> — جنس <b><span class="en">Porphyra</span></b>: طحلبة بحرية تنمو مثبتة على الصخور أو طفيلية على نباتات أخرى؛ الثالوس من أجزاء ورقية رقيقة مغطاة بمادة جيلاتينية (صف واحد أو صفّان من الخلايا)؛ الخلايا الخضرية متقاربة مضغوطة بجدر رقيقة بكتينية وفي الجزء الداخلي حامل صبغي (كلوروبلاست) والنواة صغيرة مركزية. <b>تكاثرها:</b> لاجنسي بأبواغ أحادية تتشكل داخل الخلايا الخضرية العادية فتنمو طحلبة جديدة عند تحررها؛ وجنسي: تُنتج الأمشاج الذكرية غير المتحركة <span class="en">Spermaties</span> من الخلايا الذكرية، والعضو الأنثوي بويضة كروية بثغرة استقبال طرفية؛ عند الوصول يمر المشيج الذكري عبر قناة الثغرة وتتم الإلقاحة (بويضة ملقحة) التي تنقسم عدة انقسامات أولها اختزالي منتجة **حرازيم مثمرة** <span class="en">carpospores</span> — كل واحدة تنمو لتعطي طحلبة جديدة.</p>
+        <div class="gal">
+          <figure><img src="assets/svt/botsys/u2b/img_05.jpg" alt="دورة الحمراء"><figcaption>🔴 دورة الحياة الثلاثية عند الطحالب الحمراء: مشيجي (n) ← ثمراق بوغي <span class="en">Carposporophyte</span> (2n) ← رباعي البوغي <span class="en">Tetrasporophyte</span> — مع مرشة حمراء مرجانية الشكل</figcaption></figure>
+        </div>
+
+        <h4>8. قسم الطحالب البنية <span class="en">Phaeophyta</span></h4>
+        <ul class="pts">
+          <li>تُعتبر من <b>أرقى الطحالب</b> وأكبرها تطوراً من حيث التركيب الخارجي والداخلي؛ بحرية تعيش في البحار والمحيطات (عكس المزركة والخضراء العذبية غالباً).</li>
+          <li>مثبتة بالصخور أو متطفلة على نباتات أخرى بواسطة <b>مثبتات</b>.</li>
+          <li>الثالوس كبير الحجم ذو قاعدة قرصي أو نفاخي (فقاعي) يعوّض بناء المادة العضوية وإنتاج الأبواغ؛ غير متحركة وليست وحيدة الخلية — متعددة الخلايا: خيوط أو متفرعة ضخمة.</li>
+          <li>الجدار من طبقتين: داخلية سيليلوزية وخارجية جيلاتينية تحتوي وسيطاً من الألجين.</li>
+          <li>الصبغة الإضافية <b>الفوكسوزانتين</b> تطغى على الكلوروفيل والكاروتينات فتعطي اللون البني.</li>
+          <li>المواد المدخرة: مواد هيدروكربونية — <b>اللامينارين</b> <span class="en">Laminarine</span> وسكر <b>المانيتول</b>.</li>
+          <li>التكاثر: خضري (تجزؤ)، لاجنسي بأبواغ متحركة (2n) بسوطين (طويل أمامي + قصير خلفي)، وجنسي مع ظاهرة تبادل الأجيال المتميزة.</li>
+        </ul>
+        <p class="def">تُصنف حسب دورات الحياة إلى ثلاث مجموعات:</p>
+        <table class="cmp">
+          <tr><th>المجموعة</th><th>الميزة</th><th>المثال</th></tr>
+          <tr><td><b>متشابهة الأجيال</b> <span class="en">Isogeneratae</span></td><td>طوران متعاقدان ومتشابهان ظاهرياً</td><td>رتبة <span class="en">Ectocarpales</span> — جنس <span class="en">Ectocarpus</span>: البحر الأبيض المتوسط والمياه الباردة؛ خيوط رقيقة متفرعة؛ دورة بسيادة جنسية: أبواغ سائبة أحادية وثنائية، حوافظ مشيجية تنتج أمشاجاً متشابهة أو غير متشابهة، تندمج في لاقحة <span class="en">Zygote</span> تعطي طوراً بوغياً جديداً — الطوران متشابهان ظاهرياً</td></tr>
+          <tr><td><b>مختلفة الأجيال</b> <span class="en">Heterogeneratae</span></td><td>طوران غير متشابهين ظاهرياً ووراثياً</td><td>رتبة <span class="en">Laminariales</span> — جنس <span class="en">Laminaria</span>: كبير الحجم (حتى ~2م وبعض الأنواع ~5م) من ثلاثة أجزاء: مثبت/ماسك قاعدي، عنق ساقي صلب، ونصل ورقي متفرع؛ تركيب داخلي بطبقات (مريستم، خلايا هلامية غنية بحاملات اللون، لب داخلي بخلايا تصنع خيوطاً غذائية كثيفة)؛ دورة بسيادة البوغي الضخم (2n) على مشيجي صغير (n) — أعضاء ذكرية (أنتريدات) وأنثوية (أرجونات) والبويضة تبقى متصلة بالنبات <span class="en">(Zygote)</span></td></tr>
+          <tr><td><b>دائرية الأبواغ</b> <span class="en">Cyclosparae</span></td><td><b>لا</b> ظاهرة تبادل أجيال؛ الثالوس (2n) طوال الدورة — رتبة واحدة <span class="en">Fucales</span></td><td>جنس <span class="en">Fucus</span>: مناطق المد والجزر؛ يفرز مادة هلامية تحميه من الجفاف؛ الثالوس: <b>ماسك</b> قرصي لاصق، <b>عنق</b> أسطواني يشبه الساق، <b>نصل</b> شريط عريض مسطح متفرع بعروق وسطية؛ التكاثر لاجنسي وجنسي: الأنتريدات والأرجونات داخل حوافظ جنسية، البويضات تنفصل لماء البحر (إلقاح خارجي) والتكاثر تبيّضي <span class="en">Oogamie</span></td></tr>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ═══════════ الوحدة 3: الفطريات والأشنات ═══════════ -->
+<section class="unit" id="unitFungi">
+  <div class="unit-head">
+    <span class="unit-ico">🍄</span>
+    <div>
+      <h2>الوحدة الثالثة: الفطريات والأشنات <span class="en">Mycologie &amp; Lichens</span></h2>
+      <p>فصلان: مدخل عام (البنية، التغذية، التكاثر) ثم التصنيف الكامل مع الأشنات</p>
+    </div>
+    <span class="unit-tag tag-on">🔒 مشتركين</span>
+  </div>
+
+  <div class="acc-list">
+    <div class="acc-item" id="my0">
+      <button class="acc-btn" onclick="togTax(this)"><span class="acc-num">4</span> الفصل الأوّل: مدخل عام إلى الفطريات — بنية الثالوس والتغذية والتكاثر <span class="acc-arrow">▼</span></button>
+      <div class="acc-body">
+
+        <h4>1. تقديم عام</h4>
+        <p class="def">تُعتبر الفطريات من <b>أقدم الكائنات حقيقية النواة</b>، إذ عُثر على حفريات لها يعود عمرها إلى <b>410 مليون سنة</b>. وبسبب خصائصها الفريدة — خاصة احتواء جدر خلاياها على <span class="term">الكيتين</span> — فُصِلت من المملكة النباتية (حيث كانت تصنّف مع الطحالب والأشنات ضمن <b>الخلاسيات</b> أي كائنات المرشة <span class="en">Thallus</span> الأرضية التي تتغذى امتصاصاً ولا تتمايز إلى أجزاء) وذلك منذ العصر الحديث، ليضعها ويتكر سنة <b>1969</b> في مملكة مستقلة.</p>
+        <p class="def">والفطريات مجموعة واسعة الانتشار (تربة، ماء، هواء): تختلف عن النباتات بافتقارها <b>اليخضور</b> فلا تستطيع تركيب غذائها (<b>غير ذاتية التغذية</b>)، وتختلف عن الحيوانات بطريقة تغذيتها: لا تبتلع الغذاء بل <b>تمتصّ المواد الغذائية الجاهزة</b>. وبفضل انتشارها الواسع وقدرتها على تحويل المواد العضوية الميتة تلعب دوراً رئيسياً في <b>السلاسل الغذائية</b> باعتبارها <span class="term">محلّلات</span> <span class="en">Décomposeurs</span>، إضافة إلى أهميتها الاقتصادية في مجالات الزراعة والصناعة.</p>
+
+        <h4>2. تركيب الثالوس الفطري</h4>
+        <ul class="pts">
+          <li>أجسام معظمها <b>متعددة الخلايا</b> (وبعض الأنواع وحيدة الخلية كالخمائر).</li>
+          <li>خلاياها حقيقية النواة، تحتوي كل العضيات: جهاز غولجي، الفجوات العصارية، الشبكة الداخلية، الميتوكوندريا... وتشبه خلايا النبات بوجود <b>فجوات عصارية</b>، وقد تحتوي الصبغات الحيوانية.</li>
+          <li>الجدار الخلوي يحتوي <b>الكيتين</b> <span class="en">Chitine</span> (عنصر دخيل في تركيب الأغلفة الخارجية للحشرات) بالإضافة إلى السيليلوز.</li>
+          <li>ينتظم الثالوس في خيوط تُعرف بـ<span class="term">الهيفات</span> <span class="en">Hyphes</span>، ومجموع الهيفات لكل فطر يُسمّى <span class="term">الغزل الفطري</span> (الملس) <span class="en">Mycélium</span>. الهيفات إما وحيدة الخلية غير مقسمة بجدر (مدمجة) أو مقسمة بحواجز (وحيدة أو متعددة النوى).</li>
+          <li>حجمها متغاير: من عدة ميكرونات إلى عدة أمتار؛ وعرض الهيفة عادة من <b>5 إلى 100 ميكرون</b>، وهي متفرعة في العادة.</li>
+        </ul>
+
+        <h4>3. التغذية عند الفطريات</h4>
+        <p class="def">لغياب الصانعات (الكلوروفيل) فهي غير ذاتية التغذية: تكون إما <b>متطفلة</b> أو <b>مترممة</b> أو <b>متكافئة</b>، لقدرتها على إفراز <b>إنزيمات خارجية</b> تعمل على تحويل المواد العضوية الموجودة في الوسط الذي تعيش فيه وتفكيكها فتجعلها قابلة للامتصاص. وتنقسم حسب نمط التغذية إلى:</p>
+        <ul class="pts">
+          <li><b>فطريات حيالية التعفّن (مترممة):</b> تعيش على بقايا الكائنات الميتة — مثل فطريات التخمير (خميرة الخبز).</li>
+          <li><b>فطريات حيالية الارتدم (متطفلة):</b> تعيش على كائنات حية مسببة الأمراض — مثل <span class="en">Fusarium</span> والفطريات الممرضة.</li>
+          <li><b>فطريات متكافئة:</b> تعيش مع غيرها علماً متبادلاً (مثل علاقتها بجذور النباتات).</li>
+        </ul>
+
+        <h4>4. التكاثر عند الفطريات <span class="en">La reproduction</span></h4>
+        <p class="def">تستطيع الفطريات التكاثر بعدة طرق مائزتها قدرتها الكبيرة على الانتشار والبقاء: تتكاثر بالطريقتين اللاجنسية والجنسية مع التكيفات المناسبة.</p>
+        <p class="def"><b>أ/ التكاثر اللاجنسي</b> <span class="en">La reproduction asexuée</span> — وهو الأكثر شيوعاً، يتكرر أكثر من مرة خلال موسم التكاثر، بعكس الجنسي الذي يحدث مرة واحدة في نهاية دورة الحياة. طرقه:</p>
+        <ul class="pts">
+          <li><b>التجزؤ:</b> انقطاع الخيوط الفطرية إلى أجزاء (خلايا عدة)؛ وعند توفر الظروف الملائمة تنمو معطية فطراً جديداً وتستعمل زراعياً لإكثار الفطريات في الوسائط المناسبة.</li>
+          <li><b>الانقسام المستعرض:</b> غالباً في وحيدة الخلية مثل «خميرة الخبز»: تنشطر الخلية الأم إلى شقيقتين كل منهما نواة مستقلة.</li>
+          <li><b>التبرعم:</b> خروج بروز من الخلية الأم «برعم»، ينقسم نواة الأم إلى شقيقتين فتهاجر إحداهما إلى البرعم، ثم ينفصل البرعم بعد تكبّره؛ وقد يتسلسل فتتكون سلسلات من التبرعات مكوّنة <b>الغزل الكاذب</b>.</li>
+          <li><b>تكوين الأجسام الحجرية:</b> عند بعض الفطريات وخاصة الأسقية <span class="en">Ascomycètes</span>، تتجمع الهيفات مكوّنة جسماً صلباً محميّاً (الجسم الحجري) تتخزن فيه مواد غذائية، وتصمد هذه الأجسام الظروف السيئة وتنبت بعد مرورها معطية فطريات جديدة.</li>
+          <li><b>تكوين الأبواغ المعتقة <span class="en">chlamydospores</span>:</b> تتحوّف الخلايا بجدار سميك وتنفصل عن بعضها مع تخزين مواد غذائية — مفردة أو في سلاسل — استراتيجية تحمّل للظروف غير الملائمة.</li>
+          <li><b>تكوين الأبواغ اللاجنسية <span class="en">spores</span>:</b> أهم الطرق لدى الفطريات؛ تختلف في الحجم والشكل واللون وعدد الخلايا؛ قطرها من ميكرونات إلى بضع ديسيمترات، مفردة أو متجمعة:
+            <br>&nbsp;&nbsp;◦ داخلية <span class="en">Endospores</span>: أبواغ متحركة <span class="en">Zoospores</span> (المائية، بسوط أو أكثر) أو أبواغ حافظة <span class="en">sporangiospores</span> (داخل حوافظ بوغية).
+            <br>&nbsp;&nbsp;◦ خارجية <span class="en">Exospores</span>: الأبواغ <b>الكونيدية</b> <span class="en">conidiospores</span> غير المتحركة، تنشأ على بروزات محمولة (الحوامل الكونيدية)، مفردة أو متجمعة في سلاسل.</li>
+        </ul>
+        <p class="def"><b>ب/ التكاثر الجنسي:</b> غالبية الفطريات تتكاثر جنسياً باستثناء <b>الفطريات الناقصة</b> <span class="en">Deuteromycètes</span> (التي يغيب عندها الطور الجنسي) — ويتضمن ثلاث مراحل مميزة:</p>
+        <ul class="pts">
+          <li><b>1. الاقتران البلازمي</b> <span class="en">plasmogamie</span>: الاتحاد الخلوي — اندماج سيتوبلازمي الخليتين المتزاوجتين مع بقاء النواتين منفصلتين داخل الخلية.</li>
+          <li><b>2. الاقتران النووي</b> <span class="en">caryogamie</span>: الخطوة التالية، يندمج فيها النواتان (كل واحدة أحادية <span class="en">n</span>) مكوّنتين <b>اللاقحة</b> <span class="en">Zygote</span> ثنائية الصيغة <span class="en">(2n)</span>.</li>
+          <li><b>3. الانقسام الاختزالي:</b> الطور الثالث من التكاثر الجنسي؛ قد يتبع الاقتران النووي مباشرة أو بعد فترة — تعود النواة من (2n) إلى أحادية (n) بالانقسام الاختزالي منتجة أبواغاً أحادية الصيغة.</li>
+        </ul>
+
+      </div>
+    </div>
+
+    <div class="acc-item" id="my1">
+      <button class="acc-btn" onclick="togTax(this)"><span class="acc-num">5</span> الفصل الثاني: تصنيف الفطريات + الأشنات <span class="en">Classification des champignons &amp; Lichens</span> <span class="acc-arrow">▼</span></button>
+      <div class="acc-body">
+
+        <p class="def">تنقسم مملكة الفطريات إلى <b>قسمين</b>: الفطريات الهلامية (اللزجة/المخاطية) <span class="en">Myxomycètes</span>، والفطريات الحقيقية <span class="en">Eumycètes</span>.</p>
+
+        <h4>1. قسم الفطريات المخاطية <span class="en">Myxomycètes</span></h4>
+        <ul class="pts">
+          <li>كائنات حية تعيش <b>معيشة رمّية</b>، تتواجد في الدبال وبقايا الخشب المتحللة.</li>
+          <li>تتكون من كتلة خلوية (<b>بلازموديوم</b>) لا تحتوي جداراً خلوياً (معراة) فتكون متغيرة الشكل، تتحرك حركة أميبية بالأرجل الكاذبة، متعددة الأنوية، والتكاثر بالأبواغ الأميبية.</li>
+          <li>تُعتبر بمثابة <b>حلقة اتصال بين مملكة الفطريات والحيوان</b>، توجد بكثرة في الطبيعة، ويتحكم في انتشارها مقدار الرطوبة والحرارة؛ أهميتها الاقتصادية قليلة.</li>
+        </ul>
+        <p class="def"><b>فطر <span class="en">Physarum</span>:</b> متواجد في المناطق الحارة وأوراق الأشجار في الغابات الرطبة؛ يتغذى على البكتيريا وأبواغ الفطريات (بلعمة) ويمتص المحاليل؛ الإخراج <span class="en">Exocytose</span> بحركة انقباضية كما عند الحيوان. <b>تكاثره:</b> تتزاوج خليتان (ذكرية وأنثوية) فيتكوّن زيجوت يفقد أسواطه بعد فترة ويصبح أميبي الشكل وتكبر خلاياه وتنقسم نواته انقسامات غير مباشرة فيتكوّن بلازموديوم متعدد الأنوية الثنائية؛ وبعد فترة ينمو جسم ثمري يُعرَف بالثمرة البوغية <span class="en">Sporange</span> يُحمل على حامل؛ وعند اكتمالها تنقسم الأنوية الموجودة فيها انقساماً اختزالياً ثم تحاط بجدار سميك متحولة إلى أبواغ أحادية، تنمو لتعطي دورة حياة جديدة.</p>
+        <div class="gal">
+          <figure><img src="assets/svt/botsys/u3b/img_01.jpg" alt="Physarum"><figcaption>🟡 صورة حقيقية لفطر <span class="en">Physarum</span>: البلازموديوم الأصفر الشبكي (فطر مخاطي عارٍ بلا جدار خلوي)</figcaption></figure>
+        </div>
+
+        <h4>2. قسم الفطريات الحقيقية <span class="en">Eumycètes</span> — خمسة صفوف</h4>
+        <p class="def">يضم هذا القسم الغالبية العظمى من الفطريات (أغلبها خيطية)، وينقسم إلى <b>5 صفوف</b>:</p>
+
+        <h4>أ/ الفطريات الطحلبية <span class="en">Mastigomycètes</span></h4>
+        <ul class="pts">
+          <li>معظم أنواعها مائية أو برمائية وبعضها أرضية، تعيش معيشة تطفلية؛ تركيبها من خلية وحيدة إلى ميسليوم كثير الهيفات كثير التفرع على هيئة <b>مدمج خلوي</b>؛ الجدار من السيليلوز والسكريات المتعددة.</li>
+          <li>نمطان من الأبواغ <b>السوطية</b>: <b>أولية</b> (سوطان أماميان، تسحب أسواطها وتتكوّر محاطة بجدار ثم تعطي حوصلة فهيفة فميسليوم أو بوغاً سوطياً ثانوياً عند سوء الظروف) و<b>ثانوية</b> كروية بسوطين جانبيين — وقد تتكرر العملية حتى خمس مرات كما عند <span class="en">Saprolegnia</span>.</li>
+          <li>الأبواغ الجنسية عند غالبيتها «<b>الأبواغ البيضية</b> <span class="en">Oospores</span>» (ومنه اسمها الفطريات البيضية <span class="en">Oomycètes</span>): أعضاء مشيجية <span class="en">Gamétanges</span> على نفس الهيفة أو هيفات مختلفة — الكبرى هي عضو التأنيث <span class="en">Oogone</span> (كروي، بويضة واحدة) والأصغر عضو التذكير <span class="en">Antheride</span> (وحيد أو عديد الأنوية)؛ أنبوب الإلقاح يخترق جدار المشيج الأنثوي وتتحد النواتان في بويضة ملقحة بجدار سميك، تنبت منها أنابيب إنبات تنتج حوافظ بوغية تسلّل أبواغها.</li>
+          <li>دورة حياتها <b>أحادية</b> <span class="en">Haplophasique</span>.</li>
+          <li>حسب نمط التطفل: <span class="en">Saprolegniales</span> (تتطفل على الحشرات والأسماك أو تترمم على جثثها) و<span class="en">Peronosporales</span> (تتطفل على النباتات خاصة مغطاة البذور: <span class="en">Phytophthora infestans</span> مرض اللفحة للبطاطا، <span class="en">Plasmopara viticola</span> البياض الزغبي للعنب، <span class="en">Peronospora tabacina</span> للتبغ).</li>
+        </ul>
+        <div class="gal">
+          <figure><img src="assets/svt/botsys/u3b/img_02.jpg" alt="دورة Saprolegnia"><figcaption>🔁 دورة حياة <span class="en">Saprolegnia</span>: أبواغ سوطية أولية ← ثانوية (حوصلات) + تكاثر جنسي بالأبواغ البيضية <span class="en">Oospores</span></figcaption></figure>
+          <figure><img src="assets/svt/botsys/u3b/img_03.jpg" alt="تطفل Saprolegnia"><figcaption>🐟 تطفّل <span class="en">Saprolegnia</span> على الأسماك: آفة قطنية بيضاء على الزعانف والجسم (داخل الدائرة)</figcaption></figure>
+        </div>
+
+        <h4>ب/ الفطريات الزيجية (الخيطية) <span class="en">Zygomycètes</span></h4>
+        <ul class="pts">
+          <li>تعيش معظمها <b>معيشة رمّية</b> ويتطفل القليل منها على النبات والحيوان؛ الانتشار الهائل وكثرة الأبواغ من مصادر التلوث المزعجة للإنسان — أشهرها تشكيل <b>العفن</b> على الخبز <span class="en">moisissures</span> والمواد الغذائية المخزّنة (عنب، طماطم، جبن...).</li>
+          <li><b>التركيب:</b> هيفات مدّادة <span class="en">Stolone</span> تنمو أفقياً في الوسط، ترسل هيفات على هيئة أشباه جذور <span class="en">Rhizoïdes</span> للالتصاق وامتصاص الغذاء، ونموات قائمة تحمل <b>الأكياس البوغية</b> <span class="en">Sporanges</span> الكروية التي يتمزق جدارها فتتحرر الأبواغ.</li>
+          <li><b>التكاثر:</b> لاجنسي بأبواغ في أكياس بوغية غير متحركة، وجنسي بأمشاج متشابهة تنتج <b>أبواغاً زيجوتية</b> <span class="en">Zygospores</span>.</li>
+        </ul>
+        <p class="def">وأشهرها <b>عفن الخبز <span class="en">Rhizopus</span></b> (رتبة <span class="en">Mucorales</span>): يتميّز بوجود خيطين مختلفين (<b>خيط +</b> و<b>خيط −</b>)؛ يبدأ التكاثر الجنسي باقتراب الخيطين وإفراز هرمونات متبادلة، فتتشكل حافظتان مشيجيتان (السالبة والموجبة) تندمجان مكوّنتين بويضة ملقحة <span class="en">Zygote</span> تفرز جداراً سميكاً يحيط بها متحولة إلى <b>لحمة بوغية</b> <span class="en">Zygospore</span>؛ وعند عودة الظروف الملائمة تنبت معطية حاملاً حافظياً يحمل في نهايته حافظة بوغية — وتعاد دورة الحياة.</p>
+        <div class="gal">
+          <figure><img src="assets/svt/botsys/u3b/img_04.jpg" alt="Rhizopus"><figcaption>🍞 الشكل العام ودورة حياة عفن الخبز <span class="en">Rhizopus</span>: اقتران الخيطين (+/−) ← لحمة بوغية ← حوافظ بوغية ← أبواغ</figcaption></figure>
+        </div>
+
+        <h4>ج/ الفطريات الكيسية (الزقية) <span class="en">Ascomycètes</span></h4>
+        <p class="def">تنقسم حسب طريقة تشكل الثمرة إلى: <b>كيسية أولية</b> (تتكون الثمرة انطلاقاً من الخلية نفسها كما عند الخميرة) و<b>كيسية حقيقية</b> (تتكون الثمرة ثمرة كيسية متخصصة).</p>
+        <ul class="pts">
+          <li><b>ج1 — الأولية <span class="en">Protoascomycètes</span>:</b> تسمى أيضاً الكيسية الدنيا؛ تتحول إحدى الخلايا مباشرة إلى ثمرة — مثال <b>فطر الخميرة <span class="en">Saccharomyces cerevisiae</span></b>: وحيد الخلية (بيضوي أو كروي)، يعيش على سطح النباتات والفواكه وعلى المحاليل السكرية فيُخمّرها منتجاً الكحول وثاني أكسيد الكربون؛ خلية بجدار سميك وفجوة كبيرة ونواة، سيتوبلازم محبّب (دهون وجليكوجين)؛ يتكاثر <b>بالتبرعم</b> (برعم صغير يكبر وينفصل أو يتصل بآخر مكوّناً غزالاً كاذباً). ودوره أساسي في <b>صناعة الخبز</b>: السكريات + الخميرة في ظروف لا هوائية ← كحول + <span class="en">CO₂</span> (الكحول يمنح الرائحة المميزة، والغاز محبوساً في فقاعات ينفخ العجين ثم يتمدد بالحرارة فيصبح الخبز هشاً محسّن الشكل والطعم) — لذلك تُستعمل سلالات خميرة ذات مردود عالٍ من <span class="en">CO₂</span> وأقل نسبة كحول.</li>
+          <li><b>ج2 — الكيسية الحقيقية <span class="en">Ascomycètes supérieurs</span>:</b> أربعة أقسام:
+            <br>&nbsp;&nbsp;◦ <b>الكروية <span class="en">Plectomycètes</span>:</b> أكياس ثمرية مبعثرة، الثمرة كروية معلّمة بلا حامل في العادة.
+            <br>&nbsp;&nbsp;◦ <b>القاروية <span class="en">Pyrénomycètes</span>:</b> الأكثر عدداً (معظم الفطريات الداكنة على الأغصان والفروع الميتة)؛ أكياسها على شكل قاروة تفتح عند النضج بفتحة صغيرة طرفية تخرج منها الأبواغ — رتبة <span class="en">Clavicipitales</span>: فطر <span class="en">Claviceps</span> المتطفل على العناكب والحشرات وبعض النجيليات (القمح) مسبباً مرض «<b>إرغوت</b> <span class="en">Ergot</span>».
+            <br>&nbsp;&nbsp;◦ <b>القرصية <span class="en">Discomycètes</span>:</b> أكياس منتظمة داخل أجسام ثمرية قرصية الشكل (~6000 نوع)، كأسية أو بأشكال أخرى (لسان، أجراس)، ألوان زاهية، رمّية غالباً أو متكافئة/متطفلة — رتبة <span class="en">Pezizales</span> (عائلة <span class="en">Pezizaceae</span>: <span class="en">Peziza</span>).
+            <br>&nbsp;&nbsp;◦ <b>المسكنية <span class="en">Loculomycètes</span>:</b> الكيس ثنائي الغلاف (خارجي صلب وداخلي ممدود)؛ الثمرة حشوة متعددة التجاويف منفصلة — عدة رتب.</li>
+        </ul>
+        <p class="def"><b>فطر البنيسليوم <span class="en">Penicillium</span>:</b> يعيش معيشة رمّية على الفواكه المتعفنة (خاصة الليمون والبرتقال)؛ ارتبط اسمه بالمضاد الحيوي <span class="en">Pénicilline</span>؛ يتكاثر لاجنسياً: خيوط رقيقة عديمة اللون مقسمة بحواجز تنتشر على الوسط الغذائي وتتفرع إلى حوامل كونيدية مقسّمة بحواجز، تفرعات أولية وثنائية تنتج حوامل كونيدية على شكل <b>مكنسة</b> — وهو الشكل المميز للفطر؛ أهميته الصناعية: <span class="en">Penicillium roqueforti</span> في إنتاج <b>الجبن الأزرق</b> (إفراز أحماض دهنية تعطي اللون والطعم) و<span class="en">Penicillium natatum</span> في إنتاج <b>البنسلين</b> (أول المضادات الحيوية).</p>
+        <div class="gal">
+          <figure><img src="assets/svt/botsys/u3b/img_05.jpg" alt="خميرة SEM"><figcaption>🔬 صورة مجهرية إلكترونية لخميرة الخبز <span class="en">Saccharomyces cerevisiae</span> — لاحظ التبرعم على الخلايا</figcaption></figure>
+          <figure><img src="assets/svt/botsys/u3b/img_06.jpg" alt="Penicillium"><figcaption>🖌️ <span class="en">Penicillium</span>: حامل كونيدي مكنسي الشكل (يميناً بالمجهر) ← عفن أزرق-أخضر مترمم على حبة إجاص</figcaption></figure>
+          <figure><img src="assets/svt/botsys/u3b/img_07.jpg" alt="أنواع الأكياس"><figcaption>🧆 أنواع الثمار الكيسية <span class="en">Ascocarpes</span>: كيس عاري ← كروي مغلق ← قاروي بفتحة طرفية ← قرصي مسطح</figcaption></figure>
+        </div>
+
+        <h4>د/ الفطريات الدعامية (البازيدية) <span class="en">Basidiomycètes</span></h4>
+        <ul class="pts">
+          <li>تُعرف بالفطريات الصولجانية؛ تختلف في شكلها وتركيبها لكن تشترك في: جسم صغير «<b>الحامل البازيدي</b> <span class="en">Baside</span>» تحمل عليه <b>أبواغاً بازيدية</b> <span class="en">Basidiospores</span> محددة العدد (4 غالباً) ناتجة عن اتحاد نووي ثم انقسام ميوزي في الفروع الطرفية لهيفات ثنائية النواة.</li>
+          <li>تعطي الهيفات ثنائية النواة امتدادات <b>وصلات اتصال</b> لها علاقة بانقسام النواة؛ وعند الفحص المجهري يظهر نتوء مفرد بالجدر المستعرضة.</li>
+          <li>~<b>30000 نوع</b> يشمل فطريات الصدأ والتفحم وعيش الغراب — سمّيت «بازيدية» حسب شكل الثمرة البازيدية.</li>
+          <li>تتكاثر لاجنسياً بالأبواغ الكونيدية (فطريات التفحم)، وجنسياً بتزاوج هيفتين خضريتين (فطر الصدأ) أو بتكوين حوامل بازيدية تحمل الأبواغ خارجياً (عارية) أو داخل أجسام ثمرية (عيش الغراب خارجية، فطر نجم الأرض داخلية).</li>
+        </ul>
+        <p class="def">تحت صفوفها: <b><span class="en">Phragmobasidomycètes</span></b> (الحوامل تقسم خلاياها المشكلة للرباعيات البوغية وتنفصل فكل خلية تعطي بوغاً — أربع رتب أهمها <span class="en">Ustilaginales</span>: فطر <span class="en">Puccinia graminis</span> المسبب لمرض <b>صدأ القمح</b>، بدورة حياة طويلة بخمسة أنواع من الأبواغ على عائلين: أبواغ بيكنية <span class="en">Pycniospores</span> ← أسيدية ← يوريدية <span class="en">Urédospores</span> على القمح ← تيلية <span class="en">Téleutospores</span> ← حوامل بازيدية ← أبواغ بازيدية) و<b><span class="en">Holobasidomycètes</span></b> (حوامل كاملة غير مقسمة + مِبعة <span class="en">carpophore</span> كبيرة معروفة رمّية أو متكافئة غالباً — ~16000 نوع، 6 رتب أهمها <span class="en">Agaricales</span>).</p>
+        <p class="def"><b>دورة حياة فطر عيش الغراب <span class="en">Agaricus</span></b> (رتبة <span class="en">Agaricales</span>): الخيوط الفطرية في المنطقة الخصبة وكل خيط يحتوي نواتين غير متحدتين ← اقتران نووي فتتكوّن هيفة بخلايا ثنائية النواة ← انقسام ميوزي أول (نواتان) ثم ثانٍ (أربع أنوية أحادية الصيغة) ← الخلية منتفخة تتحول إلى <span class="en">Baside</span> بطرفها أربعة نتوءات تهاجر إليها الأنوية مكوّنة أربع أبواغ بازيدية تنفصل ← الأبواغ في وسط مناسب تنبت معطية غزالاً فطرياً جديداً أحادي النواة (سلالة + أو −) ← إذا التقى خيطان من سلالتين مختلفتين تم الاقتران البلازمي — وتعاد الدورة.</p>
+        <div class="gal">
+          <figure><img src="assets/svt/botsys/u3b/img_08.jpg" alt="دورة عيش الغراب"><figcaption>🍄 دورة حياة فطر عيش الغراب: جراثيم ← جرثومة بازيدية ← مجموعة ثنائية ← حوامل بازيدية (Basides) ← ثمرة بازيدية بقبعة وخياشيم وحلقة</figcaption></figure>
+        </div>
+
+        <h4>هـ/ الفطريات الناقصة <span class="en">Deuteromycètes</span></h4>
+        <ul class="pts">
+          <li>تجمّعات آلاف الأنواع بخيوط مقسمة، <b>لم تُكتشف طريقة تكاثرها الجنسي</b> حتى الآن — فتتكاثر لاجنسياً فقط بالأبواغ الكونيدية.</li>
+          <li>معظمها رمّية، وعدد كبير متطفل على الإنسان والحيوان مسبباً أمراضاً عديدة.</li>
+          <li>التكاثر اللاجنسي بالتجزئة أو بأبواغ كونيدية خاصة على حوامل؛ التصنيف حسب تركيب خلايا التكاثر اللاجنسي فقط.</li>
+          <li>دور مهم في تحوّل المادة العضوية في التربة والبيئة المائية؛ تحليل <b>السيليلوز واللّجنين</b>، وإنزيماتها تحلّل حتى المنتجات البترولية والمصنّعة بما فيها مادة <span class="en">DDT</span>.</li>
+        </ul>
+        <div class="note">🌟 <b>أهمية الفطريات:</b> مع البكتيريا تتحلل المادة العضوية وتطلق <span class="en">CO₂</span> (يستعمل في التركيب الضوئي) • زيادة خصوبة التربة فالمحصول • صناعة الأجبان • غذاء (بعض البازيديات) • الصيدلانيات: البنسلين وإنزيم الأميلاز • أحماض عضوية (الليمون، الخل) • فيتامينات (B) • الخمائر في الكحول والخبز — ومقابلها أضرار: أمراض نباتية على المحاصيل الاقتصادية، وأمراض جلدية وباطنية للإنسان والحيوان.</div>
+
+        <h4>3. الأشنات <span class="en">Les Lichens</span></h4>
+        <p class="def"><b>1. التعريف:</b> كائنات <b>مركّبة</b> تنتج عن اتحاد دائم وثابت قادر على التكاثر (<b>تكافل/تعايش</b> <span class="en">Symbiose</span>) بين <b>طحلب</b> ذاتي التغذية و<b>فطر</b> غير ذاتي التغذية: الطحلب يركّب الغلوسيدات بالتركيب الضوئي، والفطر يؤمّن الماء والأملاح المعدنية ويضمن الحماية. الفطر غالباً من الكيسية ونادراً من الوعائية، والطحلب من رتبة <span class="en">Nostocales</span> (الخضراء المزركة ~10%) أو الطحالب الخضراء <span class="en">chlorococcales</span> (~85%).</p>
+        <p class="def"><b>2. المظهر والتركيب:</b> خلايا الطحلب متفرعة ومتفرقة، والفطر على شكل هيفات؛ الجهاز الخضري مرشة <span class="en">Thalle</span> بنوعين: <b>جيلاتينية</b> (خيوط الفطر داخل الكتلة الهلامية للطحلب مثل <span class="en">Nostoc</span> — سوداء جافة، تنتفخ بالماء) و<b>جافة</b> (الأكثر انتشاراً؛ خلايا الطحلب محصورة بين خيوط الفطر)، وللجافة أشكال: <b>قشرية</b> <span class="en">Crustacés</span> (قشرة صلبة ملتصقة شديداً بالحامل: صخرة، جذع...)، <b>ورقية</b> <span class="en">Foliacés</span> (شكل ورقي قليل أو كثير التفرع يتصل بأشباه جذور وينفصل بسهولة)، <b>شجيرية</b> <span class="en">Fruticuleux</span> (تشبه شجيرة مثبتة بدعامة ذات قاعدة ضخمة)، و<b>شكل معقد</b> (ورقية ملتصقة + أخرى قائمة متفرعة فوقها).</p>
+        <p class="def"><b>3. البنية التشريحية:</b> المرشة شبكات هيفات فطرية بينها تجمعات خلايا طحلبية <span class="en">(Gonidies)</span> — وحسب توزعها: <b>مرشة متجانسة</b> (هيفات وتجمعات طحلبية موزعة بانتظام على كامل الجسم — جنس <span class="en">Comella</span> بخلايا <span class="en">Nostoc</span> على الوجهين) أو <b>غير متجانسة</b> بطبقات من الأعلى للأسفل: <b>قشرة علوية</b> <span class="en">cortex supérieur</span> (هيفات متشابكة كثيفة واقية) ← <b>طبقة طحلبية</b> <span class="en">couche gonidies</span> (الخلايا الطحلبية محاطة ببعض الهيفات) ← <b>النخاع</b> <span class="en">médulle</span> (هيفات الفطر فقط) ← <b>قشرة سفلية</b> <span class="en">cortex inférieur</span> (هيفات للتثبيت بأشباه الجذور <span class="en">Rhizoïdes</span>).</p>
+        <p class="def"><b>4. التكاثر:</b> جنسي مضمون بالجزء الفطري (شكلان من الأكياس: مغلقة كبروزات سطحية أو مفتوحة كفتحات متعرجة في جسم المرشة — تُنتج بعد الانقسام أبواغاً كيسية <span class="en">Ascospores</span>)، ولاجنسي بمشاركة الطحلب عبر <b>التجزؤ</b> <span class="en">Fragmentation</span> (انفصال أجزاء من المرشة) بمساعدة أعضاء خاصة.</p>
+        <p class="def"><b>5. أهمية الأشنات:</b> غذاء للكثير من حيوانات التربة • مادة عضوية عند موتها في التربة الزراعية • غذاء للحيوانات خاصة شتاء • يُطحَن ويُصنع منه دقيق للخبز • تُستخرج منها أصبغة، وزيوت عطرية للتجميل، وبعض المضادات الحيوية • <b>مؤشر جيد للتلوث</b> (حساسيتها العالية للهواء الملوث).</p>
+        <div class="gal">
+          <figure><img src="assets/svt/botsys/u3b/img_09.jpg" alt="أشكال الأشنات"><figcaption>🪨 أشكال الأشنات <span class="en">(Lichen types)</span>: قشرية Crustacés ← ورقية Foliacés ← شجيرية Fruticaleux مع بنيتها الطبقية</figcaption></figure>
+          <figure><img src="assets/svt/botsys/u3b/img_10.jpg" alt="مقطع أشنة"><figcaption>🔬 مقطع في أشنة غير متجانسة: قشرة علوية ← طبقة طحلبية (خلايا خضراء) ← نخاع هيفات ← قشرة سفلية بأشباه الجذور — وخيوط فطرية تحيط بخلية طحلبية (مجهر إلكتروني)</figcaption></figure>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ═══════════ الوحدة 4: النباتات الجنينية — الحزازيات ═══════════ -->
+<section class="unit" id="unitBryo">
+  <div class="unit-head">
+    <span class="unit-ico">🌿</span>
+    <div>
+      <h2>الوحدة الرابعة: النباتات الجنينية — الحزازيات <span class="en">Embryophytes · Bryophytes</span></h2>
+      <p>الأرشيجونيات: خصائص الجنينيات ثم الحزازيات بأصنافها الثلاثة (كبدية، خُلمية، قرنية) ودوراتها المصوّرة</p>
+    </div>
+    <span class="unit-tag tag-on">🔒 مشتركين</span>
+  </div>
+
+  <div class="acc-list">
+    <div class="acc-item" id="br0">
+      <button class="acc-btn" onclick="togTax(this)"><span class="acc-num">6</span> الفصل الأوّل: النباتات الجنينية (الأرشيجونيات) — الحزازيات <span class="en">Archégoniates · Bryophytes</span> <span class="acc-arrow">▼</span></button>
+      <div class="acc-body">
+
+        <h4>1. مقدمة: من هي الجنينيات؟</h4>
+        <p class="def">النباتات الجنينية <span class="en">Embryophytes</span> نباتات أرضية تمتاز بوجود <b>جهاز تكاثري متعدد الخلايا</b>: تصل البويضة بعد عملية الإلقاح داخل عضو يسمى <span class="term">الأرشيجون</span> <span class="en">Archégone</span> (ومنه اشتق الاسم <span class="en">Archégoniates</span> — الأرشيجونيات)، وتتطور البويضة الملقحة إلى <span class="term">جنين</span> <span class="en">Embryon</span> — ومنه الاسم الثاني جنينيات.</p>
+        <p class="def">تمتاز هذه النباتات بعدة خصائص:</p>
+        <ul class="pts">
+          <li>وجود <b>الجنين</b> الناتج من تقسيم وتطور البويضة الملقحة.</li>
+          <li>وجود عضو التكاثر الأنثوي <b>الأرشيجون</b>: قاروري الشكل، يتركب من <b>بطن</b> و<b>عنق</b>؛ يحتوي البطن على خليتين: إحداهما سفلية هي البويضة، والأخرى علوية هي خلية قناة البطن، ويحيط بهما صفّ من الخلايا الحمية (الجلدية).</li>
+          <li>وجود عضو التكاثر الذكري <b>الأنثريدية</b> <span class="en">Anthéride</span>: جدار من الخلايا الحمية يحيط بالخلايا الأم للأمشاج الذكرية التي تتحول بعد نضجها إلى أمشاج ذكرية (ساحبات).</li>
+          <li>وجود طبقة <b>الكيوتين</b> التي تغطي المرشة.</li>
+          <li>وجود مادة خاصة <b>السبوروبولينين</b> <span class="en">sporopollénine</span> تدخل في تركيب جدران الأبواغ وحبوب اللقاح.</li>
+          <li>ظاهرة <b>تبادل الأجيال</b> بين طورين: مشيجي (n) وبوغي (2n) — ويختلف مدى التوازن بينهما: قد يسود المشيجي فتكون النبتة أقل تركيباً، أو يسود البوغي فتكون أكثر تركيباً.</li>
+        </ul>
+        <p class="def">تضم الجنينيات: <b>الحزازيات</b> <span class="en">Bryophytes</span> (~25000 نوع)، <b>السرخسيات</b> <span class="en">Ptéridophytes</span> (~12000 نوع)، و<b>النباتات البذرية</b> <span class="en">Spermaphytes</span> (أكثر من 250000 نوع).</p>
+        <div class="gal">
+          <figure><img src="assets/svt/botsys/u4/img_01.jpg" alt="تركيب الأرشيجونة"><figcaption>⚗️ تركيب <b>الأرشيجونة</b> (عضو التكاثر الأنثوي): بطن بالبويضة وخلية قناة البطن + عنق بخلايا القناة العنقية وجدار حمي</figcaption></figure>
+          <figure><img src="assets/svt/botsys/u4/img_02.jpg" alt="تركيب الأنثريدة"><figcaption>⚗️ تركيب <b>الأنثريدة</b> (عضو التكاثر الذكري): جدار عنيقي حمي + خلايا أمَّية للمساحات الذكرية + عنق</figcaption></figure>
+        </div>
+
+        <h4>2. الحزازيات <span class="en">Les Bryophytes</span> — الخصائص المشتركة</h4>
+        <ul class="pts">
+          <li>دورة حياة <b>أحادية-ثنائية</b> <span class="en">haplo-diplophasique</span> بسيادة الطور المشيجي الأحادي (n) على الطور البوغي الثنائي (2n) الذي يكون <b>متطفلاً على الطور المشيجي الأنثوي</b>.</li>
+          <li>أبواغ أحادية أكثر ملاءمة للانتشار.</li>
+          <li>طبقة كيوتين تغطي خلايا المرشة تساعدها في التعويل (التحكم) من فقدان الماء.</li>
+          <li>وجود الجنين الناتج من البويضة الملقحة المحمولة في الأرشيجونة.</li>
+          <li>الخلايا التكاثرية محمية في <b>أعضاء تكاثرية خاصة</b>: ما ينتج الأمشاج <span class="en">Gamétange</span> وما ينتج الأبواغ <span class="en">Sporange</span>.</li>
+          <li>وجود <b>أشباه الجذور</b> <span class="en">rhizoïdes</span> للتثبيت خارجياً بالاتصال مع الوسط (لا تقوم بدور الجذور الحقيقية في الامتصاص).</li>
+          <li>التكاثر جنسي ولاجنسي، والتكاثر الخضري يساعدها في غزو واحتلال الأوساط بسرعة: <b>تجزؤ البروتونيما</b> <span class="en">protonéma</span> (سلسلة الخلايا الخضرية التي تمثّل المرحلة الأولى لدورة الحياة)، أو نموات متعددة الخلايا <span class="en">propagules</span>، أو أعضاء تكاثرية درنية <span class="en">tubercules</span> تنشأ على مستوى أشباه الجذور.</li>
+        </ul>
+
+        <h4>2.1. الحزازيات الكبدية <span class="en">Marchantiophytes</span></h4>
+        <p class="def">الجهاز الخضري قد يكون <b>صبو ساق مورّق</b> أو <b>مرشة</b>، محميّ الوجه السفلي مسطحاً ملاصقاً للوسط (رطب، مضلل)، يتشكل من امتدادات خلوية وحيدة الخلية تمثل أشباه الجذور مع حراشف بنية أو محمرة اللون. ينتشر في الأماكن الرطبة المضللة، ويضم حوالي <b>800 جنس</b> ونحو <b>20000 نوع</b> — أجسامها مشبعة اللون منبطحة وكأنها تشبه الكبد (ومنه اشتق اسمها: الكبديات <span class="en">Hépatiques</span>). تمثل المرشة <b>الطور المشيجي</b> السائد، ويعيش الطور البوغي متطفلاً على المشيجي الأنثوي بعد الإلقاح، ويتكون من ثلاثة أجزاء: <b>القدم، الحامل والكوبة</b> (جدار الكوبة من صف واحد أو عدة صفوف من الخلايا وخالٍ من الثغور).</p>
+        <p class="def">تضم خمس رتب: <span class="en">Metzgeriales, Calobryales, Jungermanniales, Sphaerocarpales</span> و<span class="en">Marchantiales</span> هذه الأخيرة الأهم وتضم أهم عائلة <span class="en">Marchantiaceae</span>.</p>
+        <div class="gal">
+          <figure><img src="assets/svt/botsys/u4/img_03.jpg" alt="كبديات طبيعية"><figcaption>🪨 تنوّع الحزازيات الكبدية في الطبيعة: مرشات وصبوات منبطحة خضراء على الصخور والتربة الرطبة</figcaption></figure>
+          <figure><img src="assets/svt/botsys/u4/img_04.jpg" alt="Marchantia بالحوامل"><figcaption>🌂 <span class="en">Marchantia</span> بالحوامل التكاثرية المظلية: الحامل الأرشيجوني (مقصوصات) والحامل الأنثريدي</figcaption></figure>
+          <figure><img src="assets/svt/botsys/u4/img_05.jpg" alt="مرشة Marchantia"><figcaption>🍃 مرشة الحزاز الكبدي <span class="en">Marchantia</span>: جسم مسطح متشعب ثنائي التفرع، أخضر زيتي</figcaption></figure>
+        </div>
+
+        <h4>جنس <span class="en">Marchantia</span> — بنية المرشة وأنسجتها</h4>
+        <p class="def">النبات مرشة منبطحة تعيش الأماكن الرطبة؛ تحتوي الجهة العلوية على أشباه الجذور (الامتدادات خلوية) بالإضافة إلى الحراشف، ويتفرع جسم النبات تفرعاً ثنائي الشعبة، ويوجد ما يشبه البرق الموسّعي (العصّ الأوسطي) يبرز كوّال إلى المنطقة السفلية. تتكون المرشة من <b>ثلاث طبقات</b> من الخلايا:</p>
+        <ul class="pts">
+          <li><b>البرشة (البشرة) العلوية:</b> سطحية، صف واحد من الخلايا، مقسمة إلى مساحات صغيرة تحدد كل واحدة منها غرفة هوائية تقع أسفل البرشة، وفي وسط كل مساحة <b>ثقب دائم الانفتاح</b> للمبادلات الغازية.</li>
+          <li><b>نسيج التمثيل الضوئي (المتثمّل):</b> تحت البرشة العلوية؛ خلاياه كلها تحتوي الكلوروفيل داخل صانعات خضراء متعددة بيضوية الشكل، منتظم في صفوف عمودية يفصل بينها غرف هوائية منفصلة بحواجز من أربع خلايا فوق بعضها البعض، متصلة بالبرشة من الأعلى وبالنسيج التخزيني من الأسفل.</li>
+          <li><b>النسيج التخزيني:</b> دوره ادخار وتخزين المواد الناتجة عن التركيب الضوئي (زيوت أو نشا)؛ خلاياه تشبه خلايا البرشة، ويخرج منه نوعان من الزوائد: <b>أشباه جذور</b> (امتدادات غير متفرعة وحيدة الخلية) و<b>حراشف بيضية منحنية</b> متعددة الخلايا.</li>
+        </ul>
+        <div class="gal">
+          <figure><img src="assets/svt/botsys/u4/img_06.jpg" alt="أنسجة Marchantia"><figcaption>🔬 مقطع تشريحي في مرشة <span class="en">Marchantia</span>: برشة علوية ← متثمل كلوروفيلي بغرف هوائية وثقوب ← نسيج تخزين ← برشة سفلية وأشباه جذور</figcaption></figure>
+          <figure><img src="assets/svt/botsys/u4/img_07.jpg" alt="مقطع مجهري"><figcaption>🔎 مقطع مجهري في المرشة: الغرف الهوائية والفواصل الخلوية تحت البرشة العلوية</figcaption></figure>
+        </div>
+
+        <h4>التكاثر عند <span class="en">Marchantia</span></h4>
+        <ul class="pts">
+          <li><b>اللاجنسي:</b> بالتجزؤ (موت الأجزاء المرشية القديمة فتتحرر النموات والتفرعات النامية فتصبح مستقلة وتنمو معطية مرشات جديدة) أو <b>بالجاميت</b> <span class="en">Gemmae</span>: أكواس صغيرة كأسية الشكل على البرق الموسّعي تُعرف بـ<b>كؤوس الجاميت</b> (أعضاء تكاثر لاجنسي)؛ تنشأ الجاميت من خلايا داخل الكؤوس فتندفع وتحمل بقطرات ماء الأمطار فتنمو مرشات جديدة — وسيلة غزو سريعة للوسط.</li>
+          <li><b>الجنسي:</b> النبات <b>ثنائي المسكن</b> (الطور المشيجي مذكر ومؤنث منفصلان):
+            <br>&nbsp;&nbsp;◦ <b>الأنثريدية:</b> تحمل على حامل أنثريدي <span class="en">anthéridiophore</span> ينتهي بقرص مستدير مضلّع رباعي الفصوص؛ تنشأ الأنثريديات في تجاويف الجهة العلوية للقرص، بيضية الشكل، تحاط مساحاتها بجدار حمي؛ كل خلية أم للمساحات تنقسم مرة واحدة معطية مساحتين ذكريتين لكل منهما <b>زوج من الأسواط</b> — ولا تخرج المساحات إلا بوفرة رطوبة كافية فتسبح نحو الأرشيجونات.
+            <br>&nbsp;&nbsp;◦ <b>الأرشيجونة:</b> تحمل على حامل أرشيجوني <span class="en">archégoniophore</span> — يتوقف عند تكوّنه نمو المرشة الخضري؛ قرص مقصوص الفصوص منحنية نحو الأسفل، تحمل الجهة الداخلية للفصوص الأرشيجونات (محمية بصف من الخلايا = الغلاف الكاذب)، قارورية الشكل بعنق قصير وبطن ببويضة؛ عند نضج البويضة تتحول خلايا عنق الأرشيجونة إلى مادة لزجة تجذب الساحبات الذكرية.</li>
+          <li><b>الإخصاب إلى الجنين:</b> تصل ساحبة واحدة فقط إلى البويضة فيجعلها بويضة ملقحة <span class="en">Zygote (2n)</span> ← تتطور إلى جنين متعدد الخلايا ← يتمايز إلى <b>قدم</b> (تثبيت وتغذية من المشيجي الأم) و<b>حامل بوغي</b> يرفع <b>الحافظة البوغية</b> إلى الأعلى (خارجياً: جدار حميعي قلمي، وداخلياً: خلايا متخصصة) ← تنضج الأمهات للأبواغ بالانقسام الاختزالي ← تنفتح الحافظة فتتحرر الأبواغ الأحادية الصيغة (n) ← تسقط على الأرض فتنمو معطية خيطاً أولياً <span class="en">protonéma</span> ← يتطور إلى طور مشيجي ذكري أو أنثوي جديد — وتُعاد الدورة.</li>
+        </ul>
+        <div class="gal">
+          <figure><img src="assets/svt/botsys/u4/img_08.jpg" alt="مقطع قرص أرشيجوني"><figcaption>🔎 مقطع مجهري في القرص الأرشيجوني: أرشيجونات معلّقة داخل تجاويف الجهة الداخلية للفصوص</figcaption></figure>
+          <figure><img src="assets/svt/botsys/u4/img_09.jpg" alt="دورة Marchantia"><figcaption>🔁 دورة حياة <span class="en">Marchantia</span>: أحادية-ثنائية بسيادة الطور المشيجي — البوغي (2n) يعيش متطفلاً على المشيجي الأنثوي</figcaption></figure>
+        </div>
+
+        <h4>2.2. الحزازيات الخُلمية (المائية/الموسية) <span class="en">Mousses</span></h4>
+        <p class="def">يحتوي هذا الصف على حوالي <b>800 جنس</b> بأزيد من <b>14000 نوع</b>. تمتاز بوجود <b>أشباه جذور وسيقان وأوراق</b> منتظمة في شكل حلزوني؛ يعيش الطور البوغي متطفلاً <b>جزئياً</b> على المشيجي الأنثوي لاحتوائه على منطقة غنية بالكلوروفيل والصانعات تُعرف بـ<span class="term">apophysis</span>؛ وتمتاز أيضاً بوجود <b>بروتونيما خيطي</b> وأشباه جذور متعددة الخلايا. تُصنف إلى: سفاجنية <span class="en">Sphangiopsida</span>، نبوية <span class="en">Mninopsida</span>، وأندرية <span class="en">Andreaopsida</span>.</p>
+        <p class="def">رتبة <span class="en">Funariales</span> — عائلة <span class="en">Funariaceae</span> — <b>جنس <span class="en">Funaria</span></b>: ينمو المشيجي على مرحلتين: الأولى مفترشة أرضية (خيط أولي <span class="en">protonéma</span> لاجنسي متفرع بمستويين: سطحي خلاياه خلية من الصانعات الخضراء منقسمة عمودياً، وداخل التربة منقسمة بشكل مائل) والثانية قائمة (صبو ساق تحمل أشباه أوراق حلزونية التوضع، بخلايا شبيهة بخلايا الأوراق في مرورها؛ أنسجة أشباه الأوراق صف واحد من الخلايا إلا البرق الموسّعي بعدة طبقات يساعد في التوصيل).</p>
+        <ul class="pts">
+          <li><b>التكاثر اللاكجنسي (أ):</b> يتم بالأبواغ الأحادية الناتجة من الطور البوغي؛ تعطي خيطاً أولياً فيتطور أطواراً مشيجية مذكرة أو مؤنثة؛ وقد يتجزأ الخيط الأولي بفعل عوامل خارجية فتتشكل خيوط ثانوية — ما يساعد على انتشار الحزازيات. <b>التكاثر بالجاميت غير موجود</b> عند كل أجناس الخلمية.</li>
+          <li><b>التكاثر الجنسي (ب):</b> باستمرار نمو وتطور الخيوط الأولية تتشكل الأطوار المشيجية الذكرية والمؤنثة بصيغة حوامل مشيجية على نباتين منفصلين (<b>ثنائي المسكن</b> <span class="en">Dioïque</span>):
+            <br>&nbsp;&nbsp;◦ عند المذكر تظهر الحوامل بتفرق أشباه الأوراق المعرفة وتنكشف الأنثريديات: متعاودة على عنق قصير تحمل بداخلها الخلايا الأم للمساحات الذكرية.
+            <br>&nbsp;&nbsp;◦ عند المؤنث تحمل الأرشيجونات على قمة الحامل المشيجي الأنثوي، تكون كؤل الوصول إليها مخفوضة ومغطاة بمجموعة من أشباه الأوراق المحلية؛ الأرشيجونة بعنق قصير يتصل ببطن ببويضة.</li>
+          <li><b>الإخصاب:</b> يبدأ بإدخال المساحات الذكرية ذات <b>سوطين</b> عبر وسط مائي إلى الأرشيجونات، فتدخل من العنق حتى تصل خلية البويضة ويتم الإخصاب بساحبة واحدة فقط — البويضة الملقحة <span class="en">zygote</span> تتطور إلى جنين متعدد الخلايا يثبت نفسه في قمة النبات المشيجي الأنثوي بنمو القدم داخل أنسجة الحامل الأرشيجوني، ثم يتغير الحامل البوغي الذي يحمل <b>الكيس البوغي</b>: خلايا الأم للأبواغ تنقسم اختزالياً متبوعاً بانقسام متساوٍ فتتشكل أبواغ أحادية الصبغية؛ وعند نضجها تنفتح الكبسولة الموجودة في قمة الكوبة فتتحرر الأبواغ وتنتشر — وتعاد الدورة من جديد.</li>
+        </ul>
+        <div class="gal">
+          <figure><img src="assets/svt/botsys/u4/img_10.jpg" alt="حامل أنثريدي خلمي"><figcaption>🔎 مقطع مجهري في الحامل الأنثريدي عند الحزازيات الخُلمية: أنثريديات في تجاويف القرص الطرفي</figcaption></figure>
+          <figure><img src="assets/svt/botsys/u4/img_11.jpg" alt="أرشيجونة خلمية"><figcaption>🔎 مقطع مجهري في الأرشيجونة عند الحزازيات الخُلمية: بقرب البرق الموسّعي مع خلايا مرافقة</figcaption></figure>
+          <figure><img src="assets/svt/botsys/u4/img_13.jpg" alt="خلمية طبيعية"><figcaption>🌱 الحزازيات الخُلمية (الموس) في الطبيعة: سجاد أخضر كثيف تحمله حوامل بوغية رشيقة مقبّبة</figcaption></figure>
+          <figure><img src="assets/svt/botsys/u4/img_12.jpg" alt="دورة Funaria"><figcaption>🔁 دورة حياة <span class="en">Funaria</span>: أبواغ ← خيط أولي ← مشيجيان منفصلان ← زيجوت ← بوغي معلّق بالقدم (كبسولة أبواغ)</figcaption></figure>
+          <figure><img src="assets/svt/botsys/u4/img_14.jpg" alt="تشكل الأبواغ"><figcaption>🧬 مخطط تشكّل الأبواغ بالانقسام الاختزالي: خلايا أم 2n ← رباعيات بوغة n ← أبواغ n ← دورة جديدة</figcaption></figure>
+        </div>
+
+        <h4>2.3. الحزازيات القرنية <span class="en">(Anthocérotes)</span></h4>
+        <p class="def">تمتاز بخصائص مميّزة عن الكبدية والخُلمية:</p>
+        <ul class="pts">
+          <li>المرشة بسيطة تمثل الطور المشيجي.</li>
+          <li>الأنثريديات والأرشيجونات تتموضع داخل الوجه العلوي للمرشة.</li>
+          <li>الطور البوغي له <b>نمو مستمر</b> (يستمر بالنمو ما دام متصلاً بالمشيجي) ويوجد <b>شبيه العمود</b> في تركيبه.</li>
+          <li>انفتاح الكوبة البوغية بواسطة <b>شقّين</b>.</li>
+          <li>خلايا المشيجي تحتوي على <b>صانعة واحدة فقط</b> — عكس الكبدية والخُلمية التي تحتوي عدة صانعات في الخلية الواحدة.</li>
+          <li>تمايز الأنثريديات من خلايا تحت برشية.</li>
+          <li>البروتونيما يكون خيطة ثم يتحول إلى مرشة.</li>
+        </ul>
+
+        <h4>3. أهمية الحزازيات</h4>
+        <ul class="pts">
+          <li>تلعب دوراً مهماً في النظام البيئي: تساهم في حماية التربة من الانجراف.</li>
+          <li>تساهم في تفكيك الصخور وتفتيتها إلى حبيبات صغيرة تدخل في تكوين التربة.</li>
+          <li>تُعتبر وسطاً حيوياً تعيش فيه العديد من الكائنات المجهرية، وهي الحلقة الأولى في بناء السلاسل الغذائية.</li>
+          <li>تخزّن الحزازيات المتندرة في الغابات ثم تمتص مياه الأمطار، وبهذا تساعد في التشرب البطيء للماء نحو التربة.</li>
+          <li>تُعتبر <b>مؤشراً جيداً للتلوث البيئي</b> (خاصة التلوث الهوائي) لقلّة تحمّلها للانحرافات في المناطق الملوثة.</li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ═══════════ الوحدة 5: النباتات الوعائية — السرخسيات ═══════════ -->
+<section class="unit" id="unitPteri">
+  <div class="unit-head">
+    <span class="unit-ico">🌴</span>
+    <div>
+      <h2>الوحدة الخامسة: النباتات الوعائية — السرخسيات <span class="en">Trachéophytes · Ptéridophytes</span></h2>
+      <p>من التقسيم العام للجنينيات إلى الأقسام الأربعة للسرخسيات مع دورات الحياة المصوّرة</p>
+    </div>
+    <span class="unit-tag tag-on">🔒 مشتركين</span>
+  </div>
+
+  <div class="acc-list">
+    <div class="acc-item" id="pt0">
+      <button class="acc-btn" onclick="togTax(this)"><span class="acc-num">7</span> الفصل الأوّل: النباتات الوعائية — السرخسيات <span class="en">Les plantes vasculaires «Trachéophytes»</span> <span class="acc-arrow">▼</span></button>
+      <div class="acc-body">
+
+        <h4>1. التقسيم العام: من الجنينيات إلى الوعائية</h4>
+        <p class="def">تنقسم النباتات الجنينية <span class="en">Embryophytes</span> إلى: نباتات <b>حزازية</b> لا تحتوي على أنسجة ناقلة، ونباتات <b>وعائية</b> <span class="en">Trachéophytes</span> تحتوي أنسجة ناقلة متخصصة هي <b>الخشب واللحاء</b>. وتمتاز النباتات المنتمية إلى هذا القسم بما يلي:</p>
+        <ul class="pts">
+          <li><b>سيادة الطور البوغي</b> الذي يمثل النبات الحقيقي (بدرجة من التعقيد مع وجود سيقان بأوراق وجذور) على الطور المشيجي المخفض.</li>
+          <li>وجود <b>الحزم الوعائية</b> والأنسجة المتخصصة (خشب ولحاء) في الطور البوغي.</li>
+          <li>تتكون الأبواغ داخل أكياس خاصة <b>الحوافظ البوغية</b> <span class="en">sporanges</span> تحمل إما على السيقان أو الأوراق — مع نظامين: <b>تجانس الأبواغ</b> <span class="en">Homosporie</span> (الأبواغ الناتجة متشابهة) أو <b>تباينها</b> <span class="en">Hétérosporie</span> (الأبواغ الناتجة مختلفة).</li>
+          <li>النبات المشيجي مختزل ويسمى <b>المرشة الأولية</b>، وقد تكون متماثلة (<span class="en">Homothalle</span> — تحمل العضوين معاً) أو متباينة (<span class="en">Hétérothalle</span>).</li>
+        </ul>
+        <p class="def">وتضم الوعائية مجموعتين: <b>السرخسيات</b> <span class="en">Ptéridophytes</span> (البوغيات <span class="en">Sporogones</span> — تتكاثر بالأبواغ) و<b>النباتات البذرية</b> <span class="en">Spermatophytes</span> (ظاهريات الإلقاح <span class="en">Phanérogones</span>).</p>
+
+        <h4>2. السرخسيات <span class="en">Ptéridophytes</span> — تقديم عام</h4>
+        <p class="def">اشتُق اسمها من كلمتين يونانيتين (<span class="en">Pteris</span>: جناح/ريشة وتعني السرخس). عُرفت منذ حوالي <b>440 مليون سنة</b>؛ وبفضل أشكالها المورفولوجية الضخمة وكانت تشكّل في تلك الحقبة غابات كثيفة تُعتبر من عصر <b>الفحم الحجري</b>. ومقارنة بالحزازيات، تمتلك السرخسيات جهازاً نباتياً أكثر تكيفاً مع الحياة الأرضية، لكنها رغم ذلك لا تستغني عن الماء: فالأفراس (الأمشاج) الذكرية <b>متحركة وسبّاحة</b> بوجود أسواط.</p>
+
+        <h4>2.1. الخصائص التشريحية للجهاز الخضري</h4>
+        <ul class="pts">
+          <li>النبات حقيقي الأعضاء: جذر، ساق وأوراق حقيقية <b>متمايزة</b> (باستثناء بعض الأنواع البدائية).</li>
+          <li>الجهاز وعائي: جهازان ناقلان — <b>خشب</b> و<b>لحاء</b>؛ ولهذا تُعتبر السرخسيات أرقى النباتات عديمة البذور لأنها أيضاً <span class="en">Sporophytes</span> ذات طور بوغي سائد.</li>
+          <li>الأنسجة الناقلة بدائية بسيطة: عناصر الخشب غير متمايزة إلى أوعية ومآق ترشحية كما في البذريات، بل تتكون من خلايا مدببة متعاودة طولياً بجدر <b>سومية أو حلزونية</b> تسمى <b>الكعبات</b> <span class="en">trachéides</span> (نهايات غير مثقوبة، لها دور الدعامة والنقل).</li>
+          <li>اللحاء أيضاً بدائي ولا يحتوي خلايا مرافقة؛ <b>لا</b> يوجد خشب ولحاء ثانويان (غياب الكامبيوم — لهذا لا تكون السرخسيات شجرية سميكة).</li>
+          <li><b>المرستم</b>: ذو تركيب بسيط مقارنة بالنباتات البذرية — خلية واحدة كبيرة هرمية الشكل (أو كتلة صغيرة)، ودوره تكوين باقي الأنسجة.</li>
+          <li>تتغلظ الجدر بمادة <b>اللّجنين</b> <span class="en">lignine</span> التي تمنحها صلابة أكبر تساعد على الارتفاع عمودياً.</li>
+          <li>مورفولوجياً: لا توجد فوارق كبيرة بين السيقان والأوراق والجذور مثل البذريات، والتفرع <b>ثنائي النمط</b>.</li>
+        </ul>
+
+        <h4>2.2. التعريف التصنيفي وأقسام السرخسيات</h4>
+        <p class="def">تضم السراخس في الوقت الحالي حوالي <b>12000 نوع</b>، يكون حوالي <b>9/10</b> منها سراخس حقيقية والباقية تتوزع على ثلاث مجموعات بدائية، وتمثل بقايا نباتات متحجرة كانت تعيش سابقاً. وأهم الأماكن التي يتعيّش فيها السرخس: الأماكن الرطبة المضللة (يحتاج الماء لإتمام الإلقاح) خاصة الغابات الاستوائية. تنقسم إلى أربعة أقسام (صفوف):</p>
+        <table class="cmp">
+          <tr><th>القسم</th><th>أبرز خصائصه</th></tr>
+          <tr><td><b>1. السراخس البدائية</b> <span class="en">Psilotes</span></td><td>تُعتبر أقلها تمايزاً: ريزوم زاحف بأفرع قائمة ثنائية التفرع، <b>بدون جذور</b> (أشباه جذور فقط) و<b>بدون أوراق</b>، والحوافظ البوغية تحمل في نهاية الأفرع — جنسان فقط: <span class="en">Psilotum</span> و<span class="en">Tmesipteris</span></td></tr>
+          <tr><td><b>2. برخل الذهب (المساحل)</b> <span class="en">Lycopodes</span></td><td>سيقان زاحفة وقائمة تحمل أوراقاً، لا توجد جذور حقيقية؛ الحوافظ في إبط الأوراق، وتتشكل <b>سيبة بوغية</b> كثيفة الأوراق تحتوي الأفراس في نهاية الفروع</td></tr>
+          <tr><td><b>3. بذانة الخيل (ذنب الخيل)</b> <span class="en">Prèles</span></td><td>ريزوم بري عميق يمتد أفقياً مع سيقان قائمة مضلّعة مُسلّمة؛ أوراق حرشفية مختزلة حولية التوضع (غير خضراء اللون عكس السيقان الخضراء)؛ الحوافظ في نهاية الفروع معطية <b>سيبة بوغية</b></td></tr>
+          <tr><td><b>4. السراخس الحقيقية</b> <span class="en">Les vraies Fougères</span></td><td>ريزوم أرضي يخرج منه أوراق كبيرة <span class="en">(Frondes)</span> ذات تيغّر محوري (يُدعى عرق الورقة مقصوص)؛ الامتداد الوعائي من الريزوم إلى نهاية الورقة تام؛ الحوافظ البوغية في الوجه السفلي للأوراق</td></tr>
+        </table>
+
+        <h4>2.3. تطوّر الجهاز التكاثري عند السرخسيات</h4>
+        <p class="def">مقارنة بالنباتات الحزازية (سيادة مشيجي أحادي على بوغي ثنائي متطفل)، يحدث العكس عند السرخسيات: <b>سيادة الطور البوغي الثنائي</b> الذي يمثل النبات، على الطور المشيجي الأحادي المتمثل في <b>المرشة الأولية</b> الناتجة من نمو الأبواغ المحررة من الطور البوغي.</p>
+        <ul class="pts">
+          <li>بعد نمو الأبواغ تتشكل المرشة الأولية: كتلة خلوية بأشباه جذور؛ قد تكون <b>ذاتية التغذية</b> (خضراء فوق سطح التربة) أو <b>غير ذاتية التغذية</b> (متكافئة أو مرتدّمة إذا كانت معمورة في التربة).</li>
+          <li>يوجد نوعان من المرشات حسب الأبواغ الناتجة: إن كان من أبواغ <b>متشابهة</b> <span class="en">Homosporie</span> فالمرشة متجانسة <span class="en">Isogamique</span> تحمل الأرشيجونات والأنثريديات معاً على نفس المرشة؛ وإن كان من أبواغ <b>غير متشابهة</b> <span class="en">Hétérosporie</span> فالمرشة غير متجانسة: ذكرية صغيرة من الأبواغ الصغرى تحمل الأنثريديات، وأنثوية كبيرة من الأبواغ الكبرى تحمل الأرشيجونات.</li>
+          <li>بعد تحرر الأمشاج الذكرية المتحركة (بالأسواط) تسبح في وسط مائي نحو الأرشيجونات، فتتم عملية الإلقاح ← بويضة ملقحة تتطور إلى جنين (2n) ← نبات بوغي يستمر في النمو ساقاً وجذراً وأوراقاً حقيقية ثم تتشكل حوافظ بوغية على مستوى بعض الأعضاء ← بعد نضج الأبواغ تتحرر في الوسط فتعيد دورة الحياة.</li>
+        </ul>
+
+        <h4>2.4. القسم الأول: السراخس البدائية <span class="en">Psilopsida</span></h4>
+        <ul class="pts">
+          <li>تمتاز بغياب جذور حقيقية، والأوراق غائبة أيضاً فتكون السيقان عارية — ومن ذلك اشتُق اسمها (العارية <span class="en">psilo</span>). التفرع ثنائي الشعبة، والحوافظ البوغية <b>طرفية غير متجمعة</b>، والأبواغ متشابهة، والنباتات المشيجية تنمو تحت التربة.</li>
+        </ul>
+        <p class="def"><b>جنس <span class="en">Psilotum</span>:</b> في المناطق الاستوائية، نباتات برية قائمة تعيش على جذوع الأشجار؛ النبات البوغي بشكل شجيري قصير (~1م) بتركيب بسيط: ساق عبارة عن <b>ريزوم</b> معمور في التربة (ساق ترابية) وجزء هوائي ثنائي التفرع سريع النمو؛ الأوراق حرشفية صغيرة (أوراق أولية)؛ الجزء الأرضي يتكافل مع بعض الفطريات ولا يحتوي إلا أشباه جذور. السيقان بمقطع وعائي بسيط؛ المخاع من نسيج إسكلرونشيمي والنسيج الوعائي بسيط: الخشب من كعبات (تراكيد) ذات تجويف حلزوني أو سومي. تظهر الحوافظ البوغية خارجة من إبط الأوراق الحرشفية، ثلاث حوافظ متحدة في تركيب واحد بداخلها أبواغ متشابهة. النبات المشيجي مختزل قمي اللون يعيش مرتدّاً (وقد يتكافل مع بعض الفطريات)، بشكل بسيط متفرع يُغطي بأشباه جذور، لا يحتوي نسيجاً وعائياً، <b>أحادي المسكن</b>: يحمل الأنثريديات (تظهر أولاً ثم تموت) والأرشيجونات؛ الإلقاح في الماء والمساحبات حلزونية متعددة الأسواط؛ البويضة الملقحة تتطور إلى جنين ينمو معطياً نباتاً بوغياً جديداً.</p>
+        <div class="gal">
+          <figure><img src="assets/svt/botsys/u5/img_01.jpg" alt="دورة Psilotum"><figcaption>🔁 دورة حياة <span class="en">Psilotum</span>: متجانسة الأبواغ بسيادة الطور البوغي الثنائي (2n) على المشيجي الأحادي المختزل</figcaption></figure>
+        </div>
+
+        <h4>2.5. القسم الثاني: برخل الذهب <span class="en">Lycoposida</span></h4>
+        <p class="def">تختلف عن البدائية بوجود <b>أوراق وجذور</b> ذات نسيج وعائي، وتوضّع الحوافظ البوغية على أوراق خاصة تُعرف بالأوراق البوغية <span class="en">sporophylles</span> — مع رتبتين مميزتين حسب وجود اللسانيات <span class="en">(légules)</span> في الأوراق: <span class="en">Lycopodiales</span> (بدون لسانيات: نباتات مثل القدمية) و<span class="en">Selaginellales</span> (المسنّية أي بلسانيات الأوراق).</p>
+        <p class="def"><b>رتبة <span class="en">Lycopodiales</span></b> — عائلة <span class="en">Lycopodiaceae</span> — جنس <span class="en">Lycopodium</span>: الطور البوغي ينتج أبواغاً متجانسة تُنقل بعيداً مفترقة ثم تنمو معطية أطواراً مشيجية؛ المشيجي <b>أحادي المسكن</b> (الأنثريديات والأرشيجونات علوية على نفس المرشة). تختلف أنواع النباتات المشيجية وطريقة تغذيتها: بعضها ظاهرة فوق سطح التربة مضيئة للضوء (بصانعات خضراء — ذاتية التغذية)، وبعضها معمور في التربة غير ذاتي التغذية يعيش متطفلاً تكافلياً مع بعض الفطريات <span class="en">(Symbiose)</span>.</p>
+        <div class="gal">
+          <figure><img src="assets/svt/botsys/u5/img_02.jpg" alt="دورة Lycopodium"><figcaption>🔁 دورة حياة <span class="en">Lycopodium</span>: متجانسة الأبواغ — سيبة بوغية طرفية + مشيجي أحادي المسكن مختزل</figcaption></figure>
+        </div>
+        <p class="def"><b>رتبة <span class="en">Selaginellales</span></b> — عائلة <span class="en">Selaginellaceae</span> — جنس <span class="en">Selaginella</span> (المسنّية): نباتاتها مسنّية الأوراق (وجود لسانيات في الأوراق)، تحمل أوراقاً على سيقان قائمة ثنائية التفرع؛ تتشكل الحوافظ البوغية في نهاية الأفرع معطية سيبة (مخروط) بوغية. الأبواغ <b>متباينة</b>: بواغ صغرى <span class="en">microspores</span> داخل حوافظ صغرى على أوراق بوغية صغرى في <b>قمة</b> السيبة البوغية، وبواغ كبرى <span class="en">megaspores</span> في حوافظ كبرى على أوراق بوغية كبرى في <b>قاعدتها</b> — ومنه نوعان من النباتات المشيجية. <b>النبات البوغي أكثر اختزالاً من المجموعة الأولى:</b> يبدأ إنبات الأبواغ داخل الحوافظ قبل تحررها، ومعظم الغذاء الذي تعلق به معدّ من النبات البوغي. ينتج البوغ الصغير مشيجاً ذكرياً داخل الغلاف البوغي (مرشة مختزلة تتكون من أنثريدية واحدة تعطي أمشاجاً متحركة بالأسواط)، والبوغ الكبير مشيجاً أنثوياً أكبر حجماً تنكشف أرشيجوناته قرب ثلاث حجرات الشق فتلقح بويضاتها بالأمشاج معطية جنيناً فنباتاً بوغياً جديداً.</p>
+        <div class="gal">
+          <figure><img src="assets/svt/botsys/u5/img_03.jpg" alt="دورة Selaginella"><figcaption>🔁 دورة حياة <span class="en">Selaginella</span> (الطحلب الشوكي): متباينة الأبواغ — بواغ صغرى ← مشيجي ذكري وبواغ كبرى ← مشيجي أنثوي (سيادة البوغي)</figcaption></figure>
+        </div>
+
+        <h4>2.6. القسم الثالث: بذانة الخيل <span class="en">Equisetopsida</span></h4>
+        <p class="def">يتبعها جنس واحد فقط حي هو <span class="en">Equisetum</span> (ونوع منقرض <span class="en">Equisetites</span>) — بعض أنواعها «النباتات المفصولة» بسبب الجسم المفصّل. ينتمي <span class="en">Equisetum</span> إلى عائلة <span class="en">Equisetaceae</span>، رتبة <span class="en">Equisetales</span>.</p>
+        <ul class="pts">
+          <li>الطور البوغي هو السائد: ريزوم متفرع أرضي عميق يخرج منه أفرع هوائية بسيطة متفرعة وغير متفرعة؛ السيقان من <b>سلاميات</b> تخرج منها أوراق حرشفية مختزلة في تركيب حولي (غير خضراء عكس السيقان الخضراء)؛ تخرج الجذور من قواعد السيقان القائمة.</li>
+          <li>الحوافظ البوغية تتجمع في <b>سيبة بوغية</b> <span class="en">strobiles</span> في نهاية الأفرع الخضرية؛ الحوافظ تحت حراشف <b>سداسية الشكل</b> تحمل العديد منها.</li>
+          <li>الأبواغ الناتجة <b>متشابهة مورفولوجياً</b> <span class="en">(Isospores)</span> لكنها <b>مختلفة وراثياً</b> — تعطي نوعين من المرشات الأولية: أنثوية وذكرية. الأبواغ ذات <b>أربع زوائد</b> مولبة <b>المسايلات</b> <span class="en">élatères</span> تنشأ من جدار البوغ، تتمدد وتتحزّن وفق تغيرات الرطوبة فتساعد في الانتشار.</li>
+          <li>المرشة الأولية الذكرية تحمل الأنثريديات (أمشاج متحركة بعدة أهداب)، والأنثوية تحمل الأرشيجونات؛ يتم الإلقاح ← جنين يتطور إلى طور بوغي جديد.</li>
+        </ul>
+        <div class="gal">
+          <figure><img src="assets/svt/botsys/u5/img_04.jpg" alt="دورة Equisetum"><figcaption>🔁 دورة حياة <span class="en">Equisetum</span>: ساق معقّدة بسيبة بوغية + أبواغ بمسايلات <span class="en">Elatères</span> + مرشة أولية خضراء</figcaption></figure>
+        </div>
+
+        <h4>2.7. القسم الرابع: السراخس الحقيقية <span class="en">Filicopsida</span></h4>
+        <p class="def">يتراوح انتشارها بين بضع سنتيمترات في المناطق الحارة إلى عدة أمتار في المناطق الاستوائية حيث تكون بعضوية في شكل أشجار سرخسية. الجهاز الخضري: <b>ريزوم</b> غني بالمخرات الغذائية (النشا!)، متفرع، يحمل جذوراً عرضية، وتخرج منه أوراق كبيرة <span class="en">(Frondes)</span>. الحوافظ البوغية <b>متجمعة في بثور</b> <span class="en">sores</span> تتوضع على الوجه السفلي للأوراق، نضاضة مغطاة أو غير مغطاة. الساق المورقة تمثل الطور البوغي الثنائي (2n) الذي ينتج أبواغاً أحادية (n) بعد الانقسام الاختزالي؛ الأبواغ متشابهة مورفولوجياً، وعند تحررها وتشتتها تعطي <b>المرشة الأولية</b> <span class="en">(Prothalle)</span>: طبقة خلوية خضراء مسطحة قلبية الشكل ببضعة مليمترات، تحمل الأعضاء الذكرية (الأنثريديات بساحباتها لولبية متعددة الأهداب) والأعضاء الأنثوية (الأرشيجونات) — مرشة أحادية المسكن أحادية الصيغة؛ بعد الإلقاح ← بويضة ملقحة تتطور إلى جنين (2n) يتغذى في البداية من المشيجي ثم يكون الأوراق والجذور الأولى فينفصل معطياً طوراً بوغياً جديداً.</p>
+        <p class="def">ينقسم هذا الصف إلى تحت صنفين حسب الحوافظ البوغية وشكل الأوراق:</p>
+        <ul class="pts">
+          <li><b><span class="en">Eusporangiopsida</span>:</b> نباتات ذات حوافظ بوغية حقيقية سطحية (سميكة بعدة صفوف من الخلايا تنشأ من خلايا المرشة معل الورقة).</li>
+          <li><b><span class="en">Leptosporangiopsida</span>:</b> حوافظ بوغية ظهارية الجدار رقيقة من صف واحد من الخلايا تنشأ من خلية واحدة — تتبع هاته المجموعةَ عدةُ السراخس المعروفة.</li>
+        </ul>
+        <p class="def"><b>جنس <span class="en">Polypodium</span></b> (رتبة <span class="en">Polypodiales</span> — عائلة <span class="en">Polypodiaceae</span>): نبات من طور بوغي قصير العمر لكن فترة حياته تطول في دورة حياة النبات؛ ساقه عبارة عن ريزوم أرضي غير محدود النمو مغطى بحراشف، يخرج منه جذور عرضية وأوراق مركّبة ريشية متضاعفة (محور يحمل محاور جانبية ثانوية تحمل ريضات). <b>التكاثر ودورة الحياة:</b> خضرياً بتجزؤ الريزوم (يتجدد ويعطي طوراً بوغياً جديداً)، ولاجنسي بالأبواغ التي تتكون على مستوى الطور البوغي في الأوراق السرخسية <span class="en">Frondes</span>: كل ورقة تحمل على الوجه السفلي بثوراً مجموعة بواسطة نضاضة <span class="en">(placenta)</span> على مَشيمة تخرج منها الحوافظ البوغية؛ الحافظة بعنق رفيع، ويحيط بتجويفها الداخلي جدار من صف واحد من الخلايا رقيقة الجدر، مع صف خارجي من الخلايا محمّط — إحاطة غير كاملة يسمى <b>المعوق</b> <span class="en">(annulus)</span> تتغلظ جدرانه بمادة اللّجنين ما عدا الجهة الخارجية، وتنتهي الحافظة بمجموعة من الخلايا المضفوعة <span class="en">(stomium)</span> هي مكان انفتاحها؛ تتكون الأبواغ داخل الحافظة بالانقسام الاختزالي. عند نضج الحافظة تجف فتتفتح بالتوتر فيتمزق جدارها عند الخلايا المضفوعة وينفتح المعوق للخلف بحركة فجائية ثم بدخول الهواء يعود لوضعه الأصلي بحركة سريعة تعمل على انتشار الأبواغ. وعند تحرر الأبواغ ومصادفة الظروف المناسبة: تنمو معطية مرشة أولية خضراء قلبية الشكل (بضعة ملم) منبطحة على الأرض، بأشباه جذور في وجهها السفلي؛ تحمل الأعضاء الذكرية <span class="en">(Anthéride)</span> التي تظهر منذ أولاً قرب منطقة خروج الجذور (خلايا أم للساحبات ← ساحبات ذكرية حلزونية متعددة الأهداب)، وتتشكل الأرشيجونات بالقرب من منطقة الوسادة (الشق) في الوجه السفلي من الطور المشيجي وتحتوي على البويضات. تنتقل المساحبات الذكرية <span class="en">Anthérozoïdes</span> إلى بويضة الأرشيجونة فتلقحها ← بويضة ملقحة ← جنين (قد تُخصب أكثر من أرشيجونة لكن <b>بويضة واحدة فقط</b> تنمو لأنها تفرز هرموناً يثبّط باقي البويضات المخصبة فلا تتطور). يتطور الجنين مبتدئاً بالاعتماد على المشيجي ثم يستقل بتشكيل الأوراق الأولى والجذور الأولى → طور بوغي جديد.</p>
+        <div class="gal">
+          <figure><img src="assets/svt/botsys/u5/img_05.jpg" alt="بثور وحافظة"><figcaption>🔬 الحوافظ البوغية متجمعة في <b>بثور</b> على الوجه السفلي لأوراق <span class="en">Polypodium</span> ← والحافظة البوغية بحلقة المعوق الميكانيكية <span class="en">(anneau mécanique)</span></figcaption></figure>
+          <figure><img src="assets/svt/botsys/u5/img_07.jpg" alt="تشكل الأبواغ"><figcaption>🧬 مخطط تشكّل الأبواغ بالانقسام الميوزي: خلايا إنشائية (2n) ← خلايا أم للأبواغ (2n) ← رباعيات (n) ← أبواغ (n)</figcaption></figure>
+          <figure><img src="assets/svt/botsys/u5/img_06.jpg" alt="دورة Polypodium"><figcaption>🔁 دورة حياة <span class="en">Polypodium</span> (السرخس الحقيقي): بثرة ← حافظة ← أبواغ ← مرشة قلبية أولية ← جنين ← بوغي جديد</figcaption></figure>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+<footer>
+  منصة SAC · SVT prof — مقرر علم النبات التصنيفي · المدخل 🌱 الطحالب 🥬 الفطريات 🍄 الحزازيات 🌿 السرخسيات 🌴
+</footer>
+</div><!-- /wrap -->
+
+<!-- 🔒 مودال الاشتراك -->
+<div class="modal-back" id="taxLockModal">
+  <div class="modal">
+    <button class="x" onclick="taxLockClose()">✕</button>
+    <h3>🔒 هذا الفصل حصري للمشتركين</h3>
+    <p style="color:#9dc4ab;font-size:.92rem">الوحدة الأولى (المدخل) مجانية بالكامل — انضمّي للمشتركين لتكملي باقي مقرر علم النبات التصنيفي 🌱 (والبيولوجيا العامة والجيولوجيا أيضاً بنفس الاشتراك!)</p>
+    <div class="plan-row">
+      <div class="plan"><b>1000 دج</b><span>شهري</span></div>
+      <div class="plan" style="border-color:#fbbf24;background:#42200622"><b>2000 دج ⭐</b><span>فصلي — الأكثر طلباً</span></div>
+      <div class="plan"><b>6000 دج</b><span>سنوي</span></div>
+    </div>
+    <a class="sub-cta" href="ishtirak.html">💎 اشتركي الآن — تأكيد فوري بوصل التحويل</a>
+    <div class="member-form">
+      <label>🗝️ عندك اشتراك مؤكَّد؟ فعّليه بنفس بريدك/هاتفك:</label>
+      <input id="taxActInput" type="text" placeholder="البريد الإلكتروني أو رقم الهاتف المستعمل في الاشتراك" dir="rtl">
+      <button onclick="taxCheckMember()">✅ تفعيل وصولي</button>
+      <div class="msg" id="taxActMsg"></div>
+    </div>
+  </div>
+</div>
+
+<!-- 🔍 لايت بوكس -->
+<div id="lb" onclick="this.classList.remove('active')"><img id="lbImg" src="" alt=""><div id="lbCap"></div></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="sac-cursor-birds.js"></script>
+<script src="assets/sac-shield.js" defer></script>
+<script>
+/* ---------- أكورديون ---------- */
+function togTax(btn){
+  const item = btn.parentElement;
+  if(item.classList.contains('sac-locked')){ document.getElementById('taxLockModal').classList.add('active'); return; }
+  item.classList.toggle('open');
+}
+/* فتح أول فصل مجاني تلقائياً */
+document.addEventListener('DOMContentLoaded', () => {
+  const first = document.getElementById('ch0');
+  if(first) first.classList.add('open');
+});
+
+/* ---------- بوابة الاشتراك: الوحدة الأولى (المدخل) مجانية فقط ---------- */
+const TAX_FREE = ['ch0'];
+const SB_URL = "https://lkxfjjyvqmzuoxmdoswv.supabase.co";
+const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxreGZqanl2cW16dW94bWRvc3d2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMwOTM5NTYsImV4cCI6MjA5ODY2OTk1Nn0.TB5DRKXUB5Gfu-YkodmWxq_EXVbiq7t1o_bzxWj-ZTY";
+let _sb = null;
+function sb(){ if(!_sb && window.supabase){ try{ _sb = window.supabase.createClient(SB_URL, SB_KEY); }catch(e){} } return _sb; }
+
+function taxApplyLocks(){
+  document.querySelectorAll('.acc-item').forEach(it => {
+    if(!TAX_FREE.includes(it.id) && localStorage.getItem('sac_bio_member') !== '1'){
+      it.classList.add('sac-locked');
+      const arrow = it.querySelector('.acc-arrow');
+      if(arrow){ const b = document.createElement('span'); b.className = 'lock-badge'; b.textContent = '🔒 للمشتركين'; arrow.replaceWith(b); }
+    }
+  });
+}
+function taxUnlockAll(){
+  localStorage.setItem('sac_bio_member','1');
+  document.querySelectorAll('.sac-locked').forEach(it => {
+    it.classList.remove('sac-locked');
+    const b = it.querySelector('.lock-badge');
+    if(b){ const a = document.createElement('span'); a.className = 'acc-arrow'; a.textContent = '▼'; b.replaceWith(a); }
+  });
+  document.getElementById('taxLockModal').classList.remove('active');
+}
+function taxLockClose(){ document.getElementById('taxLockModal').classList.remove('active'); }
+async function taxCheckMember(){
+  const v = document.getElementById('taxActInput').value.trim();
+  const msg = document.getElementById('taxActMsg');
+  if(!v){ msg.style.color = '#fbbf24'; msg.textContent = '✍️ اكتبي البريد أو الهاتف أولاً'; return; }
+  msg.style.color = '#9dc4ab'; msg.textContent = '⏳ جاري التحقق من الاشتراك...';
+  const c = sb();
+  if(!c){ msg.style.color = '#ef4444'; msg.textContent = '⚠️ تعذر الاتصال — عاودي بعد قليل'; return; }
+  try{
+    const { data, error } = await c.from('service_orders').select('id,status,type,contact').ilike('contact', v).limit(10);
+    if(error) throw error;
+    const ok = (data||[]).some(r => (r.status||'').includes('✔') && (r.type||'').includes('اشتراك'));
+    if(ok){
+      msg.style.color = '#4ade80'; msg.textContent = '🎉 تم التفعيل! كل الفصول انفتحت لك';
+      setTimeout(taxUnlockAll, 700);
+    } else {
+      msg.style.color = '#ef4444'; msg.textContent = '❌ لا يوجد اشتراك مؤكد ✔ بهذا الاتصال بعد — تأكدي من الرقم أو تواصلي معنا بعد التسديد';
+    }
+  }catch(e){
+    msg.style.color = '#ef4444'; msg.textContent = '⚠️ خطأ في التحقق: ' + (e && e.message ? e.message : 'غير معروف');
+  }
+}
+taxApplyLocks();
+
+/* ---------- لايت بوكس ---------- */
+const lb = document.getElementById('lb'), lbImg = document.getElementById('lbImg'), lbCap = document.getElementById('lbCap');
+document.querySelectorAll('.gal figure').forEach(fig => {
+  fig.addEventListener('click', () => {
+    const img = fig.querySelector('img');
+    lbImg.src = img.src;
+    lbCap.textContent = fig.querySelector('figcaption').textContent;
+    lb.classList.add('active');
+  });
+});
+document.addEventListener('keydown', e => { if(e.key === 'Escape'){ lb.classList.remove('active'); taxLockClose(); } });
+</script>
+
+<!-- 📱 PWA: تسجيل مشغّل الخدمة (Service Worker) -->
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function() {
+      navigator.serviceWorker.register("service-worker.js").then(function(reg) {
+        console.log("✓ PWA ServiceWorker registered:", reg.scope);
+      }).catch(function(err) {
+        console.log("PWA ServiceWorker registration error:", err);
+      });
+    });
+  }
+</script>
+</body>
+</html>
