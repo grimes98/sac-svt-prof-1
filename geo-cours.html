@@ -104,13 +104,27 @@ footer .srclinks a:hover{background:var(--green)}
 .sub-note{position:relative;margin-top:12px;display:inline-block;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);padding:7px 20px;border-radius:999px;font-size:.88rem;font-weight:700}
 </style>
   <link rel="manifest" href="manifest.json">
+<style id="sacCoursDayFix">
+/* ☀️ مكملات وضع النهار لصفحات المقررات — تُفعَّل تلقائياً عبر html.sac-day (مزامنة مع محرك ثيم المنصة) */
+html.sac-day .acc-item{background:#ffffff!important;border-color:rgba(13,148,136,.25)!important;box-shadow:0 10px 26px rgba(13,148,136,.07)!important}
+html.sac-day .acc-item.sac-locked{opacity:.85}
+html.sac-day .acc-body{background:#fbfefd!important;color:#0f172a!important}
+html.sac-day .acc-body li,html.sac-day .acc-body td,html.sac-day .acc-body th,html.sac-day .acc-body .def,html.sac-day .acc-body .note,html.sac-day .acc-body .term,html.sac-day .acc-body b,html.sac-day .acc-body strong,html.sac-day .acc-body span{color:#0f172a!important}
+html.sac-day .acc-body .en,html.sac-day .acc-body em{color:#0f766e!important}
+html.sac-day .acc-body table th{background:#0d9488!important;color:#ffffff!important;border-color:#0f766e!important}
+html.sac-day .acc-body table td{border-color:#dbe7e4!important;color:#1e293b!important}
+html.sac-day .gal figure{background:#ffffff!important;border-color:#e2e8f0!important}
+html.sac-day .gal figcaption,html.sac-day footer,html.sac-day .free-note,html.sac-day .unit-head p{color:#475569!important}
+html.sac-day .modal,html.sac-day .gl-box{background:#ffffff!important;color:#0f172a!important}
+html.sac-day .badge-home{background:#0d9488;color:#ffffff;border-color:#0f766e}
+</style>
 </head>
 <body>
 
 <header>
   <div class="nav">
     <a class="brand" href="index.html"><img src="assets/Sac.png" alt="SAC" onerror="this.style.display='none'"><span>SAC · SVT prof</span></a>
-    <a class="back" href="index.html#svt">🏠 الرئيسية — ركن SVT</a>
+    <a class="back" href="index.html#svt" title="عودة إلى الصفحة الرئيسية للمنصة">🏠 عودة للمنصة</a>
   </div>
 </header>
 
@@ -558,6 +572,7 @@ function tog(btn){
       <div>👑 سنوي<b>6000 دج</b></div>
     </div>
     <a href="ishtirak.html" class="gl-sub">💎 اشترك الآن</a>
+    <a href="login.html" style="display:block;margin-top:12px;color:#fbbf24;font-weight:800;text-decoration:none">🔑 عندك حساب في المنصة؟ سجّلي دخولك — يُفتح لك كامل المقرر فوراً</a>
     <button class="gl-act" onclick="geoShowActivate()">🗝️ عندي اشتراك مفعّل — تفعيل الدخول</button>
     <div class="gl-form" id="geoActForm" style="display:none">
       <input id="geoActContact" placeholder="البريد الإلكتروني أو الهاتف المستعمل عند الاشتراك">
@@ -585,8 +600,12 @@ function geoUnlockAll(){
   closeGeoLock();
   alert('🎉 مرحباً بك أستاذ(ة)! تم تفعيل كامل مقرر الجيولوجيا لحسابك — بالتوفيق 📚');
 }
+function geoCoursOpen(){
+  /* 🔓 أي جلسة دخول في المنصة (مسؤول أو مستخدم) تفتح كامل المقرر فوراً */
+  return !!(localStorage.getItem('sac_geo_member') === '1' || localStorage.getItem('sac_session') || localStorage.getItem('sac_user_session'));
+}
 function geoGateInit(){
-  if(localStorage.getItem('sac_geo_member') === '1') return;
+  if(geoCoursOpen()) return;
   document.querySelectorAll('.acc-item').forEach(function(it){
     var btn = it.querySelector('.acc-btn');
     if(!btn) return;
@@ -804,6 +823,15 @@ else { geoGateInit(); }
       });
     });
   }
+</script>
+<!-- 🌗 مزامنة وضع الليل/النهار مع محرك المنصة (sac-cursor-birds.js) -->
+<script>
+(function(){
+  function syncSacDay(){ document.documentElement.classList.toggle('sac-day', !!document.getElementById('sacDayThemeStyles')); }
+  if(document.head && window.MutationObserver){ new MutationObserver(syncSacDay).observe(document.head, {childList:true}); }
+  document.addEventListener('DOMContentLoaded', syncSacDay);
+  syncSacDay();
+})();
 </script>
 </body>
 </html>
