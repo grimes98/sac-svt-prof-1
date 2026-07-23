@@ -1018,12 +1018,8 @@
       document.head.appendChild(st);
     }
 
-    const isTrainingOrServicePage = window.location.pathname.includes('takwin') || 
-                                    window.location.pathname.includes('srv-') || 
-                                    window.location.pathname.includes('anmat') || 
-                                    window.location.pathname.includes('istratijiyat');
-
-    if (!isTrainingOrServicePage && !document.getElementById('sacThemeToggleBtn')) {
+    // 🌗 زر الليل/النهار متاح الآن في كل صفحات المنصة بلا استثناء (بطلب الأستاذة — v029)
+    if (!document.getElementById('sacThemeToggleBtn')) {
       const btn = document.createElement('button');
       btn.id = 'sacThemeToggleBtn';
       btn.onclick = window.sacToggleTheme;
